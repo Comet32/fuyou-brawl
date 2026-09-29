@@ -11,7 +11,7 @@ export interface SearchRecord {
   pyInitials: string;
 }
 
-const toKey = (parts: string[]) => parts.join('').toLowerCase().replace(/[^a-z0-9]/g, '');
+const toKey = (parts: string[]) => parts.join('').normalize('NFKC').toLowerCase().replace(/[^a-z0-9]/g, '');
 
 export function toSearchRecord(b: Blessing): SearchRecord {
   return {
@@ -20,7 +20,7 @@ export function toSearchRecord(b: Blessing): SearchRecord {
     category: b.category,
     effect: b.effect,
     tags: b.tags,
-    py: toKey(pinyin(b.name, { toneType: 'none', type: 'array' })),
-    pyInitials: toKey(pinyin(b.name, { pattern: 'first', toneType: 'none', type: 'array' })),
+    py: toKey(pinyin(b.name, { toneType: 'none', type: 'array', v: true })),
+    pyInitials: toKey(pinyin(b.name, { pattern: 'first', toneType: 'none', type: 'array', v: true })),
   };
 }

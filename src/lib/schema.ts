@@ -12,6 +12,8 @@ export const ATTR_LABELS: Record<(typeof ATTRS)[number], string> = {
 };
 
 const slug = z.string().regex(/^[a-z0-9_-]+$/, 'id 只能包含小写字母、数字、- 和 _');
+// Only http(s) links are allowed in source fields (rejects javascript: etc.).
+const httpUrl = z.url({ protocol: /^https?$/ });
 // Astro's YAML/frontmatter parser turns unquoted 2026-09-28 into a Date; normalize back to a string.
 const isoDate = z.preprocess(
   (v) => (v instanceof Date ? v.toISOString().slice(0, 10) : v),
@@ -30,7 +32,7 @@ export const blessingSchema = z.object({
   // File name under public/img/blessings/
   icon: z.string().optional(),
   since_version: isoDate.optional(),
-  sources: z.array(z.url()).default([]),
+  sources: z.array(httpUrl).default([]),
   history: z.array(z.object({ version: isoDate, change: z.string().min(1) })).default([]),
 });
 
@@ -50,7 +52,7 @@ export const itemSchema = z.object({
 export const versionSchema = z.object({
   id: isoDate,
   title: z.string().min(1),
-  source_url: z.url().optional(),
+  source_url: httpUrl.optional(),
   changes: z
     .array(z.object({ blessing: slug.nullable().default(null), text: z.string().min(1) }))
     .default([]),
@@ -62,7 +64,7 @@ export const buildSchema = z.object({
   blessings: z.array(z.object({ id: slug, note: z.string().optional() })).default([]),
   items: z.array(slug).default([]),
   updated: isoDate,
-  sources: z.array(z.url()).default([]),
+  sources: z.array(httpUrl).default([]),
 });
 
 export const guideSchema = z.object({
@@ -70,7 +72,7 @@ export const guideSchema = z.object({
   description: z.string().min(1),
   order: z.number().default(100),
   updated: isoDate,
-  sources: z.array(z.url()).default([]),
+  sources: z.array(httpUrl).default([]),
 });
 
 export type Blessing = z.infer<typeof blessingSchema>;

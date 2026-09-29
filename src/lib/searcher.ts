@@ -1,7 +1,18 @@
 import Fuse from 'fuse.js';
 import type { SearchRecord } from './search-record';
 
-const normalize = (q: string) => q.trim().toLowerCase().replace(/\s+/g, '');
+const normalize = (q: string) => q.normalize('NFKC').toLowerCase().replace(/\s+/g, '');
+
+// Lower is better: how closely a record matches the (normalized) query. Undefined = not an exact hit.
+function exactRank(r: SearchRecord, name: string, q: string): number | undefined {
+  if (name === q) return 0;
+  if (name.startsWith(q)) return 1;
+  if (r.pyInitials === q || r.py === q) return 2;
+  if (r.pyInitials.startsWith(q)) return 3;
+  if (r.py.startsWith(q)) return 4;
+  if (name.includes(q)) return 5;
+  return undefined;
+}
 
 export function createSearcher(records: SearchRecord[]) {
   const fuse = new Fuse(records, {
@@ -18,11 +29,13 @@ export function createSearcher(records: SearchRecord[]) {
 
   return function search(query: string): SearchRecord[] {
     const q = normalize(query);
-    if (!q) return records;
-    // Exact name / pinyin prefix hits always rank above fuzzy hits.
-    const exact = records.filter(
-      (r) => r.name.toLowerCase().includes(q) || r.py.startsWith(q) || r.pyInitials.startsWith(q),
-    );
+    if (!q) return [...records];
+    // Exact name / pinyin prefix hits always rank above fuzzy hits, ordered by match quality (stable).
+    const exact = records
+      .map((r) => ({ r, rank: exactRank(r, normalize(r.name), q) }))
+      .filter((x): x is { r: SearchRecord; rank: number } => x.rank !== undefined)
+      .sort((a, b) => a.rank - b.rank)
+      .map((x) => x.r);
     const seen = new Set(exact.map((r) => r.id));
     const fuzzy = fuse
       .search(q)

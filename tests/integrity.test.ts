@@ -1,12 +1,22 @@
 import { describe, expect, it } from 'vitest';
 import { findBrokenRefs } from '../src/lib/integrity';
-import { buildSchema } from '../src/lib/schema';
+import { blessingSchema, buildSchema } from '../src/lib/schema';
 import { validSet } from './fixtures';
 
 describe('isoDate fields', () => {
   it('accept Date objects produced by frontmatter parsers', () => {
     const b = buildSchema.parse({ hero: 'axe', summary: 's', updated: new Date('2026-09-28') });
     expect(b.updated).toBe('2026-09-28');
+  });
+});
+
+describe('source URLs', () => {
+  const base = { id: 'x', name: 'X', category: '其他', effect: 'e' };
+  it('rejects non-http(s) protocols', () => {
+    expect(blessingSchema.safeParse({ ...base, sources: ['javascript:alert(1)'] }).success).toBe(false);
+  });
+  it('accepts https urls', () => {
+    expect(blessingSchema.safeParse({ ...base, sources: ['https://example.com'] }).success).toBe(true);
   });
 });
 
@@ -21,6 +31,17 @@ describe('findBrokenRefs', () => {
     const errors = findBrokenRefs(d);
     expect(errors).toContain('福佑 id 重复：wolf-core');
     expect(errors).toContain('福佑名称重复：狼王核心');
+  });
+
+  it('reports duplicate hero, item and version ids', () => {
+    const d = validSet();
+    d.heroes.push({ ...d.heroes[0] });
+    d.items.push({ ...d.items[1] });
+    d.versions.push({ ...d.versions[0] });
+    const errors = findBrokenRefs(d);
+    expect(errors).toContain('英雄 id 重复：axe');
+    expect(errors).toContain('装备 id 重复：blink');
+    expect(errors).toContain('版本 id 重复：2026-09-01');
   });
 
   it('reports unknown exclusive hero', () => {

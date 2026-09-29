@@ -24,6 +24,7 @@ export function blessingsForHero(heroId: string, blessings: Blessing[], build: B
   return out;
 }
 
+// Exclusive heroes are intentionally not included; the detail page shows exclusive_hero separately.
 export function heroesForBlessing(blessingId: string, builds: Build[]): string[] {
   return builds.filter((b) => b.blessings.some((ref) => ref.id === blessingId)).map((b) => b.hero);
 }
