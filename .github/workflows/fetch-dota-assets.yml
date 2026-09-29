@@ -1,0 +1,38 @@
+name: Fetch Dota assets
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - run: sudo apt-get update && sudo apt-get install -y webp
+      - run: npm ci
+      - name: TEMP probe feed shape
+        run: |
+          curl -s "https://www.dota2.com/datafeed/herolist?language=schinese" | head -c 1500; echo
+          curl -s "https://www.dota2.com/datafeed/itemlist?language=schinese" | head -c 1500; echo
+      - run: npx tsx scripts/fetch-dota-assets.ts
+      - run: npm run validate
+      - name: Commit and redeploy
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data public/img
+          if git diff --cached --quiet; then echo "No changes"; exit 0; fi
+          git commit -m "data: refresh Dota heroes and items"
+          git push
+          # Pushes made with GITHUB_TOKEN don't trigger other workflows; dispatch explicitly.
+          gh workflow run deploy.yml
