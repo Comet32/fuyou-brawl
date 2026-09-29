@@ -98,7 +98,25 @@ const groups = [
       groups.map((g) => (
         <section class="group" data-group={g.id} data-q={g.q} aria-labelledby={`g-${g.id}`}>
           <h2 id={`g-${g.id}`} class="group-head">
-            <span>{g.label}</span>
+            <span class="group-name">{g.label}</span>
+            {/* Empty family: the teaching hint lives inside the header, so it stays one bar tall. */}
+            <span class="group-empty" hidden={g.items.length > 0}>
+              {g.q ? (
+                <Fragment>
+                  还没有 · <a href={url('/label/')}>去标注 →</a>
+                </Fragment>
+              ) : (
+                '全部已标注'
+              )}
+            </span>
+            {g.id === 'none' && (
+              <button class="group-fold" type="button" hidden>
+                <span>
+                  显示 <span class="num" data-fold-shown>0</span> / <span class="num" data-fold-total>0</span>
+                </span>
+                <Icon name="chevron" size={18} />
+              </button>
+            )}
             <b class="num" data-group-tally>{g.items.filter((b) => !isHeroBlessing(b.id)).length}</b>
           </h2>
           <ul class="slots">
@@ -111,15 +129,6 @@ const groups = [
               );
             })}
           </ul>
-          <p class="group-empty" hidden={g.items.length > 0}>
-            {g.q ? (
-              <Fragment>
-                还没有标注为{g.label}的福佑 · <a href={url('/label/')}>去标注页</a>
-              </Fragment>
-            ) : (
-              '所有福佑都已标注品质。'
-            )}
-          </p>
           {g.id === 'none' && (
             <button class="btn bar group-more" type="button" hidden>
               展开全部 <span class="num">0</span> 个

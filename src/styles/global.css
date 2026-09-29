@@ -772,17 +772,13 @@ body {
   color: var(--on-gold);
   font-weight: 800;
 }
-/* Wide screens: team-bars and tag strip share one row across the content column. */
-@media (min-width: 1024px) {
-  .filters {
-    display: grid;
-    grid-template-columns: minmax(0, 620px) minmax(0, 1fr);
-    align-items: center;
-    gap: 0 16px;
-  }
-  .filters .tagstrip {
-    margin: 0;
-    padding: 4px 0 8px;
+/* Wide screens: nothing scrolls or clips; team-bars span the column, the strip wraps below. */
+@media (min-width: 721px) {
+  .tagstrip {
+    flex-wrap: wrap;
+    overflow: visible;
+    margin: 8px 0 0;
+    padding: 0 0 4px;
   }
 }
 
@@ -905,9 +901,6 @@ body {
   font-size: 19px;
   font-weight: 900;
 }
-.group-head span {
-  align-self: center;
-}
 /* The tally block keeps the 12° cap, inverse of the team color. */
 .group-head b {
   position: relative;
@@ -939,18 +932,43 @@ body {
   -webkit-mask: var(--hatch-mask) repeat;
   mask: var(--hatch-mask) repeat;
 }
+.group-name {
+  align-self: center;
+}
 .group-empty {
-  margin: 0;
-  padding: 14px 18px;
-  border-radius: 14px;
-  background: var(--hollow);
-  border: 1px solid var(--line);
-  color: var(--ink-2);
-  font-size: 14px;
+  align-self: center;
+  margin-left: 12px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  opacity: 0.9;
 }
 .group-empty a {
-  color: var(--gold-ink);
-  font-weight: 800;
+  color: inherit;
+  text-decoration-color: currentColor;
+}
+.group-fold {
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 10px;
+  padding: 4px 8px 4px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--panel);
+  color: var(--ink-2);
+  font: 700 13px var(--font-body);
+}
+.group-fold:hover {
+  color: var(--ink);
+  border-color: var(--ink-3);
+}
+.group-head b {
+  margin-left: auto;
+}
+.group-head:has(.group-empty:not([hidden])) {
+  margin-bottom: 0;
 }
 .slots > li[data-fold] {
   display: none;
@@ -1286,7 +1304,7 @@ body {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: var(--q, var(--gold));
+  background: var(--q, transparent);
   border-radius: 12px;
   visibility: hidden;
 }
@@ -1294,7 +1312,35 @@ body {
   visibility: visible;
 }
 .pick.is-locked .pick-head {
-  color: var(--on-q, var(--on-gold));
+  color: var(--on-q, var(--ink));
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+  border-radius: 12px;
+}
+/* Unlabeled lock: the band is the hatched hollow, not a color that could read as a quality. */
+.pick:not([data-q]) .pick-lock {
+  border: 1px solid var(--hatch);
+}
+.pick:not([data-q]) .pick-lock::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 11px;
+  background: var(--hatch);
+  opacity: 0.7;
+  -webkit-mask: var(--hatch-mask) repeat;
+  mask: var(--hatch-mask) repeat;
+}
+.pick-quality {
+  font-size: 14px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+.pick:not([data-q]) .pick-quality {
+  padding: 1px 8px;
+  border-radius: 6px;
+  background: var(--stage);
+  color: var(--ink);
 }
 .pick.is-locking .pick-lock {
   animation: lock-wipe 220ms var(--ease-expo) both;
@@ -1333,7 +1379,12 @@ body {
 .pick-stamp {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
+  padding: 2px 9px 2px 7px;
+  border-radius: 999px;
+  background: var(--gold);
+  color: var(--on-gold);
+  font-size: 13px;
 }
 .pick-toggle {
   display: flex;

@@ -94,6 +94,7 @@ export function initComparePage(): void {
     clear: pick.querySelector<HTMLButtonElement>('.pick-clear')!,
     toggle: pick.querySelector<HTMLButtonElement>('.pick-toggle')!,
     repick: pick.querySelector<HTMLElement>('.pick-repick')!,
+    qword: pick.querySelector<HTMLElement>('.pick-quality')!,
   }));
 
   const close = (i: number) => {
@@ -102,7 +103,7 @@ export function initComparePage(): void {
 
   // LOCK-IN: the head wipes in the quality color and stamps 已锁定 with the pick number.
   const choose = (i: number, id: string | null, animate = true) => {
-    const { pick, input, card, idle, stamp, clear, toggle, repick } = parts[i];
+    const { pick, input, card, idle, stamp, clear, toggle, repick, qword } = parts[i];
     const r = id ? byId.get(id) : undefined;
     selected[i] = r ? r.id : null;
     card.replaceChildren();
@@ -124,6 +125,9 @@ export function initComparePage(): void {
     stamp.hidden = !r;
     clear.hidden = !r;
     repick.hidden = !r;
+    // Quality is spelled out on the band, never inferred from the lock color alone.
+    qword.hidden = !r;
+    qword.textContent = r ? qualityLabel(r.quality) || '品质未标注' : '';
     toggle.disabled = !r;
     pick.classList.remove('is-editing');
     close(i);

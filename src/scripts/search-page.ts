@@ -41,6 +41,7 @@ export function initSearchPage(): void {
     tally: section.querySelector<HTMLElement>('[data-group-tally]')!,
     empty: section.querySelector<HTMLElement>('.group-empty')!,
     more: section.querySelector<HTMLButtonElement>('.group-more'),
+    fold: section.querySelector<HTMLButtonElement>('.group-fold'),
   }));
   const unfolded = new Set<string>();
 
@@ -79,9 +80,17 @@ export function initSearchPage(): void {
       }
       g.tally.textContent = String(shown);
       g.empty.hidden = shown > 0;
+      const folded = phone.matches && shown > FOLD_AT && !unfolded.has(g.id);
       if (g.more) {
-        g.more.hidden = !(phone.matches && shown > FOLD_AT && !unfolded.has(g.id));
+        g.more.hidden = !folded;
         g.more.querySelector('span')!.textContent = String(shown);
+      }
+      // The header says it is folded: 显示 30 / N with a chevron that expands it.
+      if (g.fold) {
+        g.fold.hidden = !folded;
+        g.fold.querySelector('[data-fold-shown]')!.textContent = String(Math.min(shown, FOLD_AT));
+        g.fold.querySelector('[data-fold-total]')!.textContent = String(shown);
+        g.fold.setAttribute('aria-label', `已折叠，显示 ${Math.min(shown, FOLD_AT)} / ${shown}，展开全部`);
       }
     }
   };
@@ -188,10 +197,12 @@ export function initSearchPage(): void {
   heroToggle?.addEventListener('click', flipHero);
   hint?.querySelector('button')?.addEventListener('click', flipHero);
   for (const g of groups) {
-    g.more?.addEventListener('click', () => {
+    const unfold = () => {
       unfolded.add(g.id);
       renderGroups();
-    });
+    };
+    g.more?.addEventListener('click', unfold);
+    g.fold?.addEventListener('click', unfold);
   }
   document.querySelectorAll<HTMLButtonElement>('[data-try]').forEach((b) =>
     b.addEventListener('click', () => {
