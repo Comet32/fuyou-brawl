@@ -53,7 +53,23 @@ export function normalizeTipDate(date: string | null | undefined): string | unde
   return m ? m[1] + (m[2] ?? '') : undefined;
 }
 
-const qualityLabel = (id: string) => qualityOf(id)?.label ?? id;
+/**
+ * Where a research tip belongs: the Steam changelog is official history, the wiki's own annotations are
+ * 图鉴备注, and one-image guides, videos and comments are player tips.
+ */
+function tipKind(source: string): 'change' | 'wiki' | 'tip' {
+  let u: URL;
+  try {
+    u = new URL(source);
+  } catch {
+    return 'tip';
+  }
+  if (u.hostname === 'steamcommunity.com' && u.pathname.includes('/changelog/')) return 'change';
+  if (u.host === WIKI_HOST && !isGuidePath(u.pathname)) return 'wiki';
+  return 'tip';
+}
+
+const isGuidePath = (path: string) => path.startsWith('/icons/guides/') || path.startsWith('/api/hero-guides');
 
 /** Convert one research note into a community entry (undefined when nothing usable is left). */
 export function convertNote(
@@ -65,15 +81,15 @@ export function convertNote(
   const skip = (what: string, reason: SkipReason) => skipped.push({ id: note.id, what, reason });
   const entry: BlessingCommunity = {};
   const tips: NonNullable<BlessingCommunity['tips']> = [];
+  const wikiNotes: NonNullable<BlessingCommunity['wiki_notes']> = [];
+  const changes: NonNullable<BlessingCommunity['changes']> = [];
 
   const q = note.quality;
   if (q && QUALITY_IDS.includes(q.value as QualityId)) {
-    const conflicts = note.quality_conflicts ?? [];
+    const conflicts = (note.quality_conflicts ?? []).filter((c) => QUALITY_IDS.includes(c.value as QualityId));
     if (conflicts.length > 0) {
       skip('quality', 'quality_conflict');
-      const claims = [q, ...conflicts].map((c) => `${sourceLink(c.source).label}为${qualityLabel(c.value)}`);
-      const date = normalizeTipDate(q.date);
-      tips.push({ text: `品质说法不一：${claims.join('，')}，暂不标注`, source: q.source, ...(date && { date }) });
+      entry.quality_conflict = [q, ...conflicts].map((c) => ({ quality: c.value as QualityId, source: c.source }));
     } else {
       entry.quality = q.value as QualityId;
       entry.quality_source = q.source;
@@ -109,9 +125,15 @@ export function convertNote(
       continue;
     }
     const date = normalizeTipDate(t.date);
-    tips.push({ text, source: t.source, ...(date && { date }) });
+    const kind = tipKind(t.source);
+    if (kind === 'change' && date) changes.push({ date, text, source: t.source });
+    // An undated changelog line cannot go into the dated history; keep it as a note.
+    else if (kind === 'change' || kind === 'wiki') wikiNotes.push({ text, source: t.source, ...(date && { date }) });
+    else tips.push({ text, source: t.source, ...(date && { date }) });
   }
   if (tips.length > 0) entry.tips = tips;
+  if (wikiNotes.length > 0) entry.wiki_notes = wikiNotes;
+  if (changes.length > 0) entry.changes = changes;
 
   const heroes: NonNullable<BlessingCommunity['recommended_heroes']> = [];
   for (const h of note.heroes ?? []) {
@@ -182,4 +204,31 @@ export function parseRange(value: number | string): [string, string] | undefined
   if (typeof value !== 'string') return undefined;
   const m = RANGE_RE.exec(value);
   return m ? [m[1], m[2]] : undefined;
+}
+
+/** Band caption for disagreeing sources, e.g. "品质说法不一 · 图鉴紫 / 一图流蓝". */
+export function conflictCaption(claims: { quality: string; source: string }[]): string {
+  const parts = claims.map((c) => `${sourceLink(c.source).short}${qualityOf(c.quality)?.label.slice(0, 1) ?? c.quality}`);
+  return parts.length > 0 ? `品质说法不一 · ${parts.join(' / ')}` : '品质说法不一';
+}
+
+export interface HistoryEntry {
+  date: string;
+  text: string;
+  /** Set for manual entries: the versions.yaml id to link to. */
+  version?: string;
+  /** Set for community entries: where the change was recorded. */
+  source?: string;
+}
+
+/** Manual history and community changes in one list, newest first (month-only dates sort by their month). */
+export function historyEntries(
+  history: { version: string; change: string }[],
+  changes: { date: string; text: string; source: string }[],
+): HistoryEntry[] {
+  const all: HistoryEntry[] = [
+    ...history.map((h) => ({ date: h.version, text: h.change, version: h.version })),
+    ...changes.map((c) => ({ date: c.date, text: c.text, source: c.source })),
+  ];
+  return all.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
 }

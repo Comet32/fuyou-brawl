@@ -4,6 +4,8 @@ import {
   isPossiblyOutdated,
   normalizeTipDate,
   parseRange,
+  conflictCaption,
+  historyEntries,
   sourceLink,
   type ResearchNote,
 } from '../src/lib/community';
@@ -34,19 +36,23 @@ describe('convertNote', () => {
     expect(entry).toEqual({ quality: 'ssr', quality_source: WIKI });
   });
 
-  it('skips quality when sources conflict and records a note tip instead', () => {
+  it('skips quality when sources conflict and records every claim instead', () => {
+    const GUIDES_API = 'http://122.51.0.76:8081/api/hero-guides';
     const { entry, skipped } = convertNote(
       note({
         quality: { value: 'sr', source: WIKI, date: '2026-09-29' },
-        quality_conflicts: [{ value: 'r', source: 'http://122.51.0.76:8081/api/hero-guides', note: 'x' }],
+        quality_conflicts: [{ value: 'r', source: GUIDES_API, note: 'x' }],
       }),
       ctx,
     );
-    expect(entry?.quality).toBeUndefined();
-    expect(entry?.tips).toEqual([
-      { text: '品质说法不一：社区图鉴为紫色，社区一图流为蓝色，暂不标注', source: WIKI, date: '2026-09-29' },
-    ]);
+    expect(entry).toEqual({
+      quality_conflict: [
+        { quality: 'sr', source: WIKI },
+        { quality: 'r', source: GUIDES_API },
+      ],
+    });
     expect(skipped).toEqual([{ id: '10010', what: 'quality', reason: 'quality_conflict' }]);
+    expect(blessingCommunitySchema.parse(entry)).toEqual(entry);
   });
 
   it('keeps quality_note as notes', () => {
@@ -94,23 +100,38 @@ describe('convertNote', () => {
     ]);
   });
 
-  it('imports tips with normalized dates and drops over-long ones', () => {
+  it('splits tips by source: changelog into changes, wiki annotations into wiki_notes, the rest stay tips', () => {
     const long = '长'.repeat(81);
+    const COMMENTS = 'https://steamcommunity.com/sharedfiles/filedetails/comments/2841152696';
     const { entry, skipped } = convertNote(
       note({
         tips: [
-          { text: ' 仅远程英雄可获得 ', source: WIKI, date: null },
-          { text: '削弱 3 次', source: CHANGELOG, date: '2026-05-22T00:00:00Z' },
+          { text: ' 图鉴标注：仅远程英雄可获得 ', source: WIKI, date: null },
+          { text: '官方改动：削弱', source: CHANGELOG, date: '2026-05-22T00:00:00Z' },
+          { text: '一图流推荐', source: GUIDE, date: '2026-04-14' },
+          { text: '一图流合计', source: 'http://122.51.0.76:8081/api/hero-guides', date: '2026-09' },
+          { text: 'UP 主确认', source: BILI, date: '2026-05' },
+          { text: '留言反馈', source: COMMENTS, date: '2026-08-27' },
           { text: long, source: BILI, date: '2026-05' },
         ],
       }),
       ctx,
     );
+    expect(entry?.wiki_notes).toEqual([{ text: '图鉴标注：仅远程英雄可获得', source: WIKI }]);
+    expect(entry?.changes).toEqual([{ date: '2026-05-22', text: '官方改动：削弱', source: CHANGELOG }]);
     expect(entry?.tips).toEqual([
-      { text: '仅远程英雄可获得', source: WIKI },
-      { text: '削弱 3 次', source: CHANGELOG, date: '2026-05-22' },
+      { text: '一图流推荐', source: GUIDE, date: '2026-04-14' },
+      { text: '一图流合计', source: 'http://122.51.0.76:8081/api/hero-guides', date: '2026-09' },
+      { text: 'UP 主确认', source: BILI, date: '2026-05' },
+      { text: '留言反馈', source: COMMENTS, date: '2026-08-27' },
     ]);
     expect(skipped).toEqual([{ id: '10010', what: `tip: ${long.slice(0, 20)}…`, reason: 'tip_too_long' }]);
+    expect(blessingCommunitySchema.parse(entry)).toEqual(entry);
+  });
+
+  it('keeps an undated changelog note as a wiki-style note rather than inventing a date', () => {
+    const { entry } = convertNote(note({ tips: [{ text: '官方改动', source: CHANGELOG, date: null }] }), ctx);
+    expect(entry).toEqual({ wiki_notes: [{ text: '官方改动', source: CHANGELOG }] });
   });
 
   it('never imports wiki_text', () => {
@@ -200,5 +221,39 @@ describe('parseRange', () => {
     expect(parseRange(3500)).toBeUndefined();
     expect(parseRange('3500')).toBeUndefined();
     expect(parseRange('雷神之锤')).toBeUndefined();
+  });
+});
+
+describe('conflictCaption', () => {
+  it('names each source with its colour', () => {
+    expect(
+      conflictCaption([
+        { quality: 'sr', source: WIKI },
+        { quality: 'r', source: 'http://122.51.0.76:8081/api/hero-guides' },
+      ]),
+    ).toBe('品质说法不一 · 图鉴紫 / 一图流蓝');
+  });
+  it('falls back to a bare caption without claims', () => {
+    expect(conflictCaption([])).toBe('品质说法不一');
+  });
+});
+
+describe('historyEntries', () => {
+  it('merges manual history and community changes, newest first', () => {
+    const out = historyEntries(
+      [{ version: '2026-09-01', change: '金币 3000→3500' }],
+      [
+        { date: '2026-03-24', text: '图鉴改动', source: CHANGELOG },
+        { date: '2026-05', text: '五月改动', source: CHANGELOG },
+      ],
+    );
+    expect(out).toEqual([
+      { date: '2026-09-01', text: '金币 3000→3500', version: '2026-09-01' },
+      { date: '2026-05', text: '五月改动', source: CHANGELOG },
+      { date: '2026-03-24', text: '图鉴改动', source: CHANGELOG },
+    ]);
+  });
+  it('is empty when there is nothing', () => {
+    expect(historyEntries([], [])).toEqual([]);
   });
 });

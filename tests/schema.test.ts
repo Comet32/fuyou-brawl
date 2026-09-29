@@ -87,6 +87,9 @@ describe('blessingSchema (merged)', () => {
       sources: [],
       history: [],
       tips: [],
+      wiki_notes: [],
+      changes: [],
+      quality_conflict: [],
       recommended_heroes: [],
     });
   });

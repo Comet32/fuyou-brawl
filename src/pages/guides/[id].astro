@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
+import { describeSource, loadSources } from '../../lib/sources';
 import { url } from '../../lib/url';
 
 export async function getStaticPaths() {
@@ -11,6 +12,8 @@ export async function getStaticPaths() {
 
 const { guide } = Astro.props;
 const { Content } = await render(guide);
+const registry = loadSources(process.cwd());
+const sources = guide.data.sources.map((s) => describeSource(s, registry));
 ---
 
 <Base title={guide.data.title} description={guide.data.description}>
@@ -22,16 +25,17 @@ const { Content } = await render(guide);
     <p class="meta-line">更新于 <span class="num">{guide.data.updated}</span></p>
     <Content />
     {
-      guide.data.sources.length > 0 && (
+      sources.length > 0 && (
         <Fragment>
           <h2>参考来源</h2>
-          <ul>
-            {guide.data.sources.map((s) => (
+          <ul class="source-list">
+            {sources.map(({ href, parts: [title, ...rest] }) => (
               <li>
-                <a class="link-inline" href={s} target="_blank" rel="noopener">
-                  {s}
+                <a class="link-inline" href={href} target="_blank" rel="noopener">
+                  {title}
                   <Icon name="external" />
                 </a>
+                {rest.length > 0 && <span class="muted"> · {rest.join(' · ')}</span>}
               </li>
             ))}
           </ul>

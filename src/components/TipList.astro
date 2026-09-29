@@ -1,0 +1,37 @@
+---
+// A list of short notes (玩家心得 / 图鉴备注), each with its source label, date and a 可能过时 tag.
+import { isPossiblyOutdated, sourceLink } from '../lib/community';
+import { GAME_VERSION } from '../lib/site';
+import Icon from './Icon.astro';
+
+interface Props {
+  items: { text: string; source?: string; date?: string }[];
+}
+const items = Astro.props.items.map((t) => ({
+  ...t,
+  link: t.source ? sourceLink(t.source) : undefined,
+  stale: isPossiblyOutdated(t.date, GAME_VERSION),
+}));
+---
+
+<ul class="tips">
+  {
+    items.map((t) => (
+      <li>
+        <p>{t.text}</p>
+        {(t.link || t.date) && (
+          <p class="tip-meta">
+            {t.link && (
+              <a href={t.link.href} target="_blank" rel="noopener">
+                {t.link.label}
+                <Icon name="external" size={14} />
+              </a>
+            )}
+            {t.date && <span class="num">{t.date}</span>}
+            {t.stale && <span class="stale" title={`早于 ${GAME_VERSION} 版本半年以上`}>可能过时</span>}
+          </p>
+        )}
+      </li>
+    ))
+  }
+</ul>

@@ -28,6 +28,9 @@ describe('mergeBlessings', () => {
       sources: [],
       history: [],
       tips: [],
+      wiki_notes: [],
+      changes: [],
+      quality_conflict: [],
       recommended_heroes: [],
     });
   });
@@ -129,6 +132,29 @@ describe('mergeBlessings with community data', () => {
     expect(b.numbers).toEqual({ pct: 8, count: 3 });
     expect(b.number_sources).toEqual({ count: WIKI });
     expect(b.tips).toEqual([{ text: '手动心得' }, { text: '社区心得', source: WIKI, date: '2026-05' }]);
+  });
+
+  it('carries community changes, wiki notes and quality conflicts', () => {
+    const claims = [
+      { quality: 'sr' as const, source: WIKI },
+      { quality: 'r' as const, source: WIKI },
+    ];
+    const [b] = mergeBlessings([gen('10048')], {}, {
+      '10048': {
+        changes: [{ date: '2026-08-08', text: '调入攻速福佑池', source: STEAM }],
+        wiki_notes: [{ text: '图鉴标注：仅远程', source: WIKI }],
+        quality_conflict: claims,
+      },
+    });
+    expect(b).toMatchObject({
+      quality: null,
+      changes: [{ date: '2026-08-08', text: '调入攻速福佑池', source: STEAM }],
+      wiki_notes: [{ text: '图鉴标注：仅远程', source: WIKI }],
+      quality_conflict: claims,
+    });
+    // A manual quality settles a conflict.
+    const [m] = mergeBlessings([gen('10048')], { '10048': { quality: 'r' } }, { '10048': { quality_conflict: claims } });
+    expect(m.quality_conflict).toEqual([]);
   });
 
   it('keeps the community quality note when quality is unknown', () => {

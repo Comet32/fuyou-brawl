@@ -5,12 +5,15 @@ import BlessingIcon from '../../components/BlessingIcon.astro';
 import HeroImage from '../../components/HeroImage.astro';
 import Icon from '../../components/Icon.astro';
 import Template from '../../components/Template.astro';
+import TipList from '../../components/TipList.astro';
 import { heroesForBlessing } from '../../lib/hero-blessings';
 import { isHeroBlessing } from '../../lib/hero-blessing';
 import { heroLinks } from '../../lib/hero-links-data';
 import { qualityOf } from '../../lib/quality';
-import { isPossiblyOutdated, parseRange, sourceLink } from '../../lib/community';
-import { COMMUNITY_VIDEO_URL, COMMUNITY_WIKI_URL, GAME_VERSION, REPO_URL } from '../../lib/site';
+import { conflictCaption, historyEntries, parseRange, sourceLink } from '../../lib/community';
+import { placeholderLabels } from '../../lib/stat-labels';
+import { describeSource, loadSources } from '../../lib/sources';
+import { COMMUNITY_VIDEO_URL, COMMUNITY_WIKI_URL, REPO_URL } from '../../lib/site';
 import { placeholderKeys, toPlainText } from '../../lib/template';
 import { OVERRIDES_FILE } from '../../lib/blessings';
 import { url } from '../../lib/url';
@@ -39,19 +42,26 @@ const keys = [...new Set([...placeholderKeys(blessing.effect), ...placeholderKey
 const knownCount = keys.filter((k) => Object.hasOwn(blessing.numbers, k)).length;
 const editUrl = `${REPO_URL}/edit/main/${OVERRIDES_FILE}`;
 const qualitySource = blessing.quality_source === 'community' && blessing.quality_url ? sourceLink(blessing.quality_url) : undefined;
+// Unknown quality with disagreeing (or ambiguous) sources: say so in the band's caption slot.
+const conflict =
+  blessing.quality === null && (blessing.quality_conflict.length > 0 || blessing.quality_note)
+    ? conflictCaption(blessing.quality_conflict)
+    : undefined;
+// Readable row labels from the words around each placeholder; the full effect wins over the summary.
+const labels = { ...placeholderLabels(blessing.summary), ...placeholderLabels(blessing.effect) };
 // Stat sheet rows: value (plain or "a~b" range) and, for community values, where it came from.
 const rows = keys.map((key) => {
   const known = Object.hasOwn(blessing.numbers, key);
   const value = known ? blessing.numbers[key] : undefined;
   const src = blessing.number_sources[key];
-  return { key, value, range: value === undefined ? undefined : parseRange(value), src: src ? sourceLink(src) : undefined };
+  const range = value === undefined ? undefined : parseRange(value);
+  return { key, label: labels[key], value, range, src: src ? sourceLink(src) : undefined };
 });
-const hasRange = rows.some((r) => r.range);
-const tips = blessing.tips.map((t) => ({
-  ...t,
-  link: t.source ? sourceLink(t.source) : undefined,
-  stale: isPossiblyOutdated(t.date, GAME_VERSION),
-}));
+const firstRange = rows.find((r) => r.range)?.range;
+const tips = blessing.tips;
+const history = historyEntries(blessing.history, blessing.changes);
+const registry = loadSources(process.cwd());
+const manualSources = blessing.sources.map((s) => describeSource(s, registry));
 // Community picks, separate from the automatic hero links above them.
 const communityHeroes = blessing.recommended_heroes
   .map((r) => ({ hero: heroes.get(r.hero), link: sourceLink(r.source) }))
@@ -61,8 +71,10 @@ const usesCommunity =
   qualitySource !== undefined ||
   Object.keys(blessing.number_sources).length > 0 ||
   communityHeroes.length > 0 ||
-  tips.some((t) => t.link) ||
-  blessing.quality_note !== undefined;
+  tips.some((t) => t.source) ||
+  blessing.wiki_notes.length > 0 ||
+  blessing.changes.length > 0 ||
+  conflict !== undefined;
 ---
 
 <Base title={blessing.name} description={toPlainText(blessing.summary, blessing.numbers)}>
@@ -95,7 +107,9 @@ const usesCommunity =
           <a class="lt-src" href={qualitySource.href} target="_blank" rel="noopener">品质来源：{qualitySource.label}</a>
         )
       }
-      <span>{quality ? `${quality.label}品质` : '品质未标注'}</span>
+      {conflict && <span class="lt-src lt-cap">{conflict}</span>}
+      {/* With a conflict caption the caption already says 品质; keep the band to one line. */}
+      <span>{quality ? `${quality.label}品质` : conflict ? '未标注' : '品质未标注'}</span>
     </p>
   </header>
   {blessing.quality_note && <p class="note q-note">品质未定：{blessing.quality_note}</p>}
@@ -119,25 +133,7 @@ const usesCommunity =
       <h2 id="tips-h" class="strap">玩家心得<span class="num">{tips.length}</span></h2>
       {
         tips.length > 0 ? (
-          <ul class="tips">
-            {tips.map((t) => (
-              <li>
-                <p>{t.text}</p>
-                {(t.link || t.date || t.stale) && (
-                  <p class="tip-meta">
-                    {t.link && (
-                      <a href={t.link.href} target="_blank" rel="noopener">
-                        {t.link.label}
-                        <Icon name="external" size={14} />
-                      </a>
-                    )}
-                    {t.date && <span class="num">{t.date}</span>}
-                    {t.stale && <span class="stale" title={`早于 ${GAME_VERSION} 版本半年以上`}>可能过时</span>}
-                  </p>
-                )}
-              </li>
-            ))}
-          </ul>
+          <TipList items={tips} />
         ) : (
           <p class="note">
             还没有这个福佑的心得。用过它？在 <code>{OVERRIDES_FILE}</code> 里给它加一条 <code>tips</code>：一句话、用自己的话写，最好附上来源链接。
@@ -146,6 +142,15 @@ const usesCommunity =
         )
       }
     </section>
+
+    {
+      blessing.wiki_notes.length > 0 && (
+        <section aria-labelledby="wiki-h">
+          <h2 id="wiki-h" class="strap">图鉴备注<span class="num">{blessing.wiki_notes.length}</span></h2>
+          <TipList items={blessing.wiki_notes} />
+        </section>
+      )
+    }
     </div>
 
     <section aria-labelledby="stats-h">
@@ -155,14 +160,23 @@ const usesCommunity =
           <table class="stats">
             <thead>
               <tr>
-                <th scope="col">占位符</th>
+                <th scope="col">项目</th>
                 <th scope="col">数值</th>
               </tr>
             </thead>
             <tbody>
               {rows.map((r) => (
                 <tr>
-                  <th scope="row">{r.key}</th>
+                  <th scope="row">
+                    {r.label ? (
+                      <Fragment>
+                        {r.label}
+                        <code class="key">{r.key}</code>
+                      </Fragment>
+                    ) : (
+                      <code>{r.key}</code>
+                    )}
+                  </th>
                   <td>
                     {r.value === undefined ? (
                       <i class="u">待补充</i>
@@ -192,8 +206,10 @@ const usesCommunity =
         )
       }
       {
-        hasRange && (
-          <p class="note">「200~400」这样的区间照社区图鉴原样记录，来源没有说明它随等级、时间还是随机变化。</p>
+        firstRange && (
+          <p class="note">
+            「{firstRange.join('~')}」这样的区间照社区图鉴原样记录，来源没有说明它随等级、时间还是随机变化。
+          </p>
         )
       }
       <p class="note">
@@ -270,12 +286,22 @@ const usesCommunity =
   <section aria-labelledby="history-h">
     <h2 id="history-h" class="strap">改动历史</h2>
     {
-      blessing.history.length > 0 ? (
-        <ol class="plain-list">
-          {blessing.history.map((h) => (
+      history.length > 0 ? (
+        <ol class="plain-list history">
+          {history.map((h) => (
             <li>
-              <a class="num" href={url(`/versions/#v-${h.version}`)}>{h.version}</a>
-              {h.change}
+              {h.version ? (
+                <a class="num" href={url(`/versions/#v-${h.version}`)}>{h.date}</a>
+              ) : (
+                <span class="num">{h.date}</span>
+              )}
+              {h.text}
+              {h.source && (
+                <a class="hist-src" href={sourceLink(h.source).href} target="_blank" rel="noopener">
+                  {sourceLink(h.source).label}
+                  <Icon name="external" size={14} />
+                </a>
+              )}
             </li>
           ))}
         </ol>
@@ -290,13 +316,13 @@ const usesCommunity =
       <section class="credits" aria-labelledby="sources-h">
         <h2 id="sources-h" class="strap">资料来源</h2>
         <ul>
-          {blessing.sources.map((s) => (
+          {manualSources.map(({ href, parts: [title, ...rest] }) => (
             <li>
-              <a class="link-inline" href={s} target="_blank" rel="noopener">
-                {sourceLink(s).label}
+              <a class="link-inline" href={href} target="_blank" rel="noopener">
+                {title}
                 <Icon name="external" />
               </a>
-              <span class="muted">{s}</span>
+              {rest.length > 0 && <span class="muted">{rest.join(' · ')}</span>}
             </li>
           ))}
           {usesCommunity && (

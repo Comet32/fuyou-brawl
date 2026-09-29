@@ -41,6 +41,10 @@ const tipText = z.string().min(1).max(TIP_MAX_LENGTH, `心得不超过 ${TIP_MAX
 const tip = z.strictObject({ text: tipText, source: httpUrl.optional(), date: tipDate.optional() });
 const communityTip = z.strictObject({ text: tipText, source: httpUrl, date: tipDate.optional() });
 const recommendedHero = z.strictObject({ hero: slug, source: httpUrl });
+// A dated official change, e.g. from the Steam workshop changelog.
+const communityChange = z.strictObject({ date: tipDate, text: tipText, source: httpUrl });
+// One source's claim about a quality, kept when sources disagree.
+const qualityClaim = z.strictObject({ quality, source: httpUrl });
 
 /** One entry of blessings.generated.yaml (written by scripts/import-vpk.ts). */
 export const generatedBlessingSchema = z.object({
@@ -80,8 +84,15 @@ export const blessingCommunitySchema = z.strictObject({
   numbers: numbers.optional(),
   // Placeholder name -> where its value came from.
   number_sources: z.record(z.string(), httpUrl).optional(),
+  // Player tips (one-image guides, Bilibili and Steam comments).
   tips: z.array(communityTip).optional(),
+  // The wiki's own annotations (restrictions, its change notes), paraphrased.
+  wiki_notes: z.array(communityTip).optional(),
+  // Official changes from the Steam changelog.
+  changes: z.array(communityChange).optional(),
   recommended_heroes: z.array(recommendedHero).optional(),
+  // Every claim when sources disagree on the quality (quality is then left unset).
+  quality_conflict: z.array(qualityClaim).optional(),
   // Caveat about the quality, e.g. why it is left unknown.
   notes: z.string().min(1).optional(),
 });
@@ -113,6 +124,12 @@ export const blessingSchema = z.object({
   history: history.default([]),
   /** Manual tips first, then community ones. */
   tips: z.array(tip).default([]),
+  /** Community wiki annotations (图鉴备注). */
+  wiki_notes: z.array(communityTip).default([]),
+  /** Official changes from the community research, shown in 改动历史 next to `history`. */
+  changes: z.array(communityChange).default([]),
+  /** Conflicting quality claims; only kept while the quality is unknown. */
+  quality_conflict: z.array(qualityClaim).default([]),
   /** Heroes the community recommends this blessing for (separate from the automatic hero links). */
   recommended_heroes: z.array(recommendedHero).default([]),
 });
@@ -168,6 +185,8 @@ export type GeneratedBlessing = z.infer<typeof generatedBlessingSchema>;
 export type BlessingOverride = z.infer<typeof blessingOverrideSchema>;
 export type BlessingCommunity = z.infer<typeof blessingCommunitySchema>;
 export type Tip = z.infer<typeof tip>;
+export type CommunityChange = z.infer<typeof communityChange>;
+export type QualityClaim = z.infer<typeof qualityClaim>;
 export type Blessing = z.infer<typeof blessingSchema>;
 export type Hero = z.infer<typeof heroSchema>;
 export type HeroAbilities = z.infer<typeof heroAbilitiesSchema>;

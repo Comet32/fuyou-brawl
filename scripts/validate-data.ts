@@ -1,8 +1,11 @@
 import { findBrokenRefs } from '../src/lib/integrity';
 import { loadDataSet } from '../src/lib/load';
+import { loadSources } from '../src/lib/sources';
 
 try {
   const data = loadDataSet(process.cwd());
+  // Schema check of the cited-source registry (throws with the file name on error).
+  loadSources(process.cwd());
   const errors = findBrokenRefs(data);
   if (errors.length > 0) {
     console.error(`✗ 发现 ${errors.length} 个数据问题：`);

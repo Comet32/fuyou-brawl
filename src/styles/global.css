@@ -1813,8 +1813,21 @@ a.tag:hover {
   text-align: right;
 }
 .stats tbody th {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--ink);
+}
+.stats tbody th code {
   font: 500 14px/1.3 var(--font-code);
   color: var(--ink-2);
+}
+/* The raw placeholder key, secondary under the readable label. */
+.stats tbody th .key {
+  display: block;
+  margin-top: 2px;
+  font-size: 12px;
+  color: var(--ink-3);
 }
 .stats td {
   text-align: right;
@@ -1875,6 +1888,13 @@ a.tag:hover {
   letter-spacing: 0;
   text-decoration-color: currentColor;
 }
+.lt-band > * {
+  white-space: nowrap;
+}
+.lt3:not([data-q]) .lt-band .lt-cap {
+  margin-right: 8px;
+  padding: 2px 8px;
+}
 .lt-src:hover {
   color: inherit;
   text-decoration-thickness: 2px;
@@ -1893,8 +1913,19 @@ a.tag:hover {
   vertical-align: 0.9em;
 }
 .src-mark a {
+  position: relative;
   color: var(--ink-3);
   text-decoration-style: dotted;
+}
+/* 11px text, 24px hit area. */
+.src-mark a::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: max(100%, 24px);
+  height: max(100%, 24px);
+  transform: translate(-50%, -50%);
 }
 .src-mark a:hover {
   color: var(--gold-ink);
@@ -1944,6 +1975,19 @@ a.tag:hover {
   font-weight: 700;
   line-height: 20px;
   cursor: help;
+}
+.history .hist-src {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-left: 8px;
+  color: var(--ink-2);
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.history .hist-src:hover {
+  color: var(--gold-ink);
 }
 .hero-chips {
   display: flex;
@@ -2236,6 +2280,13 @@ a.tag:hover {
 }
 .prose strong {
   font-weight: 800;
+}
+.source-list {
+  font-size: 15px;
+}
+/* Titles wrap between words, never mid-word like the default for long URLs. */
+.source-list a {
+  overflow-wrap: break-word;
 }
 .meta-line {
   color: var(--ink-3);

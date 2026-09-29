@@ -18,7 +18,7 @@ const HEADER = [
 ].join('\n');
 
 const REASONS: Record<Skip['reason'], string> = {
-  quality_conflict: '品质来源冲突，未写入品质（改记为心得）',
+  quality_conflict: '品质来源冲突，未写入品质（记为 quality_conflict）',
   unit_mismatch: '数值单位与模板不一致',
   not_placeholder: '数值键不是模板里的占位符',
   tip_too_long: '心得超过 80 字，疑似照抄',
@@ -61,7 +61,7 @@ try {
     Pair(_, pair) {
       const key = String((pair.key as { value?: unknown })?.value ?? '');
       if ((key === 'numbers' || key === 'number_sources') && isMap(pair.value)) pair.value.flow = true;
-      if ((key === 'tips' || key === 'recommended_heroes') && isSeq(pair.value)) {
+      if (['tips', 'wiki_notes', 'changes', 'recommended_heroes', 'quality_conflict'].includes(key) && isSeq(pair.value)) {
         for (const item of pair.value.items) if (isMap(item)) item.flow = true;
       }
     },
@@ -78,6 +78,8 @@ try {
   console.log(`  品质 ${qualities.length}（${dist}）`);
   console.log(`  数值 ${count((e) => Object.keys(e.numbers ?? {}).length)} 项，覆盖 ${entries.filter((e) => e.numbers).length} 个福佑`);
   console.log(`  心得 ${count((e) => e.tips?.length ?? 0)} 条，覆盖 ${entries.filter((e) => e.tips).length} 个福佑`);
+  console.log(`  图鉴备注 ${count((e) => e.wiki_notes?.length ?? 0)} 条，覆盖 ${entries.filter((e) => e.wiki_notes).length} 个福佑`);
+  console.log(`  官方改动 ${count((e) => e.changes?.length ?? 0)} 条，覆盖 ${entries.filter((e) => e.changes).length} 个福佑`);
   console.log(`  推荐英雄 ${count((e) => e.recommended_heroes?.length ?? 0)} 个，覆盖 ${entries.filter((e) => e.recommended_heroes).length} 个福佑`);
   console.log(`  品质备注 ${entries.filter((e) => e.notes).length} 条`);
   const manualWins = merged.filter((b) => b.quality_source === 'manual' && out[b.id]?.quality).length;
