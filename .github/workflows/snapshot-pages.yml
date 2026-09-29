@@ -1,0 +1,38 @@
+name: Snapshot source pages
+
+# Fetch pages that are unreachable from mainland China (Steam, etc.) and
+# upload them as an artifact: `gh run download <run-id> -n pages`.
+on:
+  workflow_dispatch:
+    inputs:
+      urls:
+        description: Space-separated URLs to fetch
+        required: true
+        default: >-
+          https://steamcommunity.com/sharedfiles/filedetails/?id=2841152696&l=schinese
+          https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese
+
+permissions:
+  contents: read
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch pages
+        env:
+          URLS: ${{ inputs.urls }}
+        run: |
+          mkdir -p pages
+          i=0
+          for u in $URLS; do
+            i=$((i + 1))
+            curl -sSL --max-time 60 -H 'Accept-Language: zh-CN' -o "pages/$i.html" "$u"
+            printf '%s\t%s\n' "$i.html" "$u" >> pages/index.tsv
+          done
+          ls -la pages
+      - uses: actions/upload-artifact@v7
+        with:
+          name: pages
+          path: pages
+          retention-days: 7
