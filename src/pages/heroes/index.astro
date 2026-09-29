@@ -7,7 +7,7 @@ import { isHeroBlessing } from '../../lib/hero-blessing';
 import { heroLinks } from '../../lib/hero-links-data';
 import { toHeroSearchRecord } from '../../lib/hero-search-data';
 import { safeJson } from '../../lib/json';
-import { loadDataSet } from '../../lib/load';
+import { renderHeroAbilities } from '../../lib/render-data';
 import { ATTRS, ATTR_LABELS } from '../../lib/schema';
 import { url } from '../../lib/url';
 
@@ -15,7 +15,7 @@ const heroes = (await getCollection('heroes'))
   .map((e) => e.data)
   .sort((a, b) => a.name.localeCompare(b.name, 'zh-CN'));
 const withBuild = new Set((await getCollection('builds')).map((e) => e.data.hero));
-const abilities = new Map(loadDataSet(process.cwd()).heroAbilities.map((h) => [h.hero, h.abilities.map((a) => a.name)]));
+const abilities = new Map(renderHeroAbilities().map((h) => [h.hero, h.abilities.map((a) => a.name)]));
 const records = heroes.map((h) => toHeroSearchRecord(h, abilities.get(h.id) ?? []));
 const { byHero } = heroLinks();
 const heroBlessingCount = (id: string) => (byHero.get(id) ?? []).filter((l) => isHeroBlessing(l.blessing)).length;

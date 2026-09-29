@@ -2,7 +2,8 @@
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
-import { describeSource, loadSources } from '../../lib/sources';
+import { describeSource } from '../../lib/sources';
+import { renderSources } from '../../lib/render-data';
 import { url } from '../../lib/url';
 
 export async function getStaticPaths() {
@@ -12,7 +13,7 @@ export async function getStaticPaths() {
 
 const { guide } = Astro.props;
 const { Content } = await render(guide);
-const registry = loadSources(process.cwd());
+const registry = renderSources();
 const sources = guide.data.sources.map((s) => describeSource(s, registry));
 ---
 

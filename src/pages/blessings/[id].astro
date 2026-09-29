@@ -12,7 +12,8 @@ import { heroLinks } from '../../lib/hero-links-data';
 import { qualityOf } from '../../lib/quality';
 import { conflictCaption, historyEntries, parseRange, sourceLink } from '../../lib/community';
 import { placeholderLabels } from '../../lib/stat-labels';
-import { describeSource, loadSources } from '../../lib/sources';
+import { describeSource } from '../../lib/sources';
+import { renderSources } from '../../lib/render-data';
 import { COMMUNITY_VIDEO_URL, COMMUNITY_WIKI_URL, REPO_URL } from '../../lib/site';
 import { placeholderKeys, toPlainText } from '../../lib/template';
 import { OVERRIDES_FILE } from '../../lib/blessings';
@@ -61,7 +62,7 @@ const firstRange = rows.find((r) => r.range)?.range;
 const tips = blessing.tips;
 const history = historyEntries(blessing.history, blessing.changes);
 const hasHistory = history.length > 0 || blessing.change_summary !== undefined;
-const registry = loadSources(process.cwd());
+const registry = renderSources();
 const manualSources = blessing.sources.map((s) => describeSource(s, registry));
 // Community picks, separate from the automatic hero links above them.
 const communityHeroes = blessing.recommended_heroes

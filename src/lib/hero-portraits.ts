@@ -1,14 +1,10 @@
 // Build-time paths and placeholder colors for hero portraits.
 import { publicFileExists } from './assets';
-import { parseWith, readYaml } from './data-file';
-import { heroColorsSchema } from './schema';
-
-let colors: Record<string, string> | undefined;
+import { renderHeroColors } from './render-data';
 
 /** Average portrait color from src/data/hero-colors.yaml (tools/hero-thumbs.ts). */
 export function heroColor(id: string): string | undefined {
-  colors ??= parseWith(heroColorsSchema, readYaml(process.cwd(), 'src/data/hero-colors.yaml', {}, { optional: true }), 'hero-colors.yaml');
-  return colors[id];
+  return renderHeroColors()[id];
 }
 
 /** Site-relative portrait paths; `thumb` is the 128px grid/chip version (falls back to full). */

@@ -1,6 +1,7 @@
 // Display metadata for cited source URLs (src/data/sources.yaml), so guides show titles instead of bare links.
 import { z } from 'astro/zod';
-import { parseWith, readYaml } from './data-file';
+import { readYaml } from './data-file';
+import { parseWith } from './parse';
 
 export const SOURCES_FILE = 'src/data/sources.yaml';
 

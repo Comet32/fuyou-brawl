@@ -1,5 +1,6 @@
 import { z } from 'astro/zod';
-import { parseWith, readYaml } from './data-file';
+import { readYaml } from './data-file';
+import { parseWith } from './parse';
 import {
   blessingCommunitySchema,
   blessingOverrideSchema,
@@ -72,25 +73,22 @@ export function mergeBlessings(
   });
 }
 
+/** Validate and merge already-parsed blessing YAML documents (no file access, safe in any runtime). */
+export function parseBlessingDocs(generatedDoc: unknown, overridesDoc: unknown, communityDoc: unknown): Blessing[] {
+  const generated = parseWith(z.array(generatedBlessingSchema), generatedDoc ?? [], 'blessings.generated.yaml');
+  const overrides = parseWith(z.record(z.string(), blessingOverrideSchema), overridesDoc ?? {}, 'blessings.overrides.yaml');
+  const community = parseWith(z.record(z.string(), blessingCommunitySchema), communityDoc ?? {}, 'blessings.community.yaml');
+  return mergeBlessings(generated, overrides, community);
+}
+
 /**
- * Read, validate and merge the blessing data files under `root`.
+ * Read, validate and merge the blessing data files under `root` (Node only: scripts and content config).
  * The overrides and community files may be missing or empty.
  */
 export function loadBlessingFiles(root: string): Blessing[] {
-  const generated = parseWith(
-    z.array(generatedBlessingSchema),
+  return parseBlessingDocs(
     readYaml(root, GENERATED_FILE, []),
-    'blessings.generated.yaml',
-  );
-  const overrides = parseWith(
-    z.record(z.string(), blessingOverrideSchema),
     readYaml(root, OVERRIDES_FILE, {}, { optional: true }),
-    'blessings.overrides.yaml',
-  );
-  const community = parseWith(
-    z.record(z.string(), blessingCommunitySchema),
     readYaml(root, COMMUNITY_FILE, {}, { optional: true }),
-    'blessings.community.yaml',
   );
-  return mergeBlessings(generated, overrides, community);
 }
