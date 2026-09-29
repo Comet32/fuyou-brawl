@@ -3,22 +3,41 @@ export interface ChangelogEntry {
   text: string;
 }
 
-const ENTITIES: Record<string, string> = {
-  '&amp;': '&',
-  '&lt;': '<',
-  '&gt;': '>',
-  '&quot;': '"',
-  '&#39;': "'",
-  '&nbsp;': ' ',
+const NAMED_ENTITIES: Record<string, string> = {
+  amp: '&',
+  lt: '<',
+  gt: '>',
+  quot: '"',
+  apos: "'",
+  nbsp: ' ',
 };
+
+function decodeEntity(m: string, body: string): string {
+  if (body[0] === '#') {
+    const code = body[1] === 'x' || body[1] === 'X' ? parseInt(body.slice(2), 16) : parseInt(body.slice(1), 10);
+    return Number.isInteger(code) && code > 0 && code <= 0x10ffff ? String.fromCodePoint(code) : m;
+  }
+  return NAMED_ENTITIES[body.toLowerCase()] ?? m;
+}
 
 export function htmlToText(html: string): string {
   return html
     .replace(/<br\s*\/?>/gi, '\n')
+    .replace(/<\/(p|div|li)\s*>/gi, '\n')
+    .replace(/<li(\s[^>]*)?>/gi, '- ')
     .replace(/<[^>]+>/g, '')
-    .replace(/&(amp|lt|gt|quot|#39|nbsp);/g, (m) => ENTITIES[m])
+    .replace(/&(#x[0-9a-f]+|#\d+|[a-z]+);/gi, decodeEntity)
+    .replace(/\r\n?/g, '\n')
+    .split('\n')
+    .map((l) => l.trim())
+    .join('\n')
     .replace(/\n{3,}/g, '\n\n')
     .trim();
+}
+
+// Quoted third-party text must not ping users or auto-link issues/PRs on GitHub.
+function neutralizeGithubRefs(line: string): string {
+  return line.replace(/@/g, '@\u200b').replace(/#(?=\d)/g, '#\u200b');
 }
 
 // Steam changelog entries are <p id="{unix timestamp}">...</p>.
@@ -41,12 +60,18 @@ export function buildIssue(
 ): { key: string; title: string; body: string } {
   const key = `v${timeUpdated}`;
   const date = formatBeijingDate(timeUpdated);
-  const entry = entries.find((e) => Math.abs(e.timestamp - timeUpdated) <= 6 * 3600) ?? entries[0];
-  const quoted = entry ? entry.text.split('\n').map((l) => `> ${l}`).join('\n') : '';
+  const exact = entries.find((e) => Math.abs(e.timestamp - timeUpdated) <= 6 * 3600);
+  const entry = exact ?? entries[0];
+  const quoted = entry ? entry.text.split('\n').map((l) => `> ${neutralizeGithubRefs(l)}`).join('\n') : '';
+  const heading = exact
+    ? '### 更新日志原文'
+    : entry
+      ? '### ⚠️ 未找到对应时间的日志，以下为最新一条'
+      : '### ⚠️ 未能解析更新日志，请手动查看';
   const body = [
     `创意工坊在 **${date}**（北京时间）发布了新版本。`,
     '',
-    entry ? '### 更新日志原文' : '### ⚠️ 未能解析更新日志，请手动查看',
+    heading,
     '',
     quoted,
     '',
