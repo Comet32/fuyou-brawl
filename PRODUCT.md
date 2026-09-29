@@ -39,7 +39,7 @@ web
 - Astro 7 纯静态站，没有后端。部署在 GitHub Pages 的子路径 `/fuyou-brawl/` 下，Cloudflare 只作为海外镜像（国内被墙）。
 - 页面：福佑图鉴（首页，搜索加品质和标签筛选）、三选一对比、福佑详情、英雄列表和详情（127 个英雄）、版本变动、攻略文章，另有一个隐藏的品质标注页。
 - 福佑描述是带 `{占位符}` 的模板：
-  - 大部分数值取自社区图鉴，通常是区间（重铸会改变数值），并标注来源；
+  - 大部分数值取自社区图鉴，通常是区间（来源未说明区间随什么变化），并标注来源；
   - 仍然未知的显示为斜线空心「?」；
   - 不能编造数值。
 - 数据优先级：`blessings.overrides.yaml`（手动）> `blessings.community.yaml`（社区，由 `scripts/import-community.ts` 生成）> `blessings.generated.yaml`（游戏文件，由 `scripts/import-vpk.ts` 生成）。
