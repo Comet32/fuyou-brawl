@@ -25,7 +25,7 @@ const groups = ATTRS.map((attr) => ({ attr, heroes: heroes.filter((h) => h.attr 
 // Position across all groups, so the first screen of tiles loads eagerly.
 const order = new Map(groups.flatMap((g) => g.heroes).map((h, i) => [h.id, i]));
 // Eager covers the desktop first viewport (4 rows × 6 columns); the first row gets high priority.
-const EAGER = 24;
+const EAGER = 36;
 const PRIORITY = 6;
 ---
 
