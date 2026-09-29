@@ -953,62 +953,32 @@
     - id: invoker_cold_snap
       name: 急速冷却
       name_en: Cold Snap
-    - id: invoker_cold_snap_ad
-      name: 急速冷却（OMG）
-      name_en: Cold Snap (AD)
     - id: invoker_ghost_walk
       name: 幽灵漫步
       name_en: Ghost Walk
-    - id: invoker_ghost_walk_ad
-      name: 幽灵漫步（OMG）
-      name_en: Ghost Walk (AD)
     - id: invoker_tornado
       name: 强袭飓风
       name_en: Tornado
-    - id: invoker_tornado_ad
-      name: 强袭飓风（OMG）
-      name_en: Tornado (AD)
     - id: invoker_emp
       name: 电磁脉冲
       name_en: E.M.P.
-    - id: invoker_emp_ad
-      name: 电磁脉冲（OMG）
-      name_en: E.M.P. (AD)
     - id: invoker_alacrity
       name: 灵动迅捷
       name_en: Alacrity
-    - id: invoker_alacrity_ad
-      name: 灵动迅捷（OMG）
-      name_en: Alacrity (AD)
     - id: invoker_chaos_meteor
       name: 混沌陨石
       name_en: Chaos Meteor
-    - id: invoker_chaos_meteor_ad
-      name: 混沌陨石（OMG）
-      name_en: Chaos Meteor (AD)
     - id: invoker_sun_strike
       name: 阳炎冲击
       name_en: Sun Strike
-    - id: invoker_sun_strike_ad
-      name: 阳炎冲击（OMG）
-      name_en: Sun Strike (AD)
     - id: invoker_forge_spirit
       name: 熔炉精灵
       name_en: Forge Spirit
-    - id: invoker_forge_spirit_ad
-      name: 熔炉精灵（OMG）
-      name_en: Forge Spirit (AD)
     - id: invoker_ice_wall
       name: 寒冰之墙
       name_en: Ice Wall
-    - id: invoker_ice_wall_ad
-      name: 寒冰之墙（OMG）
-      name_en: Ice Wall (AD)
     - id: invoker_deafening_blast
       name: 超震声波
-      name_en: Deafening Blast
-    - id: invoker_deafening_blast_ad
-      name: 超震声波（OMG）
       name_en: Deafening Blast
     - id: invoker_mastermind
       name: 聪明绝顶
@@ -2145,6 +2115,23 @@
     - id: rubick_spell_steal
       name: 技能窃取
       name_en: Spell Steal
+- hero: sand_king
+  abilities:
+    - id: sandking_burrowstrike
+      name: 掘地穿刺
+      name_en: Burrowstrike
+    - id: sandking_sand_storm
+      name: 沙尘暴
+      name_en: Sand Storm
+    - id: sandking_caustic_finale
+      name: 腐尸毒
+      name_en: Caustic Finale
+    - id: sandking_epicenter
+      name: 地震
+      name_en: Epicenter
+    - id: sandking_scorpion_strike
+      name: 尾刺
+      name_en: Stinger
 - hero: shadow_demon
   abilities:
     - id: shadow_demon_disruption
