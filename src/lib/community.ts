@@ -1,6 +1,7 @@
 // Community research -> blessings.community.yaml entries, plus small display helpers for tips and sources.
 import { qualityOf, QUALITY_IDS, type QualityId } from './quality';
 import { TIP_MAX_LENGTH, type BlessingCommunity } from './schema';
+import { COMMUNITY_WIKI_URL } from './site';
 
 /** One entry of tmp/research/blessing-notes.json (shape of the research export). */
 export interface ResearchNote {
@@ -42,8 +43,8 @@ export const HERO_NAME_ALIASES: Record<string, string> = { 先知: 'furion' };
 // "图鉴标注的专属英雄" marks the owner of a hero blessing, which the site already links; not a recommendation.
 const EXCLUSIVE_MARKER = '图鉴标注的专属英雄';
 
-const WIKI_HOST = '122.51.0.76:8081';
-export const WIKI_URL = `http://${WIKI_HOST}/`;
+const WIKI_URL = COMMUNITY_WIKI_URL;
+const WIKI_HOST = new URL(WIKI_URL).host;
 
 /** Keep YYYY-MM and YYYY-MM-DD (trimming any time part); anything else is dropped. */
 export function normalizeTipDate(date: string | null | undefined): string | undefined {
@@ -144,23 +145,41 @@ export function isPossiblyOutdated(date: string | undefined, reference: string, 
   return at < cutoff;
 }
 
+export interface SourceLink {
+  href: string;
+  /** Chinese label, e.g. 社区图鉴 / Steam 改动记录 / B站. */
+  label: string;
+  /** Compact label for superscript markers. */
+  short: string;
+}
+
 /** Display link for a source url: a short Chinese label, and the wiki's front page instead of its JSON API. */
-export function sourceLink(source: string): { href: string; label: string } {
+export function sourceLink(source: string): SourceLink {
+  const link = (href: string, label: string, short = label): SourceLink => ({ href, label, short });
   let u: URL;
   try {
     u = new URL(source);
   } catch {
-    return { href: source, label: source };
+    return link(source, source);
   }
   if (u.host === WIKI_HOST) {
     // Hero "一图流" guide images and the API listing them.
-    if (u.pathname.startsWith('/icons/guides/')) return { href: source, label: '社区一图流' };
-    if (u.pathname.startsWith('/api/hero-guides')) return { href: WIKI_URL, label: '社区一图流' };
-    return { href: u.pathname.startsWith('/api/') ? WIKI_URL : source, label: '社区图鉴' };
+    if (u.pathname.startsWith('/icons/guides/')) return link(source, '社区一图流', '一图流');
+    if (u.pathname.startsWith('/api/hero-guides')) return link(WIKI_URL, '社区一图流', '一图流');
+    return link(u.pathname.startsWith('/api/') ? WIKI_URL : source, '社区图鉴', '图鉴');
   }
   if (u.hostname === 'steamcommunity.com') {
-    return { href: source, label: u.pathname.includes('/changelog/') ? 'Steam 改动记录' : 'Steam 创意工坊' };
+    return link(source, u.pathname.includes('/changelog/') ? 'Steam 改动记录' : 'Steam 创意工坊', 'Steam');
   }
-  if (u.hostname.endsWith('bilibili.com')) return { href: source, label: 'B站' };
-  return { href: source, label: u.hostname };
+  if (u.hostname.endsWith('bilibili.com')) return link(source, 'B站');
+  return link(source, u.hostname);
+}
+
+const RANGE_RE = /^(-?\d+(?:\.\d+)?)~(-?\d+(?:\.\d+)?)$/;
+
+/** Split a community range value ("200~400") into its two ends; undefined for anything else. */
+export function parseRange(value: number | string): [string, string] | undefined {
+  if (typeof value !== 'string') return undefined;
+  const m = RANGE_RE.exec(value);
+  return m ? [m[1], m[2]] : undefined;
 }

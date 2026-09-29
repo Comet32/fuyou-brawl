@@ -3,6 +3,7 @@ import {
   convertNote,
   isPossiblyOutdated,
   normalizeTipDate,
+  parseRange,
   sourceLink,
   type ResearchNote,
 } from '../src/lib/community';
@@ -167,14 +168,37 @@ describe('isPossiblyOutdated', () => {
 
 describe('sourceLink', () => {
   it('labels known sources and points wiki API urls at the wiki itself', () => {
-    expect(sourceLink(WIKI)).toEqual({ href: 'http://122.51.0.76:8081/', label: '社区图鉴' });
-    expect(sourceLink(GUIDE)).toEqual({ href: GUIDE, label: '社区一图流' });
-    expect(sourceLink(CHANGELOG)).toEqual({ href: CHANGELOG, label: 'Steam 改动记录' });
+    expect(sourceLink(WIKI)).toEqual({ href: 'http://122.51.0.76:8081/', label: '社区图鉴', short: '图鉴' });
+    expect(sourceLink('http://122.51.0.76:8081/api/hero-guides')).toEqual({
+      href: 'http://122.51.0.76:8081/',
+      label: '社区一图流',
+      short: '一图流',
+    });
+    expect(sourceLink(GUIDE)).toEqual({ href: GUIDE, label: '社区一图流', short: '一图流' });
+    expect(sourceLink(CHANGELOG)).toEqual({ href: CHANGELOG, label: 'Steam 改动记录', short: 'Steam' });
     expect(sourceLink('https://steamcommunity.com/sharedfiles/filedetails/?id=2841152696')).toEqual({
       href: 'https://steamcommunity.com/sharedfiles/filedetails/?id=2841152696',
       label: 'Steam 创意工坊',
+      short: 'Steam',
     });
-    expect(sourceLink(BILI)).toEqual({ href: BILI, label: 'B站' });
-    expect(sourceLink('https://example.com/a')).toEqual({ href: 'https://example.com/a', label: 'example.com' });
+    expect(sourceLink(BILI)).toEqual({ href: BILI, label: 'B站', short: 'B站' });
+    expect(sourceLink('https://example.com/a')).toEqual({
+      href: 'https://example.com/a',
+      label: 'example.com',
+      short: 'example.com',
+    });
+  });
+});
+
+describe('parseRange', () => {
+  it('splits "a~b" range strings, in either direction', () => {
+    expect(parseRange('200~400')).toEqual(['200', '400']);
+    expect(parseRange('8~4.8')).toEqual(['8', '4.8']);
+    expect(parseRange('-5~-1')).toEqual(['-5', '-1']);
+  });
+  it('returns undefined for plain values', () => {
+    expect(parseRange(3500)).toBeUndefined();
+    expect(parseRange('3500')).toBeUndefined();
+    expect(parseRange('雷神之锤')).toBeUndefined();
   });
 });

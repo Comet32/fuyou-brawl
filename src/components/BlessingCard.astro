@@ -10,7 +10,7 @@ import Template from './Template.astro';
 interface Props {
   blessing: Blessing;
   note?: string;
-  headingLevel?: 'h2' | 'h3';
+  headingLevel?: 'h2' | 'h3' | 'h4';
   /** The hero of a hero blessing (英雄福佑): shown as a small portrait strap. */
   hero?: Pick<Hero, 'id' | 'name'>;
 }

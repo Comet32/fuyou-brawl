@@ -2,7 +2,7 @@
 import '../styles/global.css';
 import Icon, { type IconName } from '../components/Icon.astro';
 import { url } from '../lib/url';
-import { REPO_URL, SITE_NAME } from '../lib/site';
+import { COMMUNITY_WIKI_URL, REPO_URL, SITE_NAME, WORKSHOP_CHANGELOG_URL, WORKSHOP_URL } from '../lib/site';
 
 interface Props {
   title?: string;
@@ -111,8 +111,11 @@ const mark = [
     <main><slot /></main>
     <footer class="site-footer">
       <p>
-        非官方玩家攻略站，名称、描述与图标取自游戏文件，品质为人工标注，数值待补充；可能滞后于游戏版本。
-        发现错误？<a href={REPO_URL}>在 GitHub 上提交修改</a>
+        非官方玩家攻略站，可能滞后于游戏版本。发现错误？<a href={REPO_URL}>在 GitHub 上提交修改</a>
+      </p>
+      <p class="credit-line">
+        数据参考：<a href={WORKSHOP_URL} rel="noopener">游戏文件</a> · <a href={COMMUNITY_WIKI_URL} rel="noopener">社区图鉴站</a> ·
+        <a href={WORKSHOP_CHANGELOG_URL} rel="noopener">Steam 改动记录</a>
       </p>
     </footer>
     <nav class="dock" aria-label="底部导航">

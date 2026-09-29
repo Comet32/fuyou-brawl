@@ -6,11 +6,12 @@ import HeroImage from '../../components/HeroImage.astro';
 import Icon from '../../components/Icon.astro';
 import ItemImage from '../../components/ItemImage.astro';
 import { ATTR_LABELS } from '../../lib/schema';
-import { blessingsForHero } from '../../lib/hero-blessings';
+import { blessingsForHero, blessingsRecommendedForHero } from '../../lib/hero-blessings';
+import { sourceLink } from '../../lib/community';
 import { isHeroBlessing } from '../../lib/hero-blessing';
 import { heroLinks } from '../../lib/hero-links-data';
-import { QUALITY_IDS } from '../../lib/quality';
-import { REPO_URL } from '../../lib/site';
+import { QUALITIES, QUALITY_IDS } from '../../lib/quality';
+import { COMMUNITY_WIKI_URL, REPO_URL } from '../../lib/site';
 import { url } from '../../lib/url';
 
 export async function getStaticPaths() {
@@ -33,6 +34,15 @@ const linked = (heroLinks().byHero.get(hero.id) ?? [])
   .sort((a, b) => qualityRank(a.quality) - qualityRank(b.quality) || a.name.localeCompare(b.name, 'zh-CN'));
 const heroBlessings = linked.filter((b) => isHeroBlessing(b.id));
 const generalLinked = linked.filter((b) => !isHeroBlessing(b.id));
+// Community picks for this hero (one-image guides, video titles), grouped by quality.
+const recommended = blessingsRecommendedForHero(hero.id, blessings);
+const recGroups = [
+  ...QUALITIES.map((q) => ({ id: q.id as string, q: q.id as string | undefined, label: q.label })),
+  { id: 'none', q: undefined, label: '未标注' },
+]
+  .map((g) => ({ ...g, items: recommended.filter((r) => (r.blessing.quality ?? 'none') === g.id) }))
+  .filter((g) => g.items.length > 0);
+const recNote = (sources: string[]) => `推荐来源：${[...new Set(sources.map((s) => sourceLink(s).label))].join('、')}`;
 const items = new Map((await getCollection('items')).map((e) => [e.data.id, e.data]));
 const newBuildUrl = `${REPO_URL}/new/main/src/content/builds?filename=${hero.id}.md`;
 ---
@@ -80,6 +90,34 @@ const newBuildUrl = `${REPO_URL}/new/main/src/content/builds?filename=${hero.id}
             </li>
           ))}
         </ul>
+      </section>
+    )
+  }
+
+  {
+    recommended.length > 0 && (
+      <section aria-labelledby="rec-h">
+        <h2 id="rec-h" class="strap">社区推荐福佑<span class="num">{recommended.length}</span></h2>
+        <p class="note">
+          整理自
+          <a class="link-inline" href={COMMUNITY_WIKI_URL} target="_blank" rel="noopener">社区图鉴站<Icon name="external" /></a>
+          的英雄一图流和 B站实战视频标题，是玩家的经验之谈，不是官方推荐。
+        </p>
+        {recGroups.map((g) => (
+          <div class="group rec-group" data-q={g.q}>
+            <h3 class="group-head">
+              <span class="group-name">{g.label}</span>
+              <b class="num">{g.items.length}</b>
+            </h3>
+            <ul class="slot-list">
+              {g.items.map((r) => (
+                <li>
+                  <BlessingCard blessing={r.blessing} headingLevel="h4" note={recNote(r.sources)} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </section>
     )
   }
