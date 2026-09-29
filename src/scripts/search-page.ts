@@ -217,4 +217,6 @@ export function initSearchPage(): void {
     render();
   });
   render(false);
+  // The inline pre-paint guard in index.astro is no longer needed once li.hidden is managed here.
+  document.documentElement.classList.remove('hb-off');
 }

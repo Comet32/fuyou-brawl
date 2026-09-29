@@ -50,7 +50,7 @@ function renderCard(r: HydratedCard): HTMLElement {
   const card = el('article', 'pc');
   setQuality(card, r.quality);
   const top = el('div', 'pc-top');
-  top.appendChild(renderIcon(r, BASE, 64));
+  top.appendChild(renderIcon(r, BASE, 64, true)); // locked cards are the whole screen: load now
   const head = el('div');
   const h = el('h2');
   const link = el('a', undefined, r.name);

@@ -7,6 +7,7 @@ import { toCardRecord } from '../lib/card-data';
 import { isHeroBlessing } from '../lib/hero-blessing';
 import { heroLinks } from '../lib/hero-links-data';
 import { heroPortrait } from '../lib/hero-portraits';
+import { iconColor } from '../lib/icon-colors';
 import { MAX_COMPARE } from '../lib/compare';
 import { safeJson } from '../lib/json';
 
@@ -23,9 +24,11 @@ const heroOf = (id: string) => {
   const img = heroPortrait(h.id).thumb;
   return { id: h.id, name: h.name, ...(img ? { img } : {}) };
 };
-const records = blessings.map((b) =>
-  toCardRecord(b, Boolean(b.icon && publicFileExists(`img/blessings/${b.icon}`)), heroOf(b.id)),
-);
+const records = blessings.map((b) => {
+  const r = toCardRecord(b, Boolean(b.icon && publicFileExists(`img/blessings/${b.icon}`)), heroOf(b.id));
+  const color = r.icon ? iconColor(b.icon) : undefined;
+  return color ? { ...r, color } : r;
+});
 const slots = Array.from({ length: MAX_COMPARE }, (_, i) => i);
 ---
 

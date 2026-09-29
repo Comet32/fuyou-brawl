@@ -37,8 +37,14 @@ export function renderTemplate(tpl: string, numbers?: Record<string, number | st
 }
 
 /** Icon box; `base` is the site base URL (import.meta.env.BASE_URL). */
-export function renderIcon(r: Pick<CardRecord, 'icon' | 'name'>, base: string, size: number): HTMLElement {
+export function renderIcon(
+  r: Pick<CardRecord, 'icon' | 'name' | 'color'>,
+  base: string,
+  size: number,
+  priority = false,
+): HTMLElement {
   const box = el('span', 'ic');
+  if (r.color) box.style.setProperty('--ic-bg', r.color);
   if (r.icon) {
     const img = el('img');
     img.src = base.replace(/\/?$/, '/') + r.icon;
@@ -46,6 +52,7 @@ export function renderIcon(r: Pick<CardRecord, 'icon' | 'name'>, base: string, s
     img.width = size;
     img.height = size;
     img.decoding = 'async';
+    if (priority) img.fetchPriority = 'high';
     box.appendChild(img);
   } else {
     const fb = el('span', 'fb', r.name.slice(0, 1));

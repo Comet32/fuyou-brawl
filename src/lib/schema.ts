@@ -149,6 +149,12 @@ export const heroSchema = z.object({
 /** hero-colors.yaml (written by tools/hero-thumbs.ts): hero id -> average portrait color. */
 export const heroColorsSchema = z.record(slug, z.string().regex(/^#[0-9a-f]{6}$/, '颜色应为 #rrggbb'));
 
+/** blessing-colors.yaml (written by tools/blessing-colors.ts): icon file name without .webp -> average color. */
+export const blessingColorsSchema = z.record(
+  z.string().regex(/^[\w.-]+$/, '应为图标文件名（不含 .webp）'),
+  z.string().regex(/^#[0-9a-f]{6}$/, '颜色应为 #rrggbb'),
+);
+
 /** One entry of hero-abilities.yaml (written by scripts/fetch-dota-assets.ts). */
 export const heroAbilitiesSchema = z.object({
   hero: slug,

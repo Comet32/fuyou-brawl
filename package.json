@@ -17,7 +17,8 @@
     "labels": "tsx scripts/apply-labels.ts",
     "fonts": "tsx tools/subset-display-font.ts",
     "community": "tsx scripts/import-community.ts",
-    "thumbs": "tsx tools/hero-thumbs.ts"
+    "thumbs": "tsx tools/hero-thumbs.ts",
+    "icon-colors": "tsx tools/blessing-colors.ts"
   },
   "dependencies": {
     "@fontsource/barlow-condensed": "^5.3.0",

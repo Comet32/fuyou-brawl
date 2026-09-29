@@ -9,11 +9,13 @@ export interface CardRecord extends Omit<SearchRecord, 'text'> {
   /** Description template of the summary; parse with parseTemplate. */
   summary: string;
   numbers?: Record<string, number | string>;
+  /** Average icon color, painted until the icon loads. */
+  color?: string;
   /** Hero of a hero blessing, with a site-relative portrait path when the image exists. */
   hero?: { id: string; name: string; img?: string };
 }
 
-export type HydratedCard = SearchRecord & Pick<CardRecord, 'icon' | 'summary' | 'numbers' | 'hero'>;
+export type HydratedCard = SearchRecord & Pick<CardRecord, 'icon' | 'summary' | 'numbers' | 'hero' | 'color'>;
 
 /** Restore the search text that toCardRecord leaves out (it equals toPlainText of the summary). */
 export function hydrateCardRecord(r: CardRecord): HydratedCard {

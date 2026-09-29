@@ -996,6 +996,13 @@ body {
   content-visibility: auto;
   contain-intrinsic-size: auto 124px;
 }
+/* First-screen slots render immediately so their eager icons are not held back. */
+.slots > li.now {
+  content-visibility: visible;
+}
+.hb-off #groups li[data-hb] {
+  display: none;
+}
 @media (min-width: 721px) {
   .slots {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1053,7 +1060,7 @@ body {
   height: 100%;
   object-fit: cover;
   border-radius: 8px;
-  background: var(--panel-3);
+  background: var(--ic-bg, var(--panel-3));
 }
 .ic .fb {
   display: grid;

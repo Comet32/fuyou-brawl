@@ -13,8 +13,11 @@ interface Props {
   headingLevel?: 'h2' | 'h3' | 'h4';
   /** The hero of a hero blessing (英雄福佑): shown as a small portrait strap. */
   hero?: Pick<Hero, 'id' | 'name'>;
+  /** First-screen card: load its icon eagerly (and with high priority). */
+  eager?: boolean;
+  priority?: boolean;
 }
-const { blessing, note, headingLevel = 'h3', hero } = Astro.props;
+const { blessing, note, headingLevel = 'h3', hero, eager = false, priority = false } = Astro.props;
 const Heading = headingLevel;
 const quality = qualityOf(blessing.quality);
 const heroThumb = hero ? heroPortrait(hero.id).thumb : undefined;
@@ -22,7 +25,7 @@ const heroImg = heroThumb ? url(heroThumb) : undefined;
 ---
 
 <article class="slot" data-q={quality?.id}>
-  <BlessingIcon blessing={blessing} />
+  <BlessingIcon blessing={blessing} eager={eager} priority={priority} />
   <Heading><a href={url(`/blessings/${blessing.id}/`)}>{blessing.name}</a></Heading>
   {
     /* Unknown quality is already said by the hatched bar under the icon; no repeated word. */

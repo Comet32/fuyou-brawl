@@ -32,6 +32,13 @@ const groups = [
   ...QUALITIES.map((q) => ({ id: q.id as string, q: q.id as string | undefined, label: q.label })),
   { id: 'none', q: undefined, label: '未标注' },
 ].map((g) => ({ ...g, items: blessings.filter((b) => (b.quality ?? 'none') === g.id) }));
+// First screen of the default grouped view (hero blessings hidden): 24 slots cover desktop's
+// 3 columns × several rows. Their icons load eagerly and skip content-visibility.
+const EAGER = 24;
+const PRIORITY = 6;
+const screenOrder = new Map(
+  groups.flatMap((g) => g.items.filter((b) => !isHeroBlessing(b.id))).map((b, i) => [b.id, i]),
+);
 ---
 
 <Base>
@@ -93,6 +100,10 @@ const groups = [
       </div>
     )
   }
+  {/* Hide hero blessings before first paint so their lazy images never start; search-page takes over. */}
+  <script is:inline>
+    if (!/[?&]hero=1(&|$)/.test(location.search)) document.documentElement.classList.add('hb-off');
+  </script>
   <div id="groups">
     {
       groups.map((g) => (
@@ -122,9 +133,11 @@ const groups = [
           <ul class="slots">
             {g.items.map((b) => {
               const hero = heroOf(b.id);
+              const at = screenOrder.get(b.id);
+              const first = at !== undefined && at < EAGER;
               return (
-                <li data-id={b.id} data-hb={isHeroBlessing(b.id) ? '' : undefined}>
-                  <BlessingCard blessing={b} hero={hero} />
+                <li data-id={b.id} data-hb={isHeroBlessing(b.id) ? '' : undefined} class={first ? 'now' : undefined}>
+                  <BlessingCard blessing={b} hero={hero} eager={first} priority={first && at! < PRIORITY} />
                 </li>
               );
             })}

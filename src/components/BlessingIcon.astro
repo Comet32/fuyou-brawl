@@ -1,21 +1,35 @@
 ---
 import type { Blessing } from '../lib/schema';
 import { publicFileExists } from '../lib/assets';
+import { iconColor } from '../lib/icon-colors';
 import { url } from '../lib/url';
 
 interface Props {
   blessing: Blessing;
-  /** Rendered size in CSS pixels (the source images are 128×128). */
+  /** Rendered size in CSS pixels (the source images are 96×96). */
   size?: number;
+  /** First screen: load now instead of lazily. */
   eager?: boolean;
+  /** fetchpriority="high" for the very first icons. */
+  priority?: boolean;
 }
-const { blessing, size = 56, eager = false } = Astro.props;
+const { blessing, size = 56, eager = false, priority = false } = Astro.props;
 const rel = blessing.icon ? `img/blessings/${blessing.icon}` : undefined;
+// The icon's average color fills the box until the image arrives; the quality plinth stays around it.
+const bg = iconColor(blessing.icon);
 ---
 
-<span class="ic">{
+<span class="ic" style={bg ? `--ic-bg:${bg}` : undefined}>{
   rel && publicFileExists(rel) ? (
-    <img src={url(rel)} alt="" width={size} height={size} loading={eager ? undefined : 'lazy'} decoding="async" />
+    <img
+      src={url(rel)}
+      alt=""
+      width={size}
+      height={size}
+      loading={eager ? 'eager' : 'lazy'}
+      fetchpriority={priority ? 'high' : undefined}
+      decoding="async"
+    />
   ) : (
     <span class="fb" aria-hidden="true">{blessing.name.slice(0, 1)}</span>
   )

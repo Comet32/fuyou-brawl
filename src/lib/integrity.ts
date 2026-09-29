@@ -6,6 +6,8 @@ export interface DataSet {
   heroAbilities: HeroAbilities[];
   /** Placeholder colors of hero portraits (hero id -> #rrggbb). */
   heroColors?: Record<string, string>;
+  /** Placeholder colors of blessing icons (icon file name without .webp -> #rrggbb). */
+  blessingColors?: Record<string, string>;
   items: Item[];
   versions: Version[];
   builds: { file: string; data: Build }[];
@@ -54,6 +56,10 @@ export function findBrokenRefs(d: DataSet): string[] {
     if (!heroIds.has(hero)) errors.push(`hero-abilities：英雄 "${hero}" 不存在`);
   }
   for (const hero of duplicates(d.heroAbilities.map((h) => h.hero))) errors.push(`hero-abilities：英雄 ${hero} 重复`);
+  const iconIds = new Set(d.blessings.flatMap((b) => (b.icon ? [b.icon.replace(/\.webp$/, '')] : [])));
+  for (const icon of Object.keys(d.blessingColors ?? {})) {
+    if (!iconIds.has(icon)) errors.push(`blessing-colors：没有福佑使用图标 "${icon}"`);
+  }
   for (const hero of Object.keys(d.heroColors ?? {})) {
     if (!heroIds.has(hero)) errors.push(`hero-colors：英雄 "${hero}" 不存在`);
   }

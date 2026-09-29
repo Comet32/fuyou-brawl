@@ -65,9 +65,9 @@ const newBuildUrl = `${REPO_URL}/new/main/src/content/builds?filename=${hero.id}
     {
       heroBlessings.length > 0 ? (
         <ul class="slot-list">
-          {heroBlessings.map((b) => (
+          {heroBlessings.map((b, i) => (
             <li>
-              <BlessingCard blessing={b} />
+              <BlessingCard blessing={b} eager={i < 12} priority={i < 4} />
             </li>
           ))}
         </ul>

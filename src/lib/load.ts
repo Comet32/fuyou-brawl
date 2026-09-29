@@ -4,7 +4,7 @@ import { parse } from 'yaml';
 import { z } from 'astro/zod';
 import { loadBlessingFiles } from './blessings';
 import { parseWith, readYaml } from './data-file';
-import { buildSchema, heroAbilitiesSchema, heroColorsSchema, heroSchema, itemSchema, versionSchema } from './schema';
+import { blessingColorsSchema, buildSchema, heroAbilitiesSchema, heroColorsSchema, heroSchema, itemSchema, versionSchema } from './schema';
 import type { DataSet } from './integrity';
 
 function readYamlArray<T extends z.ZodType>(
@@ -34,6 +34,11 @@ export function loadDataSet(root: string): DataSet {
       heroColorsSchema,
       readYaml(root, 'src/data/hero-colors.yaml', {}, { optional: true }),
       'hero-colors.yaml',
+    ),
+    blessingColors: parseWith(
+      blessingColorsSchema,
+      readYaml(root, 'src/data/blessing-colors.yaml', {}, { optional: true }),
+      'blessing-colors.yaml',
     ),
     items: readYamlArray(root, 'src/data/items.yaml', itemSchema),
     versions: readYamlArray(root, 'src/data/versions.yaml', versionSchema),

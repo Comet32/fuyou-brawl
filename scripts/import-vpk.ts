@@ -28,6 +28,7 @@ import {
 import { GENERATED_FILE, OVERRIDES_FILE } from '../src/lib/blessings';
 import { parseCsv } from '../src/lib/csv';
 import { parseWith, readYaml } from '../src/lib/data-file';
+import { writeBlessingColors } from '../tools/blessing-colors';
 import { generatedBlessingSchema, versionSchema, type GeneratedBlessing } from '../src/lib/schema';
 import { readVpkEntries, readVpkFile, type VpkEntry } from '../src/lib/vpk';
 
@@ -113,7 +114,7 @@ async function writeIcons(buf: Uint8Array, entries: Map<string, VpkEntry>, bless
       const dest = join(dir, file);
       writeFileSync(png, readVpkFile(buf, entry));
       try {
-        await execFileAsync('cwebp', ['-quiet', '-q', '85', '-resize', '96', '0', png, '-o', `${dest}.tmp`]);
+        await execFileAsync('cwebp', ['-quiet', '-q', '75', '-resize', '96', '0', png, '-o', `${dest}.tmp`]);
         renameSync(`${dest}.tmp`, dest);
       } catch (e) {
         if ((e as NodeJS.ErrnoException).code === 'ENOENT')
@@ -196,6 +197,12 @@ async function main() {
 
   const icons = await writeIcons(buf, entries, blessings);
   writeGenerated(blessings);
+  // Placeholder colors follow the icons; ImageMagick is optional for an import.
+  try {
+    console.log(`  图标颜色 ${writeBlessingColors(ROOT)} 个`);
+  } catch (e) {
+    console.log(`  ⚠ 未更新图标颜色：${e instanceof Error ? e.message : e}（之后运行 npm run icon-colors）`);
+  }
 
   const withIcon = blessings.filter((b) => b.icon).length;
   const variantIcons = blessings.filter((b) => b.icon && b.icon !== `${b.id}.webp`).length;

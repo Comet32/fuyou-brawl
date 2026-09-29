@@ -29,8 +29,8 @@ const tile = variant === 'tile' && thumb && full && thumb !== full;
       src={url(tile ? thumb! : full)}
       srcset={tile ? `${url(thumb!)} 128w, ${url(full)} 256w` : undefined}
       sizes={
-        /* Deliberately small on phones so 2x screens still take the 2.5 KB thumb: bytes beat sharpness mid-match. */
-        tile ? '(min-width: 721px) 128px, 64px' : undefined
+        /* Desktop tiles take the 128px thumb; phones (2x screens, ~half-width tiles) take the sharp 256px portrait. */
+        tile ? '(min-width: 721px) 128px, 50vw' : undefined
       }
       alt=""
       width="256"
