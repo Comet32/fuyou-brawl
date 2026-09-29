@@ -1,0 +1,21 @@
+# 样例数据：名称与效果来自创意工坊描述的转述，Task 13 按原文校对后替换。
+- id: wolf-core
+  name: 狼王核心
+  category: 团队类
+  effect: 在双方泉水生成 3 个狼王核心，拾取者冷却缩减 8%，福佑持有者冷却缩减 3%
+  numbers: { 拾取者冷却缩减: 8%, 持有者冷却缩减: 3% }
+  tags: [冷却, 待核实]
+  sources: [https://steamcommunity.com/sharedfiles/filedetails/?id=2841152696]
+- id: electric-hammer
+  name: 电锤思维
+  category: 装备类
+  effect: 获得 3500 金币，携带的第一把深渊之刃升级为雷神之锤（真）
+  numbers: { 金币: 3500 }
+  tags: [经济, 待核实]
+  sources: [https://steamcommunity.com/sharedfiles/filedetails/?id=2841152696]
+- id: rescue
+  name: 救援
+  category: 其他
+  effect: 死亡后留下墓碑，3 秒后可在队友附近复活，等待期间可以购物
+  tags: [复活, 待核实]
+  sources: [https://steamcommunity.com/sharedfiles/filedetails/?id=2841152696]

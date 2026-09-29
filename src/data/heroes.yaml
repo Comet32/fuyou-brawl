@@ -1,0 +1,3 @@
+- { id: axe, name: 斧王, name_en: Axe, attr: str }
+- { id: antimage, name: 敌法师, name_en: Anti-Mage, attr: agi }
+- { id: crystal_maiden, name: 水晶室女, name_en: Crystal Maiden, attr: int }
