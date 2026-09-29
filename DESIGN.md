@@ -442,7 +442,7 @@ An inline hatched hollow with a hairline radius (4px) and a 1px hatch border, sh
 An inline-block `panel-3` strap with 8px corners, set in the display face at 17px, followed by an optional `ink-3` count. It heads each section on the detail and hero pages.
 
 ### Motion
-One easing, `--ease-expo` (`cubic-bezier(0.16, 1, 0.3, 1)`). Results FLIP-slide 160ms while typing, and newly revealed slots rise from 14px below at 0.35 opacity. The lock wipe runs 220ms, the stamp 260ms, the sheet rise 200ms, the switch knob 160ms and the label timeline fill 200ms. Under `prefers-reduced-motion` every animation and transition collapses to 1ms, and FLIP is skipped.
+One easing, `--ease-expo` (`cubic-bezier(0.16, 1, 0.3, 1)`). Results FLIP-slide 160ms while typing, and newly revealed slots rise from 14px below at 0.35 opacity. The lock wipe runs 220ms, the stamp 260ms, the sheet rise 200ms, the switch knob 160ms and the label timeline fill 200ms. Page navigation uses cross-document view transitions: the top bar and dock hold still while the content crossfades in 200ms, and going into a blessing or hero detail page the tapped card's icon (or portrait) and name morph into the header in 240ms, then back again on return. Browsers without support simply navigate. Under `prefers-reduced-motion` every animation and transition collapses to 1ms, FLIP is skipped, and page transitions are off.
 
 ## Do's and Don'ts
 

@@ -2698,6 +2698,53 @@ a.tag:hover {
   margin: 0;
 }
 
+/* ---------- Page transitions (cross-document View Transitions) ----------
+   Browsers without support, and reduced motion, just navigate. The chrome holds still while the
+   content crossfades; into a detail page, the tapped card's icon and name morph into the header
+   (cards are named only at navigation time, by the script in Base.astro). */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+}
+.topbar {
+  view-transition-name: topbar;
+}
+.dock {
+  view-transition-name: dock;
+}
+.lt3 .ic {
+  view-transition-name: bl-icon;
+}
+.lt3 h1 {
+  view-transition-name: bl-name;
+}
+.hero-lt .hero-img {
+  view-transition-name: hero-icon;
+}
+.hero-lt h1 {
+  view-transition-name: hero-name;
+}
+::view-transition-group(*) {
+  animation-duration: 240ms;
+  animation-timing-function: var(--ease-expo);
+}
+::view-transition-group(root) {
+  animation-duration: 200ms;
+}
+::view-transition-old(*),
+::view-transition-new(*) {
+  animation-timing-function: var(--ease-expo);
+}
+/* Headings are block-wide: scale names by height so the text grows with the font, not the box. */
+::view-transition-old(bl-name),
+::view-transition-new(bl-name),
+::view-transition-old(hero-name),
+::view-transition-new(hero-name) {
+  inline-size: auto;
+  block-size: 100%;
+}
+
 /* ---------- Reduced motion: no wipes, slides or lifts in flight ---------- */
 @media (prefers-reduced-motion: reduce) {
   *,

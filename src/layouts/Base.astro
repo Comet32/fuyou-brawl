@@ -81,6 +81,79 @@ const mark = [
         if (localStorage.getItem('theme') === 'light') document.documentElement.dataset.theme = 'light';
       } catch {}
     </script>
+    <script is:inline>
+      // Page transitions: name the tapped card's icon and name so they morph into the detail header, and
+      // on the way back name the card the header returns to. Parser-blocking on purpose: pagereveal fires
+      // before the first frame. Detail headers carry their names in CSS (global.css, page transitions).
+      (() => {
+        if (!('onpagereveal' in window)) return;
+        const KINDS = {
+          blessings: { card: '.slot, .pc', icon: '.ic', name: 'h2, h3, h4', header: '.lt3', vt: 'bl' },
+          heroes: { card: '.hero-tile, .hero-chip', icon: '.hero-img', name: '.name-strap', header: '.hero-lt', vt: 'hero' },
+        };
+        let named = [];
+        const clear = () => {
+          for (const el of named) el.style.viewTransitionName = '';
+          named = [];
+        };
+        const name = (el, vt) => {
+          if (!el) return;
+          el.style.viewTransitionName = vt;
+          named.push(el);
+        };
+        const mark = (target, transition) => {
+          const path = target && new URL(target, location.href).pathname;
+          const m = path && path.match(/\/(blessings|heroes)\/[^/]+\/$/);
+          if (!m) return;
+          const k = KINDS[m[1]];
+          // This page's own header already holds the names; a second holder would cancel the transition.
+          if (document.querySelector(k.header)) return;
+          const vh = innerHeight;
+          for (const a of document.querySelectorAll('a[href]')) {
+            if (a.pathname !== path) continue;
+            const card = a.closest(k.card);
+            if (!card) continue;
+            const r = card.getBoundingClientRect();
+            if (r.height === 0 || r.bottom <= 0 || r.top >= vh) continue;
+            name(card.querySelector(k.icon), k.vt + '-icon');
+            name(card.querySelector(k.name), k.vt + '-name');
+            break;
+          }
+          transition.finished.finally(clear);
+        };
+        let clicked = null;
+        addEventListener(
+          'click',
+          (e) => {
+            const a = e.target instanceof Element ? e.target.closest('a[href]') : null;
+            clicked = a ? a.href : null;
+          },
+          true,
+        );
+        addEventListener('pageswap', (e) => {
+          clear();
+          if (!e.viewTransition) return;
+          mark(e.activation ? e.activation.entry.url : clicked, e.viewTransition);
+          try {
+            sessionStorage.setItem('vt-from', location.href);
+          } catch {}
+        });
+        addEventListener('pagereveal', (e) => {
+          clear(); // a page restored from the back-forward cache may still hold names from leaving it
+          if (!e.viewTransition) return;
+          let from = null;
+          try {
+            from = navigation.activation.from.url;
+          } catch {}
+          if (!from) {
+            try {
+              from = sessionStorage.getItem('vt-from');
+            } catch {}
+          }
+          mark(from, e.viewTransition);
+        });
+      })();
+    </script>
   </head>
   <body>
     <header class="topbar">
