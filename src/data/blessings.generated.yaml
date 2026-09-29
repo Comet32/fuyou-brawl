@@ -1851,12 +1851,6 @@
   tags:
     - 生存
   icon: 10183.webp
-- id: "10184"
-  name: x
-  name_en: Am I not dead?
-  summary: x
-  effect: x
-  tags: []
 - id: "10185"
   name: 来财
   name_en: Investment
@@ -1959,12 +1953,6 @@
     - 攻击
     - 生存
   icon: 10196.webp
-- id: "10197"
-  name: 灭霸没大了
-  name_en: ""
-  summary: ""
-  effect: ""
-  tags: []
 - id: "10199"
   name: 背水一战
   name_en: Last Stand
@@ -3454,24 +3442,6 @@
   tags:
     - 法术
   icon: 100156.webp
-- id: "100157"
-  name: 德鲁伊
-  name_en: Lone Druid
-  summary: x
-  effect: x
-  tags: []
-- id: "100158"
-  name: 德鲁伊
-  name_en: Lone Druid
-  summary: x
-  effect: x
-  tags: []
-- id: "100159"
-  name: 德鲁伊
-  name_en: Lone Druid
-  summary: x
-  effect: x
-  tags: []
 - id: "100160"
   name: 月光施法
   name_en: Lucent Beam Cast
@@ -3629,24 +3599,6 @@
   tags:
     - 法术
   icon: 100177.webp
-- id: "100178"
-  name: 米波
-  name_en: Meepo
-  summary: x
-  effect: x
-  tags: []
-- id: "100179"
-  name: 米波
-  name_en: Meepo
-  summary: x
-  effect: x
-  tags: []
-- id: "100180"
-  name: 米波
-  name_en: Meepo
-  summary: x
-  effect: x
-  tags: []
 - id: "100181"
   name: 群星风暴强化
   name_en: Starstorm Upgrade
@@ -3678,24 +3630,6 @@
   tags:
     - 法术
   icon: 100183a.webp
-- id: "100184"
-  name: 齐天大圣
-  name_en: Monkey King
-  summary: x
-  effect: x
-  tags: []
-- id: "100185"
-  name: 齐天大圣
-  name_en: Monkey King
-  summary: x
-  effect: x
-  tags: []
-- id: "100186"
-  name: 齐天大圣
-  name_en: Monkey King
-  summary: x
-  effect: x
-  tags: []
 - id: "100187"
   name: 波浪形态冷却
   name_en: Waveform Cooldown
@@ -3952,24 +3886,6 @@
   tags:
     - 法术
   icon: 100216.webp
-- id: "100217"
-  name: 神谕者
-  name_en: Oracle
-  summary: x
-  effect: x
-  tags: []
-- id: "100218"
-  name: 神谕者
-  name_en: Oracle
-  summary: x
-  effect: x
-  tags: []
-- id: "100219"
-  name: 神谕者
-  name_en: Oracle
-  summary: x
-  effect: x
-  tags: []
 - id: "100220"
   name: 天佑勇者（先天）强化
   name_en: Fortune's Favor (Innate) Upgrade
@@ -4017,24 +3933,6 @@
   tags:
     - 法术
   icon: 100225.webp
-- id: "100226"
-  name: 幻影长矛手
-  name_en: Phantom Lancer
-  summary: x
-  effect: x
-  tags: []
-- id: "100227"
-  name: 幻影长矛手
-  name_en: Phantom Lancer
-  summary: x
-  effect: x
-  tags: []
-- id: "100228"
-  name: 幻影长矛手
-  name_en: Phantom Lancer
-  summary: x
-  effect: x
-  tags: []
 - id: "100229"
   name: 烈火精灵强化
   name_en: Fire Spirits Upgrade
@@ -5009,24 +4907,6 @@
   tags:
     - 法术
   icon: 100348.webp
-- id: "100349"
-  name: 维萨吉
-  name_en: Visage
-  summary: x
-  effect: x
-  tags: []
-- id: "100350"
-  name: 维萨吉
-  name_en: Visage
-  summary: x
-  effect: x
-  tags: []
-- id: "100351"
-  name: 维萨吉
-  name_en: Visage
-  summary: x
-  effect: x
-  tags: []
 - id: "100352"
   name: 残阴伤害
   name_en: Aether Remnant Damage
@@ -5154,24 +5034,6 @@
   tags:
     - 法术
   icon: 100366.webp
-- id: "100367"
-  name: 艾欧
-  name_en: Io
-  summary: x
-  effect: x
-  tags: []
-- id: "100368"
-  name: 艾欧
-  name_en: Io
-  summary: x
-  effect: x
-  tags: []
-- id: "100369"
-  name: 艾欧
-  name_en: Io
-  summary: x
-  effect: x
-  tags: []
 - id: "100370"
   name: 麻痹药剂伤害
   name_en: Paralyzing Cask Damage

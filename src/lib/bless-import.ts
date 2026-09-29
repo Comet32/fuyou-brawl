@@ -15,6 +15,8 @@ export interface ImportInput {
 }
 
 const TOKEN_PREFIX = 'bless_';
+// Dev placeholder rows in the game data have a bare "x"-style description or one that just repeats the name.
+const MIN_EFFECT_LENGTH = 3;
 const isBlessingId = (id: string) => generatedBlessingSchema.shape.id.safeParse(id).success;
 
 interface Row {
@@ -78,6 +80,11 @@ export function buildGenerated(input: ImportInput): { blessings: GeneratedBlessi
     const full = desc.get(`${token}_desc`)?.zh ?? '';
     const brief = short.get(`${token}_desc_short`)?.zh ?? '';
     const effect = full || brief;
+    const plainEffect = toPlainText(effect);
+    if (plainEffect.length < MIN_EFFECT_LENGTH || plainEffect === row.zh) {
+      skipped.push(id);
+      continue;
+    }
     const base = baseBlessingId(id);
     const icon = input.iconIds.has(id) ? `${id}.webp` : input.iconIds.has(base) ? `${base}.webp` : undefined;
     raw.push({
@@ -86,7 +93,7 @@ export function buildGenerated(input: ImportInput): { blessings: GeneratedBlessi
       name_en: row.en,
       summary: brief || full,
       effect,
-      tags: autoTags(toPlainText(effect)),
+      tags: autoTags(plainEffect),
       ...(icon ? { icon } : {}),
     });
   }

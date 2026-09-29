@@ -73,7 +73,8 @@ describe('buildGenerated', () => {
       ['English', 'Tokens', 'Schinese'],
       ['Axe', 'bless_10001', '斧头'],
     ];
-    const out = buildGenerated({ names: swapped, desc: [HEADER], short: [HEADER], iconIds: new Set() });
+    const desc = [HEADER, ['bless_10001_desc', '砍人造成伤害。', '', '']];
+    const out = buildGenerated({ names: swapped, desc, short: [HEADER], iconIds: new Set() });
     expect(out.blessings[0]).toMatchObject({ id: '10001', name: '斧头', name_en: 'Axe' });
   });
 
@@ -81,6 +82,47 @@ describe('buildGenerated', () => {
     expect(() =>
       buildGenerated({ names: [['Tokens', 'English']], desc: [HEADER], short: [HEADER], iconIds: new Set() }),
     ).toThrow(/Schinese/);
+  });
+});
+
+describe('buildGenerated placeholder rows', () => {
+  const build = (rows: [string, string][], descs: [string, string][], shorts: [string, string][] = []) =>
+    buildGenerated({
+      names: table(rows),
+      desc: table(descs),
+      short: table(shorts),
+      iconIds: new Set(),
+    });
+
+  it('skips rows whose plain-text effect is under 3 characters or equals the name', () => {
+    const { blessings, skipped } = build(
+      [
+        ['bless_10001', '艾欧'],
+        ['bless_10002', '米波'],
+        ['bless_10003', '真实福佑'],
+        ['bless_10004', '无描述'],
+        ['bless_10005', '标记之后'],
+        ['bless_10006', '  '],
+      ],
+      [
+        ['bless_10001_desc', 'x'],
+        ['bless_10002_desc', `<font color='#83d18a'> xy </font>`],
+        ['bless_10003_desc', '获得 {gold} 金币。'],
+        ['bless_10005_desc', '标记之后'],
+      ],
+    );
+    expect(blessings.map((b) => b.id)).toEqual(['10003']);
+    expect(skipped).toEqual(['10001', '10002', '10004', '10005', '10006']);
+  });
+
+  it('keeps a 3-character effect that differs from the name', () => {
+    const { blessings } = build([['bless_10001', '短效果']], [['bless_10001_desc', '加移速啊']]);
+    expect(blessings.map((b) => b.id)).toEqual(['10001']);
+  });
+
+  it('falls back to the short description when judging the effect', () => {
+    const { blessings } = build([['bless_10001', '甲']], [], [['bless_10001_desc_short', '这是一个短描述']]);
+    expect(blessings.map((b) => b.id)).toEqual(['10001']);
   });
 });
 
