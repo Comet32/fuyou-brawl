@@ -16,6 +16,7 @@
 - id: rescue
   name: 救援
   category: 其他
+  exclusive_hero: axe
   effect: 死亡后留下墓碑，3 秒后可在队友附近复活，等待期间可以购物
   tags: [复活, 待核实]
   sources: [https://steamcommunity.com/sharedfiles/filedetails/?id=2841152696]

@@ -1,0 +1,37 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import HeroImage from '../../components/HeroImage.astro';
+import { ATTRS, ATTR_LABELS } from '../../lib/schema';
+import { url } from '../../lib/url';
+
+const heroes = (await getCollection('heroes'))
+  .map((e) => e.data)
+  .sort((a, b) => a.name.localeCompare(b.name, 'zh-CN'));
+const withBuild = new Set((await getCollection('builds')).map((e) => e.data.hero));
+---
+
+<Base title="英雄">
+  <h1>英雄搭配</h1>
+  <p class="muted">共 {heroes.length} 个英雄，其中 {withBuild.size} 个已有搭配攻略（半透明的待补充）。</p>
+  {
+    ATTRS.map((attr) => {
+      const group = heroes.filter((h) => h.attr === attr);
+      return group.length === 0 ? null : (
+        <section>
+          <h2>{ATTR_LABELS[attr]}</h2>
+          <ul class="hero-grid">
+            {group.map((h) => (
+              <li>
+                <a class:list={['hero-tile', { 'no-build': !withBuild.has(h.id) }]} href={url(`/heroes/${h.id}/`)}>
+                  <HeroImage hero={h} />
+                  {h.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      );
+    })
+  }
+</Base>

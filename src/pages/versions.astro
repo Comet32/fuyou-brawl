@@ -1,0 +1,32 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { WORKSHOP_ID } from '../lib/site';
+import { url } from '../lib/url';
+
+const versions = (await getCollection('versions')).map((e) => e.data).sort((a, b) => b.id.localeCompare(a.id));
+const names = new Map((await getCollection('blessings')).map((e) => [e.data.id, e.data.name]));
+const changelog = `https://steamcommunity.com/sharedfiles/filedetails/changelog/${WORKSHOP_ID}`;
+---
+
+<Base title="版本变动">
+  <h1>版本变动</h1>
+  <p class="muted">整理自 <a href={changelog} target="_blank" rel="noopener">创意工坊更新日志</a>，按时间倒序。</p>
+  {versions.length === 0 && <p class="empty">还没有整理版本记录。</p>}
+  {
+    versions.map((v) => (
+      <article class="version" id={`v-${v.id}`}>
+        <h2>{v.id} · {v.title}</h2>
+        <ul>
+          {v.changes.map((c) => (
+            <li>
+              {c.blessing && <Fragment><a href={url(`/blessings/${c.blessing}/`)}>{names.get(c.blessing)}</a>：</Fragment>}
+              {c.text}
+            </li>
+          ))}
+        </ul>
+        {v.source_url && <p><a href={v.source_url} target="_blank" rel="noopener">原文</a></p>}
+      </article>
+    ))
+  }
+</Base>

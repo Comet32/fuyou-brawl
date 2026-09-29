@@ -1,0 +1,85 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import BlessingCard from '../../components/BlessingCard.astro';
+import { heroesForBlessing } from '../../lib/hero-blessings';
+import { url } from '../../lib/url';
+
+export async function getStaticPaths() {
+  const blessings = await getCollection('blessings');
+  return blessings.map((e) => ({ params: { id: e.data.id }, props: { blessing: e.data } }));
+}
+
+const { blessing } = Astro.props;
+const builds = (await getCollection('builds')).map((e) => e.data);
+const heroes = new Map((await getCollection('heroes')).map((e) => [e.data.id, e.data]));
+const recommendedBy = heroesForBlessing(blessing.id, builds)
+  .map((id) => heroes.get(id))
+  .filter((h) => h !== undefined);
+const exclusive = blessing.exclusive_hero ? heroes.get(blessing.exclusive_hero) : undefined;
+const numbers = Object.entries(blessing.numbers);
+---
+
+<Base title={blessing.name} description={blessing.effect}>
+  <p><a href={url('/')}>← 返回图鉴</a></p>
+  <BlessingCard blessing={blessing} />
+
+  {exclusive && <p>专属英雄：<a href={url(`/heroes/${exclusive.id}/`)}>{exclusive.name}</a></p>}
+
+  {
+    numbers.length > 0 && (
+      <section>
+        <h2>数值</h2>
+        <dl class="numbers">
+          {numbers.map(([k, v]) => (
+            <Fragment>
+              <dt>{k}</dt>
+              <dd>{v}</dd>
+            </Fragment>
+          ))}
+        </dl>
+      </section>
+    )
+  }
+
+  <section>
+    <h2>推荐搭配的英雄</h2>
+    {
+      recommendedBy.length > 0 ? (
+        <p>{recommendedBy.map((h, i) => <Fragment>{i > 0 && '、'}<a href={url(`/heroes/${h.id}/`)}>{h.name}</a></Fragment>)}</p>
+      ) : (
+        <p class="muted">暂无，欢迎补充</p>
+      )
+    }
+  </section>
+
+  <section>
+    <h2>改动历史</h2>
+    {
+      blessing.history.length > 0 ? (
+        <ol>
+          {blessing.history.map((h) => (
+            <li>
+              <a href={url(`/versions/#v-${h.version}`)}>{h.version}</a>：{h.change}
+            </li>
+          ))}
+        </ol>
+      ) : (
+        <p class="muted">{blessing.since_version ? `自 ${blessing.since_version} 起暂无改动记录` : '暂无记录'}</p>
+      )
+    }
+  </section>
+
+  {
+    blessing.sources.length > 0 && (
+      <section>
+        <h2>参考来源</h2>
+        <ul>
+          {blessing.sources.map((s) => (
+            <li><a href={s} target="_blank" rel="noopener">{s}</a></li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+</Base>

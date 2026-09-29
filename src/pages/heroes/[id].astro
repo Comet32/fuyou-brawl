@@ -1,0 +1,92 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import BlessingCard from '../../components/BlessingCard.astro';
+import HeroImage from '../../components/HeroImage.astro';
+import ItemImage from '../../components/ItemImage.astro';
+import { ATTR_LABELS } from '../../lib/schema';
+import { blessingsForHero } from '../../lib/hero-blessings';
+import { REPO_URL } from '../../lib/site';
+import { url } from '../../lib/url';
+
+export async function getStaticPaths() {
+  const heroes = await getCollection('heroes');
+  return heroes.map((e) => ({ params: { id: e.data.id }, props: { hero: e.data } }));
+}
+
+const { hero } = Astro.props;
+const buildEntry = (await getCollection('builds')).find((e) => e.data.hero === hero.id);
+const build = buildEntry?.data;
+const Content = buildEntry ? (await render(buildEntry)).Content : null;
+const blessings = (await getCollection('blessings')).map((e) => e.data);
+const related = blessingsForHero(hero.id, blessings, build);
+const items = new Map((await getCollection('items')).map((e) => [e.data.id, e.data]));
+---
+
+<Base title={hero.name}>
+  <p><a href={url('/heroes/')}>← 全部英雄</a></p>
+  <header class="hero-head">
+    <HeroImage hero={hero} />
+    <div>
+      <h1>{hero.name}</h1>
+      <p class="muted">{hero.name_en} · {ATTR_LABELS[hero.attr]}</p>
+    </div>
+  </header>
+
+  {
+    build ? (
+      <p>{build.summary} <span class="muted">（更新于 {build.updated}）</span></p>
+    ) : (
+      <p class="empty">
+        这个英雄的搭配攻略待补充。
+        <a href={`${REPO_URL}/new/main/src/content/builds?filename=${hero.id}.md`}>在 GitHub 上补充</a>
+      </p>
+    )
+  }
+
+  <section>
+    <h2>推荐福佑</h2>
+    {
+      related.length > 0 ? (
+        <ul class="card-list">
+          {related.map((r) => (
+            <li><BlessingCard blessing={r.blessing} note={r.note ?? (r.reason === 'exclusive' ? '专属福佑' : undefined)} /></li>
+          ))}
+        </ul>
+      ) : (
+        <p class="muted">暂无</p>
+      )
+    }
+  </section>
+
+  {
+    build && build.items.length > 0 && (
+      <section>
+        <h2>推荐出装</h2>
+        <ul class="item-list">
+          {build.items.map((id) => (
+            <li><ItemImage id={id} />{items.get(id)?.name ?? id}</li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  {
+    Content && (
+      <section class="prose">
+        <h2>思路</h2>
+        <Content />
+      </section>
+    )
+  }
+
+  {
+    build && build.sources.length > 0 && (
+      <section>
+        <h2>参考来源</h2>
+        <ul>{build.sources.map((s) => <li><a href={s} target="_blank" rel="noopener">{s}</a></li>)}</ul>
+      </section>
+    )
+  }
+</Base>
