@@ -12,7 +12,8 @@
     "check": "astro check",
     "test": "vitest run",
     "validate": "tsx scripts/validate-data.ts",
-    "import": "tsx scripts/import-vpk.ts"
+    "import": "tsx scripts/import-vpk.ts",
+    "check:cn": "tsx scripts/check-china.ts"
   },
   "dependencies": {
     "astro": "^7.3.5",
