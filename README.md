@@ -60,6 +60,7 @@ Dota2 游廊自定义游戏《福佑大乱斗》（创意工坊 [2841152696](htt
 ### 写英雄搭配或攻略
 
 - 英雄搭配：`src/content/builds/<英雄id>.md`，英雄 id 见 `src/data/heroes.yaml`。
+  带 `origin: community-guide` 的搭配由 `npm run builds -- <guides.json> <build-notes.json>` 从社区一图流生成；手写的搭配不要加这个字段，生成脚本不会覆盖它们。
 - 攻略文章：`src/content/guides/<slug>.md`。
 
 ## 开发

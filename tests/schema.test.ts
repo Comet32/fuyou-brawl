@@ -98,6 +98,19 @@ describe('blessingSchema (merged)', () => {
   });
 });
 
+describe('buildSchema origin', () => {
+  const base = { hero: 'axe', summary: 's', updated: '2026-09-01' };
+  it('is optional so hand-written builds need nothing extra', () => {
+    expect(buildSchema.parse(base).origin).toBeUndefined();
+  });
+  it('keeps the marker the community-guide importer writes', () => {
+    expect(buildSchema.parse({ ...base, origin: 'community-guide' }).origin).toBe('community-guide');
+  });
+  it('rejects an empty marker', () => {
+    expect(buildSchema.safeParse({ ...base, origin: '' }).success).toBe(false);
+  });
+});
+
 describe('blessing references', () => {
   it('coerce unquoted YAML numbers to string ids', () => {
     const v = versionSchema.parse({ id: '2026-09-01', title: 't', changes: [{ blessing: 10010, text: 'x' }] });
