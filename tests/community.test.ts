@@ -6,6 +6,7 @@ import {
   parseRange,
   conflictCaption,
   historyEntries,
+  normalizeChangeText,
   sourceLink,
   type ResearchNote,
 } from '../src/lib/community';
@@ -118,7 +119,7 @@ describe('convertNote', () => {
       ctx,
     );
     expect(entry?.wiki_notes).toEqual([{ text: '图鉴标注：仅远程英雄可获得', source: WIKI }]);
-    expect(entry?.changes).toEqual([{ date: '2026-05-22', text: '官方改动：削弱', source: CHANGELOG }]);
+    expect(entry?.changes).toEqual([{ date: '2026-05-22', text: '削弱', source: CHANGELOG }]);
     expect(entry?.tips).toEqual([
       { text: '一图流推荐', source: GUIDE, date: '2026-04-14' },
       { text: '一图流合计', source: 'http://122.51.0.76:8081/api/hero-guides', date: '2026-09' },
@@ -126,6 +127,24 @@ describe('convertNote', () => {
       { text: '留言反馈', source: COMMENTS, date: '2026-08-27' },
     ]);
     expect(skipped).toEqual([{ id: '10010', what: `tip: ${long.slice(0, 20)}…`, reason: 'tip_too_long' }]);
+    expect(blessingCommunitySchema.parse(entry)).toEqual(entry);
+  });
+
+  it('turns the balance statistics line into a change summary instead of a change', () => {
+    const { entry } = convertNote(
+      note({
+        tips: [
+          { text: '官方平衡记录（2026-02起）：增强0次、削弱3次；最近一次2026-05-22削弱', source: CHANGELOG, date: '2026-05-22' },
+          { text: '官方改动：品质下调为蓝色', source: CHANGELOG, date: '2026-05-25' },
+        ],
+      }),
+      ctx,
+    );
+    expect(entry?.change_summary).toEqual({
+      text: '2026-02 以来官方增强 0 次、削弱 3 次，最近一次是 2026-05-22 削弱',
+      source: CHANGELOG,
+    });
+    expect(entry?.changes).toEqual([{ date: '2026-05-25', text: '品质下调为蓝色', source: CHANGELOG }]);
     expect(blessingCommunitySchema.parse(entry)).toEqual(entry);
   });
 
@@ -255,5 +274,24 @@ describe('historyEntries', () => {
   });
   it('is empty when there is nothing', () => {
     expect(historyEntries([], [])).toEqual([]);
+  });
+});
+
+describe('normalizeChangeText', () => {
+  it('drops the 官方 prefix but keeps what kind of note it is', () => {
+    expect(normalizeChangeText('官方改动：调入攻速/攻击福佑池', '2026-08-08')).toBe('调入攻速/攻击福佑池');
+    expect(normalizeChangeText('官方：以橙色福佑身份新增', '2026-03-06')).toBe('以橙色福佑身份新增');
+    expect(normalizeChangeText('官方修复：解除附身时减益免疫未正确结束的问题', '2026-05-25')).toBe(
+      '修复：解除附身时减益免疫未正确结束的问题',
+    );
+  });
+  it('removes the entry date when the text repeats it', () => {
+    expect(normalizeChangeText('官方更新：2026-04-03 品质上调一档', '2026-04-03')).toBe('品质上调一档');
+    expect(normalizeChangeText('官方：5月21日新增的24个福佑之一', '2026-05-21')).toBe('新增的24个福佑之一');
+    expect(normalizeChangeText('官方：新增福佑（2月21日版本）', '2026-02-21')).toBe('新增福佑');
+    expect(normalizeChangeText('官方：肉身成圣四件套于2月23日加入', '2026-02-23')).toBe('肉身成圣四件套加入');
+  });
+  it('keeps other dates, such as when a change takes effect', () => {
+    expect(normalizeChangeText('官方改动：已从福佑池移除（5月4日生效）', '2026-04-30')).toBe('已从福佑池移除（5月4日生效）');
   });
 });

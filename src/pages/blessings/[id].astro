@@ -60,6 +60,7 @@ const rows = keys.map((key) => {
 const firstRange = rows.find((r) => r.range)?.range;
 const tips = blessing.tips;
 const history = historyEntries(blessing.history, blessing.changes);
+const hasHistory = history.length > 0 || blessing.change_summary !== undefined;
 const registry = loadSources(process.cwd());
 const manualSources = blessing.sources.map((s) => describeSource(s, registry));
 // Community picks, separate from the automatic hero links above them.
@@ -129,25 +130,33 @@ const usesCommunity =
       }
     </section>
 
-    <section aria-labelledby="tips-h">
-      <h2 id="tips-h" class="strap">玩家心得<span class="num">{tips.length}</span></h2>
-      {
-        tips.length > 0 ? (
+    {
+      tips.length > 0 && (
+        <section aria-labelledby="tips-h">
+          <h2 id="tips-h" class="strap">玩家心得<span class="num">{tips.length}</span></h2>
           <TipList items={tips} />
-        ) : (
-          <p class="note">
-            还没有这个福佑的心得。用过它？在 <code>{OVERRIDES_FILE}</code> 里给它加一条 <code>tips</code>：一句话、用自己的话写，最好附上来源链接。
-            <a class="link-inline" href={editUrl} target="_blank" rel="noopener"><Icon name="edit" />在 GitHub 上补充</a>
-          </p>
-        )
-      }
-    </section>
+        </section>
+      )
+    }
 
     {
       blessing.wiki_notes.length > 0 && (
         <section aria-labelledby="wiki-h">
           <h2 id="wiki-h" class="strap">图鉴备注<span class="num">{blessing.wiki_notes.length}</span></h2>
           <TipList items={blessing.wiki_notes} />
+        </section>
+      )
+    }
+
+    {
+      /* Empty sections come after the filled ones, one line each. */
+      tips.length === 0 && (
+        <section class="empty-sec" aria-labelledby="tips-h">
+          <h2 id="tips-h" class="strap">玩家心得</h2>
+          <p>
+            还没有人写。
+            <a class="link-inline" href={editUrl} target="_blank" rel="noopener"><Icon name="edit" />在 GitHub 上补充</a>
+          </p>
         </section>
       )
     }
@@ -213,7 +222,7 @@ const usesCommunity =
         )
       }
       <p class="note">
-        数值记录在 <code>{OVERRIDES_FILE}</code>，按占位符名填写，会覆盖社区数据；不知道的保持空着，页面会显示「待补充」。
+        数值不对，或者知道「待补充」的值？
         <a class="link-inline" href={editUrl} target="_blank" rel="noopener"><Icon name="edit" />在 GitHub 上补充</a>
       </p>
     </section>
@@ -258,58 +267,80 @@ const usesCommunity =
   }
 
   {
-    /* With community picks above, an empty "no build recommends this" note would only contradict them. */
-    (recommendedBy.length > 0 || communityHeroes.length === 0) && (
+    recommendedBy.length > 0 && (
       <section aria-labelledby="heroes-h">
         <h2 id="heroes-h" class="strap">推荐搭配的英雄</h2>
-        {recommendedBy.length > 0 ? (
-          <ul class="hero-grid">
-            {recommendedBy.map((h) => (
+        <ul class="hero-grid">
+          {recommendedBy.map((h) => (
+            <li>
+              <a class="hero-tile" href={url(`/heroes/${h.id}/`)}>
+                <HeroImage hero={h} eager />
+                <span class="name-strap">{h.name}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  {
+    hasHistory && (
+      <section aria-labelledby="history-h">
+        <h2 id="history-h" class="strap">改动历史</h2>
+        {blessing.change_summary && (
+          <p class="hist-lead">
+            {blessing.change_summary.text}
+            <a class="hist-src" href={sourceLink(blessing.change_summary.source).href} target="_blank" rel="noopener">
+              {sourceLink(blessing.change_summary.source).label}
+              <Icon name="external" size={14} />
+            </a>
+          </p>
+        )}
+        {history.length > 0 && (
+          <ol class="plain-list history">
+            {history.map((h) => (
               <li>
-                <a class="hero-tile" href={url(`/heroes/${h.id}/`)}>
-                  <HeroImage hero={h} eager />
-                  <span class="name-strap">{h.name}</span>
-                </a>
+                {h.version ? (
+                  <a class="num" href={url(`/versions/#v-${h.version}`)}>{h.date}</a>
+                ) : (
+                  <span class="num">{h.date}</span>
+                )}
+                {h.text}
+                {h.source && (
+                  <a class="hist-src" href={sourceLink(h.source).href} target="_blank" rel="noopener">
+                    {sourceLink(h.source).label}
+                    <Icon name="external" size={14} />
+                  </a>
+                )}
               </li>
             ))}
-          </ul>
-        ) : (
-          <p class="note">
-            还没有英雄搭配推荐这个福佑。
-            <a class="link-inline" href={url('/heroes/')}>去英雄页看看</a>
-          </p>
+          </ol>
         )}
       </section>
     )
   }
 
-  <section aria-labelledby="history-h">
-    <h2 id="history-h" class="strap">改动历史</h2>
-    {
-      history.length > 0 ? (
-        <ol class="plain-list history">
-          {history.map((h) => (
-            <li>
-              {h.version ? (
-                <a class="num" href={url(`/versions/#v-${h.version}`)}>{h.date}</a>
-              ) : (
-                <span class="num">{h.date}</span>
-              )}
-              {h.text}
-              {h.source && (
-                <a class="hist-src" href={sourceLink(h.source).href} target="_blank" rel="noopener">
-                  {sourceLink(h.source).label}
-                  <Icon name="external" size={14} />
-                </a>
-              )}
-            </li>
-          ))}
-        </ol>
-      ) : (
-        <p class="note">{blessing.since_version ? `自 ${blessing.since_version} 起暂无改动记录。` : '暂无改动记录。'}</p>
-      )
-    }
-  </section>
+  {
+    /* Empty sections last, one line each. With community picks above, "no build recommends this" would contradict them. */
+    recommendedBy.length === 0 && communityHeroes.length === 0 && (
+      <section class="empty-sec" aria-labelledby="heroes-h">
+        <h2 id="heroes-h" class="strap">推荐搭配的英雄</h2>
+        <p>
+          还没有。<a class="link-inline" href={url('/heroes/')}>去英雄页看看</a>
+        </p>
+      </section>
+    )
+  }
+
+  {
+    !hasHistory && (
+      <section class="empty-sec" aria-labelledby="history-h">
+        <h2 id="history-h" class="strap">改动历史</h2>
+        <p>{blessing.since_version ? `自 ${blessing.since_version} 起没有改动。` : '暂无记录。'}</p>
+      </section>
+    )
+  }
 
   {
     (blessing.sources.length > 0 || usesCommunity) && (

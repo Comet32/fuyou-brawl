@@ -142,6 +142,7 @@ describe('mergeBlessings with community data', () => {
     const [b] = mergeBlessings([gen('10048')], {}, {
       '10048': {
         changes: [{ date: '2026-08-08', text: '调入攻速福佑池', source: STEAM }],
+        change_summary: { text: '2026-02 以来官方增强 1 次', source: STEAM },
         wiki_notes: [{ text: '图鉴标注：仅远程', source: WIKI }],
         quality_conflict: claims,
       },
@@ -149,6 +150,7 @@ describe('mergeBlessings with community data', () => {
     expect(b).toMatchObject({
       quality: null,
       changes: [{ date: '2026-08-08', text: '调入攻速福佑池', source: STEAM }],
+      change_summary: { text: '2026-02 以来官方增强 1 次', source: STEAM },
       wiki_notes: [{ text: '图鉴标注：仅远程', source: WIKI }],
       quality_conflict: claims,
     });

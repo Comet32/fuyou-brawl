@@ -8,25 +8,23 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { range: 200~400, xx: 15, ysI: 26 }
   number_sources: { range: http://122.51.0.76:8081/api/universal, xx: http://122.51.0.76:8081/api/universal, ysI: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 3 次，最近一次是 2026-05-22 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   wiki_notes:
     - { text: 图鉴标注：仅远程英雄可获得, source: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-05-22, text: 官方平衡记录（2026-02起）：增强0次、削弱3次；最近一次2026-05-22削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10002":
   quality: ssr
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { dmg_pct: 22~44 }
   number_sources: { dmg_pct: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 6 次，最近一次是 2026-04-30 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   wiki_notes:
     - { text: 图鉴标注：仅远程英雄可获得, source: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-04-30, text: 官方平衡记录（2026-02起）：增强0次、削弱6次；最近一次2026-04-30削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10003":
   quality: ssr
   quality_source: http://122.51.0.76:8081/api/hero-guides
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 7 次，最近一次是 2026-05-22 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   changes:
-    - { date: 2026-05-22, text: 官方平衡记录（2026-02起）：增强0次、削弱7次；最近一次2026-05-22削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-04-30, text: 官方改动：已从不需要普攻的英雄的福佑池移除（5月4日生效）, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-04-30, text: 已从不需要普攻的英雄的福佑池移除（5月4日生效）, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: slark, source: http://122.51.0.76:8081/icons/guides/1776210104249.png }
     - { hero: lion, source: http://122.51.0.76:8081/icons/guides/1778030133350.png }
@@ -43,10 +41,9 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { gjjl: 230~460 }
   number_sources: { gjjl: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 1 次、削弱 0 次，最近一次是 2026-02-16 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   wiki_notes:
     - { text: 图鉴标注：仅近战英雄可获得, source: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-02-16, text: 官方平衡记录（2026-02起）：增强1次、削弱0次；最近一次2026-02-16增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: slark, source: http://122.51.0.76:8081/icons/guides/1776210104249.png }
 "10006":
@@ -55,7 +52,7 @@
   numbers: { atk_spd_pct: 9, move_speed: 10~20, duration: 5, max_stack: 80 }
   number_sources: { atk_spd_pct: http://122.51.0.76:8081/api/universal, move_speed: http://122.51.0.76:8081/api/universal, duration: http://122.51.0.76:8081/api/universal, max_stack: http://122.51.0.76:8081/api/universal }
   changes:
-    - { date: 2026-04-30, text: 官方改动：已从不需要普攻的英雄的福佑池移除（5月4日生效）, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-04-30, text: 已从不需要普攻的英雄的福佑池移除（5月4日生效）, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: slark, source: http://122.51.0.76:8081/icons/guides/1776210104249.png }
     - { hero: lina, source: http://122.51.0.76:8081/icons/guides/1776210154343.jpg }
@@ -64,10 +61,9 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { lv_factor: 0.75~1.5 }
   number_sources: { lv_factor: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 1 次，最近一次是 2026-03-16 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: 图鉴站22篇英雄一图流中有10篇把它列为推荐福佑, source: http://122.51.0.76:8081/api/hero-guides, date: 2026-09 }
-  changes:
-    - { date: 2026-03-16, text: 官方平衡记录（2026-02起）：增强0次、削弱1次；最近一次2026-03-16削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: lina, source: http://122.51.0.76:8081/icons/guides/1776210154343.jpg }
     - { hero: riki, source: http://122.51.0.76:8081/icons/guides/1780378971200.png }
@@ -84,12 +80,11 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { gs: 100~240, gjI: 30, cffyshI: 100 }
   number_sources: { gs: http://122.51.0.76:8081/api/universal, gjI: http://122.51.0.76:8081/api/universal, cffyshI: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 1 次、削弱 0 次，最近一次是 2026-03-16 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: 莉娜一图流：物理莉娜刚需特效类福佑，否则输出不足, source: http://122.51.0.76:8081/icons/guides/1776210154343.jpg, date: 2026-04-14 }
   wiki_notes:
     - { text: 图鉴定位标签：核心, source: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-03-16, text: 官方平衡记录（2026-02起）：增强1次、削弱0次；最近一次2026-03-16增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: slark, source: http://122.51.0.76:8081/icons/guides/1776210104249.png }
     - { hero: lina, source: http://122.51.0.76:8081/icons/guides/1776210154343.jpg }
@@ -99,13 +94,13 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { dmg: 36~72, add_dmg: 54, dur: 5 }
   number_sources: { dmg: http://122.51.0.76:8081/api/universal, add_dmg: http://122.51.0.76:8081/api/universal, dur: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 1 次，最近一次是 2026-03-11 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: 图鉴站22篇英雄一图流中有5篇把它列为推荐福佑, source: http://122.51.0.76:8081/api/hero-guides, date: 2026-09 }
   wiki_notes:
     - { text: 图鉴归类为“触发类福佑”（特效专家等加成触发类伤害）, source: http://122.51.0.76:8081/api/universal }
   changes:
-    - { date: 2026-03-11, text: 官方平衡记录（2026-02起）：增强0次、削弱1次；最近一次2026-03-11削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-04-30, text: 官方改动：已从不需要普攻的英雄的福佑池移除（5月4日生效）, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-04-30, text: 已从不需要普攻的英雄的福佑池移除（5月4日生效）, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: slark, source: http://122.51.0.76:8081/icons/guides/1776210104249.png }
     - { hero: lina, source: http://122.51.0.76:8081/icons/guides/1776210154343.jpg }
@@ -117,13 +112,13 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { gold: 3500 }
   number_sources: { gold: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 1 次、削弱 1 次，最近一次是 2026-03-21 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: 图鉴站22篇英雄一图流中有11篇把它列为推荐福佑, source: http://122.51.0.76:8081/api/hero-guides, date: 2026-09 }
   wiki_notes:
     - { text: 图鉴改动记录：获得金币由3000改为3500, source: http://122.51.0.76:8081/api/universal, date: 2026-03-24 }
   changes:
-    - { date: 2026-03-21, text: 官方平衡记录（2026-02起）：增强1次、削弱1次；最近一次2026-03-21增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-02-13, text: 官方改动：第一回合抽不到此类高即战力福佑, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-02-13, text: 第一回合抽不到此类高即战力福佑, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: beastmaster, source: http://122.51.0.76:8081/icons/guides/1775888387842.png }
     - { hero: slark, source: http://122.51.0.76:8081/icons/guides/1776210104249.png }
@@ -160,7 +155,7 @@
   tips:
     - { text: 图鉴站22篇英雄一图流中有5篇把它列为推荐福佑, source: http://122.51.0.76:8081/api/hero-guides, date: 2026-09 }
   changes:
-    - { date: 2026-02-12, text: 官方改动：只有真正复活才刷新冷却，防止骷髅王/尸王无限复活, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-02-12, text: 只有真正复活才刷新冷却，防止骷髅王/尸王无限复活, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: necrolyte, source: http://122.51.0.76:8081/icons/guides/1790615274497.png }
     - { hero: beastmaster, source: http://122.51.0.76:8081/icons/guides/1775888387842.png }
@@ -197,24 +192,22 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { duration: 6, income_dmg_pct: 50~75, mp: 60 }
   number_sources: { duration: http://122.51.0.76:8081/api/universal, income_dmg_pct: http://122.51.0.76:8081/api/universal, mp: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 1 次、削弱 0 次，最近一次是 2026-04-17 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   changes:
-    - { date: 2026-04-17, text: 官方平衡记录（2026-02起）：增强1次、削弱0次；最近一次2026-04-17增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-04-03, text: 官方更新：2026-04-03 品质下调一档, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-04-03, text: 品质下调一档, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10016":
   quality: r
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { blink: 800~1600, dmg: 1200 }
   number_sources: { blink: http://122.51.0.76:8081/api/universal, dmg: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-02-23, text: 官方平衡记录（2026-02起）：增强2次、削弱0次；最近一次2026-02-23增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 2 次、削弱 0 次，最近一次是 2026-02-23 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10017":
   quality: ssr
   quality_source: http://122.51.0.76:8081/api/universal
+  change_summary: { text: 2026-02 以来官方增强 5 次、削弱 0 次，最近一次是 2026-04-17 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: UP主在评论中确认：一拳超人的效果对斗气同样生效, source: https://www.bilibili.com/video/BV15CQPBcEKt/, date: 2026-04-11 }
     - { text: 牛头一图流：一拳超人+僵王/斗气是强力组合, source: http://122.51.0.76:8081/icons/guides/1785007345284.png, date: 2026-07-25 }
-  changes:
-    - { date: 2026-04-17, text: 官方平衡记录（2026-02起）：增强5次、削弱0次；最近一次2026-04-17增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: earthshaker, source: http://122.51.0.76:8081/icons/guides/1785007345284.png }
     - { hero: tusk, source: https://www.bilibili.com/video/BV1CJTh6LEzK/ }
@@ -225,20 +218,19 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { dmg: 80, hp_pct: 15~30 }
   number_sources: { dmg: http://122.51.0.76:8081/api/universal, hp_pct: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 1 次、削弱 0 次，最近一次是 2026-03-21 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   changes:
-    - { date: 2026-03-21, text: 官方平衡记录（2026-02起）：增强1次、削弱0次；最近一次2026-03-21增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-08-07, text: 官方更新：2026-08-07 由橙色下调为紫色, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-02-12, text: 官方改动：只有真正复活才刷新冷却，防止骷髅王/尸王无限复活, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-08-07, text: 由橙色下调为紫色, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-02-12, text: 只有真正复活才刷新冷却，防止骷髅王/尸王无限复活, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10019":
   quality: ssr
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { base: 350, hp_pct: 5~10 }
   number_sources: { base: http://122.51.0.76:8081/api/universal, hp_pct: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 8 次，最近一次是 2026-03-16 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: 图鉴站22篇英雄一图流中有6篇把它列为推荐福佑, source: http://122.51.0.76:8081/api/hero-guides, date: 2026-09 }
     - { text: 小小一图流：有捆绑王/震震果实/斗气时可多出龙心堆力量, source: http://122.51.0.76:8081/icons/guides/1775787563407.png, date: 2026-04-10 }
-  changes:
-    - { date: 2026-03-16, text: 官方平衡记录（2026-02起）：增强0次、削弱8次；最近一次2026-03-16削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: tiny, source: http://122.51.0.76:8081/icons/guides/1775787563407.png }
     - { hero: ogre_magi, source: http://122.51.0.76:8081/icons/guides/1775888401870.png }
@@ -251,11 +243,10 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { delay: 1.6, base: 240, hp_pct: 8~16 }
   number_sources: { delay: http://122.51.0.76:8081/api/universal, base: http://122.51.0.76:8081/api/universal, hp_pct: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 1 次，最近一次是 2026-03-16 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: 图鉴站22篇英雄一图流中有6篇把它列为推荐福佑, source: http://122.51.0.76:8081/api/hero-guides, date: 2026-09 }
     - { text: 小小一图流：有捆绑王/震震果实/斗气时可多出龙心堆力量, source: http://122.51.0.76:8081/icons/guides/1775787563407.png, date: 2026-04-10 }
-  changes:
-    - { date: 2026-03-16, text: 官方平衡记录（2026-02起）：增强0次、削弱1次；最近一次2026-03-16削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: tiny, source: http://122.51.0.76:8081/icons/guides/1775787563407.png }
     - { hero: ogre_magi, source: http://122.51.0.76:8081/icons/guides/1775888401870.png }
@@ -278,21 +269,21 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { time: 5, lv_factor: 65~130 }
   number_sources: { time: http://122.51.0.76:8081/api/universal, lv_factor: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 2 次，最近一次是 2026-03-01 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   changes:
-    - { date: 2026-03-01, text: 官方平衡记录（2026-02起）：增强0次、削弱2次；最近一次2026-03-01削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-04-03, text: 官方更新：2026-04-03 品质下调一档, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-04-03, text: 品质下调一档, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10023":
   quality: ssr
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { shI: 8~24, lq: 15 }
   number_sources: { shI: http://122.51.0.76:8081/api/universal, lq: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 4 次，最近一次是 2026-03-11 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: 图鉴站22篇英雄一图流中有6篇把它列为推荐福佑, source: http://122.51.0.76:8081/api/hero-guides, date: 2026-09 }
   wiki_notes:
     - { text: 图鉴标注：只能在3选1中选到，不会被随机给予, source: http://122.51.0.76:8081/api/universal }
   changes:
-    - { date: 2026-03-11, text: 官方平衡记录（2026-02起）：增强0次、削弱4次；最近一次2026-03-11削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-02-23, text: 官方改动：不会再被随机给予，只能在3选1中选到, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-02-23, text: 不会再被随机给予，只能在3选1中选到, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: tiny, source: http://122.51.0.76:8081/icons/guides/1775787563407.png }
     - { hero: ogre_magi, source: http://122.51.0.76:8081/icons/guides/1775888401870.png }
@@ -305,10 +296,9 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { duration: 45, value_pct: 24~48 }
   number_sources: { duration: http://122.51.0.76:8081/api/universal, value_pct: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 1 次、削弱 2 次，最近一次是 2026-03-16 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: 图鉴站22篇英雄一图流中有10篇把它列为推荐福佑, source: http://122.51.0.76:8081/api/hero-guides, date: 2026-09 }
-  changes:
-    - { date: 2026-03-16, text: 官方平衡记录（2026-02起）：增强1次、削弱2次；最近一次2026-03-16增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: ogre_magi, source: http://122.51.0.76:8081/icons/guides/1775888401870.png }
     - { hero: lina, source: http://122.51.0.76:8081/icons/guides/1776210154343.jpg }
@@ -330,8 +320,7 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { radius: 600~1200, dmg_pct: 35, duration: 7 }
   number_sources: { radius: http://122.51.0.76:8081/api/universal, dmg_pct: http://122.51.0.76:8081/api/universal, duration: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-03-06, text: 官方平衡记录（2026-02起）：增强5次、削弱0次；最近一次2026-03-06增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 5 次、削弱 0 次，最近一次是 2026-03-06 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10027":
   quality: ssr
   quality_source: http://122.51.0.76:8081/api/universal
@@ -354,12 +343,12 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { hp_pct: 3, gold: 150~450 }
   number_sources: { hp_pct: http://122.51.0.76:8081/api/universal, gold: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 2 次，最近一次是 2026-03-16 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: 图鉴站22篇英雄一图流中有6篇把它列为推荐福佑, source: http://122.51.0.76:8081/api/hero-guides, date: 2026-09 }
   changes:
-    - { date: 2026-03-16, text: 官方平衡记录（2026-02起）：增强0次、削弱2次；最近一次2026-03-16削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-04-03, text: 官方更新：2026-04-03 品质下调一档, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-07-03, text: 官方改动：不再无视薄葬等免死效果，也不再无视没到点子上、五秒真男人等免伤, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-04-03, text: 品质下调一档, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-07-03, text: 不再无视薄葬等免死效果，也不再无视没到点子上、五秒真男人等免伤, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: tiny, source: http://122.51.0.76:8081/icons/guides/1775787563407.png }
     - { hero: beastmaster, source: http://122.51.0.76:8081/icons/guides/1775888387842.png }
@@ -372,8 +361,7 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { fhsj: 11~22 }
   number_sources: { fhsj: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-03-06, text: 官方平衡记录（2026-02起）：增强1次、削弱1次；最近一次2026-03-06增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 1 次、削弱 1 次，最近一次是 2026-03-06 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: witch_doctor, source: http://122.51.0.76:8081/icons/guides/1780468328727.png }
     - { hero: techies, source: http://122.51.0.76:8081/icons/guides/1780614669802.png }
@@ -382,13 +370,12 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { dmg_pct: 150~300 }
   number_sources: { dmg_pct: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 1 次，最近一次是 2026-04-17 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: 图鉴站22篇英雄一图流中有8篇把它列为推荐福佑, source: http://122.51.0.76:8081/api/hero-guides, date: 2026-09 }
     - { text: B站视频标题：狙击手配超超负荷一枪约2万，但费刷新币且怕刃甲, source: https://www.bilibili.com/video/BV1ny94B1E44/, date: 2026-04-29 }
     - { text: 火猫一图流：10级前拿到可走一刀流，但后期需要会心伤害, source: http://122.51.0.76:8081/icons/guides/1776583999601.png, date: 2026-04-19 }
     - { text: SA一图流：一刀流刚需，因为它会触发背刺结算, source: http://122.51.0.76:8081/icons/guides/1780378971200.png, date: 2026-06-02 }
-  changes:
-    - { date: 2026-04-17, text: 官方平衡记录（2026-02起）：增强0次、削弱1次；最近一次2026-04-17削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: phantom_assassin, source: http://122.51.0.76:8081/icons/guides/1776403380549.png }
     - { hero: ember_spirit, source: http://122.51.0.76:8081/icons/guides/1776583999601.png }
@@ -406,11 +393,11 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { atk_rate: 0.7, atk_bonus: 0.9~1.8 }
   number_sources: { atk_rate: http://122.51.0.76:8081/api/universal, atk_bonus: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 1 次、削弱 0 次，最近一次是 2026-02-21 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: SA一图流：没有超超负荷时可靠游刃有余等攻速福佑走平A, source: http://122.51.0.76:8081/icons/guides/1780378971200.png, date: 2026-06-02 }
   changes:
-    - { date: 2026-02-21, text: 官方平衡记录（2026-02起）：增强1次、削弱0次；最近一次2026-02-21增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-03-16, text: 官方举例：斯拉克抽到游刃有余的概率降低了70%（不适配英雄降权）, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-03-16, text: 举例：斯拉克抽到游刃有余的概率降低了70%（不适配英雄降权）, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: phantom_assassin, source: http://122.51.0.76:8081/icons/guides/1776403380549.png }
     - { hero: ember_spirit, source: http://122.51.0.76:8081/icons/guides/1776583999601.png }
@@ -434,12 +421,11 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { cd: 20, duration: 30, owner_gold: 300~600, assist_gold: 100 }
   number_sources: { cd: http://122.51.0.76:8081/api/universal, duration: http://122.51.0.76:8081/api/universal, owner_gold: http://122.51.0.76:8081/api/universal, assist_gold: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 1 次、削弱 4 次，最近一次是 2026-03-21 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: UP主称悬赏令被削弱过多次，最初的奖励超过1000, source: https://www.bilibili.com/video/BV1rNomBCEhA/, date: 2026-04-28 }
   wiki_notes:
     - { text: 图鉴补充：悬赏不提供视野, source: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-03-21, text: 官方平衡记录（2026-02起）：增强1次、削弱4次；最近一次2026-03-21削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: riki, source: http://122.51.0.76:8081/icons/guides/1780378971200.png }
     - { hero: kunkka, source: http://122.51.0.76:8081/icons/guides/1783247096791.png }
@@ -464,21 +450,19 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { gold: 700~2100, stay_time: 3, duration: 10 }
   number_sources: { gold: http://122.51.0.76:8081/api/universal, stay_time: http://122.51.0.76:8081/api/universal, duration: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 1 次、削弱 0 次，最近一次是 2026-03-16 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: Steam留言反馈：龟龟触发隐身时会打断普攻, source: https://steamcommunity.com/sharedfiles/filedetails/comments/2841152696, date: 2026-04-10 }
   wiki_notes:
     - { text: 图鉴补充：进入隐身后10秒内移动也不会显形, source: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-03-16, text: 官方平衡记录（2026-02起）：增强1次、削弱0次；最近一次2026-03-16增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10037":
   quality: sr
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { radius: 1450, duration: 13, count: 2 }
   number_sources: { radius: http://122.51.0.76:8081/api/universal, duration: http://122.51.0.76:8081/api/universal, count: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 3 次，最近一次是 2026-03-11 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   wiki_notes:
     - { text: 图鉴补充：生效范围有限，站在台阶上既不隐身也不会被打到, source: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-03-11, text: 官方平衡记录（2026-02起）：增强0次、削弱3次；最近一次2026-03-11削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10038":
   quality: sr
   quality_source: http://122.51.0.76:8081/api/universal
@@ -490,15 +474,13 @@
   numbers: { sfjl: 210~420 }
   number_sources: { sfjl: http://122.51.0.76:8081/api/universal }
 "10040":
-  changes:
-    - { date: 2026-03-11, text: 官方平衡记录（2026-02起）：增强0次、削弱1次；最近一次2026-03-11削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 1 次，最近一次是 2026-03-11 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10041":
   quality: r
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { gjjl: 70~140 }
   number_sources: { gjjl: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-02-21, text: 官方平衡记录（2026-02起）：增强0次、削弱1次；最近一次2026-02-21削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 1 次，最近一次是 2026-02-21 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: slark, source: http://122.51.0.76:8081/icons/guides/1776210104249.png }
 "10042":
@@ -506,8 +488,7 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { sm: 1600~3200, shI: 8 }
   number_sources: { sm: http://122.51.0.76:8081/api/universal, shI: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-04-17, text: 官方平衡记录（2026-02起）：增强3次、削弱0次；最近一次2026-04-17增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 3 次、削弱 0 次，最近一次是 2026-04-17 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10043":
   notes: 同名福佑存在多个id且一图流里同时出现在r/sr分区，品质对应关系待核实
   numbers: { jnzq: 24~48 }
@@ -537,17 +518,15 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { gsI: 24~48 }
   number_sources: { gsI: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-03-01, text: 官方平衡记录（2026-02起）：增强0次、削弱2次；最近一次2026-03-01削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 2 次，最近一次是 2026-03-01 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: legion_commander, source: http://122.51.0.76:8081/icons/guides/1780468246035.png }
 "10046":
   quality: sr
   quality_source: http://122.51.0.76:8081/api/hero-guides
+  change_summary: { text: 2026-02 以来官方增强 2 次、削弱 0 次，最近一次是 2026-03-01 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: 图鉴站22篇英雄一图流中有6篇把它列为推荐福佑, source: http://122.51.0.76:8081/api/hero-guides, date: 2026-09 }
-  changes:
-    - { date: 2026-03-01, text: 官方平衡记录（2026-02起）：增强2次、削弱0次；最近一次2026-03-01增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: necrolyte, source: http://122.51.0.76:8081/icons/guides/1790615274497.png }
     - { hero: tiny, source: http://122.51.0.76:8081/icons/guides/1775787563407.png }
@@ -577,7 +556,7 @@
   numbers: { gjbI: 25~50 }
   number_sources: { gjbI: http://122.51.0.76:8081/api/universal }
   changes:
-    - { date: 2026-08-08, text: 官方改动：调入攻速/攻击福佑池, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-08-08, text: 调入攻速/攻击福佑池, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: phantom_assassin, source: http://122.51.0.76:8081/icons/guides/1776403380549.png }
 "10049":
@@ -585,9 +564,9 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { gsI: 40~80, xx: 8 }
   number_sources: { gsI: http://122.51.0.76:8081/api/universal, xx: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 1 次，最近一次是 2026-02-21 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   changes:
-    - { date: 2026-02-21, text: 官方平衡记录（2026-02起）：增强0次、削弱1次；最近一次2026-02-21削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-08-08, text: 官方改动：调入攻速/攻击福佑池, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-08-08, text: 调入攻速/攻击福佑池, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: slark, source: http://122.51.0.76:8081/icons/guides/1776210104249.png }
     - { hero: lina, source: http://122.51.0.76:8081/icons/guides/1776210154343.jpg }
@@ -600,8 +579,7 @@
 "10051":
   quality: sr
   quality_source: http://122.51.0.76:8081/api/hero-guides
-  changes:
-    - { date: 2026-05-22, text: 官方平衡记录（2026-02起）：增强1次、削弱0次；最近一次2026-05-22增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 1 次、削弱 0 次，最近一次是 2026-05-22 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: slark, source: http://122.51.0.76:8081/icons/guides/1776210104249.png }
 "10052":
@@ -622,9 +600,9 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { cd: 60, hp_pct: 16~32 }
   number_sources: { cd: http://122.51.0.76:8081/api/universal, hp_pct: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 1 次，最近一次是 2026-03-01 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   changes:
-    - { date: 2026-03-01, text: 官方平衡记录（2026-02起）：增强0次、削弱1次；最近一次2026-03-01削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-05-21, text: 官方更新：2026-05-21 品质下调, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-05-21, text: 品质下调, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10054":
   quality: sr
   quality_source: http://122.51.0.76:8081/api/universal
@@ -635,19 +613,18 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { check_time: 5, hp_pct: 9~18 }
   number_sources: { check_time: http://122.51.0.76:8081/api/universal, hp_pct: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-03-11, text: 官方平衡记录（2026-02起）：增强0次、削弱3次；最近一次2026-03-11削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 3 次，最近一次是 2026-03-11 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10056":
   quality_conflict:
     - { quality: r, source: http://122.51.0.76:8081/api/universal }
     - { quality: sr, source: http://122.51.0.76:8081/api/hero-guides }
   numbers: { hp_pct: 11~22, bonus_pct_per_amp: 1 }
   number_sources: { hp_pct: http://122.51.0.76:8081/api/universal, bonus_pct_per_amp: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 4 次，最近一次是 2026-04-10 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: 蓝胖一图流称其为紫色必拿，能提供8万以上护盾, source: http://122.51.0.76:8081/icons/guides/1775888401870.png, date: 2026-04-11 }
   changes:
-    - { date: 2026-04-10, text: 官方平衡记录（2026-02起）：增强0次、削弱4次；最近一次2026-04-10削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-04-03, text: 官方更新：2026-04-03 品质上调一档, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-04-03, text: 品质上调一档, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: ogre_magi, source: http://122.51.0.76:8081/icons/guides/1775888401870.png }
 "10058":
@@ -656,26 +633,23 @@
   numbers: { lose_pct: 60, rate: 0.7~1.4 }
   number_sources: { lose_pct: http://122.51.0.76:8081/api/universal, rate: http://122.51.0.76:8081/api/universal }
 "10060":
-  changes:
-    - { date: 2026-02-16, text: 官方平衡记录（2026-02起）：增强1次、削弱0次；最近一次2026-02-16增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 1 次、削弱 0 次，最近一次是 2026-02-16 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10061":
   quality: r
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { rate: 0.5~1 }
   number_sources: { rate: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 1 次、削弱 1 次，最近一次是 2026-02-23 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   wiki_notes:
     - { text: 图鉴标注：仅智力英雄可获得, source: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-02-23, text: 官方平衡记录（2026-02起）：增强1次、削弱1次；最近一次2026-02-23削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10062":
   quality: r
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { lose_pct: 80, rate: 0.7~1.4 }
   number_sources: { lose_pct: http://122.51.0.76:8081/api/universal, rate: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 1 次，最近一次是 2026-02-16 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   wiki_notes:
     - { text: 图鉴标注：仅力量/智力英雄可获得, source: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-02-16, text: 官方平衡记录（2026-02起）：增强0次、削弱1次；最近一次2026-02-16削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10063":
   quality: r
   quality_source: http://122.51.0.76:8081/api/universal
@@ -703,25 +677,22 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { trigger_pct: 30, hp_pct: 35~70, msp: 20, duration: 1 }
   number_sources: { trigger_pct: http://122.51.0.76:8081/api/universal, hp_pct: http://122.51.0.76:8081/api/universal, msp: http://122.51.0.76:8081/api/universal, duration: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-03-21, text: 官方平衡记录（2026-02起）：增强2次、削弱2次；最近一次2026-03-21增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 2 次、削弱 2 次，最近一次是 2026-03-21 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10068":
   quality: r
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { shI: 30, times: 6 }
   number_sources: { shI: http://122.51.0.76:8081/api/universal, times: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 2 次、削弱 1 次，最近一次是 2026-03-16 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   wiki_notes:
     - { text: 图鉴称其与“铁血复仇”为同一系列：复活后45秒内多项属性提升, source: http://122.51.0.76:8081/api/universal }
     - { text: 图鉴改动记录：伤害输出由-50%改为-30%, source: http://122.51.0.76:8081/api/universal, date: 2026-03-24 }
-  changes:
-    - { date: 2026-03-16, text: 官方平衡记录（2026-02起）：增强2次、削弱1次；最近一次2026-03-16增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10069":
   quality: ssr
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { mxI: 30, smI: 16~32, mk: 15, hj: 8 }
   number_sources: { mxI: http://122.51.0.76:8081/api/universal, smI: http://122.51.0.76:8081/api/universal, mk: http://122.51.0.76:8081/api/universal, hj: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-04-30, text: 官方平衡记录（2026-02起）：增强0次、削弱3次；最近一次2026-04-30削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 3 次，最近一次是 2026-04-30 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: necrolyte, source: http://122.51.0.76:8081/icons/guides/1790615274497.png }
     - { hero: ember_spirit, source: http://122.51.0.76:8081/icons/guides/1776583999601.png }
@@ -730,12 +701,11 @@
 "10070":
   quality: ssr
   quality_source: http://122.51.0.76:8081/api/universal
+  change_summary: { text: 2026-02 以来官方增强 3 次、削弱 0 次，最近一次是 2026-03-11 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: B站评论：可能把已成型的组合洗乱；UP主建议福佑已成型时少拿随机类, source: https://www.bilibili.com/video/BV1WXGZ6KE8r/, date: 2026-05-26 }
     - { text: B站评论：更适合在完全没胡的时候拿来赌一把, source: https://www.bilibili.com/video/BV1WXGZ6KE8r/, date: 2026-05-27 }
     - { text: B站评论（UP确认是机制）：先拿的技能福佑被九莲宝灯洗掉后技能仍保留, source: https://www.bilibili.com/video/BV1WXGZ6KE8r/, date: 2026-05-26 }
-  changes:
-    - { date: 2026-03-11, text: 官方平衡记录（2026-02起）：增强3次、削弱0次；最近一次2026-03-11增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10071":
   quality: ssr
   quality_source: http://122.51.0.76:8081/api/universal
@@ -744,7 +714,7 @@
   tips:
     - { text: 图鉴站22篇英雄一图流中有16篇把它列为推荐福佑, source: http://122.51.0.76:8081/api/hero-guides, date: 2026-09 }
   changes:
-    - { date: 2026-04-03, text: 官方更新：2026-04-03 品质上调一档, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-04-03, text: 品质上调一档, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: tiny, source: http://122.51.0.76:8081/icons/guides/1775787563407.png }
     - { hero: beastmaster, source: http://122.51.0.76:8081/icons/guides/1775888387842.png }
@@ -769,21 +739,20 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { radius: 600 }
   number_sources: { radius: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-08-07, text: 官方平衡记录（2026-02起）：增强4次、削弱0次；最近一次2026-08-07增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 4 次、削弱 0 次，最近一次是 2026-08-07 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10073":
   quality: ssr
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { dmg_pct: 0.5~1, duration: 4 }
   number_sources: { dmg_pct: http://122.51.0.76:8081/api/universal, duration: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 4 次，最近一次是 2026-03-11 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: 图鉴站22篇英雄一图流中有5篇把它列为推荐福佑, source: http://122.51.0.76:8081/api/hero-guides, date: 2026-09 }
   wiki_notes:
     - { text: 图鉴归类为“触发类福佑”（特效专家等加成触发类伤害）, source: http://122.51.0.76:8081/api/universal }
   changes:
-    - { date: 2026-03-11, text: 官方平衡记录（2026-02起）：增强0次、削弱4次；最近一次2026-03-11削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-04-03, text: 官方更新：2026-04-03 品质上调一档, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-04-30, text: 官方改动：已从不需要普攻的英雄的福佑池移除（5月4日生效）, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-04-03, text: 品质上调一档, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-04-30, text: 已从不需要普攻的英雄的福佑池移除（5月4日生效）, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: slark, source: http://122.51.0.76:8081/icons/guides/1776210104249.png }
     - { hero: lina, source: http://122.51.0.76:8081/icons/guides/1776210154343.jpg }
@@ -811,8 +780,7 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { heal_pct: 5~10, cd: 6 }
   number_sources: { heal_pct: http://122.51.0.76:8081/api/universal, cd: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-03-21, text: 官方平衡记录（2026-02起）：增强1次、削弱3次；最近一次2026-03-21削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 1 次、削弱 3 次，最近一次是 2026-03-21 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: tiny, source: http://122.51.0.76:8081/icons/guides/1775787563407.png }
     - { hero: tusk, source: http://122.51.0.76:8081/icons/guides/1780502122236.png }
@@ -832,27 +800,25 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { hp_pct: 30~60, movespeed: 100, duration: 5 }
   number_sources: { hp_pct: http://122.51.0.76:8081/api/universal, movespeed: http://122.51.0.76:8081/api/universal, duration: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-04-10, text: 官方平衡记录（2026-02起）：增强3次、削弱0次；最近一次2026-04-10增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 3 次、削弱 0 次，最近一次是 2026-04-10 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10079":
   quality: ssr
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { hp_pct: 6, effect_pct: 8~24, duration: 20 }
   number_sources: { hp_pct: http://122.51.0.76:8081/api/universal, effect_pct: http://122.51.0.76:8081/api/universal, duration: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 1 次、削弱 0 次，最近一次是 2026-05-22 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: 英文工坊旧描述：击杀5秒内手动发“?”回复30%生命，三项+20%持续15秒（与现图鉴数值不同）, source: https://steamcommunity.com/sharedfiles/filedetails/?id=2841152696, date: 2026-03 }
   changes:
-    - { date: 2026-05-22, text: 官方平衡记录（2026-02起）：增强1次、削弱0次；最近一次2026-05-22增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-03-16, text: 官方改动：不再需要手动输入“?”，击杀后自动发送, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-03-16, text: 不再需要手动输入“?”，击杀后自动发送, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10080":
   quality: sr
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { main_attr: 30~60, tower: 1, add_pct: 100 }
   number_sources: { main_attr: http://122.51.0.76:8081/api/universal, tower: http://122.51.0.76:8081/api/universal, add_pct: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 5 次、削弱 0 次，最近一次是 2026-04-10 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: 图鉴站22篇英雄一图流中有7篇把它列为推荐福佑, source: http://122.51.0.76:8081/api/hero-guides, date: 2026-09 }
-  changes:
-    - { date: 2026-04-10, text: 官方平衡记录（2026-02起）：增强5次、削弱0次；最近一次2026-04-10增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: slark, source: http://122.51.0.76:8081/icons/guides/1776210104249.png }
     - { hero: riki, source: http://122.51.0.76:8081/icons/guides/1780378971200.png }
@@ -866,45 +832,41 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { dmg_reduce_pct: 12~24 }
   number_sources: { dmg_reduce_pct: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 2 次、削弱 0 次，最近一次是 2026-03-21 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   wiki_notes:
     - { text: 图鉴标注：全场只能有一人持有, source: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-03-21, text: 官方平衡记录（2026-02起）：增强2次、削弱0次；最近一次2026-03-21增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10082":
   quality: sr
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { count: 2, gold: 666~888 }
   number_sources: { count: http://122.51.0.76:8081/api/universal, gold: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 2 次、削弱 0 次，最近一次是 2026-02-23 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: B站评论：前几分钟单吃收益很高；阵亡时当分钟的红包会丢失, source: https://www.bilibili.com/video/BV1rNomBCEhA/, date: 2026-04-28 }
   wiki_notes:
     - { text: 图鉴补充：按购买时的秒数每分钟掉两个钱袋，可能落到走不到的位置, source: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-02-23, text: 官方平衡记录（2026-02起）：增强2次、削弱0次；最近一次2026-02-23增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10083":
   quality: r
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { count: 3, hp: 500, max_hp: 90~180 }
   number_sources: { count: http://122.51.0.76:8081/api/universal, hp: http://122.51.0.76:8081/api/universal, max_hp: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 1 次、削弱 3 次，最近一次是 2026-03-21 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   changes:
-    - { date: 2026-03-21, text: 官方平衡记录（2026-02起）：增强1次、削弱3次；最近一次2026-03-21削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-04-03, text: 官方更新：2026-04-03 品质下调一档, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-04-03, text: 品质下调一档, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10084":
   quality: r
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { hp_pct: 10~30, gold: 750 }
   number_sources: { hp_pct: http://122.51.0.76:8081/api/universal, gold: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-03-11, text: 官方平衡记录（2026-02起）：增强1次、削弱0次；最近一次2026-03-11增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 1 次、削弱 0 次，最近一次是 2026-03-11 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10085":
   quality: sr
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { level_factor: 650~1300 }
   number_sources: { level_factor: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 3 次，最近一次是 2026-03-21 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: 图鉴站22篇英雄一图流中有11篇把它列为推荐福佑, source: http://122.51.0.76:8081/api/hero-guides, date: 2026-09 }
-  changes:
-    - { date: 2026-03-21, text: 官方平衡记录（2026-02起）：增强0次、削弱3次；最近一次2026-03-21削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: necrolyte, source: http://122.51.0.76:8081/icons/guides/1790615274497.png }
     - { hero: beastmaster, source: http://122.51.0.76:8081/icons/guides/1775888387842.png }
@@ -922,10 +884,9 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { dur: 3 }
   number_sources: { dur: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 14 次、削弱 0 次，最近一次是 2026-08-07 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   wiki_notes:
     - { text: 图鉴补充：飞剑始终朝施法瞬间的朝向发射, source: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-08-07, text: 官方平衡记录（2026-02起）：增强14次、削弱0次；最近一次2026-08-07增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: legion_commander, source: http://122.51.0.76:8081/icons/guides/1780468246035.png }
 "10087":
@@ -933,11 +894,10 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { death_count: 7, bonus_pct: 2.8~5.6, max_stack: 7 }
   number_sources: { death_count: http://122.51.0.76:8081/api/universal, bonus_pct: http://122.51.0.76:8081/api/universal, max_stack: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 6 次，最近一次是 2026-03-21 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: 图鉴站22篇英雄一图流中有8篇把它列为推荐福佑, source: http://122.51.0.76:8081/api/hero-guides, date: 2026-09 }
     - { text: B站评论：现在需阵亡7次后才开始叠加，之前的阵亡不追溯, source: https://www.bilibili.com/video/BV1rNomBCEhA/, date: 2026-05-26 }
-  changes:
-    - { date: 2026-03-21, text: 官方平衡记录（2026-02起）：增强0次、削弱6次；最近一次2026-03-21削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: necrolyte, source: http://122.51.0.76:8081/icons/guides/1790615274497.png }
     - { hero: beastmaster, source: http://122.51.0.76:8081/icons/guides/1775888387842.png }
@@ -952,19 +912,18 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { delay: 0.5 }
   number_sources: { delay: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-08-07, text: 官方平衡记录（2026-02起）：增强2次、削弱0次；最近一次2026-08-07增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 2 次、削弱 0 次，最近一次是 2026-08-07 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10089":
   quality: ssr
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { sm: 666, radius: 666, hp_pct: 0.8~1.6 }
   number_sources: { sm: http://122.51.0.76:8081/api/universal, radius: http://122.51.0.76:8081/api/universal, hp_pct: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 3 次，最近一次是 2026-03-11 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   wiki_notes:
     - { text: 图鉴标注：仅力量英雄可获得, source: http://122.51.0.76:8081/api/universal }
   changes:
-    - { date: 2026-03-11, text: 官方平衡记录（2026-02起）：增强0次、削弱3次；最近一次2026-03-11削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-02-13, text: 官方改动：只有力量英雄能刷新或随机到太阳, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-03-16, text: 官方改动：骷髅王、噬魂鬼、斯拉达、龙骑士、狼人不再能刷到太阳, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-02-13, text: 只有力量英雄能刷新或随机到太阳, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-03-16, text: 骷髅王、噬魂鬼、斯拉达、龙骑士、狼人不再能刷到太阳, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: tiny, source: http://122.51.0.76:8081/icons/guides/1775787563407.png }
     - { hero: ogre_magi, source: http://122.51.0.76:8081/icons/guides/1775888401870.png }
@@ -973,23 +932,21 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { pct: 17.5~35 }
   number_sources: { pct: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-03-21, text: 官方平衡记录（2026-02起）：增强2次、削弱0次；最近一次2026-03-21增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 2 次、削弱 0 次，最近一次是 2026-03-21 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: ursa, source: http://122.51.0.76:8081/icons/guides/1780614643627.png }
 "10091":
   quality: sr
   quality_source: http://122.51.0.76:8081/api/universal
+  change_summary: { text: 2026-02 以来官方增强 2 次、削弱 0 次，最近一次是 2026-03-21 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   wiki_notes:
     - { text: "图鉴改动记录：墓碑范围由220改为300，复活血量[30-90]%改为[40-80]%，墓碑消失时间由10秒改为15秒", source: http://122.51.0.76:8081/api/universal, date: 2026-03-24 }
   changes:
-    - { date: 2026-03-21, text: 官方平衡记录（2026-02起）：增强2次、削弱0次；最近一次2026-03-21增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-04-03, text: 官方更新：2026-04-03 品质下调一档, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-04-03, text: 品质下调一档, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10092":
   quality: r
   quality_source: http://122.51.0.76:8081/api/universal
-  changes:
-    - { date: 2026-02-21, text: 官方平衡记录（2026-02起）：增强0次、削弱1次；最近一次2026-02-21削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 1 次，最近一次是 2026-02-21 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: furion, source: http://122.51.0.76:8081/icons/guides/1790500798559.png }
 "10093":
@@ -997,24 +954,23 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { hp_pct: 22~11 }
   number_sources: { hp_pct: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-02-17, text: 官方平衡记录（2026-02起）：增强1次、削弱0次；最近一次2026-02-17增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 1 次、削弱 0 次，最近一次是 2026-02-17 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10094":
   quality: r
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { ztkx: 14~28, mk: 8 }
   number_sources: { ztkx: http://122.51.0.76:8081/api/universal, mk: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 1 次，最近一次是 2026-03-01 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   changes:
-    - { date: 2026-03-01, text: 官方平衡记录（2026-02起）：增强0次、削弱1次；最近一次2026-03-01削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-02-13, text: 官方改动：附加少量魔法抗性, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-02-13, text: 附加少量魔法抗性, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10095":
   quality: sr
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { ztkx: 24~48, mk: 8 }
   number_sources: { ztkx: http://122.51.0.76:8081/api/universal, mk: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 1 次，最近一次是 2026-02-21 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   changes:
-    - { date: 2026-02-21, text: 官方平衡记录（2026-02起）：增强0次、削弱1次；最近一次2026-02-21削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-02-13, text: 官方改动：附加少量魔法抗性, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-02-13, text: 附加少量魔法抗性, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: necrolyte, source: http://122.51.0.76:8081/icons/guides/1790615274497.png }
     - { hero: ember_spirit, source: http://122.51.0.76:8081/icons/guides/1776583999601.png }
@@ -1024,10 +980,9 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { jnfwI: 10~20 }
   number_sources: { jnfwI: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 1 次，最近一次是 2026-03-01 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: 图鉴站22篇英雄一图流中有15篇把它列为推荐福佑, source: http://122.51.0.76:8081/api/hero-guides, date: 2026-09 }
-  changes:
-    - { date: 2026-03-01, text: 官方平衡记录（2026-02起）：增强0次、削弱1次；最近一次2026-03-01削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: lina, source: http://122.51.0.76:8081/icons/guides/1776210154343.jpg }
     - { hero: queenofpain, source: http://122.51.0.76:8081/icons/guides/1776210186642.png }
@@ -1042,15 +997,14 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { jnfwI: 15~30 }
   number_sources: { jnfwI: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-03-11, text: 官方平衡记录（2026-02起）：增强0次、削弱2次；最近一次2026-03-11削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 2 次，最近一次是 2026-03-11 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10098":
   quality: sr
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { smI: 10~20, mk: 12 }
   number_sources: { smI: http://122.51.0.76:8081/api/universal, mk: http://122.51.0.76:8081/api/universal }
   changes:
-    - { date: 2026-02-13, text: 官方改动：附加少量魔法抗性, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-02-13, text: 附加少量魔法抗性, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: ember_spirit, source: http://122.51.0.76:8081/icons/guides/1776583999601.png }
 "10099":
@@ -1063,8 +1017,7 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { hp_pct: 70, amp: 40~80 }
   number_sources: { hp_pct: http://122.51.0.76:8081/api/universal, amp: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-06-10, text: 官方平衡记录（2026-02起）：增强8次、削弱0次；最近一次2026-06-10增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 8 次、削弱 0 次，最近一次是 2026-06-10 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: techies, source: http://122.51.0.76:8081/icons/guides/1780614669802.png }
     - { hero: hoodwink, source: http://122.51.0.76:8081/icons/guides/1783247078493.png }
@@ -1075,8 +1028,7 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { hp: 1000, amp: 3~6, max: 20 }
   number_sources: { hp: http://122.51.0.76:8081/api/universal, amp: http://122.51.0.76:8081/api/universal, max: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-03-16, text: 官方平衡记录（2026-02起）：增强0次、削弱2次；最近一次2026-03-16削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 2 次，最近一次是 2026-03-16 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: beastmaster, source: http://122.51.0.76:8081/icons/guides/1775888387842.png }
     - { hero: ogre_magi, source: http://122.51.0.76:8081/icons/guides/1775888401870.png }
@@ -1094,15 +1046,13 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { dur: 2~4, hp_pct: 20 }
   number_sources: { dur: http://122.51.0.76:8081/api/universal, hp_pct: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-03-21, text: 官方平衡记录（2026-02起）：增强4次、削弱0次；最近一次2026-03-21增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 4 次、削弱 0 次，最近一次是 2026-03-21 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10104":
   quality: sr
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { smI: 27.5~55, csshI: 20 }
   number_sources: { smI: http://122.51.0.76:8081/api/universal, csshI: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-06-10, text: 官方平衡记录（2026-02起）：增强1次、削弱1次；最近一次2026-06-10削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 1 次、削弱 1 次，最近一次是 2026-06-10 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: necrolyte, source: http://122.51.0.76:8081/icons/guides/1790615274497.png }
     - { hero: tusk, source: http://122.51.0.76:8081/icons/guides/1780502122236.png }
@@ -1111,12 +1061,11 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { shI: 2.5~5, csshI: 3 }
   number_sources: { shI: http://122.51.0.76:8081/api/universal, csshI: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 2 次，最近一次是 2026-03-21 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: 图鉴站22篇英雄一图流中有13篇把它列为推荐福佑, source: http://122.51.0.76:8081/api/hero-guides, date: 2026-09 }
     - { text: B站多个实战视频把放手一搏叠到39~49层（宙斯、飞机、炸弹人、火女）, source: https://www.bilibili.com/video/BV1qQ7T6aEbA/, date: 2026-06-22 }
     - { text: 炸弹人一图流：拿到放手一搏可从T2升到T1, source: http://122.51.0.76:8081/icons/guides/1780614669802.png, date: 2026-06-04 }
-  changes:
-    - { date: 2026-03-21, text: 官方平衡记录（2026-02起）：增强0次、削弱2次；最近一次2026-03-21削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: lina, source: http://122.51.0.76:8081/icons/guides/1776210154343.jpg }
     - { hero: queenofpain, source: http://122.51.0.76:8081/icons/guides/1776210186642.png }
@@ -1226,10 +1175,9 @@
   notes: 同名福佑存在多个id且一图流里同时出现在r/sr分区，品质对应关系待核实
   numbers: { hxgjgl: 17~34 }
   number_sources: { hxgjgl: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 4 次、削弱 0 次，最近一次是 2026-05-22 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: 图鉴站22篇英雄一图流中有7篇把它列为推荐福佑, source: http://122.51.0.76:8081/api/hero-guides, date: 2026-09 }
-  changes:
-    - { date: 2026-05-22, text: 官方平衡记录（2026-02起）：增强4次、削弱0次；最近一次2026-05-22增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: phantom_assassin, source: http://122.51.0.76:8081/icons/guides/1776403380549.png }
     - { hero: ember_spirit, source: http://122.51.0.76:8081/icons/guides/1776583999601.png }
@@ -1240,8 +1188,7 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { jnfw: 70~140 }
   number_sources: { jnfw: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-03-11, text: 官方平衡记录（2026-02起）：增强0次、削弱2次；最近一次2026-03-11削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 2 次，最近一次是 2026-03-11 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: kunkka, source: http://122.51.0.76:8081/icons/guides/1783247096791.png }
     - { hero: bloodseeker, source: http://122.51.0.76:8081/icons/guides/1784838452081.png }
@@ -1252,12 +1199,11 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { sfjl: 80~160, mfhf: 1 }
   number_sources: { sfjl: http://122.51.0.76:8081/api/universal, mfhf: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 1 次、削弱 0 次，最近一次是 2026-03-21 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: 图鉴站22篇英雄一图流中有6篇把它列为推荐福佑, source: http://122.51.0.76:8081/api/hero-guides, date: 2026-09 }
   wiki_notes:
     - { text: 图鉴改动记录：魔法恢复由5改为10, source: http://122.51.0.76:8081/api/universal, date: 2026-03-24 }
-  changes:
-    - { date: 2026-03-21, text: 官方平衡记录（2026-02起）：增强1次、削弱0次；最近一次2026-03-21增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: lina, source: http://122.51.0.76:8081/icons/guides/1776210154343.jpg }
     - { hero: queenofpain, source: http://122.51.0.76:8081/icons/guides/1776210186642.png }
@@ -1270,15 +1216,13 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { delay: 3, radius: 600, regen: 800~1600, cd: 60 }
   number_sources: { delay: http://122.51.0.76:8081/api/universal, radius: http://122.51.0.76:8081/api/universal, regen: http://122.51.0.76:8081/api/universal, cd: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-03-06, text: 官方平衡记录（2026-02起）：增强1次、削弱1次；最近一次2026-03-06削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 1 次、削弱 1 次，最近一次是 2026-03-06 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10116":
   quality: ssr
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { level_factor: 15~30, distance: 1500, dmg_add_distance: 100, dmg_add: 8 }
   number_sources: { level_factor: http://122.51.0.76:8081/api/universal, distance: http://122.51.0.76:8081/api/universal, dmg_add_distance: http://122.51.0.76:8081/api/universal, dmg_add: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-03-01, text: 官方平衡记录（2026-02起）：增强0次、削弱1次；最近一次2026-03-01削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 1 次，最近一次是 2026-03-01 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: lina, source: http://122.51.0.76:8081/icons/guides/1776210154343.jpg }
     - { hero: kunkka, source: http://122.51.0.76:8081/icons/guides/1783247096791.png }
@@ -1287,8 +1231,7 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { count: 1, hp_pct: 1.8~3.6 }
   number_sources: { count: http://122.51.0.76:8081/api/universal, hp_pct: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-03-11, text: 官方平衡记录（2026-02起）：增强0次、削弱2次；最近一次2026-03-11削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 2 次，最近一次是 2026-03-11 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: lina, source: http://122.51.0.76:8081/icons/guides/1776210154343.jpg }
     - { hero: queenofpain, source: http://122.51.0.76:8081/icons/guides/1776210186642.png }
@@ -1298,11 +1241,10 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { max_stack: 20 }
   number_sources: { max_stack: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 1 次、削弱 0 次，最近一次是 2026-05-22 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: 图鉴站22篇英雄一图流中有5篇把它列为推荐福佑, source: http://122.51.0.76:8081/api/hero-guides, date: 2026-09 }
     - { text: 血魔一图流：秒杀流刚需大招强化+马猴烧酒，之后别选技能福佑以免消耗它, source: http://122.51.0.76:8081/icons/guides/1784838452081.png, date: 2026-07-23 }
-  changes:
-    - { date: 2026-05-22, text: 官方平衡记录（2026-02起）：增强1次、削弱0次；最近一次2026-05-22增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: techies, source: http://122.51.0.76:8081/icons/guides/1780614669802.png }
     - { hero: hoodwink, source: http://122.51.0.76:8081/icons/guides/1783247078493.png }
@@ -1314,12 +1256,11 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { mana_pct_limit: 30, mana: 50, mana_pct: 2, dmg_pct: 330~660 }
   number_sources: { mana_pct_limit: http://122.51.0.76:8081/api/universal, mana: http://122.51.0.76:8081/api/universal, mana_pct: http://122.51.0.76:8081/api/universal, dmg_pct: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 7 次、削弱 0 次，最近一次是 2026-03-11 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   wiki_notes:
     - { text: 图鉴归类为“触发类福佑”（特效专家等加成触发类伤害）, source: http://122.51.0.76:8081/api/universal }
     - { text: 图鉴标注：仅远程英雄可获得, source: http://122.51.0.76:8081/api/universal }
     - { text: "图鉴改动记录：造成魔法消耗值伤害由[320~640]改为[330~660]", source: http://122.51.0.76:8081/api/universal, date: 2026-03-24 }
-  changes:
-    - { date: 2026-03-11, text: 官方平衡记录（2026-02起）：增强7次、削弱0次；最近一次2026-03-11增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10120":
   quality: sr
   quality_source: http://122.51.0.76:8081/api/universal
@@ -1328,7 +1269,7 @@
   wiki_notes:
     - { text: 图鉴标注：每队只能有一人持有, source: http://122.51.0.76:8081/api/universal }
   changes:
-    - { date: 2026-08-07, text: 官方更新：2026-08-07 由橙色下调为紫色, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-08-07, text: 由橙色下调为紫色, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10121":
   quality: r
   quality_source: http://122.51.0.76:8081/api/universal
@@ -1373,10 +1314,9 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { gold: 1600~3200 }
   number_sources: { gold: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 2 次、削弱 0 次，最近一次是 2026-03-01 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: 图鉴站22篇英雄一图流中有10篇把它列为推荐福佑, source: http://122.51.0.76:8081/api/hero-guides, date: 2026-09 }
-  changes:
-    - { date: 2026-03-01, text: 官方平衡记录（2026-02起）：增强2次、削弱0次；最近一次2026-03-01增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: necrolyte, source: http://122.51.0.76:8081/icons/guides/1790615274497.png }
     - { hero: ember_spirit, source: http://122.51.0.76:8081/icons/guides/1776583999601.png }
@@ -1393,10 +1333,9 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { gold: 550~1110, exp: 500, count: 10 }
   number_sources: { gold: http://122.51.0.76:8081/api/universal, exp: http://122.51.0.76:8081/api/universal, count: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 5 次、削弱 0 次，最近一次是 2026-03-21 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: 图鉴站22篇英雄一图流中有19篇把它列为推荐福佑, source: http://122.51.0.76:8081/api/hero-guides, date: 2026-09 }
-  changes:
-    - { date: 2026-03-21, text: 官方平衡记录（2026-02起）：增强5次、削弱0次；最近一次2026-03-21增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: necrolyte, source: http://122.51.0.76:8081/icons/guides/1790615274497.png }
     - { hero: tiny, source: http://122.51.0.76:8081/icons/guides/1775787563407.png }
@@ -1447,33 +1386,31 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { count_min: 1~4 }
   number_sources: { count_min: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-08-07, text: 官方平衡记录（2026-02起）：增强2次、削弱0次；最近一次2026-08-07增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 2 次、削弱 0 次，最近一次是 2026-08-07 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10129":
   quality: ssr
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { hp_pct: 30, dmg_pct: 30~60 }
   number_sources: { hp_pct: http://122.51.0.76:8081/api/universal, dmg_pct: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 2 次、削弱 0 次，最近一次是 2026-03-21 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   wiki_notes:
     - { text: 图鉴标注：仅力量英雄可获得, source: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-03-21, text: 官方平衡记录（2026-02起）：增强2次、削弱0次；最近一次2026-03-21增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10130":
   quality: r
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { im_dur: 3.5, pct: 14~28, hp_dur: 10 }
   number_sources: { im_dur: http://122.51.0.76:8081/api/universal, pct: http://122.51.0.76:8081/api/universal, hp_dur: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 3 次、削弱 0 次，最近一次是 2026-03-16 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   changes:
-    - { date: 2026-03-16, text: 官方平衡记录（2026-02起）：增强3次、削弱0次；最近一次2026-03-16增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-05-21, text: 官方更新：2026-05-21 品质下调, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-05-21, text: 品质下调, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10131":
   quality: r
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { spd_pct: 50, atk: 16~32, dur: 5 }
   number_sources: { spd_pct: http://122.51.0.76:8081/api/universal, atk: http://122.51.0.76:8081/api/universal, dur: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 9 次、削弱 0 次，最近一次是 2026-08-07 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   changes:
-    - { date: 2026-08-07, text: 官方平衡记录（2026-02起）：增强9次、削弱0次；最近一次2026-08-07增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-04-03, text: 官方更新：2026-04-03 品质下调一档, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-04-03, text: 品质下调一档, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: phantom_assassin, source: http://122.51.0.76:8081/icons/guides/1776403380549.png }
     - { hero: riki, source: http://122.51.0.76:8081/icons/guides/1780378971200.png }
@@ -1493,11 +1430,10 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { radius: 350, dmg: 30, atk_pct: 50~100 }
   number_sources: { radius: http://122.51.0.76:8081/api/universal, dmg: http://122.51.0.76:8081/api/universal, atk_pct: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 3 次，最近一次是 2026-03-11 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: 图鉴站22篇英雄一图流中有8篇把它列为推荐福佑, source: http://122.51.0.76:8081/api/hero-guides, date: 2026-09 }
     - { text: UP主在评论中确认：斗气能吃到一拳超人的效果, source: https://www.bilibili.com/video/BV15CQPBcEKt/, date: 2026-04-11 }
-  changes:
-    - { date: 2026-03-11, text: 官方平衡记录（2026-02起）：增强0次、削弱3次；最近一次2026-03-11削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: tiny, source: http://122.51.0.76:8081/icons/guides/1775787563407.png }
     - { hero: beastmaster, source: http://122.51.0.76:8081/icons/guides/1775888387842.png }
@@ -1531,21 +1467,21 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { pct: 25~75, radius: 700, dur: 6 }
   number_sources: { pct: http://122.51.0.76:8081/api/universal, radius: http://122.51.0.76:8081/api/universal, dur: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 7 次、削弱 0 次，最近一次是 2026-04-30 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   wiki_notes:
     - { text: 图鉴标注：仅近战英雄可获得, source: http://122.51.0.76:8081/api/universal }
   changes:
-    - { date: 2026-04-30, text: 官方平衡记录（2026-02起）：增强7次、削弱0次；最近一次2026-04-30增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-04-03, text: 官方更新：2026-04-03 品质下调一档, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-04-03, text: 品质下调一档, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10136":
   quality: ssr
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { atk_pct: 80~160 }
   number_sources: { atk_pct: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 2 次、削弱 1 次，最近一次是 2026-04-17 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   wiki_notes:
     - { text: 图鉴标注：仅近战英雄可获得, source: http://122.51.0.76:8081/api/universal }
   changes:
-    - { date: 2026-04-17, text: 官方平衡记录（2026-02起）：增强2次、削弱1次；最近一次2026-04-17增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-08-07, text: 官方更新：2026-08-07 由橙色下调为紫色, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-08-07, text: 由橙色下调为紫色, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: ember_spirit, source: http://122.51.0.76:8081/icons/guides/1776583999601.png }
 "10137":
@@ -1553,11 +1489,10 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { trigger_pct: 40, radius: 600, kb: 600, cd: 30~15 }
   number_sources: { trigger_pct: http://122.51.0.76:8081/api/universal, radius: http://122.51.0.76:8081/api/universal, kb: http://122.51.0.76:8081/api/universal, cd: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 1 次、削弱 0 次，最近一次是 2026-02-23 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   wiki_notes:
     - { text: 图鉴标注：仅远程英雄可获得, source: http://122.51.0.76:8081/api/universal }
     - { text: 图鉴标注：仅智力英雄可获得, source: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-02-23, text: 官方平衡记录（2026-02起）：增强1次、削弱0次；最近一次2026-02-23增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10138":
   quality: ssr
   quality_source: http://122.51.0.76:8081/api/universal
@@ -1572,13 +1507,13 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { extra_range: 200~400, hp_regen_pct: 1, mp_pct: 24 }
   number_sources: { extra_range: http://122.51.0.76:8081/api/universal, hp_regen_pct: http://122.51.0.76:8081/api/universal, mp_pct: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 4 次、削弱 0 次，最近一次是 2026-03-21 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   wiki_notes:
     - { text: 图鉴补充：信物对队友使用后跟随其身后；队友死后可自由行动，己方复活会被拉回队友身边, source: http://122.51.0.76:8081/api/universal }
   changes:
-    - { date: 2026-03-21, text: 官方平衡记录（2026-02起）：增强4次、削弱0次；最近一次2026-03-21增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-08-07, text: 官方更新：2026-08-07 由橙色下调为紫色, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-07-03, text: 官方改动：小强在苦命鸳鸯队友阵亡时不能再移动地堡, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-02-21, text: 官方：新增福佑（2月21日版本）, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-08-07, text: 由橙色下调为紫色, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-07-03, text: 小强在苦命鸳鸯队友阵亡时不能再移动地堡, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-02-21, text: 新增福佑, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: nyx_assassin, source: https://www.bilibili.com/video/BV1EsdLBmEnn/ }
 "10140":
@@ -1586,11 +1521,11 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { atk: 60~120, spd: 130, hp: 20, atk_spd: 100, max: 3 }
   number_sources: { atk: http://122.51.0.76:8081/api/universal, spd: http://122.51.0.76:8081/api/universal, hp: http://122.51.0.76:8081/api/universal, atk_spd: http://122.51.0.76:8081/api/universal, max: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 3 次、削弱 1 次，最近一次是 2026-05-22 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: B站视频简介：火猫无影拳触发的僵王会直接出现在目标脚下, source: https://www.bilibili.com/video/BV17Yhs61EDS/, date: 2026-09-22 }
   changes:
-    - { date: 2026-05-22, text: 官方平衡记录（2026-02起）：增强3次、削弱1次；最近一次2026-05-22削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-02-21, text: 官方：新增福佑（2月21日版本）, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-02-21, text: 新增福佑, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: lion, source: http://122.51.0.76:8081/icons/guides/1778030133350.png }
     - { hero: earthshaker, source: http://122.51.0.76:8081/icons/guides/1785007345284.png }
@@ -1601,11 +1536,10 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { armor: 4, atk_pct: 2~6, spd: 10, max: 5, dur: 5 }
   number_sources: { armor: http://122.51.0.76:8081/api/universal, atk_pct: http://122.51.0.76:8081/api/universal, spd: http://122.51.0.76:8081/api/universal, max: http://122.51.0.76:8081/api/universal, dur: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 4 次，最近一次是 2026-03-11 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: 图鉴站22篇英雄一图流中有6篇把它列为推荐福佑, source: http://122.51.0.76:8081/api/hero-guides, date: 2026-09 }
     - { text: B站视频简介：斗战神减甲配合高攻击的僵尸，输出很高（火猫）, source: https://www.bilibili.com/video/BV17Yhs61EDS/, date: 2026-09-22 }
-  changes:
-    - { date: 2026-03-11, text: 官方平衡记录（2026-02起）：增强0次、削弱4次；最近一次2026-03-11削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: slark, source: http://122.51.0.76:8081/icons/guides/1776210104249.png }
     - { hero: phantom_assassin, source: http://122.51.0.76:8081/icons/guides/1776403380549.png }
@@ -1619,23 +1553,21 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { factor: 4~8 }
   number_sources: { factor: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-04-17, text: 官方平衡记录（2026-02起）：增强0次、削弱2次；最近一次2026-04-17削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 2 次，最近一次是 2026-04-17 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10143":
   quality: sr
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { value: 6~12, max_stack: 10 }
   number_sources: { value: http://122.51.0.76:8081/api/universal, max_stack: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-03-11, text: 官方平衡记录（2026-02起）：增强0次、削弱3次；最近一次2026-03-11削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 3 次，最近一次是 2026-03-11 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10144":
   quality: ssr
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { radius: 700, stack: 100, pct: 12~24, max_stack: 700 }
   number_sources: { radius: http://122.51.0.76:8081/api/universal, stack: http://122.51.0.76:8081/api/universal, pct: http://122.51.0.76:8081/api/universal, max_stack: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 5 次，最近一次是 2026-03-11 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   changes:
-    - { date: 2026-03-11, text: 官方平衡记录（2026-02起）：增强0次、削弱5次；最近一次2026-03-11削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-04-30, text: 官方改动：已从不需要普攻的英雄的福佑池移除（5月4日生效）, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-04-30, text: 已从不需要普攻的英雄的福佑池移除（5月4日生效）, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: slark, source: http://122.51.0.76:8081/icons/guides/1776210104249.png }
     - { hero: legion_commander, source: http://122.51.0.76:8081/icons/guides/1780468246035.png }
@@ -1644,14 +1576,14 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { cd_min: 60~180, count: 3, pct: 8, self_pct: 1.5~3 }
   number_sources: { cd_min: http://122.51.0.76:8081/api/universal, count: http://122.51.0.76:8081/api/universal, pct: http://122.51.0.76:8081/api/universal, self_pct: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 1 次，最近一次是 2026-03-16 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: 图鉴站22篇英雄一图流中有5篇把它列为推荐福佑, source: http://122.51.0.76:8081/api/hero-guides, date: 2026-09 }
   wiki_notes:
     - { text: 图鉴标注：全场只能有一人持有, source: http://122.51.0.76:8081/api/universal }
   changes:
-    - { date: 2026-03-16, text: 官方平衡记录（2026-02起）：增强0次、削弱1次；最近一次2026-03-16削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-03-09, text: 官方改动：狼王内丹数量改为3颗, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-03-06, text: 官方：以橙色福佑身份新增, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-03-09, text: 狼王内丹数量改为3颗, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-03-06, text: 以橙色福佑身份新增, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: lina, source: http://122.51.0.76:8081/icons/guides/1776210154343.jpg }
     - { hero: riki, source: http://122.51.0.76:8081/icons/guides/1780378971200.png }
@@ -1686,30 +1618,30 @@
   wiki_notes:
     - { text: 图鉴标注：只能在3选1中选到，不会被随机给予, source: http://122.51.0.76:8081/api/universal }
   changes:
-    - { date: 2026-02-23, text: 官方：新增福佑（2月23日版本）, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-02-23, text: 新增福佑, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10149":
   quality: ssr
   quality_source: http://122.51.0.76:8081/api/universal
   wiki_notes:
     - { text: 图鉴补充：蓝色品质本身出现概率就偏低, source: http://122.51.0.76:8081/api/universal }
   changes:
-    - { date: 2026-02-23, text: 官方：新增福佑（2月23日版本）, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-02-23, text: 新增福佑, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10150":
   quality: sr
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { pct: 5~10, cd: 5 }
   number_sources: { pct: http://122.51.0.76:8081/api/universal, cd: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 7 次、削弱 0 次，最近一次是 2026-08-07 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   changes:
-    - { date: 2026-08-07, text: 官方平衡记录（2026-02起）：增强7次、削弱0次；最近一次2026-08-07增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-06-17, text: 官方改动：攻击建筑或被建筑攻击不再触发肉身成圣，数值相应提高, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-06-17, text: 攻击建筑或被建筑攻击不再触发肉身成圣，数值相应提高, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10151":
   quality: ssr
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { pct: 7.5~15, cd: 5 }
   number_sources: { pct: http://122.51.0.76:8081/api/universal, cd: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 4 次、削弱 0 次，最近一次是 2026-04-17 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   changes:
-    - { date: 2026-04-17, text: 官方平衡记录（2026-02起）：增强4次、削弱0次；最近一次2026-04-17增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-06-17, text: 官方改动：攻击建筑或被建筑攻击不再触发肉身成圣，数值相应提高, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-06-17, text: 攻击建筑或被建筑攻击不再触发肉身成圣，数值相应提高, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: ursa, source: http://122.51.0.76:8081/icons/guides/1780614643627.png }
 "10152":
@@ -1717,18 +1649,18 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { pct: 4.5~9, cd: 5 }
   number_sources: { pct: http://122.51.0.76:8081/api/universal, cd: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 5 次、削弱 0 次，最近一次是 2026-06-10 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   changes:
-    - { date: 2026-06-10, text: 官方平衡记录（2026-02起）：增强5次、削弱0次；最近一次2026-06-10增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-06-17, text: 官方改动：攻击建筑或被建筑攻击不再触发肉身成圣，数值相应提高, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-02-23, text: 官方：肉身成圣四件套于2月23日加入, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-06-17, text: 攻击建筑或被建筑攻击不再触发肉身成圣，数值相应提高, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-02-23, text: 肉身成圣四件套加入, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10153":
   quality: ssr
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { pct: 10~20, cd: 5 }
   number_sources: { pct: http://122.51.0.76:8081/api/universal, cd: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 1 次、削弱 0 次，最近一次是 2026-03-06 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   changes:
-    - { date: 2026-03-06, text: 官方平衡记录（2026-02起）：增强1次、削弱0次；最近一次2026-03-06增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-06-17, text: 官方改动：攻击建筑或被建筑攻击不再触发肉身成圣，数值相应提高, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-06-17, text: 攻击建筑或被建筑攻击不再触发肉身成圣，数值相应提高, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: necrolyte, source: http://122.51.0.76:8081/icons/guides/1790615274497.png }
     - { hero: ursa, source: http://122.51.0.76:8081/icons/guides/1780614643627.png }
@@ -1737,25 +1669,22 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { pct: 6~12, dur: 12, max: 7 }
   number_sources: { pct: http://122.51.0.76:8081/api/universal, dur: http://122.51.0.76:8081/api/universal, max: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-08-07, text: 官方平衡记录（2026-02起）：增强5次、削弱0次；最近一次2026-08-07增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 5 次、削弱 0 次，最近一次是 2026-08-07 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10155":
   quality: r
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { time: 2, pct: 30, hp_pct: 6~18, dmg_pct: 30, dur: 2, cd: 50 }
   number_sources: { time: http://122.51.0.76:8081/api/universal, pct: http://122.51.0.76:8081/api/universal, hp_pct: http://122.51.0.76:8081/api/universal, dmg_pct: http://122.51.0.76:8081/api/universal, dur: http://122.51.0.76:8081/api/universal, cd: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-03-21, text: 官方平衡记录（2026-02起）：增强2次、削弱0次；最近一次2026-03-21增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 2 次、削弱 0 次，最近一次是 2026-03-21 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10156":
   quality: ssr
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { hxgjgl: 10~30, hxgjbl: 100 }
   number_sources: { hxgjgl: http://122.51.0.76:8081/api/universal, hxgjbl: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 2 次、削弱 0 次，最近一次是 2026-04-24 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: 图鉴站22篇英雄一图流中有11篇把它列为推荐福佑, source: http://122.51.0.76:8081/api/hero-guides, date: 2026-09 }
     - { text: 法系英雄一图流（森海飞霞、血魔、猛犸）均注明：会心伤害需配法术会心, source: http://122.51.0.76:8081/icons/guides/1783247078493.png, date: 2026-07-05 }
-  changes:
-    - { date: 2026-04-24, text: 官方平衡记录（2026-02起）：增强2次、削弱0次；最近一次2026-04-24增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: lina, source: http://122.51.0.76:8081/icons/guides/1776210154343.jpg }
     - { hero: phantom_assassin, source: http://122.51.0.76:8081/icons/guides/1776403380549.png }
@@ -1790,8 +1719,7 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { hxgjgl: 13~39 }
   number_sources: { hxgjgl: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-05-22, text: 官方平衡记录（2026-02起）：增强4次、削弱0次；最近一次2026-05-22增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 4 次、削弱 0 次，最近一次是 2026-05-22 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: phantom_assassin, source: http://122.51.0.76:8081/icons/guides/1776403380549.png }
     - { hero: legion_commander, source: http://122.51.0.76:8081/icons/guides/1780468246035.png }
@@ -1799,10 +1727,9 @@
   notes: 同名福佑存在多个id且一图流里同时出现在r/sr分区，品质对应关系待核实
   numbers: { hxgjgl: 17~34 }
   number_sources: { hxgjgl: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 4 次、削弱 0 次，最近一次是 2026-05-22 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: 图鉴站22篇英雄一图流中有7篇把它列为推荐福佑, source: http://122.51.0.76:8081/api/hero-guides, date: 2026-09 }
-  changes:
-    - { date: 2026-05-22, text: 官方平衡记录（2026-02起）：增强4次、削弱0次；最近一次2026-05-22增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: phantom_assassin, source: http://122.51.0.76:8081/icons/guides/1776403380549.png }
     - { hero: ember_spirit, source: http://122.51.0.76:8081/icons/guides/1776583999601.png }
@@ -1813,10 +1740,9 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { armor: 6.5~13, dur: 8 }
   number_sources: { armor: http://122.51.0.76:8081/api/universal, dur: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 1 次，最近一次是 2026-03-11 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: 图鉴站22篇英雄一图流中有5篇把它列为推荐福佑, source: http://122.51.0.76:8081/api/hero-guides, date: 2026-09 }
-  changes:
-    - { date: 2026-03-11, text: 官方平衡记录（2026-02起）：增强0次、削弱1次；最近一次2026-03-11削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: ember_spirit, source: http://122.51.0.76:8081/icons/guides/1776583999601.png }
     - { hero: riki, source: http://122.51.0.76:8081/icons/guides/1780378971200.png }
@@ -1835,20 +1761,19 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { pct: 14~28, max: 5, dur: 5 }
   number_sources: { pct: http://122.51.0.76:8081/api/universal, max: http://122.51.0.76:8081/api/universal, dur: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-03-11, text: 官方平衡记录（2026-02起）：增强0次、削弱1次；最近一次2026-03-11削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 1 次，最近一次是 2026-03-11 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10163":
   quality: sr
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { count: 3, pct: 5~10 }
   number_sources: { count: http://122.51.0.76:8081/api/universal, pct: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 1 次、削弱 0 次，最近一次是 2026-03-21 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   wiki_notes:
     - { text: 图鉴归类为“触发类福佑”（特效专家等加成触发类伤害）, source: http://122.51.0.76:8081/api/universal }
     - { text: 图鉴标注：仅近战英雄可获得, source: http://122.51.0.76:8081/api/universal }
     - { text: 图鉴标注：仅远程英雄可获得, source: http://122.51.0.76:8081/api/universal }
   changes:
-    - { date: 2026-03-21, text: 官方平衡记录（2026-02起）：增强1次、削弱0次；最近一次2026-03-21增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-04-03, text: 官方更新：2026-04-03 品质下调一档, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-04-03, text: 品质下调一档, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10164":
   quality: ssr
   quality_source: http://122.51.0.76:8081/api/universal
@@ -1860,7 +1785,7 @@
   wiki_notes:
     - { text: 图鉴定位标签：核心, source: http://122.51.0.76:8081/api/universal }
   changes:
-    - { date: 2026-03-13, text: 官方：原“唯快不破”更名为替身攻击，同时新增了新的唯快不破, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-03-13, text: 原“唯快不破”更名为替身攻击，同时新增了新的唯快不破, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: slark, source: http://122.51.0.76:8081/icons/guides/1776210104249.png }
     - { hero: lina, source: http://122.51.0.76:8081/icons/guides/1776210154343.jpg }
@@ -1875,19 +1800,17 @@
     - { hero: slark, source: http://122.51.0.76:8081/icons/guides/1776210104249.png }
     - { hero: lina, source: http://122.51.0.76:8081/icons/guides/1776210154343.jpg }
 "10166":
-  changes:
-    - { date: 2026-04-10, text: 官方平衡记录（2026-02起）：增强2次、削弱0次；最近一次2026-04-10增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 2 次、削弱 0 次，最近一次是 2026-04-10 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10167":
   quality: sr
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { pct: 2.2~4.4, lose_pct: 50 }
   number_sources: { pct: http://122.51.0.76:8081/api/universal, lose_pct: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 9 次，最近一次是 2026-06-10 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: 图鉴站22篇英雄一图流中有5篇把它列为推荐福佑, source: http://122.51.0.76:8081/api/hero-guides, date: 2026-09 }
   wiki_notes:
     - { text: 图鉴定位标签：前排, source: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-06-10, text: 官方平衡记录（2026-02起）：增强0次、削弱9次；最近一次2026-06-10削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: necrolyte, source: http://122.51.0.76:8081/icons/guides/1790615274497.png }
     - { hero: tiny, source: http://122.51.0.76:8081/icons/guides/1775787563407.png }
@@ -1899,35 +1822,32 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { pct_threshold: 10, pct_bonus: 5, pct_bonus_max: 30~60 }
   number_sources: { pct_threshold: http://122.51.0.76:8081/api/universal, pct_bonus: http://122.51.0.76:8081/api/universal, pct_bonus_max: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-05-22, text: 官方平衡记录（2026-02起）：增强6次、削弱0次；最近一次2026-05-22增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 6 次、削弱 0 次，最近一次是 2026-05-22 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: hoodwink, source: http://122.51.0.76:8081/icons/guides/1783247078493.png }
     - { hero: bloodseeker, source: http://122.51.0.76:8081/icons/guides/1784838452081.png }
 "10169":
   quality: r
   quality_source: http://122.51.0.76:8081/api/universal
+  change_summary: { text: 2026-02 以来官方增强 7 次、削弱 0 次，最近一次是 2026-06-10 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   wiki_notes:
     - { text: 图鉴作者认为其护盾指令比较好用；每队只能有一人持有, source: http://122.51.0.76:8081/api/universal }
   changes:
-    - { date: 2026-06-10, text: 官方平衡记录（2026-02起）：增强7次、削弱0次；最近一次2026-06-10增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-04-03, text: 官方更新：2026-04-03 品质下调一档, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-05-21, text: 官方更新：2026-05-21 品质下调, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-03-05, text: 官方：新增福佑（3月5日版本）, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-04-03, text: 品质下调一档, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-05-21, text: 品质下调, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-03-05, text: 新增福佑, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10170":
   quality: r
   quality_source: http://122.51.0.76:8081/api/universal
-  changes:
-    - { date: 2026-03-21, text: 官方平衡记录（2026-02起）：增强0次、削弱1次；最近一次2026-03-21削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 1 次，最近一次是 2026-03-21 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10171":
   quality: sr
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { stack: 1800, pct: 210 }
   number_sources: { stack: http://122.51.0.76:8081/api/universal, pct: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 5 次、削弱 0 次，最近一次是 2026-03-21 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: 图鉴站22篇英雄一图流中有8篇把它列为推荐福佑, source: http://122.51.0.76:8081/api/hero-guides, date: 2026-09 }
-  changes:
-    - { date: 2026-03-21, text: 官方平衡记录（2026-02起）：增强5次、削弱0次；最近一次2026-03-21增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: necrolyte, source: http://122.51.0.76:8081/icons/guides/1790615274497.png }
     - { hero: tiny, source: http://122.51.0.76:8081/icons/guides/1775787563407.png }
@@ -1940,8 +1860,7 @@
 "10172":
   quality: r
   quality_source: http://122.51.0.76:8081/api/universal
-  changes:
-    - { date: 2026-03-21, text: 官方平衡记录（2026-02起）：增强0次、削弱1次；最近一次2026-03-21削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 1 次，最近一次是 2026-03-21 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10173":
   quality: sr
   quality_source: http://122.51.0.76:8081/api/universal
@@ -1974,8 +1893,7 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { pct: 40~80, max_stack: 1, atk_times: 3 }
   number_sources: { pct: http://122.51.0.76:8081/api/universal, max_stack: http://122.51.0.76:8081/api/universal, atk_times: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-05-22, text: 官方平衡记录（2026-02起）：增强3次、削弱0次；最近一次2026-05-22增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 3 次、削弱 0 次，最近一次是 2026-05-22 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10176":
   quality: ssr
   quality_source: http://122.51.0.76:8081/api/universal
@@ -1999,12 +1917,11 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { cd: 300~150 }
   number_sources: { cd: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 5 次，最近一次是 2026-05-22 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: 图鉴站22篇英雄一图流中有7篇把它列为推荐福佑, source: http://122.51.0.76:8081/api/hero-guides, date: 2026-09 }
   wiki_notes:
     - { text: 图鉴标注：每队只能有一人持有, source: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-05-22, text: 官方平衡记录（2026-02起）：增强0次、削弱5次；最近一次2026-05-22削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: necrolyte, source: http://122.51.0.76:8081/icons/guides/1790615274497.png }
     - { hero: queenofpain, source: http://122.51.0.76:8081/icons/guides/1776210186642.png }
@@ -2015,16 +1932,15 @@
     - { hero: bloodseeker, source: http://122.51.0.76:8081/icons/guides/1784838452081.png }
 "10178":
   changes:
-    - { date: 2026-03-21, text: 官方：新增福佑，同时有SP版本, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-03-21, text: 新增福佑，同时有SP版本, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10179":
   quality: sr
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { stay_time: 2, pct: 16~32, cs_pct: 12, range: 240 }
   number_sources: { stay_time: http://122.51.0.76:8081/api/universal, pct: http://122.51.0.76:8081/api/universal, cs_pct: http://122.51.0.76:8081/api/universal, range: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 1 次、削弱 2 次，最近一次是 2026-04-30 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   wiki_notes:
     - { text: 图鉴标注为小强（司夜刺客）专属, source: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-04-30, text: 官方平衡记录（2026-02起）：增强1次、削弱2次；最近一次2026-04-30削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: hoodwink, source: http://122.51.0.76:8081/icons/guides/1783247078493.png }
 "10180":
@@ -2032,10 +1948,9 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { cs_pct: 6~12, pct: 1, stay_time: 0.3 }
   number_sources: { cs_pct: http://122.51.0.76:8081/api/universal, pct: http://122.51.0.76:8081/api/universal, stay_time: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 1 次，最近一次是 2026-06-10 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: 图鉴站22篇英雄一图流中有5篇把它列为推荐福佑, source: http://122.51.0.76:8081/api/hero-guides, date: 2026-09 }
-  changes:
-    - { date: 2026-06-10, text: 官方平衡记录（2026-02起）：增强0次、削弱1次；最近一次2026-06-10削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: necrolyte, source: http://122.51.0.76:8081/icons/guides/1790615274497.png }
     - { hero: tiny, source: http://122.51.0.76:8081/icons/guides/1775787563407.png }
@@ -2048,14 +1963,13 @@
   numbers: { pct: 20~60, dur: 5, resist: 20 }
   number_sources: { pct: http://122.51.0.76:8081/api/universal, dur: http://122.51.0.76:8081/api/universal, resist: http://122.51.0.76:8081/api/universal }
   changes:
-    - { date: 2026-05-21, text: 官方更新：2026-05-21 品质下调, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-05-21, text: 品质下调, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10182":
   quality: r
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { coin: 20, pct: 1~20 }
   number_sources: { coin: http://122.51.0.76:8081/api/universal, pct: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-05-22, text: 官方平衡记录（2026-02起）：增强4次、削弱0次；最近一次2026-05-22增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 4 次、削弱 0 次，最近一次是 2026-05-22 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: phantom_assassin, source: http://122.51.0.76:8081/icons/guides/1776403380549.png }
     - { hero: ember_spirit, source: http://122.51.0.76:8081/icons/guides/1776583999601.png }
@@ -2066,7 +1980,7 @@
   numbers: { hp_pct: 12, dmg_pct: 12, pct: 30~60 }
   number_sources: { hp_pct: http://122.51.0.76:8081/api/universal, dmg_pct: http://122.51.0.76:8081/api/universal, pct: http://122.51.0.76:8081/api/universal }
   changes:
-    - { date: 2026-04-03, text: 官方：第二赛季开始时新增, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-04-03, text: 第二赛季开始时新增, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: necrolyte, source: http://122.51.0.76:8081/icons/guides/1790615274497.png }
 "10185":
@@ -2084,7 +1998,7 @@
   tips:
     - { text: 图鉴站22篇英雄一图流中有22篇把它列为推荐福佑, source: http://122.51.0.76:8081/api/hero-guides, date: 2026-09 }
   changes:
-    - { date: 2026-04-03, text: 官方：第二赛季开始时新增, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-04-03, text: 第二赛季开始时新增, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: necrolyte, source: http://122.51.0.76:8081/icons/guides/1790615274497.png }
     - { hero: tiny, source: http://122.51.0.76:8081/icons/guides/1775787563407.png }
@@ -2113,9 +2027,9 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { value: 6~12 }
   number_sources: { value: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 3 次，最近一次是 2026-08-07 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   changes:
-    - { date: 2026-08-07, text: 官方平衡记录（2026-02起）：增强0次、削弱3次；最近一次2026-08-07削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-04-03, text: 官方：第二赛季开始时新增, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-04-03, text: 第二赛季开始时新增, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: necrolyte, source: http://122.51.0.76:8081/icons/guides/1790615274497.png }
 "10188":
@@ -2124,13 +2038,13 @@
   wiki_notes:
     - { text: 图鉴标注：只能由“天胡 九莲宝灯”产出, source: http://122.51.0.76:8081/api/universal }
   changes:
-    - { date: 2026-03-13, text: 官方：只能由九莲宝灯产出，备用背包中的物品也生效且可主动使用, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-03-13, text: 只能由九莲宝灯产出，备用背包中的物品也生效且可主动使用, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10189":
   quality: ssr
   quality_source: http://122.51.0.76:8081/api/hero-guides
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 1 次，最近一次是 2026-03-11 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   changes:
-    - { date: 2026-03-11, text: 官方平衡记录（2026-02起）：增强0次、削弱1次；最近一次2026-03-11削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-03-06, text: 官方：以橙色福佑身份新增, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-03-06, text: 以橙色福佑身份新增, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: slark, source: http://122.51.0.76:8081/icons/guides/1776210104249.png }
     - { hero: lina, source: http://122.51.0.76:8081/icons/guides/1776210154343.jpg }
@@ -2139,9 +2053,9 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { ys: 160~320 }
   number_sources: { ys: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 1 次、削弱 0 次，最近一次是 2026-05-22 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   changes:
-    - { date: 2026-05-22, text: 官方平衡记录（2026-02起）：增强1次、削弱0次；最近一次2026-05-22增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-05-25, text: 官方改动：判断间隔调整为1秒, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-05-25, text: 判断间隔调整为1秒, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10194":
   quality: ssr
   quality_source: http://122.51.0.76:8081/api/universal
@@ -2152,9 +2066,9 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { dupi: 10, move: 10000, jirou: 7, pct: 1~2, csshI: 3, ms: 2 }
   number_sources: { dupi: http://122.51.0.76:8081/api/universal, move: http://122.51.0.76:8081/api/universal, jirou: http://122.51.0.76:8081/api/universal, pct: http://122.51.0.76:8081/api/universal, csshI: http://122.51.0.76:8081/api/universal, ms: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 1 次，最近一次是 2026-08-07 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   changes:
-    - { date: 2026-08-07, text: 官方平衡记录（2026-02起）：增强0次、削弱1次；最近一次2026-08-07削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-06-23, text: 官方：新增福佑，只出现在坦克、刺客、射手类英雄的福佑池, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-06-23, text: 新增福佑，只出现在坦克、刺客、射手类英雄的福佑池, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10200":
   quality: sr
   quality_source: http://122.51.0.76:8081/api/universal
@@ -2166,7 +2080,7 @@
   numbers: { tang_chance: 60, cs_pct: 8, tang_stack_max: 3 }
   number_sources: { tang_chance: http://122.51.0.76:8081/api/universal, cs_pct: http://122.51.0.76:8081/api/universal, tang_stack_max: http://122.51.0.76:8081/api/universal }
   changes:
-    - { date: 2026-05-21, text: 官方：5月21日新增的24个福佑之一, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-05-21, text: 新增的24个福佑之一, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: furion, source: http://122.51.0.76:8081/icons/guides/1790500798559.png }
     - { hero: magnataur, source: http://122.51.0.76:8081/icons/guides/1790501679501.png }
@@ -2180,9 +2094,9 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { chance: 30~50, radius: 600, cd: 1 }
   number_sources: { chance: http://122.51.0.76:8081/api/universal, radius: http://122.51.0.76:8081/api/universal, cd: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 3 次、削弱 0 次，最近一次是 2026-08-12 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   changes:
-    - { date: 2026-08-12, text: 官方平衡记录（2026-02起）：增强3次、削弱0次；最近一次2026-08-12增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-08-08, text: 官方改动：不能再转向敌方英雄，优先转向己方小兵, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-08-08, text: 不能再转向敌方英雄，优先转向己方小兵, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10205":
   quality: ssr
   quality_source: http://122.51.0.76:8081/api/universal
@@ -2193,8 +2107,7 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { sb: 24, spell_dodge_chance: 13~26, trigger_chance: 25, damage: 60 }
   number_sources: { sb: http://122.51.0.76:8081/api/universal, spell_dodge_chance: http://122.51.0.76:8081/api/universal, trigger_chance: http://122.51.0.76:8081/api/universal, damage: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-08-08, text: 官方平衡记录（2026-02起）：增强1次、削弱0次；最近一次2026-08-08增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 1 次、削弱 0 次，最近一次是 2026-08-08 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: necrolyte, source: http://122.51.0.76:8081/icons/guides/1790615274497.png }
 "10207":
@@ -2202,9 +2115,9 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { cd_reduce: 1.7~3.4 }
   number_sources: { cd_reduce: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 1 次、削弱 0 次，最近一次是 2026-08-12 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   changes:
-    - { date: 2026-08-12, text: 官方平衡记录（2026-02起）：增强1次、削弱0次；最近一次2026-08-12增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-08-10, text: 官方改动：改为每次施法随机减少一个冷却中技能的冷却，内置1秒CD, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-08-10, text: 改为每次施法随机减少一个冷却中技能的冷却，内置1秒CD, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: techies, source: https://www.bilibili.com/video/BV1H7er6rEp4/ }
     - { hero: windrunner, source: https://www.bilibili.com/video/BV1b3gM6PEBR/ }
@@ -2213,9 +2126,9 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { idle_time: 3, break_radius: 400, enemy_stay_time: 2.5~5 }
   number_sources: { idle_time: http://122.51.0.76:8081/api/universal, break_radius: http://122.51.0.76:8081/api/universal, enemy_stay_time: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 3 次、削弱 0 次，最近一次是 2026-08-12 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   changes:
-    - { date: 2026-08-12, text: 官方平衡记录（2026-02起）：增强3次、削弱0次；最近一次2026-08-12增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-08-07, text: 官方更新：2026-08-07 由橙色下调为紫色, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-08-07, text: 由橙色下调为紫色, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: necrolyte, source: http://122.51.0.76:8081/icons/guides/1790615274497.png }
     - { hero: furion, source: http://122.51.0.76:8081/icons/guides/1790500798559.png }
@@ -2224,20 +2137,20 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { damage_pct: 35, stun: 5, gold: 800~1600, heal_pct: 60, cd: 10 }
   number_sources: { damage_pct: http://122.51.0.76:8081/api/universal, stun: http://122.51.0.76:8081/api/universal, gold: http://122.51.0.76:8081/api/universal, heal_pct: http://122.51.0.76:8081/api/universal, cd: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 2 次、削弱 0 次，最近一次是 2026-08-08 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   changes:
-    - { date: 2026-08-08, text: 官方平衡记录（2026-02起）：增强2次、削弱0次；最近一次2026-08-08增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-08-12, text: 官方更新：2026-08-12 由橙色下调为紫色, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-08-12, text: 官方改动：品质由橙色降为紫色, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-08-12, text: 由橙色下调为紫色, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-08-12, text: 品质由橙色降为紫色, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10210":
   quality: sr
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { gold_per_level: 18~36 }
   number_sources: { gold_per_level: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 2 次、削弱 0 次，最近一次是 2026-08-12 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   wiki_notes:
     - { text: 图鉴作者评价为“废物福佑”，强度偏低, source: http://122.51.0.76:8081/api/universal }
   changes:
-    - { date: 2026-08-12, text: 官方平衡记录（2026-02起）：增强2次、削弱0次；最近一次2026-08-12增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-08-07, text: 官方更新：2026-08-07 由橙色下调为紫色, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-08-07, text: 由橙色下调为紫色, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10211":
   quality: ssr
   quality_source: http://122.51.0.76:8081/api/universal
@@ -2248,9 +2161,9 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { debuff_count: 13~26, clear_interval: 18 }
   number_sources: { debuff_count: http://122.51.0.76:8081/api/universal, clear_interval: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 1 次、削弱 0 次，最近一次是 2026-08-07 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   changes:
-    - { date: 2026-08-07, text: 官方平衡记录（2026-02起）：增强1次、削弱0次；最近一次2026-08-07增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-08-08, text: 官方更新：2026-08-08 下调为紫色, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-08-08, text: 下调为紫色, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10213":
   quality: ssr
   quality_source: http://122.51.0.76:8081/api/universal
@@ -2259,17 +2172,16 @@
   wiki_notes:
     - { text: 图鉴标注：每队只能有一人持有, source: http://122.51.0.76:8081/api/universal }
   changes:
-    - { date: 2026-08-10, text: 官方改动：改为团队限定福佑, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-08-08, text: 官方改动：发放的福佑礼盒不再受使用次数限制, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-08-10, text: 改为团队限定福佑, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-08-08, text: 发放的福佑礼盒不再受使用次数限制, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "10214":
   quality: ssr
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { duration: 2~4, damage_amp: 25 }
   number_sources: { duration: http://122.51.0.76:8081/api/universal, damage_amp: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 3 次、削弱 0 次，最近一次是 2026-08-12 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   wiki_notes:
     - { text: 图鉴定位标签：破坏, source: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-08-12, text: 官方平衡记录（2026-02起）：增强3次、削弱0次；最近一次2026-08-12增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "20001":
   quality: ssr
   quality_source: http://122.51.0.76:8081/api/universal
@@ -2280,7 +2192,7 @@
   wiki_notes:
     - { text: 图鉴归类为“技能福佑”（获得一个Dota2技能）, source: http://122.51.0.76:8081/api/universal }
   changes:
-    - { date: 2026-05-21, text: 官方：作为“Dota2技能类”通用福佑新增, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-05-21, text: 作为“Dota2技能类”通用福佑新增, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: necrolyte, source: http://122.51.0.76:8081/icons/guides/1790615274497.png }
     - { hero: tusk, source: http://122.51.0.76:8081/icons/guides/1780502122236.png }
@@ -2290,7 +2202,7 @@
   tips:
     - { text: 图鉴站22篇英雄一图流中有5篇把它列为推荐福佑, source: http://122.51.0.76:8081/api/hero-guides, date: 2026-09 }
   changes:
-    - { date: 2026-05-21, text: 官方：作为“Dota2技能类”通用福佑新增, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-05-21, text: 作为“Dota2技能类”通用福佑新增, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: necrolyte, source: http://122.51.0.76:8081/icons/guides/1790615274497.png }
     - { hero: legion_commander, source: http://122.51.0.76:8081/icons/guides/1780468246035.png }
@@ -2300,11 +2212,11 @@
 "20003":
   quality: ssr
   quality_source: http://122.51.0.76:8081/api/hero-guides
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 1 次，最近一次是 2026-06-10 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: B站评论：对钢戒/火甲类近战核很好用，魔抗堆多了会质变, source: https://www.bilibili.com/video/BV11ZVs62EK4/, date: 2026-05-31 }
   changes:
-    - { date: 2026-06-10, text: 官方平衡记录（2026-02起）：增强0次、削弱1次；最近一次2026-06-10削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-05-21, text: 官方：作为“Dota2技能类”通用福佑新增, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-05-21, text: 作为“Dota2技能类”通用福佑新增, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: necrolyte, source: http://122.51.0.76:8081/icons/guides/1790615274497.png }
     - { hero: legion_commander, source: http://122.51.0.76:8081/icons/guides/1780468246035.png }
@@ -2314,6 +2226,7 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { lv: 2 }
   number_sources: { lv: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 2 次，最近一次是 2026-08-07 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: 图鉴站22篇英雄一图流中有6篇把它列为推荐福佑, source: http://122.51.0.76:8081/api/hero-guides, date: 2026-09 }
     - { text: B站评论：冷却好了会自动释放，没人可打时放掉会影响平A输出, source: https://www.bilibili.com/video/BV11ZVs62EK4/, date: 2026-05-29 }
@@ -2321,8 +2234,7 @@
     - { text: 图鉴标注：仅近战英雄可获得, source: http://122.51.0.76:8081/api/universal }
     - { text: 图鉴归类为“技能福佑”（获得一个Dota2技能）, source: http://122.51.0.76:8081/api/universal }
   changes:
-    - { date: 2026-08-07, text: 官方平衡记录（2026-02起）：增强0次、削弱2次；最近一次2026-08-07削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-05-21, text: 官方：作为“Dota2技能类”通用福佑新增, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-05-21, text: 作为“Dota2技能类”通用福佑新增, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: necrolyte, source: http://122.51.0.76:8081/icons/guides/1790615274497.png }
     - { hero: tusk, source: http://122.51.0.76:8081/icons/guides/1780502122236.png }
@@ -2333,9 +2245,9 @@
 "20006":
   quality: sr
   quality_source: http://122.51.0.76:8081/api/hero-guides
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 1 次，最近一次是 2026-08-07 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   changes:
-    - { date: 2026-08-07, text: 官方平衡记录（2026-02起）：增强0次、削弱1次；最近一次2026-08-07削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-05-21, text: 官方：作为“Dota2技能类”通用福佑新增, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-05-21, text: 作为“Dota2技能类”通用福佑新增, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: legion_commander, source: http://122.51.0.76:8081/icons/guides/1780468246035.png }
     - { hero: tusk, source: http://122.51.0.76:8081/icons/guides/1780502122236.png }
@@ -2345,15 +2257,15 @@
   quality: sr
   quality_source: http://122.51.0.76:8081/api/hero-guides
   changes:
-    - { date: 2026-05-21, text: 官方：作为“Dota2技能类”通用福佑新增, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-05-21, text: 作为“Dota2技能类”通用福佑新增, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: earthshaker, source: http://122.51.0.76:8081/icons/guides/1785007345284.png }
 "20008":
   quality: sr
   quality_source: http://122.51.0.76:8081/api/hero-guides
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 1 次，最近一次是 2026-08-07 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   changes:
-    - { date: 2026-08-07, text: 官方平衡记录（2026-02起）：增强0次、削弱1次；最近一次2026-08-07削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-05-21, text: 官方：作为“Dota2技能类”通用福佑新增, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-05-21, text: 作为“Dota2技能类”通用福佑新增, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: legion_commander, source: http://122.51.0.76:8081/icons/guides/1780468246035.png }
     - { hero: tusk, source: http://122.51.0.76:8081/icons/guides/1780502122236.png }
@@ -2362,16 +2274,16 @@
 "20009":
   quality: sr
   quality_source: http://122.51.0.76:8081/api/hero-guides
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 1 次，最近一次是 2026-08-07 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   changes:
-    - { date: 2026-08-07, text: 官方平衡记录（2026-02起）：增强0次、削弱1次；最近一次2026-08-07削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-05-21, text: 官方：作为“Dota2技能类”通用福佑新增, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-05-21, text: 作为“Dota2技能类”通用福佑新增, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: earthshaker, source: http://122.51.0.76:8081/icons/guides/1785007345284.png }
 "20011":
   tips:
     - { text: B站评论：修补匠拿到奔袭冲撞会变得极强, source: https://www.bilibili.com/video/BV11ZVs62EK4/, date: 2026-05-29 }
   changes:
-    - { date: 2026-05-21, text: 官方：作为“Dota2技能类”通用福佑新增, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-05-21, text: 作为“Dota2技能类”通用福佑新增, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: tinker, source: https://www.bilibili.com/video/BV1fmjd6vEjT/ }
 "20012":
@@ -2387,47 +2299,47 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { atk_range: 75, base_dmg: 100, dmg_per_kill: 18~36, kill_hero: 10, cd: 3 }
   number_sources: { atk_range: http://122.51.0.76:8081/api/universal, base_dmg: http://122.51.0.76:8081/api/universal, dmg_per_kill: http://122.51.0.76:8081/api/universal, kill_hero: http://122.51.0.76:8081/api/universal, cd: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 2 次、削弱 0 次，最近一次是 2026-08-07 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: 牛头一图流：灵魂痛击一刀流需在5级前拿到, source: http://122.51.0.76:8081/icons/guides/1785007345284.png, date: 2026-07-25 }
   wiki_notes:
     - { text: 图鉴标注：仅近战英雄可获得, source: http://122.51.0.76:8081/api/universal }
   changes:
-    - { date: 2026-08-07, text: 官方平衡记录（2026-02起）：增强2次、削弱0次；最近一次2026-08-07增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-05-21, text: 官方：5月21日新增的24个福佑之一, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-05-21, text: 新增的24个福佑之一, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: earthshaker, source: http://122.51.0.76:8081/icons/guides/1785007345284.png }
 "21002":
   quality: ssr
   quality_source: http://122.51.0.76:8081/api/hero-guides
+  change_summary: { text: 2026-02 以来官方增强 1 次、削弱 0 次，最近一次是 2026-08-07 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   changes:
-    - { date: 2026-08-07, text: 官方平衡记录（2026-02起）：增强1次、削弱0次；最近一次2026-08-07增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-05-21, text: 官方：5月21日新增的24个福佑之一, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-05-21, text: 新增的24个福佑之一, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: tusk, source: http://122.51.0.76:8081/icons/guides/1780502122236.png }
 "21004":
+  change_summary: { text: 2026-02 以来官方增强 1 次、削弱 0 次，最近一次是 2026-08-07 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   tips:
     - { text: B站实战标题：蓝胖配瑶瑶公主，队友获得约3万护盾和持续BKB, source: https://www.bilibili.com/video/BV1pBG76WEJy/, date: 2026-05-24 }
   changes:
-    - { date: 2026-08-07, text: 官方平衡记录（2026-02起）：增强1次、削弱0次；最近一次2026-08-07增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-05-25, text: 官方修复：解除附身时减益免疫未正确结束的问题, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-05-21, text: 官方：5月21日新增的24个福佑之一, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-05-25, text: 修复：解除附身时减益免疫未正确结束的问题, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-05-21, text: 新增的24个福佑之一, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: ogre_magi, source: https://www.bilibili.com/video/BV1pBG76WEJy/ }
 "21005":
+  change_summary: { text: 2026-02 以来官方增强 3 次、削弱 0 次，最近一次是 2026-08-07 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   changes:
-    - { date: 2026-08-07, text: 官方平衡记录（2026-02起）：增强3次、削弱0次；最近一次2026-08-07增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-05-25, text: 官方更新：2026-05-25 下调为蓝色, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-05-25, text: 官方改动：品质下调为蓝色, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-05-25, text: 下调为蓝色, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-05-25, text: 品质下调为蓝色, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 "21006":
   quality: sr
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { limit_pct: 45, pct: 8, ys: 15~30, duration: 5, recover_pct: 1.9 }
   number_sources: { limit_pct: http://122.51.0.76:8081/api/universal, pct: http://122.51.0.76:8081/api/universal, ys: http://122.51.0.76:8081/api/universal, duration: http://122.51.0.76:8081/api/universal, recover_pct: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 1 次，最近一次是 2026-06-10 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   wiki_notes:
     - { text: 图鉴作者：不是无脑拿，对面爆发高或有瘟疫法师时优先级低, source: http://122.51.0.76:8081/api/universal }
   changes:
-    - { date: 2026-06-10, text: 官方平衡记录（2026-02起）：增强0次、削弱1次；最近一次2026-06-10削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-05-21, text: 官方：5月21日新增的24个福佑之一, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-05-21, text: 新增的24个福佑之一, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   recommended_heroes:
     - { hero: necrolyte, source: http://122.51.0.76:8081/icons/guides/1790615274497.png }
     - { hero: tusk, source: http://122.51.0.76:8081/icons/guides/1780502122236.png }
@@ -4186,39 +4098,33 @@
   numbers: { v1: 70~140, v2: 400 }
   number_sources: { v1: http://122.51.0.76:8081/api/hero, v2: http://122.51.0.76:8081/api/hero }
 10004a:
-  changes:
-    - { date: 2026-03-16, text: 官方平衡记录（2026-02起）：增强2次、削弱0次；最近一次2026-03-16增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 2 次、削弱 0 次，最近一次是 2026-03-16 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 10005a:
   quality: ssr
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { gjjl: 350~700, smI: 15 }
   number_sources: { gjjl: http://122.51.0.76:8081/api/universal, smI: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 1 次、削弱 0 次，最近一次是 2026-05-22 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   wiki_notes:
     - { text: 图鉴标注：仅近战英雄可获得, source: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-05-22, text: 官方平衡记录（2026-02起）：增强1次、削弱0次；最近一次2026-05-22增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 10027a:
   quality: ssr
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { shI: 26~52, smI: 18, csshI: 12 }
   number_sources: { shI: http://122.51.0.76:8081/api/universal, smI: http://122.51.0.76:8081/api/universal, csshI: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 1 次，最近一次是 2026-02-23 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   wiki_notes:
     - { text: 图鉴定位标签：核心/先手/法师, source: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-02-23, text: 官方平衡记录（2026-02起）：增强0次、削弱1次；最近一次2026-02-23削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 10029a:
   quality: ssr
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { fhsj: 17~34, csshI: 14 }
   number_sources: { fhsj: http://122.51.0.76:8081/api/universal, csshI: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-03-11, text: 官方平衡记录（2026-02起）：增强4次、削弱0次；最近一次2026-03-11增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 4 次、削弱 0 次，最近一次是 2026-03-11 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 10040a:
-  changes:
-    - { date: 2026-02-23, text: 官方平衡记录（2026-02起）：增强0次、削弱1次；最近一次2026-02-23削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 1 次，最近一次是 2026-02-23 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 10041a:
-  changes:
-    - { date: 2026-04-17, text: 官方平衡记录（2026-02起）：增强1次、削弱0次；最近一次2026-04-17增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 1 次、削弱 0 次，最近一次是 2026-04-17 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 10042a:
   quality: r
   quality_source: http://122.51.0.76:8081/api/universal
@@ -4232,22 +4138,18 @@
   wiki_notes:
     - { text: 图鉴定位标签：前排/法师, source: http://122.51.0.76:8081/api/universal }
 10042c:
-  changes:
-    - { date: 2026-03-06, text: 官方平衡记录（2026-02起）：增强1次、削弱1次；最近一次2026-03-06增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 1 次、削弱 1 次，最近一次是 2026-03-06 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 10042d:
-  changes:
-    - { date: 2026-03-16, text: 官方平衡记录（2026-02起）：增强1次、削弱0次；最近一次2026-03-16增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 1 次、削弱 0 次，最近一次是 2026-03-16 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 10043a:
   quality: r
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { jnzq: 18~36, mfI: 20 }
   number_sources: { jnzq: http://122.51.0.76:8081/api/universal, mfI: http://122.51.0.76:8081/api/universal }
 10044a:
-  changes:
-    - { date: 2026-04-30, text: 官方平衡记录（2026-02起）：增强3次、削弱0次；最近一次2026-04-30增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 3 次、削弱 0 次，最近一次是 2026-04-30 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 10046a:
-  changes:
-    - { date: 2026-03-06, text: 官方平衡记录（2026-02起）：增强0次、削弱1次；最近一次2026-03-06削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 1 次，最近一次是 2026-03-06 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 10046b:
   quality: sr
   quality_source: http://122.51.0.76:8081/api/universal
@@ -4292,25 +4194,22 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { gjjl: 210~420, gjI: 20 }
   number_sources: { gjjl: http://122.51.0.76:8081/api/universal, gjI: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-05-22, text: 官方平衡记录（2026-02起）：增强1次、削弱0次；最近一次2026-05-22增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 1 次、削弱 0 次，最近一次是 2026-05-22 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 10051a:
   quality: sr
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { gjjl: 210~420, jnfwI: 15 }
   number_sources: { gjjl: http://122.51.0.76:8081/api/universal, jnfwI: http://122.51.0.76:8081/api/universal }
 10052a:
-  changes:
-    - { date: 2026-04-17, text: 官方平衡记录（2026-02起）：增强2次、削弱0次；最近一次2026-04-17增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 2 次、削弱 0 次，最近一次是 2026-04-17 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 10069a:
   quality: ssr
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { mxI: 30, smI: 21~42, mk: 15, hj: 8, gsI: 50, ysI: 12 }
   number_sources: { mxI: http://122.51.0.76:8081/api/universal, smI: http://122.51.0.76:8081/api/universal, mk: http://122.51.0.76:8081/api/universal, hj: http://122.51.0.76:8081/api/universal, gsI: http://122.51.0.76:8081/api/universal, ysI: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 1 次，最近一次是 2026-04-17 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   wiki_notes:
     - { text: 图鉴定位标签：前排, source: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-04-17, text: 官方平衡记录（2026-02起）：增强0次、削弱1次；最近一次2026-04-17削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 10094a:
   quality: r
   quality_source: http://122.51.0.76:8081/api/universal
@@ -4331,8 +4230,7 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { smI: 16~32, mk: 12, hj: 15 }
   number_sources: { smI: http://122.51.0.76:8081/api/universal, mk: http://122.51.0.76:8081/api/universal, hj: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-02-23, text: 官方平衡记录（2026-02起）：增强1次、削弱0次；最近一次2026-02-23增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 1 次、削弱 0 次，最近一次是 2026-02-23 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 10099a:
   quality: r
   quality_source: http://122.51.0.76:8081/api/universal
@@ -4345,29 +4243,25 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { jnfw: 90~180, sfjl: 150 }
   number_sources: { jnfw: http://122.51.0.76:8081/api/universal, sfjl: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-03-06, text: 官方平衡记录（2026-02起）：增强0次、削弱1次；最近一次2026-03-06削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 1 次，最近一次是 2026-03-06 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 10143a:
   quality: sr
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { value: 1.8~3.6 }
   number_sources: { value: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 5 次，最近一次是 2026-04-30 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   wiki_notes:
     - { text: 图鉴标注：仅力量英雄可获得, source: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-04-30, text: 官方平衡记录（2026-02起）：增强0次、削弱5次；最近一次2026-04-30削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 10143b:
-  changes:
-    - { date: 2026-03-06, text: 官方平衡记录（2026-02起）：增强0次、削弱2次；最近一次2026-03-06削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 2 次，最近一次是 2026-03-06 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 10143c:
   quality: sr
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { value: 1.5~3 }
   number_sources: { value: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 0 次、削弱 3 次，最近一次是 2026-04-17 削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   wiki_notes:
     - { text: 图鉴标注：仅智力英雄可获得, source: http://122.51.0.76:8081/api/universal }
-  changes:
-    - { date: 2026-04-17, text: 官方平衡记录（2026-02起）：增强0次、削弱3次；最近一次2026-04-17削弱, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 10148a:
   notes: 图鉴里同名条目有多种颜色（r/sr/ssr），无法确定对应哪个id
   numbers: { pct: 15~30 }
@@ -4375,7 +4269,7 @@
   wiki_notes:
     - { text: 图鉴标注：只能在3选1中选到，不会被随机给予, source: http://122.51.0.76:8081/api/universal }
   changes:
-    - { date: 2026-02-23, text: 官方：新增福佑（2月23日版本）, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-02-23, text: 新增福佑, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 10148b:
   notes: 图鉴里同名条目有多种颜色（r/sr/ssr），无法确定对应哪个id
   numbers: { pct: 15~30 }
@@ -4383,7 +4277,7 @@
   wiki_notes:
     - { text: 图鉴标注：只能在3选1中选到，不会被随机给予, source: http://122.51.0.76:8081/api/universal }
   changes:
-    - { date: 2026-02-23, text: 官方：新增福佑（2月23日版本）, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-02-23, text: 新增福佑, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 10178a:
   quality: r
   quality_source: http://122.51.0.76:8081/api/universal
@@ -4394,11 +4288,11 @@
   quality_source: http://122.51.0.76:8081/api/universal
   numbers: { count: 2 }
   number_sources: { count: http://122.51.0.76:8081/api/universal }
+  change_summary: { text: 2026-02 以来官方增强 1 次、削弱 0 次，最近一次是 2026-04-24 增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
   wiki_notes:
     - { text: 图鉴标注：只能由“天胡 九莲宝灯”产出, source: http://122.51.0.76:8081/api/universal }
   changes:
-    - { date: 2026-04-24, text: 官方平衡记录（2026-02起）：增强1次、削弱0次；最近一次2026-04-24增强, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
-    - { date: 2026-03-13, text: 官方：只能由九莲宝灯产出，获取时随机获得2个橙色福佑, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
+    - { date: 2026-03-13, text: 只能由九莲宝灯产出，获取时随机获得2个橙色福佑, source: https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese }
 100049a:
   quality: r
   quality_source: http://122.51.0.76:8081/api/hero

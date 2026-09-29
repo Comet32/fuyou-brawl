@@ -60,7 +60,7 @@ try {
   visit(doc, {
     Pair(_, pair) {
       const key = String((pair.key as { value?: unknown })?.value ?? '');
-      if ((key === 'numbers' || key === 'number_sources') && isMap(pair.value)) pair.value.flow = true;
+      if (['numbers', 'number_sources', 'change_summary'].includes(key) && isMap(pair.value)) pair.value.flow = true;
       if (['tips', 'wiki_notes', 'changes', 'recommended_heroes', 'quality_conflict'].includes(key) && isSeq(pair.value)) {
         for (const item of pair.value.items) if (isMap(item)) item.flow = true;
       }
@@ -79,7 +79,7 @@ try {
   console.log(`  数值 ${count((e) => Object.keys(e.numbers ?? {}).length)} 项，覆盖 ${entries.filter((e) => e.numbers).length} 个福佑`);
   console.log(`  心得 ${count((e) => e.tips?.length ?? 0)} 条，覆盖 ${entries.filter((e) => e.tips).length} 个福佑`);
   console.log(`  图鉴备注 ${count((e) => e.wiki_notes?.length ?? 0)} 条，覆盖 ${entries.filter((e) => e.wiki_notes).length} 个福佑`);
-  console.log(`  官方改动 ${count((e) => e.changes?.length ?? 0)} 条，覆盖 ${entries.filter((e) => e.changes).length} 个福佑`);
+  console.log(`  官方改动 ${count((e) => e.changes?.length ?? 0)} 条，覆盖 ${entries.filter((e) => e.changes).length} 个福佑；平衡统计 ${entries.filter((e) => e.change_summary).length} 条`);
   console.log(`  推荐英雄 ${count((e) => e.recommended_heroes?.length ?? 0)} 个，覆盖 ${entries.filter((e) => e.recommended_heroes).length} 个福佑`);
   console.log(`  品质备注 ${entries.filter((e) => e.notes).length} 条`);
   const manualWins = merged.filter((b) => b.quality_source === 'manual' && out[b.id]?.quality).length;

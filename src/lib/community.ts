@@ -126,7 +126,9 @@ export function convertNote(
     }
     const date = normalizeTipDate(t.date);
     const kind = tipKind(t.source);
-    if (kind === 'change' && date) changes.push({ date, text, source: t.source });
+    const summary = kind === 'change' ? summarizeBalance(text) : undefined;
+    if (summary) entry.change_summary = { text: summary, source: t.source };
+    else if (kind === 'change' && date) changes.push({ date, text: normalizeChangeText(text, date), source: t.source });
     // An undated changelog line cannot go into the dated history; keep it as a note.
     else if (kind === 'change' || kind === 'wiki') wikiNotes.push({ text, source: t.source, ...(date && { date }) });
     else tips.push({ text, source: t.source, ...(date && { date }) });
@@ -204,6 +206,37 @@ export function parseRange(value: number | string): [string, string] | undefined
   if (typeof value !== 'string') return undefined;
   const m = RANGE_RE.exec(value);
   return m ? [m[1], m[2]] : undefined;
+}
+
+const BALANCE_RE = /^官方平衡记录（(\d{4}-\d{2})起）：增强(\d+)次、削弱(\d+)次；最近一次(\d{4}-\d{2}-\d{2})(增强|削弱)$/;
+
+/** The research's per-blessing balance statistics, rephrased as one lead line; undefined for other text. */
+function summarizeBalance(text: string): string | undefined {
+  const m = BALANCE_RE.exec(text);
+  if (!m) return undefined;
+  const [, since, buffs, nerfs, last, kind] = m;
+  return `${since} 以来官方增强 ${buffs} 次、削弱 ${nerfs} 次，最近一次是 ${last} ${kind}`;
+}
+
+const PREFIX_RE = /^官方(改动|更新|修复|举例)?[：:]\s*/;
+
+/**
+ * A changelog line as a history entry: without the 官方 prefix (the section already says so, but a
+ * 修复 / 举例 kind is kept) and without repeating the entry's own date. Other dates stay.
+ */
+export function normalizeChangeText(text: string, date: string): string {
+  let out = text.replace(PREFIX_RE, (_, kind: string | undefined) =>
+    kind === '修复' || kind === '举例' ? `${kind}：` : '',
+  );
+  const [, m, d] = date.split('-').map(Number);
+  if (d) {
+    const cn = `${m}月${d}日`;
+    out = out
+      .replace(date, '')
+      .replace(new RegExp(`（${cn}版本）`), '')
+      .replace(new RegExp(`于?${cn}`), '');
+  }
+  return out.replace(/\s{2,}/g, ' ').trim();
 }
 
 /** Band caption for disagreeing sources, e.g. "品质说法不一 · 图鉴紫 / 一图流蓝". */

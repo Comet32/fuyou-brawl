@@ -43,6 +43,7 @@ const communityTip = z.strictObject({ text: tipText, source: httpUrl, date: tipD
 const recommendedHero = z.strictObject({ hero: slug, source: httpUrl });
 // A dated official change, e.g. from the Steam workshop changelog.
 const communityChange = z.strictObject({ date: tipDate, text: tipText, source: httpUrl });
+const changeSummary = z.strictObject({ text: tipText, source: httpUrl });
 // One source's claim about a quality, kept when sources disagree.
 const qualityClaim = z.strictObject({ quality, source: httpUrl });
 
@@ -90,6 +91,8 @@ export const blessingCommunitySchema = z.strictObject({
   wiki_notes: z.array(communityTip).optional(),
   // Official changes from the Steam changelog.
   changes: z.array(communityChange).optional(),
+  // One-line statistics of the official balance changes (count of buffs / nerfs).
+  change_summary: changeSummary.optional(),
   recommended_heroes: z.array(recommendedHero).optional(),
   // Every claim when sources disagree on the quality (quality is then left unset).
   quality_conflict: z.array(qualityClaim).optional(),
@@ -128,6 +131,8 @@ export const blessingSchema = z.object({
   wiki_notes: z.array(communityTip).default([]),
   /** Official changes from the community research, shown in 改动历史 next to `history`. */
   changes: z.array(communityChange).default([]),
+  /** Lead line above 改动历史: how often it was buffed / nerfed. */
+  change_summary: changeSummary.optional(),
   /** Conflicting quality claims; only kept while the quality is unknown. */
   quality_conflict: z.array(qualityClaim).default([]),
   /** Heroes the community recommends this blessing for (separate from the automatic hero links). */

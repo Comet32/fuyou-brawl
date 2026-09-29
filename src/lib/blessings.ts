@@ -65,6 +65,7 @@ export function mergeBlessings(
       tips: [...(o.tips ?? []), ...(c.tips ?? [])].map((t) => ({ ...t })),
       wiki_notes: (c.wiki_notes ?? []).map((t) => ({ ...t })),
       changes: (c.changes ?? []).map((ch) => ({ ...ch })),
+      change_summary: c.change_summary ? { ...c.change_summary } : undefined,
       quality_conflict: quality === null ? (c.quality_conflict ?? []).map((q) => ({ ...q })) : [],
       recommended_heroes: (c.recommended_heroes ?? []).map((r) => ({ ...r })),
     };

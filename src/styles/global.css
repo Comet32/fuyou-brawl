@@ -1976,6 +1976,25 @@ a.tag:hover {
   line-height: 20px;
   cursor: help;
 }
+/* An empty section: its strap and one short line side by side. */
+.empty-sec {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 14px;
+}
+.empty-sec p {
+  margin: 0;
+  color: var(--ink-2);
+  font-size: 14px;
+}
+.hist-lead {
+  max-width: 70ch;
+  margin: 0 0 4px;
+  color: var(--ink-2);
+  font-size: 15px;
+}
+.hist-lead .hist-src,
 .history .hist-src {
   display: inline-flex;
   align-items: center;
@@ -1986,6 +2005,7 @@ a.tag:hover {
   font-weight: 700;
   white-space: nowrap;
 }
+.hist-lead .hist-src:hover,
 .history .hist-src:hover {
   color: var(--gold-ink);
 }

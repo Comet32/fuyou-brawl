@@ -73,7 +73,7 @@ const newBuildUrl = `${REPO_URL}/new/main/src/content/builds?filename=${hero.id}
         </ul>
       ) : (
         <p class="group-empty">
-          还没有关联到{hero.name}的英雄福佑。关联来自技能名匹配，也可以在 blessings.overrides.yaml 里用 heroes 手动指定。
+          还没有关联到{hero.name}的英雄福佑。关联按技能名自动匹配，漏掉了可以在 GitHub 上补充。
         </p>
       )
     }
@@ -141,7 +141,7 @@ const newBuildUrl = `${REPO_URL}/new/main/src/content/builds?filename=${hero.id}
     !build && (
       <div class="empty-state">
         <h2>这个英雄的搭配攻略待补充</h2>
-        <p>搭配写在 src/content/builds/{hero.id}.md，列出推荐福佑、出装和思路。</p>
+        <p>知道{hero.name}怎么玩？写下推荐福佑、出装和思路，帮其他玩家少走弯路。</p>
         <a class="btn bar" href={newBuildUrl} target="_blank" rel="noopener">
           <Icon name="edit" />在 GitHub 上补充
         </a>

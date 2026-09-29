@@ -47,18 +47,36 @@ function shorten(label: string, from: 'before' | 'after'): string {
 // "（CD: {cd} 秒）": a short name right before a colon labels the value after it.
 const COLON_LABEL_RE = /(?:^|[\s。；;，,（()）])([^\s。；;，,（()）：:]{1,4})\s*[：:]\s*$/;
 
-function before(text: string): { label: string; listItem: boolean } {
+interface Before {
+  label: string;
+  listItem: boolean;
+  /** Words of change cut off the label's end ("永久增加"), or a sign turned into words. */
+  suffix: string;
+  /** The clause's last words once its verb is removed ("额外" in "的敌人额外造成"). */
+  context: string;
+}
+
+const CJK_ONLY_RE = /[^\u4e00-\u9fff]/g;
+
+function before(text: string): Before {
+  const none: Before = { label: '', listItem: false, suffix: '', context: '' };
   const parts = text.split(BOUNDARY_RE);
   const clause = parts[parts.length - 1];
   if (!clause.trim()) {
     const m = COLON_LABEL_RE.exec(text);
-    if (m) return { label: m[1], listItem: false };
+    return m ? { ...none, label: m[1] } : none;
   }
   // "伤害输出、 {gold}": the value starts a new list item.
-  if (/、\s*$/.test(clause)) return { label: '', listItem: true };
+  if (/、\s*$/.test(clause)) return { ...none, listItem: true };
   const subParts = clause.split(CONJ_RE);
-  const label = subParts[subParts.length - 1].replace(LEADING_RE, '').replace(TRAILING_RE, '').trim();
-  return { label, listItem: false };
+  const lead = subParts[subParts.length - 1].replace(LEADING_RE, '');
+  const label = lead.replace(TRAILING_RE, '').trim();
+  const tail = lead.slice(label.length);
+  let suffix = tail.replace(CJK_ONLY_RE, '');
+  if (!suffix && /[-－]/.test(tail)) suffix = '降低';
+  else if (!suffix && /[+＋]/.test(tail)) suffix = '提升';
+  const context = clean(clause).replace(VERB_RE, '').replace(CJK_ONLY_RE, '').slice(-2);
+  return { label, listItem: false, suffix, context };
 }
 
 function after(text: string): string {
@@ -67,19 +85,33 @@ function after(text: string): string {
   return words.split(/获得|造成|拥有/)[0].replace(TRAILING_RE, '').trim();
 }
 
+// A unit right after a value, as the noun it measures.
+const UNIT_NOUN: Record<string, string> = { 秒: '时间', 层: '层数', 次: '次数', 码: '距离' };
+
+/** The noun a value measures, from the words after it: "{x} 秒" -> 时间, "{x} 护盾值" -> 护盾值. */
+function nounAfter(text: string): string {
+  const unit = /^\s*([秒层次码])/.exec(text);
+  if (unit) return UNIT_NOUN[unit[1]];
+  return clean(text.split(FOLLOW_CUT_RE)[0]).replace(CJK_ONLY_RE, '');
+}
+
+// Labels that say too little on their own ("伤害" of what?).
+const GENERIC = new Set(['伤害', '时间', '数值', '持续', '冷却', '范围', '距离', '次数', '几率', '概率', '效果', '上限', '数量']);
+
 /**
  * Label each placeholder of a template by the words around it: usually the words right before it
  * ("吸血 +{xx}%"), or the ones after it when only a verb or nothing precedes it ("获得 {gold} 金币").
+ * A generic or duplicated label keeps its qualifier ("伤害永久增加", "额外伤害", "最大生命值降低").
  * Keys without a sensible label are left out. Labels are at most 8 characters.
  */
 export function placeholderLabels(tpl: string): Record<string, string> {
   const list = tokens(tpl);
-  const labels: Record<string, string> = {};
+  const found: { key: string; label: string; qualified: string }[] = [];
   list.forEach((t, i) => {
-    if (t.kind !== 'value' || Object.hasOwn(labels, t.key)) return;
+    if (t.kind !== 'value' || found.some((f) => f.key === t.key)) return;
     const prev = list[i - 1];
     const next = list[i + 1];
-    const b = prev?.kind === 'text' ? before(prev.text) : { label: '', listItem: false };
+    const b = prev?.kind === 'text' ? before(prev.text) : { label: '', listItem: false, suffix: '', context: '' };
     const bl = clean(b.label);
     const a = next?.kind === 'text' ? clean(after(next.text)) : '';
     let label = bl;
@@ -89,7 +121,27 @@ export function placeholderLabels(tpl: string): Record<string, string> {
       label = a;
       from = 'after';
     }
-    if (label.length >= 2 || /^[A-Za-z]+$/.test(label)) labels[t.key] = shorten(label, from);
+    if (label.length < 2 && !/^[A-Za-z]+$/.test(label)) return;
+    // "{k1}伤害": a value glued to a generic noun names something (an ability), it is not that stat.
+    if (from === 'after' && GENERIC.has(label) && next?.kind === 'text' && /^[\u4e00-\u9fff]/.test(next.text)) return;
+    label = shorten(label, from);
+    const nextText = next?.kind === 'text' ? next.text : '';
+    let qualified = '';
+    if (from === 'before') {
+      const noun = nounAfter(nextText);
+      if (b.suffix) qualified = label + b.suffix;
+      else if (label === '持续' && noun === '时间') qualified = '持续时间';
+      else if (noun && noun !== label) qualified = noun + label;
+    } else if (b.context.length === 2 && !b.listItem) qualified = b.context + label;
+    // "造成 {x}% 伤害": a percentage of damage.
+    else if (label === '伤害' && !b.listItem && /^\s*[%％]/.test(nextText)) qualified = '伤害比例';
+    found.push({ key: t.key, label, qualified: qualified.slice(0, MAX_LABEL) });
   });
+  const count = (l: string) => found.filter((f) => f.label === l).length;
+  const labels: Record<string, string> = {};
+  for (const f of found) {
+    const vague = GENERIC.has(f.label) || count(f.label) > 1;
+    labels[f.key] = vague && f.qualified ? f.qualified : f.label;
+  }
   return labels;
 }
