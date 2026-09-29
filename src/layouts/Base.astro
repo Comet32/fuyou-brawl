@@ -54,6 +54,8 @@ const dock: { href: string; label: string; icon: IconName; current: boolean; she
   { href: url('/heroes/'), label: '英雄', icon: 'heroes', current: section === 'heroes' },
   { href: url('/more/'), label: '更多', icon: 'more', current: inMore, sheet: true },
 ];
+// Self-hosted CJK display subset (tools/subset-display-font.ts); declared here so the URL carries the base path.
+const displayFontFace = `@font-face{font-family:'Fuyou Display';font-style:normal;font-weight:900;font-display:swap;src:url(${url('/fonts/fuyou-display-900.woff2')}) format('woff2')}`;
 const mark = [
   'M4 3h5L6 17H1z',
   'M11 3h5l-3 14H8z',
@@ -72,6 +74,7 @@ const mark = [
     {noindex && <meta name="robots" content="noindex" />}
     <title>{fullTitle}</title>
     <link rel="icon" href={url('/favicon.svg')} type="image/svg+xml" />
+    <style is:inline set:html={displayFontFace}></style>
     <script is:inline>
       // Dark is the house scene; light is an explicit choice that persists.
       try {
@@ -81,6 +84,7 @@ const mark = [
   </head>
   <body>
     <header class="topbar">
+      <div class="topbar-in">
       <a class="brand" href={home} aria-label="福佑图鉴 首页">
         <svg width="24" height="20" viewBox="0 0 23 20" aria-hidden="true">
           <path d={mark[0]} fill="var(--q-ssr)" /><path d={mark[1]} fill="var(--q-sr)" /><path d={mark[2]} fill="var(--q-r)" />
@@ -101,6 +105,7 @@ const mark = [
         <button id="theme-toggle" class="icon-btn" type="button" aria-label="切换深浅色" title="切换深浅色">
           <Icon name="theme" />
         </button>
+      </div>
       </div>
     </header>
     <main><slot /></main>

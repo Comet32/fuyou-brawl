@@ -6,6 +6,8 @@ import HeroImage from '../../components/HeroImage.astro';
 import Icon from '../../components/Icon.astro';
 import Template from '../../components/Template.astro';
 import { heroesForBlessing } from '../../lib/hero-blessings';
+import { isHeroBlessing } from '../../lib/hero-blessing';
+import { heroLinks } from '../../lib/hero-links-data';
 import { qualityOf } from '../../lib/quality';
 import { REPO_URL } from '../../lib/site';
 import { placeholderKeys, toPlainText } from '../../lib/template';
@@ -25,6 +27,12 @@ const recommendedBy = heroesForBlessing(blessing.id, builds)
   .map((id) => heroes.get(id))
   .filter((h) => h !== undefined);
 const exclusive = blessing.exclusive_hero ? heroes.get(blessing.exclusive_hero) : undefined;
+// Heroes this blessing is about (ability-name links or manual `heroes:` in overrides).
+const related = (heroLinks().byBlessing.get(blessing.id) ?? [])
+  .map((l) => ({ hero: heroes.get(l.hero), ability: l.ability }))
+  .filter((x): x is { hero: NonNullable<typeof x.hero>; ability: string } => x.hero !== undefined);
+const heroBlessing = isHeroBlessing(blessing.id);
+const owner = heroBlessing ? related[0]?.hero : undefined;
 // Every placeholder of the full effect, then any that only the summary uses.
 const keys = [...new Set([...placeholderKeys(blessing.effect), ...placeholderKeys(blessing.summary)])];
 const known = keys.filter((k) => Object.hasOwn(blessing.numbers, k)).length;
@@ -37,21 +45,25 @@ const editUrl = `${REPO_URL}/edit/main/${OVERRIDES_FILE}`;
     <a href={url(`/compare/?ids=${blessing.id}`)}><Icon name="compare" size={18} />放进三选一对比</a>
   </nav>
 
-  <header class="lt" data-q={quality?.id}>
+  <header class="lt3" data-q={quality?.id}>
+    <div class="lt" data-q={quality?.id}>
     <BlessingIcon blessing={blessing} size={128} eager />
     <h1>{blessing.name}</h1>
     {blessing.name_en && <p class="en">{blessing.name_en}</p>}
     <div class="lt-tags">
-      {
-        quality ? (
-          <span class="q-strap bar">{quality.label}品质</span>
-        ) : (
-          <span class="q-strap unknown hatched">品质未标注</span>
-        )
-      }
       {blessing.tags.map((t) => <a class="tag bar" href={url(`/?tag=${encodeURIComponent(t)}`)}>{t}</a>)}
       {exclusive && <a class="tag bar" href={url(`/heroes/${exclusive.id}/`)}>专属：{exclusive.name}</a>}
+      {
+        owner && (
+          <a class="hero-strap lt-hero" href={url(`/heroes/${owner.id}/`)}>
+            <HeroImage hero={owner} eager />
+            英雄福佑 · {owner.name}
+          </a>
+        )
+      }
     </div>
+    </div>
+    <p class="lt-band"><span>{quality ? `${quality.label}品质` : '品质未标注'}</span></p>
   </header>
 
   <div class="detail-grid">
@@ -105,6 +117,25 @@ const editUrl = `${REPO_URL}/edit/main/${OVERRIDES_FILE}`;
     </section>
   </div>
 
+  {
+    related.length > 0 && (
+      <section aria-labelledby="related-h">
+        <h2 id="related-h" class="strap">相关英雄</h2>
+        <ul class="hero-grid">
+          {related.map(({ hero: h, ability }) => (
+            <li>
+              <a class="hero-tile" href={url(`/heroes/${h.id}/`)}>
+                <HeroImage hero={h} eager />
+                <span class="name-strap">{h.name}</span>
+                {ability && <span class="ability-strap">{ability}</span>}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
   <section aria-labelledby="heroes-h">
     <h2 id="heroes-h" class="strap">推荐搭配的英雄</h2>
     {
@@ -113,7 +144,7 @@ const editUrl = `${REPO_URL}/edit/main/${OVERRIDES_FILE}`;
           {recommendedBy.map((h) => (
             <li>
               <a class="hero-tile" href={url(`/heroes/${h.id}/`)}>
-                <HeroImage hero={h} />
+                <HeroImage hero={h} eager />
                 <span class="name-strap">{h.name}</span>
               </a>
             </li>

@@ -4,20 +4,33 @@ import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import { publicFileExists } from '../lib/assets';
 import { toCardRecord } from '../lib/card-data';
+import { isHeroBlessing } from '../lib/hero-blessing';
+import { heroLinks } from '../lib/hero-links-data';
 import { MAX_COMPARE } from '../lib/compare';
 import { safeJson } from '../lib/json';
 
 const blessings = (await getCollection('blessings'))
   .map((e) => e.data)
-  .sort((a, b) => a.name.localeCompare(b.name, 'zh-CN'));
+  .sort((a, b) => a.name.localeCompare(b.name, 'zh-CN') || a.id.localeCompare(b.id));
 // Cards are drawn on the client from this data; no hidden pool of 675 server-rendered cards.
-const records = blessings.map((b) => toCardRecord(b, Boolean(b.icon && publicFileExists(`img/blessings/${b.icon}`))));
+const heroes = new Map((await getCollection('heroes')).map((e) => [e.data.id, e.data]));
+const { byBlessing } = heroLinks();
+// Suggestions always include hero blessings (they are offered in-match), marked with their hero.
+const heroOf = (id: string) => {
+  const h = isHeroBlessing(id) ? heroes.get(byBlessing.get(id)?.[0]?.hero ?? '') : undefined;
+  if (!h) return undefined;
+  const img = `img/heroes/${h.id}.webp`;
+  return { id: h.id, name: h.name, ...(publicFileExists(img) ? { img } : {}) };
+};
+const records = blessings.map((b) =>
+  toCardRecord(b, Boolean(b.icon && publicFileExists(`img/blessings/${b.icon}`)), heroOf(b.id)),
+);
 const slots = Array.from({ length: MAX_COMPARE }, (_, i) => i);
 ---
 
 <Base title="三选一对比" description="对局里抽到三个福佑？分别搜出来并排比较。">
   <div class="board-head">
-    <h1>三选一对比</h1>
+    <h1 class="page-title">三选一对比</h1>
     <p class="page-lede">每格输入名称或首字母，回车锁定第一个结果并跳到下一格。锁定后的链接可以直接分享。</p>
   </div>
   <div class="board">
@@ -26,14 +39,17 @@ const slots = Array.from({ length: MAX_COMPARE }, (_, i) => i);
         <section class="pick" data-slot={i} aria-label={`第 ${i + 1} 个福佑`}>
           <div class="pick-head">
             <span class="pick-lock" aria-hidden="true" />
-            <span class="pick-no num" aria-hidden="true">{i + 1}</span>
-            <span class="pick-state">
-              <span class="pick-idle">待选</span>
-              <span class="pick-stamp" hidden>
-                <Icon name="lock" size={16} />
-                已锁定
+            <button class="pick-toggle" type="button" aria-label={`重新选择第 ${i + 1} 个福佑`} disabled>
+              <span class="pick-no num" aria-hidden="true">{i + 1}</span>
+              <span class="pick-state">
+                <span class="pick-idle">待选</span>
+                <span class="pick-stamp" hidden>
+                  <Icon name="lock" size={16} />
+                  已锁定
+                </span>
               </span>
-            </span>
+              <span class="pick-repick" hidden>点此换</span>
+            </button>
             <button class="icon-btn pick-clear" type="button" aria-label={`清空第 ${i + 1} 格`} hidden>
               <Icon name="close" />
             </button>

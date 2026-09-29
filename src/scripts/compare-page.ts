@@ -30,6 +30,22 @@ function arrowIcon(): SVGSVGElement {
   return svg;
 }
 
+/** Small portrait + name of the hero a hero blessing belongs to. */
+function heroMark(hero: NonNullable<HydratedCard['hero']>): HTMLElement {
+  const mark = el('span', 'hero-strap');
+  if (hero.img) {
+    const img = el('img');
+    img.src = BASE.replace(/\/?$/, '/') + hero.img;
+    img.alt = '';
+    img.width = 32;
+    img.height = 18;
+    img.decoding = 'async';
+    mark.appendChild(img);
+  }
+  mark.appendChild(document.createTextNode(hero.name));
+  return mark;
+}
+
 function renderCard(r: HydratedCard): HTMLElement {
   const card = el('article', 'pc');
   setQuality(card, r.quality);
@@ -40,10 +56,15 @@ function renderCard(r: HydratedCard): HTMLElement {
   const link = el('a', undefined, r.name);
   link.href = `${BASE.replace(/\/?$/, '/')}blessings/${r.id}/`;
   h.appendChild(link);
-  const meta = el('p', 'mt');
-  meta.appendChild(el('b', undefined, qualityLabel(r.quality)));
-  meta.appendChild(document.createTextNode(r.tags.join(' · ')));
-  head.append(h, meta);
+  head.appendChild(h);
+  const label = qualityLabel(r.quality);
+  if (label || r.tags.length || r.hero) {
+    const meta = el('p', 'mt');
+    if (label) meta.appendChild(el('b', undefined, label));
+    meta.appendChild(document.createTextNode(r.tags.join(' · ')));
+    if (r.hero) meta.appendChild(heroMark(r.hero));
+    head.appendChild(meta);
+  }
   top.appendChild(head);
   const summary = el('p', 'sm');
   summary.appendChild(renderTemplate(r.summary, r.numbers));
@@ -71,6 +92,8 @@ export function initComparePage(): void {
     idle: pick.querySelector<HTMLElement>('.pick-idle')!,
     stamp: pick.querySelector<HTMLElement>('.pick-stamp')!,
     clear: pick.querySelector<HTMLButtonElement>('.pick-clear')!,
+    toggle: pick.querySelector<HTMLButtonElement>('.pick-toggle')!,
+    repick: pick.querySelector<HTMLElement>('.pick-repick')!,
   }));
 
   const close = (i: number) => {
@@ -79,7 +102,7 @@ export function initComparePage(): void {
 
   // LOCK-IN: the head wipes in the quality color and stamps 已锁定 with the pick number.
   const choose = (i: number, id: string | null, animate = true) => {
-    const { pick, input, card, idle, stamp, clear } = parts[i];
+    const { pick, input, card, idle, stamp, clear, toggle, repick } = parts[i];
     const r = id ? byId.get(id) : undefined;
     selected[i] = r ? r.id : null;
     card.replaceChildren();
@@ -100,6 +123,9 @@ export function initComparePage(): void {
     idle.hidden = Boolean(r);
     stamp.hidden = !r;
     clear.hidden = !r;
+    repick.hidden = !r;
+    toggle.disabled = !r;
+    pick.classList.remove('is-editing');
     close(i);
     replaceSearch(serializeCompareIds(selected));
   };
@@ -118,7 +144,11 @@ export function initComparePage(): void {
         setQuality(btn, r.quality);
         btn.appendChild(renderIcon(r, BASE, 36).firstChild!);
         btn.appendChild(el('span', undefined, r.name));
-        btn.appendChild(el('span', 'q', qualityLabel(r.quality)));
+        const label = qualityLabel(r.quality);
+        const side = el('span', 'q', label);
+        const hero = byId.get(r.id)?.hero; // the searcher returns plain search records
+        if (hero) side.appendChild(heroMark(hero));
+        btn.appendChild(side);
         btn.addEventListener('click', () => {
           choose(i, r.id);
           focusNext(i);
@@ -137,7 +167,16 @@ export function initComparePage(): void {
     else parts[i].input.blur(); // last slot: dismiss the phone keyboard
   };
 
-  parts.forEach(({ pick, input, box, clear }, i) => {
+  // Tapping a locked head unfolds its search field to pick again.
+  const edit = (i: number) => {
+    const { pick, input } = parts[i];
+    pick.classList.add('is-editing');
+    input.focus();
+    input.select();
+  };
+
+  parts.forEach(({ pick, input, box, clear, toggle }, i) => {
+    toggle.addEventListener('click', () => edit(i));
     input.addEventListener('input', () => {
       if (!input.value.trim()) {
         choose(i, null);
@@ -152,6 +191,10 @@ export function initComparePage(): void {
       if (e.isComposing || e.keyCode === 229) return; // IME candidate confirmation, not a submit
       if (e.key === 'Escape') {
         close(i);
+        if (selected[i]) {
+          input.value = byId.get(selected[i]!)?.name ?? '';
+          pick.classList.remove('is-editing');
+        }
         return;
       }
       if (e.key === 'ArrowDown' && !box.hidden) {
@@ -181,7 +224,13 @@ export function initComparePage(): void {
     // Keep the pointer press from blurring the input, so the suggestion click still lands.
     box.addEventListener('mousedown', (e) => e.preventDefault());
     pick.addEventListener('focusout', (e) => {
-      if (!pick.contains(e.relatedTarget as Node | null)) close(i);
+      if (pick.contains(e.relatedTarget as Node | null)) return;
+      close(i);
+      // Leaving a re-pick without choosing folds the field back over the locked card.
+      if (selected[i]) {
+        input.value = byId.get(selected[i]!)?.name ?? '';
+        pick.classList.remove('is-editing');
+      }
     });
     clear.addEventListener('click', () => {
       input.value = '';

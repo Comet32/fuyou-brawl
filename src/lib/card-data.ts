@@ -3,10 +3,11 @@ import type { CardRecord } from './card-record';
 import type { Blessing } from './schema';
 import { toSearchRecord } from './search-record';
 
-export function toCardRecord(b: Blessing, iconExists: boolean): CardRecord {
+export function toCardRecord(b: Blessing, iconExists: boolean, hero?: CardRecord['hero']): CardRecord {
   const { text: _text, ...search } = toSearchRecord(b);
   const record: CardRecord = { ...search, summary: b.summary };
   if (b.icon && iconExists) record.icon = `img/blessings/${b.icon}`;
   if (Object.keys(b.numbers).length > 0) record.numbers = b.numbers;
+  if (hero) record.hero = hero;
   return record;
 }

@@ -25,16 +25,23 @@ describe('toCardRecord', () => {
     expect(r.icon).toBeUndefined();
     expect(r.numbers).toBeUndefined();
   });
+
+  it('carries the hero of a hero blessing', () => {
+    const hero = { id: 'axe', name: '斧王', img: 'img/heroes/axe.webp' };
+    expect(toCardRecord(blessings[2], false, hero).hero).toEqual(hero);
+    expect(toCardRecord(blessings[2], false)).not.toHaveProperty('hero');
+  });
 });
 
 describe('hydrateCardRecord', () => {
   it('restores a full search record identical to toSearchRecord', () => {
     for (const b of blessings) {
       const card = hydrateCardRecord(JSON.parse(JSON.stringify(toCardRecord(b, true))));
-      const { summary, numbers, icon, ...rest } = card;
+      const { summary, numbers, icon, hero, ...rest } = card;
       void summary;
       void numbers;
       void icon;
+      void hero;
       expect(rest).toEqual(toSearchRecord(b));
     }
   });

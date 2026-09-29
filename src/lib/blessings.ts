@@ -36,6 +36,7 @@ export function mergeBlessings(
       numbers: { ...o.numbers },
       icon: g.icon,
       exclusive_hero: o.exclusive_hero ?? null,
+      heroes: o.heroes ? [...o.heroes] : undefined,
       since_version: o.since_version,
       sources: [...(o.sources ?? [])],
       history: (o.history ?? []).map((h) => ({ ...h })),

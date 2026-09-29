@@ -7,6 +7,9 @@ import Icon from '../../components/Icon.astro';
 import ItemImage from '../../components/ItemImage.astro';
 import { ATTR_LABELS } from '../../lib/schema';
 import { blessingsForHero } from '../../lib/hero-blessings';
+import { isHeroBlessing } from '../../lib/hero-blessing';
+import { heroLinks } from '../../lib/hero-links-data';
+import { QUALITY_IDS } from '../../lib/quality';
 import { REPO_URL } from '../../lib/site';
 import { url } from '../../lib/url';
 
@@ -21,6 +24,15 @@ const build = buildEntry?.data;
 const Content = buildEntry ? (await render(buildEntry)).Content : null;
 const blessings = (await getCollection('blessings')).map((e) => e.data);
 const related = blessingsForHero(hero.id, blessings, build);
+const byId = new Map(blessings.map((b) => [b.id, b]));
+const qualityRank = (q: string | null) => (q ? QUALITY_IDS.indexOf(q as (typeof QUALITY_IDS)[number]) : QUALITY_IDS.length);
+// Linked blessings, ordered by quality (橙 > 紫 > 蓝 > 未标注) then name.
+const linked = (heroLinks().byHero.get(hero.id) ?? [])
+  .map((l) => byId.get(l.blessing))
+  .filter((b) => b !== undefined)
+  .sort((a, b) => qualityRank(a.quality) - qualityRank(b.quality) || a.name.localeCompare(b.name, 'zh-CN'));
+const heroBlessings = linked.filter((b) => isHeroBlessing(b.id));
+const generalLinked = linked.filter((b) => !isHeroBlessing(b.id));
 const items = new Map((await getCollection('items')).map((e) => [e.data.id, e.data]));
 const newBuildUrl = `${REPO_URL}/new/main/src/content/builds?filename=${hero.id}.md`;
 ---
@@ -30,13 +42,62 @@ const newBuildUrl = `${REPO_URL}/new/main/src/content/builds?filename=${hero.id}
     <a href={url('/heroes/')}><Icon name="back" size={18} />全部英雄</a>
   </nav>
   <header class="lt hero-lt">
-    <HeroImage hero={hero} />
+    <HeroImage hero={hero} eager priority />
     <div>
       <h1>{hero.name}</h1>
       <p class="en">{hero.name_en} · {ATTR_LABELS[hero.attr]}</p>
       {build && <p class="effect">{build.summary}<span class="muted">（更新于 <span class="num">{build.updated}</span>）</span></p>}
     </div>
   </header>
+
+  <section aria-labelledby="hb-h">
+    <h2 id="hb-h" class="strap">英雄福佑<span class="num">{heroBlessings.length}</span></h2>
+    {
+      heroBlessings.length > 0 ? (
+        <ul class="slot-list">
+          {heroBlessings.map((b) => (
+            <li>
+              <BlessingCard blessing={b} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="group-empty">
+          还没有关联到{hero.name}的英雄福佑。关联来自技能名匹配，也可以在 blessings.overrides.yaml 里用 heroes 手动指定。
+        </p>
+      )
+    }
+  </section>
+
+  {
+    generalLinked.length > 0 && (
+      <section aria-labelledby="gb-h">
+        <h2 id="gb-h" class="strap">相关通用福佑<span class="num">{generalLinked.length}</span></h2>
+        <ul class="slot-list">
+          {generalLinked.map((b) => (
+            <li>
+              <BlessingCard blessing={b} />
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  {
+    related.length > 0 && (
+      <section aria-labelledby="bless-h">
+        <h2 id="bless-h" class="strap">推荐福佑<span class="num">{related.length}</span></h2>
+        <ul class="slot-list">
+          {related.map((r) => (
+            <li>
+              <BlessingCard blessing={r.blessing} note={r.note ?? (r.reason === 'exclusive' ? '专属福佑' : undefined)} />
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
 
   {
     !build && (
@@ -49,23 +110,6 @@ const newBuildUrl = `${REPO_URL}/new/main/src/content/builds?filename=${hero.id}
       </div>
     )
   }
-
-  <section aria-labelledby="bless-h">
-    <h2 id="bless-h" class="strap">推荐福佑<span class="num">{related.length}</span></h2>
-    {
-      related.length > 0 ? (
-        <ul class="slot-list">
-          {related.map((r) => (
-            <li>
-              <BlessingCard blessing={r.blessing} note={r.note ?? (r.reason === 'exclusive' ? '专属福佑' : undefined)} />
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p class="note">暂无推荐福佑。</p>
-      )
-    }
-  </section>
 
   {
     build && build.items.length > 0 && (

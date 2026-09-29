@@ -52,6 +52,8 @@ export const blessingOverrideSchema = z.strictObject({
   history: history.optional(),
   since_version: isoDate.optional(),
   exclusive_hero: slug.optional(),
+  // Hero ids this blessing belongs to; replaces the automatic ability-name links ([] = none).
+  heroes: z.array(slug).optional(),
 });
 
 /** A blessing after merging generated data with its override. */
@@ -66,6 +68,8 @@ export const blessingSchema = z.object({
   numbers: numbers.default({}),
   icon: iconFile.optional(),
   exclusive_hero: slug.nullable().default(null),
+  /** Manual hero links; undefined = use the automatic ones. */
+  heroes: z.array(slug).optional(),
   since_version: isoDate.optional(),
   sources: z.array(httpUrl).default([]),
   history: history.default([]),

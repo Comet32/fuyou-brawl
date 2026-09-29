@@ -1,6 +1,7 @@
 ---
-// One result slot. Lean markup on purpose: the catalog renders all 675 of these into one page.
-import type { Blessing } from '../lib/schema';
+// One result slot. Lean markup on purpose: the catalog renders all 652 of these into one page.
+import type { Blessing, Hero } from '../lib/schema';
+import { publicFileExists } from '../lib/assets';
 import { qualityOf } from '../lib/quality';
 import { url } from '../lib/url';
 import BlessingIcon from './BlessingIcon.astro';
@@ -10,16 +11,33 @@ interface Props {
   blessing: Blessing;
   note?: string;
   headingLevel?: 'h2' | 'h3';
+  /** The hero of a hero blessing (英雄福佑): shown as a small portrait strap. */
+  hero?: Pick<Hero, 'id' | 'name'>;
 }
-const { blessing, note, headingLevel = 'h3' } = Astro.props;
+const { blessing, note, headingLevel = 'h3', hero } = Astro.props;
 const Heading = headingLevel;
 const quality = qualityOf(blessing.quality);
+const heroImg = hero && publicFileExists(`img/heroes/${hero.id}.webp`) ? url(`img/heroes/${hero.id}.webp`) : undefined;
 ---
 
 <article class="slot" data-q={quality?.id}>
   <BlessingIcon blessing={blessing} />
   <Heading><a href={url(`/blessings/${blessing.id}/`)}>{blessing.name}</a></Heading>
-  <p class="mt"><b>{quality ? quality.label : '未标注'}</b>{blessing.tags.join(' · ')}</p>
+  {
+    /* Unknown quality is already said by the hatched bar under the icon; no repeated word. */
+    (quality || blessing.tags.length > 0 || hero) && (
+      <p class="mt">
+        {quality && <b>{quality.label}</b>}
+        {blessing.tags.join(' · ')}
+        {hero && (
+          <a class="hero-strap" href={url(`/heroes/${hero.id}/`)}>
+            {heroImg && <img src={heroImg} alt="" width="32" height="18" loading="lazy" decoding="async" />}
+            {hero.name}
+          </a>
+        )}
+      </p>
+    )
+  }
   <p class="sm"><Template tpl={blessing.summary} numbers={blessing.numbers} /></p>
   {note && <p class="slot-note">{note}</p>}
 </article>

@@ -55,8 +55,9 @@ export function renderIcon(r: Pick<CardRecord, 'icon' | 'name'>, base: string, s
   return box;
 }
 
+/** Quality label, or '' while unlabeled (the hatched bar carries that state). */
 export function qualityLabel(q: CardRecord['quality']): string {
-  return qualityOf(q)?.label ?? '未标注';
+  return qualityOf(q)?.label ?? '';
 }
 
 export function setQuality(node: HTMLElement, q: CardRecord['quality']): void {

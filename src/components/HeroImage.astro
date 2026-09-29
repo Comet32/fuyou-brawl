@@ -5,15 +5,32 @@ import { url } from '../lib/url';
 
 interface Props {
   hero: Hero;
+  /** Load immediately (first screen); otherwise lazy. */
+  eager?: boolean;
+  /** fetchpriority="high" for the very first tiles. */
+  priority?: boolean;
 }
-const { hero } = Astro.props;
+const { hero, eager = false, priority = false } = Astro.props;
 const rel = `img/heroes/${hero.id}.webp`;
+// data-attr tints the 16:9 ground shown while the portrait loads or if it fails.
 ---
 
 {
   publicFileExists(rel) ? (
-    <img class="hero-img" src={url(rel)} alt="" width="256" height="144" loading="lazy" />
+    <img
+      class="hero-img"
+      data-attr={hero.attr}
+      src={url(rel)}
+      alt=""
+      width="256"
+      height="144"
+      loading={eager ? 'eager' : 'lazy'}
+      fetchpriority={priority ? 'high' : undefined}
+      decoding="async"
+    />
   ) : (
-    <span class="hero-img" aria-hidden="true">{hero.name.slice(0, 1)}</span>
+    <span class="hero-img" data-attr={hero.attr} aria-hidden="true">
+      {hero.name.slice(0, 1)}
+    </span>
   )
 }

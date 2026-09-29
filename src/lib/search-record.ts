@@ -17,6 +17,14 @@ export interface SearchRecord {
 
 const toKey = (parts: string[]) => parts.join('').normalize('NFKC').toLowerCase().replace(/[^a-z0-9]/g, '');
 
+/** Full pinyin and initials of a Chinese name (no tones, ü as v, ASCII letters and digits only). */
+export function pinyinKeys(name: string): { py: string; pyInitials: string } {
+  return {
+    py: toKey(pinyin(name, { toneType: 'none', type: 'array', v: true })),
+    pyInitials: toKey(pinyin(name, { pattern: 'first', toneType: 'none', type: 'array', v: true })),
+  };
+}
+
 export function toSearchRecord(b: Blessing): SearchRecord {
   return {
     id: b.id,
@@ -25,7 +33,6 @@ export function toSearchRecord(b: Blessing): SearchRecord {
     quality: b.quality,
     tags: b.tags,
     text: toPlainText(b.summary),
-    py: toKey(pinyin(b.name, { toneType: 'none', type: 'array', v: true })),
-    pyInitials: toKey(pinyin(b.name, { pattern: 'first', toneType: 'none', type: 'array', v: true })),
+    ...pinyinKeys(b.name),
   };
 }

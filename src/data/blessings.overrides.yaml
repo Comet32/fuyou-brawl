@@ -9,3 +9,26 @@
 '10091':
   numbers: { time: 3 }
   sources: [https://steamcommunity.com/sharedfiles/filedetails/?id=2841152696]
+# Hero links: `heroes` replaces the automatic ability-name matching ([] = none).
+'10024':
+  heroes: [] # 铁血复仇 is a general blessing; "复仇" is not Nyx's ability here
+'100363a':
+  heroes: [windrunner] # 风行隐身: "隐身" also matched Lycan
+'100007':
+  heroes: [alchemist] # 额外金钱奖励 = 贪魔的贪婪
+'100026':
+  heroes: [batrider] # 连续释放粘性燃油
+'100051':
+  heroes: [chaos_knight] # 实相裂隙
+'100056':
+  heroes: [clinkz] # 骷髅弓手 = 烈焰之军
+'100057':
+  heroes: [clinkz] # 骷髅弓手 = 烈焰之军
+'100116':
+  heroes: [gyrocopter] # 追踪导弹
+'100132a':
+  heroes: [juggernaut] # 剑舞
+'100273a':
+  heroes: [shredder] # 伐木机摧毁树木
+'100277':
+  heroes: [skeleton_king] # 冥火爆击

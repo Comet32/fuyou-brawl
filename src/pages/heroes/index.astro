@@ -2,6 +2,12 @@
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import HeroImage from '../../components/HeroImage.astro';
+import Icon from '../../components/Icon.astro';
+import { isHeroBlessing } from '../../lib/hero-blessing';
+import { heroLinks } from '../../lib/hero-links-data';
+import { toHeroSearchRecord } from '../../lib/hero-search-data';
+import { safeJson } from '../../lib/json';
+import { loadDataSet } from '../../lib/load';
 import { ATTRS, ATTR_LABELS } from '../../lib/schema';
 import { url } from '../../lib/url';
 
@@ -9,36 +15,88 @@ const heroes = (await getCollection('heroes'))
   .map((e) => e.data)
   .sort((a, b) => a.name.localeCompare(b.name, 'zh-CN'));
 const withBuild = new Set((await getCollection('builds')).map((e) => e.data.hero));
+const abilities = new Map(loadDataSet(process.cwd()).heroAbilities.map((h) => [h.hero, h.abilities.map((a) => a.name)]));
+const records = heroes.map((h) => toHeroSearchRecord(h, abilities.get(h.id) ?? []));
+const { byHero } = heroLinks();
+const heroBlessingCount = (id: string) => (byHero.get(id) ?? []).filter((l) => isHeroBlessing(l.blessing)).length;
+const groups = ATTRS.map((attr) => ({ attr, heroes: heroes.filter((h) => h.attr === attr) })).filter(
+  (g) => g.heroes.length > 0,
+);
+// Position across all groups, so the first screen of tiles loads eagerly.
+const order = new Map(groups.flatMap((g) => g.heroes).map((h, i) => [h.id, i]));
+const EAGER = 8;
+const PRIORITY = 4;
 ---
 
-<Base title="英雄" description="127 个英雄的福佑与出装搭配">
-  <p slot="score" class="score bar"><b>{withBuild.size}</b><small>/ <span class="num">{heroes.length}</span> 有搭配</small></p>
-  <h1>英雄搭配</h1>
+<Base title="英雄" description="127 个英雄的英雄福佑、相关福佑与出装搭配">
+  <p id="hero-count" slot="score" class="score bar" aria-live="polite"><b>{heroes.length}</b><small>英雄</small></p>
+  <h1 class="page-title">英雄搭配</h1>
   <p class="page-lede">
-    共 {heroes.length} 个英雄，{withBuild.size} 个已有搭配攻略。灰色头像是还没写搭配的英雄，点进去可以补充。
+    共 {heroes.length} 个英雄，{withBuild.size} 个已有搭配攻略（金色「已有搭配」角标）。左上角数字是该英雄的英雄福佑数量。
   </p>
-  {
-    ATTRS.map((attr) => {
-      const group = heroes.filter((h) => h.attr === attr);
-      return group.length === 0 ? null : (
-        <section aria-labelledby={`attr-${attr}`}>
+  <div class="lookup">
+    <div class="field">
+      <label class="field-cap" for="hq"><Icon name="search" size={22} /><span class="sr-only">搜索英雄</span></label>
+      <input
+        id="hq"
+        type="search"
+        placeholder="英雄名 · 首字母 · 英文 · 技能"
+        autocomplete="off"
+        autocapitalize="off"
+        spellcheck="false"
+        enterkeyhint="search"
+      />
+      <button class="icon-btn field-clear" type="button" aria-label="清空搜索"><Icon name="close" /></button>
+    </div>
+  </div>
+  <div class="tagstrip" role="group" aria-label="按属性筛选（再点一次取消）">
+    {
+      groups.map((g) => (
+        <button class="chip bar" type="button" data-attr-filter={g.attr} aria-pressed="false">
+          {ATTR_LABELS[g.attr]}
+        </button>
+      ))
+    }
+  </div>
+  <div id="hero-groups">
+    {
+      groups.map(({ attr, heroes: group }) => (
+        <section aria-labelledby={`attr-${attr}`} data-attr-group={attr}>
           <h2 id={`attr-${attr}`} class="strap">
             {ATTR_LABELS[attr]}
             <span class="num">{group.length}</span>
           </h2>
           <ul class="hero-grid">
             {group.map((h) => (
-              <li>
-                <a class:list={['hero-tile', { 'no-build': !withBuild.has(h.id) }]} href={url(`/heroes/${h.id}/`)}>
-                  <HeroImage hero={h} />
+              <li data-hero={h.id}>
+                <a class="hero-tile" href={url(`/heroes/${h.id}/`)}>
+                  <HeroImage hero={h} eager={order.get(h.id)! < EAGER} priority={order.get(h.id)! < PRIORITY} />
                   <span class="name-strap">{h.name}</span>
-                  {withBuild.has(h.id) && <span class="flag">有搭配</span>}
+                  {heroBlessingCount(h.id) > 0 && (
+                    <span class="hb-count num" title="英雄福佑数量">{heroBlessingCount(h.id)}</span>
+                  )}
+                  {withBuild.has(h.id) && <span class="flag">已有搭配</span>}
                 </a>
               </li>
             ))}
           </ul>
         </section>
-      );
-    })
-  }
+      ))
+    }
+  </div>
+  <ul id="hero-results" class="hero-grid hero-results" hidden></ul>
+  <div id="hero-empty" class="empty-state" hidden>
+    <h2>没有匹配的英雄</h2>
+    <p>支持中文名、全拼、拼音首字母、英文名和技能名。试试：</p>
+    <div class="try-list">
+      <button class="try bar" type="button" data-try="dfs"><code>dfs</code>首字母</button>
+      <button class="try bar" type="button" data-try="Anti-Mage"><code>Anti-Mage</code>英文名</button>
+      <button class="try bar" type="button" data-try="法力虚空"><code>法力虚空</code>技能名</button>
+    </div>
+  </div>
+  <script type="application/json" id="hero-data" set:html={safeJson(records)} />
+  <script>
+    import { initHeroesPage } from '../../scripts/heroes-page';
+    initHeroesPage();
+  </script>
 </Base>

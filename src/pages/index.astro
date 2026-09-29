@@ -3,22 +3,40 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import BlessingCard from '../components/BlessingCard.astro';
 import Icon from '../components/Icon.astro';
+import { isHeroBlessing } from '../lib/hero-blessing';
+import { heroLinks } from '../lib/hero-links-data';
 import { QUALITIES } from '../lib/quality';
 import { TAGS } from '../lib/tags';
 import { toSearchRecord } from '../lib/search-record';
 import { safeJson } from '../lib/json';
+import { url } from '../lib/url';
 
 const blessings = (await getCollection('blessings'))
   .map((e) => e.data)
-  .sort((a, b) => a.name.localeCompare(b.name, 'zh-CN'));
+  .sort((a, b) => a.name.localeCompare(b.name, 'zh-CN') || a.id.localeCompare(b.id));
 const records = blessings.map(toSearchRecord);
 const tags = TAGS.filter((t) => blessings.some((b) => b.tags.includes(t)));
-const tally = (q: string | null) => blessings.filter((b) => b.quality === q).length;
+const heroes = new Map((await getCollection('heroes')).map((e) => [e.data.id, e.data]));
+const { byBlessing } = heroLinks();
+// Hero blessings carry a strap with their hero; they are hidden by default (toggle 含英雄福佑).
+const heroOf = (id: string) => {
+  if (!isHeroBlessing(id)) return undefined;
+  const link = byBlessing.get(id)?.[0];
+  return link ? heroes.get(link.hero) : undefined;
+};
+const general = blessings.filter((b) => !isHeroBlessing(b.id));
+const heroCount = blessings.length - general.length;
+const tally = (q: string | null) => general.filter((b) => b.quality === q).length;
+// No query: the draft pool grouped by quality, each card inside its color family.
+const groups = [
+  ...QUALITIES.map((q) => ({ id: q.id as string, q: q.id as string | undefined, label: q.label })),
+  { id: 'none', q: undefined, label: '未标注' },
+].map((g) => ({ ...g, items: blessings.filter((b) => (b.quality ?? 'none') === g.id) }));
 ---
 
 <Base>
   <p id="count" slot="score" class="score bar" aria-live="polite">
-    <b>{blessings.length}</b><small>福佑</small>
+    <b>{general.length}</b><small>福佑</small>
   </p>
   <h1 class="sr-only">福佑图鉴</h1>
   <div class="lookup">
@@ -37,30 +55,36 @@ const tally = (q: string | null) => blessings.filter((b) => b.quality === q).len
       <button class="icon-btn field-clear" type="button" aria-label="清空搜索"><Icon name="close" /></button>
     </div>
   </div>
-  <div class="teams" role="group" aria-label="按品质筛选（再点一次取消）">
-    {
-      QUALITIES.map((q) => (
-        <button class="team bar" type="button" data-q={q.id} data-quality={q.id} aria-pressed="false">
-          {q.label}
-          <b data-tally={q.id}>{tally(q.id)}</b>
-        </button>
-      ))
-    }
-    <button class="team bar team-none" type="button" data-quality="none" aria-pressed="false">
-      <span class="strip hatched" aria-hidden="true"></span>未标注<b data-tally="none">{tally(null)}</b>
-    </button>
-  </div>
-  {
-    tags.length > 0 && (
-      <div class="tagstrip" role="group" aria-label="按标签筛选（再点一次取消）">
-        {tags.map((t) => (
+  <div class="filters">
+    <div class="teams" role="group" aria-label="按品质筛选（再点一次取消）">
+      {
+        QUALITIES.map((q) => (
+          <button class="team bar" type="button" data-q={q.id} data-quality={q.id} aria-pressed="false">
+            <span class="lbl">{q.label}</span>
+            <b data-tally={q.id}>{tally(q.id)}</b>
+          </button>
+        ))
+      }
+      <button class="team bar team-none" type="button" data-quality="none" aria-pressed="false">
+        <span class="lbl">未标注</span><b data-tally="none">{tally(null)}</b>
+      </button>
+    </div>
+    <div class="tagstrip" role="group" aria-label="标签筛选与英雄福佑开关">
+      <button id="hero-toggle" class="switch bar" type="button" role="switch" aria-checked="false">
+        <span class="knob" aria-hidden="true"></span>含英雄福佑<b class="num">{heroCount}</b>
+      </button>
+      {
+        tags.map((t) => (
           <button class="chip bar" type="button" data-tag={t} aria-pressed="false">
             {t}
           </button>
-        ))}
-      </div>
-    )
-  }
+        ))
+      }
+    </div>
+  </div>
+  <p id="hero-hint" class="hero-hint" hidden>
+    有 <b class="num">0</b> 个英雄福佑匹配 · <button type="button" class="link-btn">显示</button>
+  </p>
   {
     blessings.length === 0 && (
       <div class="empty-state">
@@ -69,9 +93,43 @@ const tally = (q: string | null) => blessings.filter((b) => b.quality === q).len
       </div>
     )
   }
-  <ul id="results" class="slots">
-    {blessings.map((b) => <li data-id={b.id}><BlessingCard blessing={b} /></li>)}
-  </ul>
+  <div id="groups">
+    {
+      groups.map((g) => (
+        <section class="group" data-group={g.id} data-q={g.q} aria-labelledby={`g-${g.id}`}>
+          <h2 id={`g-${g.id}`} class="group-head">
+            <span>{g.label}</span>
+            <b class="num" data-group-tally>{g.items.filter((b) => !isHeroBlessing(b.id)).length}</b>
+          </h2>
+          <ul class="slots">
+            {g.items.map((b) => {
+              const hero = heroOf(b.id);
+              return (
+                <li data-id={b.id} data-hb={isHeroBlessing(b.id) ? '' : undefined}>
+                  <BlessingCard blessing={b} hero={hero} />
+                </li>
+              );
+            })}
+          </ul>
+          <p class="group-empty" hidden={g.items.length > 0}>
+            {g.q ? (
+              <Fragment>
+                还没有标注为{g.label}的福佑 · <a href={url('/label/')}>去标注页</a>
+              </Fragment>
+            ) : (
+              '所有福佑都已标注品质。'
+            )}
+          </p>
+          {g.id === 'none' && (
+            <button class="btn bar group-more" type="button" hidden>
+              展开全部 <span class="num">0</span> 个
+            </button>
+          )}
+        </section>
+      ))
+    }
+  </div>
+  <ul id="results" class="slots" hidden></ul>
   <div id="no-result" class="empty-state" hidden>
     <h2>没有匹配的福佑</h2>
     <p>支持中文名、全拼、拼音首字母、英文名和效果关键词。试试：</p>

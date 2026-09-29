@@ -26,7 +26,7 @@ const keys: Record<string, string> = { ssr: '1', sr: '2', r: '3' };
 
 <Base title="品质标注" noindex>
   <div class="label-desk">
-    <h1>品质标注</h1>
+    <h1 class="page-title">品质标注</h1>
     <p class="page-lede">
       逐个给还没有品质的福佑标上游戏里的颜色。进度只存在这个浏览器里；标完点「导出」，保存为 labels.json 后运行
       <code>npm run labels -- labels.json</code> 写入数据。
@@ -88,8 +88,8 @@ const keys: Record<string, string> = { ssr: '1', sr: '2', r: '3' };
       }
     </div>
     <div class="answers-sub">
-      <button class="answer-sub hatched" type="button" data-answer="unsure" aria-pressed="false" disabled>
-        不确定 <kbd>0</kbd>
+      <button class="answer-sub unsure" type="button" data-answer="unsure" aria-pressed="false" disabled>
+        <span class="swatch hatched" aria-hidden="true"></span>不确定 <kbd>0</kbd>
       </button>
       <button id="label-prev" class="answer-sub bar" type="button" disabled>
         <Icon name="undo" />上一个 <kbd>Backspace</kbd>

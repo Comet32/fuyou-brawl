@@ -8,7 +8,7 @@ const guides = (await getCollection('guides')).sort((a, b) => a.data.order - b.d
 ---
 
 <Base title="攻略">
-  <h1>攻略文章</h1>
+  <h1 class="page-title">攻略文章</h1>
   <p class="page-lede">从入门到进阶，按推荐阅读顺序排列。</p>
   {
     guides.length === 0 && (
