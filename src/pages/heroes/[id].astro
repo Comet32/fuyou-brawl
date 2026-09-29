@@ -3,6 +3,7 @@ import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import BlessingCard from '../../components/BlessingCard.astro';
 import HeroImage from '../../components/HeroImage.astro';
+import Icon from '../../components/Icon.astro';
 import ItemImage from '../../components/ItemImage.astro';
 import { ATTR_LABELS } from '../../lib/schema';
 import { blessingsForHero } from '../../lib/hero-blessings';
@@ -21,51 +22,61 @@ const Content = buildEntry ? (await render(buildEntry)).Content : null;
 const blessings = (await getCollection('blessings')).map((e) => e.data);
 const related = blessingsForHero(hero.id, blessings, build);
 const items = new Map((await getCollection('items')).map((e) => [e.data.id, e.data]));
+const newBuildUrl = `${REPO_URL}/new/main/src/content/builds?filename=${hero.id}.md`;
 ---
 
-<Base title={hero.name}>
-  <p><a href={url('/heroes/')}>← 全部英雄</a></p>
-  <header class="hero-head">
+<Base title={hero.name} description={build?.summary ?? `${hero.name}的福佑与出装搭配`}>
+  <nav class="crumbs" aria-label="页面导航">
+    <a href={url('/heroes/')}><Icon name="back" size={18} />全部英雄</a>
+  </nav>
+  <header class="lt hero-lt">
     <HeroImage hero={hero} />
     <div>
       <h1>{hero.name}</h1>
-      <p class="muted">{hero.name_en} · {ATTR_LABELS[hero.attr]}</p>
+      <p class="en">{hero.name_en} · {ATTR_LABELS[hero.attr]}</p>
+      {build && <p class="effect">{build.summary}<span class="muted">（更新于 <span class="num">{build.updated}</span>）</span></p>}
     </div>
   </header>
 
   {
-    build ? (
-      <p>{build.summary} <span class="muted">（更新于 {build.updated}）</span></p>
-    ) : (
-      <p class="empty">
-        这个英雄的搭配攻略待补充。
-        <a href={`${REPO_URL}/new/main/src/content/builds?filename=${hero.id}.md`}>在 GitHub 上补充</a>
-      </p>
+    !build && (
+      <div class="empty-state">
+        <h2>这个英雄的搭配攻略待补充</h2>
+        <p>搭配写在 src/content/builds/{hero.id}.md，列出推荐福佑、出装和思路。</p>
+        <a class="btn bar" href={newBuildUrl} target="_blank" rel="noopener">
+          <Icon name="edit" />在 GitHub 上补充
+        </a>
+      </div>
     )
   }
 
-  <section>
-    <h2>推荐福佑</h2>
+  <section aria-labelledby="bless-h">
+    <h2 id="bless-h" class="strap">推荐福佑<span class="num">{related.length}</span></h2>
     {
       related.length > 0 ? (
-        <ul class="card-list">
+        <ul class="slot-list">
           {related.map((r) => (
-            <li><BlessingCard blessing={r.blessing} note={r.note ?? (r.reason === 'exclusive' ? '专属福佑' : undefined)} /></li>
+            <li>
+              <BlessingCard blessing={r.blessing} note={r.note ?? (r.reason === 'exclusive' ? '专属福佑' : undefined)} />
+            </li>
           ))}
         </ul>
       ) : (
-        <p class="muted">暂无</p>
+        <p class="note">暂无推荐福佑。</p>
       )
     }
   </section>
 
   {
     build && build.items.length > 0 && (
-      <section>
-        <h2>推荐出装</h2>
+      <section aria-labelledby="items-h">
+        <h2 id="items-h" class="strap">推荐出装</h2>
         <ul class="item-list">
           {build.items.map((id) => (
-            <li><ItemImage id={id} />{items.get(id)?.name ?? id}</li>
+            <li>
+              <ItemImage id={id} />
+              {items.get(id)?.name ?? id}
+            </li>
           ))}
         </ul>
       </section>
@@ -74,8 +85,8 @@ const items = new Map((await getCollection('items')).map((e) => [e.data.id, e.da
 
   {
     Content && (
-      <section class="prose">
-        <h2>思路</h2>
+      <section class="prose" aria-labelledby="idea-h">
+        <h2 id="idea-h" class="strap">思路</h2>
         <Content />
       </section>
     )
@@ -83,9 +94,18 @@ const items = new Map((await getCollection('items')).map((e) => [e.data.id, e.da
 
   {
     build && build.sources.length > 0 && (
-      <section>
-        <h2>参考来源</h2>
-        <ul>{build.sources.map((s) => <li><a href={s} target="_blank" rel="noopener">{s}</a></li>)}</ul>
+      <section aria-labelledby="src-h">
+        <h2 id="src-h" class="strap">参考来源</h2>
+        <ul class="plain-list">
+          {build.sources.map((s) => (
+            <li>
+              <a class="link-inline" href={s} target="_blank" rel="noopener">
+                {s}
+                <Icon name="external" />
+              </a>
+            </li>
+          ))}
+        </ul>
       </section>
     )
   }

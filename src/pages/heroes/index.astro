@@ -11,21 +11,28 @@ const heroes = (await getCollection('heroes'))
 const withBuild = new Set((await getCollection('builds')).map((e) => e.data.hero));
 ---
 
-<Base title="英雄">
+<Base title="英雄" description="127 个英雄的福佑与出装搭配">
+  <p slot="score" class="score bar"><b>{withBuild.size}</b><small>/ <span class="num">{heroes.length}</span> 有搭配</small></p>
   <h1>英雄搭配</h1>
-  <p class="muted">共 {heroes.length} 个英雄，其中 {withBuild.size} 个已有搭配攻略（灰色的待补充）。</p>
+  <p class="page-lede">
+    共 {heroes.length} 个英雄，{withBuild.size} 个已有搭配攻略。灰色头像是还没写搭配的英雄，点进去可以补充。
+  </p>
   {
     ATTRS.map((attr) => {
       const group = heroes.filter((h) => h.attr === attr);
       return group.length === 0 ? null : (
-        <section>
-          <h2>{ATTR_LABELS[attr]}</h2>
+        <section aria-labelledby={`attr-${attr}`}>
+          <h2 id={`attr-${attr}`} class="strap">
+            {ATTR_LABELS[attr]}
+            <span class="num">{group.length}</span>
+          </h2>
           <ul class="hero-grid">
             {group.map((h) => (
               <li>
                 <a class:list={['hero-tile', { 'no-build': !withBuild.has(h.id) }]} href={url(`/heroes/${h.id}/`)}>
                   <HeroImage hero={h} />
-                  {h.name}
+                  <span class="name-strap">{h.name}</span>
+                  {withBuild.has(h.id) && <span class="flag">有搭配</span>}
                 </a>
               </li>
             ))}

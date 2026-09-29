@@ -1,79 +1,203 @@
+import { hydrateCardRecord, type CardRecord, type HydratedCard } from '../lib/card-record';
 import { parseCompareIds, serializeCompareIds } from '../lib/compare';
-import { qualityOf } from '../lib/quality';
 import { createSearcher } from '../lib/searcher';
-import type { SearchRecord } from '../lib/search-record';
 import { replaceSearch } from './history';
+import { reducedMotion } from './motion';
+import { el, qualityLabel, renderIcon, renderTemplate, setQuality } from './segments';
+
+const BASE = import.meta.env.BASE_URL;
+const SUGGESTIONS = 6;
+const ARROW = 'M14 5l7 7-7 7M21 12H3';
+
+function arrowIcon(): SVGSVGElement {
+  const ns = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(ns, 'svg');
+  for (const [k, v] of Object.entries({
+    class: 'icon',
+    width: '16',
+    height: '16',
+    viewBox: '0 0 24 24',
+    fill: 'none',
+    stroke: 'currentColor',
+    'stroke-width': '2',
+    'stroke-linecap': 'square',
+    'aria-hidden': 'true',
+  }))
+    svg.setAttribute(k, v);
+  const path = document.createElementNS(ns, 'path');
+  path.setAttribute('d', ARROW);
+  svg.appendChild(path);
+  return svg;
+}
+
+function renderCard(r: HydratedCard): HTMLElement {
+  const card = el('article', 'pc');
+  setQuality(card, r.quality);
+  const top = el('div', 'pc-top');
+  top.appendChild(renderIcon(r, BASE, 64));
+  const head = el('div');
+  const h = el('h2');
+  const link = el('a', undefined, r.name);
+  link.href = `${BASE.replace(/\/?$/, '/')}blessings/${r.id}/`;
+  h.appendChild(link);
+  const meta = el('p', 'mt');
+  meta.appendChild(el('b', undefined, qualityLabel(r.quality)));
+  meta.appendChild(document.createTextNode(r.tags.join(' · ')));
+  head.append(h, meta);
+  top.appendChild(head);
+  const summary = el('p', 'sm');
+  summary.appendChild(renderTemplate(r.summary, r.numbers));
+  const more = el('a', 'pc-more', '完整效果与数值');
+  more.href = link.href;
+  more.appendChild(arrowIcon());
+  card.append(top, summary, more);
+  return card;
+}
 
 export function initComparePage(): void {
-  const data = document.getElementById('search-data');
+  const data = document.getElementById('card-data');
   if (!data) return;
-  const records: SearchRecord[] = JSON.parse(data.textContent ?? '[]');
+  const records = (JSON.parse(data.textContent ?? '[]') as CardRecord[]).map(hydrateCardRecord);
   const search = createSearcher(records);
   const byId = new Map(records.map((r) => [r.id, r]));
-  const pool = new Map<string, Element>();
-  document.querySelectorAll<HTMLElement>('#card-pool > [data-id]').forEach((el) => pool.set(el.dataset.id!, el));
-  const slots = [...document.querySelectorAll<HTMLElement>('.compare-slot')];
-  const selected: (string | null)[] = slots.map(() => null);
+  const picks = [...document.querySelectorAll<HTMLElement>('.pick')];
+  const selected: (string | null)[] = picks.map(() => null);
 
-  const choose = (i: number, id: string | null) => {
-    selected[i] = id;
-    const slot = slots[i];
-    const input = slot.querySelector('input')!;
-    const card = slot.querySelector('.slot-card')!;
+  const parts = picks.map((pick) => ({
+    pick,
+    input: pick.querySelector('input')!,
+    box: pick.querySelector<HTMLUListElement>('.suggest')!,
+    card: pick.querySelector<HTMLElement>('.pick-card')!,
+    idle: pick.querySelector<HTMLElement>('.pick-idle')!,
+    stamp: pick.querySelector<HTMLElement>('.pick-stamp')!,
+    clear: pick.querySelector<HTMLButtonElement>('.pick-clear')!,
+  }));
+
+  const close = (i: number) => {
+    parts[i].box.hidden = true;
+  };
+
+  // LOCK-IN: the head wipes in the quality color and stamps 已锁定 with the pick number.
+  const choose = (i: number, id: string | null, animate = true) => {
+    const { pick, input, card, idle, stamp, clear } = parts[i];
+    const r = id ? byId.get(id) : undefined;
+    selected[i] = r ? r.id : null;
     card.replaceChildren();
-    if (id) {
-      const src = pool.get(id);
-      if (src) card.appendChild(src.cloneNode(true));
-      input.value = byId.get(id)?.name ?? '';
+    pick.classList.remove('is-locking');
+    if (r) {
+      card.appendChild(renderCard(r));
+      input.value = r.name;
+      setQuality(pick, r.quality);
+      pick.classList.add('is-locked');
+      if (animate && !reducedMotion()) {
+        void pick.offsetWidth; // restart the animation when re-locking the same slot
+        pick.classList.add('is-locking');
+      }
+    } else {
+      setQuality(pick, null);
+      pick.classList.remove('is-locked');
     }
-    slot.querySelector<HTMLElement>('.suggestions')!.hidden = true;
+    idle.hidden = Boolean(r);
+    stamp.hidden = !r;
+    clear.hidden = !r;
+    close(i);
     replaceSearch(serializeCompareIds(selected));
   };
 
-  slots.forEach((slot, i) => {
-    const input = slot.querySelector('input')!;
-    const box = slot.querySelector<HTMLUListElement>('.suggestions')!;
+  const suggest = (i: number) => {
+    const { input, box } = parts[i];
+    const taken = new Set(selected.filter((id, j) => id && j !== i));
+    const hits = search(input.value)
+      .filter((r) => !taken.has(r.id))
+      .slice(0, SUGGESTIONS);
+    box.replaceChildren(
+      ...hits.map((r) => {
+        const li = el('li');
+        const btn = el('button');
+        btn.type = 'button';
+        setQuality(btn, r.quality);
+        btn.appendChild(renderIcon(r, BASE, 36).firstChild!);
+        btn.appendChild(el('span', undefined, r.name));
+        btn.appendChild(el('span', 'q', qualityLabel(r.quality)));
+        btn.addEventListener('click', () => {
+          choose(i, r.id);
+          focusNext(i);
+        });
+        li.appendChild(btn);
+        return li;
+      }),
+    );
+    box.hidden = hits.length === 0;
+    return hits;
+  };
+
+  const focusNext = (i: number) => {
+    const next = parts[i + 1]?.input;
+    if (next && !selected[i + 1]) next.focus();
+    else parts[i].input.blur(); // last slot: dismiss the phone keyboard
+  };
+
+  parts.forEach(({ pick, input, box, clear }, i) => {
     input.addEventListener('input', () => {
       if (!input.value.trim()) {
         choose(i, null);
         return;
       }
-      const hits = search(input.value).slice(0, 6);
-      box.replaceChildren(
-        ...hits.map((r) => {
-          const li = document.createElement('li');
-          const btn = document.createElement('button');
-          btn.type = 'button';
-          const quality = qualityOf(r.quality)?.label;
-          btn.textContent = quality ? `${r.name} · ${quality}` : r.name;
-          btn.addEventListener('click', () => choose(i, r.id));
-          li.appendChild(btn);
-          return li;
-        }),
-      );
-      box.hidden = hits.length === 0;
+      suggest(i);
+    });
+    input.addEventListener('focus', () => {
+      if (input.value.trim() && !selected[i]) suggest(i);
     });
     input.addEventListener('keydown', (e) => {
       if (e.isComposing || e.keyCode === 229) return; // IME candidate confirmation, not a submit
       if (e.key === 'Escape') {
-        box.hidden = true;
+        close(i);
+        return;
+      }
+      if (e.key === 'ArrowDown' && !box.hidden) {
+        e.preventDefault();
+        box.querySelector('button')?.focus();
         return;
       }
       if (e.key !== 'Enter' || !input.value.trim()) return;
-      const first = search(input.value)[0];
+      const first = search(input.value).find((r) => !selected.some((id, j) => id === r.id && j !== i));
       if (!first) return;
       choose(i, first.id);
-      const next = slots[i + 1]?.querySelector('input');
-      if (next) next.focus();
-      else input.blur(); // last slot: dismiss the phone keyboard
+      focusNext(i);
+    });
+    box.addEventListener('keydown', (e) => {
+      const buttons = [...box.querySelectorAll('button')];
+      const at = buttons.indexOf(document.activeElement as HTMLButtonElement);
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        const to = e.key === 'ArrowDown' ? at + 1 : at - 1;
+        if (to < 0) input.focus();
+        else buttons[Math.min(to, buttons.length - 1)]?.focus();
+      } else if (e.key === 'Escape') {
+        close(i);
+        input.focus();
+      }
     });
     // Keep the pointer press from blurring the input, so the suggestion click still lands.
     box.addEventListener('mousedown', (e) => e.preventDefault());
-    slot.addEventListener('focusout', (e) => {
-      if (!slot.contains(e.relatedTarget as Node | null)) box.hidden = true;
+    pick.addEventListener('focusout', (e) => {
+      if (!pick.contains(e.relatedTarget as Node | null)) close(i);
+    });
+    clear.addEventListener('click', () => {
+      input.value = '';
+      choose(i, null);
+      input.focus();
     });
   });
+  picks.forEach((pick) =>
+    pick.addEventListener('animationend', (e) => {
+      // The stamp is the longest of the two lock-in animations.
+      if ((e.target as Element).classList.contains('pick-stamp')) pick.classList.remove('is-locking');
+    }),
+  );
 
-  parseCompareIds(location.search, new Set(byId.keys())).forEach((id, i) => choose(i, id));
-  if (!selected.some(Boolean)) slots[0]?.querySelector('input')?.focus();
+  // Restoring from ?ids= is instant: no page-load choreography.
+  parseCompareIds(location.search, new Set(byId.keys())).forEach((id, i) => choose(i, id, false));
+  const firstEmpty = parts.find((_, i) => !selected[i]);
+  if (!selected.some(Boolean)) firstEmpty?.input.focus();
 }

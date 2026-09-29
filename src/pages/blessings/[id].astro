@@ -1,10 +1,15 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import BlessingCard from '../../components/BlessingCard.astro';
+import BlessingIcon from '../../components/BlessingIcon.astro';
+import HeroImage from '../../components/HeroImage.astro';
+import Icon from '../../components/Icon.astro';
 import Template from '../../components/Template.astro';
 import { heroesForBlessing } from '../../lib/hero-blessings';
-import { toPlainText } from '../../lib/template';
+import { qualityOf } from '../../lib/quality';
+import { REPO_URL } from '../../lib/site';
+import { placeholderKeys, toPlainText } from '../../lib/template';
+import { OVERRIDES_FILE } from '../../lib/blessings';
 import { url } from '../../lib/url';
 
 export async function getStaticPaths() {
@@ -13,60 +18,146 @@ export async function getStaticPaths() {
 }
 
 const { blessing } = Astro.props;
+const quality = qualityOf(blessing.quality);
 const builds = (await getCollection('builds')).map((e) => e.data);
 const heroes = new Map((await getCollection('heroes')).map((e) => [e.data.id, e.data]));
 const recommendedBy = heroesForBlessing(blessing.id, builds)
   .map((id) => heroes.get(id))
   .filter((h) => h !== undefined);
 const exclusive = blessing.exclusive_hero ? heroes.get(blessing.exclusive_hero) : undefined;
+// Every placeholder of the full effect, then any that only the summary uses.
+const keys = [...new Set([...placeholderKeys(blessing.effect), ...placeholderKeys(blessing.summary)])];
+const known = keys.filter((k) => Object.hasOwn(blessing.numbers, k)).length;
+const editUrl = `${REPO_URL}/edit/main/${OVERRIDES_FILE}`;
 ---
 
 <Base title={blessing.name} description={toPlainText(blessing.summary, blessing.numbers)}>
-  <p><a href={url('/')}>← 返回图鉴</a></p>
-  <BlessingCard blessing={blessing} headingLevel="h1" />
+  <nav class="crumbs" aria-label="页面导航">
+    <a href={url('/')}><Icon name="back" size={18} />图鉴</a>
+    <a href={url(`/compare/?ids=${blessing.id}`)}><Icon name="compare" size={18} />放进三选一对比</a>
+  </nav>
 
-  {exclusive && <p>专属英雄：<a href={url(`/heroes/${exclusive.id}/`)}>{exclusive.name}</a></p>}
+  <header class="lt" data-q={quality?.id}>
+    <BlessingIcon blessing={blessing} size={128} eager />
+    <h1>{blessing.name}</h1>
+    {blessing.name_en && <p class="en">{blessing.name_en}</p>}
+    <div class="lt-tags">
+      {
+        quality ? (
+          <span class="q-strap bar">{quality.label}品质</span>
+        ) : (
+          <span class="q-strap unknown hatched">品质未标注</span>
+        )
+      }
+      {blessing.tags.map((t) => <a class="tag bar" href={url(`/?tag=${encodeURIComponent(t)}`)}>{t}</a>)}
+      {exclusive && <a class="tag bar" href={url(`/heroes/${exclusive.id}/`)}>专属：{exclusive.name}</a>}
+    </div>
+  </header>
 
-  <section>
-    <h2>完整效果</h2>
-    <p class="blessing-effect"><Template tpl={blessing.effect} numbers={blessing.numbers} /></p>
-  </section>
+  <div class="detail-grid">
+    <section aria-labelledby="effect-h">
+      <h2 id="effect-h" class="strap">完整效果</h2>
+      <p class="effect"><Template tpl={blessing.effect} numbers={blessing.numbers} /></p>
+      {
+        blessing.summary !== blessing.effect && (
+          <Fragment>
+            <h2 class="strap">选取时的简介</h2>
+            <p class="effect sm"><Template tpl={blessing.summary} numbers={blessing.numbers} /></p>
+          </Fragment>
+        )
+      }
+    </section>
 
-  <section>
-    <h2>推荐搭配的英雄</h2>
+    <section aria-labelledby="stats-h">
+      <h2 id="stats-h" class="strap">数值表<span class="num">{known}/{keys.length}</span></h2>
+      {
+        keys.length > 0 ? (
+          <table class="stats">
+            <thead>
+              <tr>
+                <th scope="col">占位符</th>
+                <th scope="col">数值</th>
+              </tr>
+            </thead>
+            <tbody>
+              {keys.map((k) => (
+                <tr>
+                  <th scope="row">{k}</th>
+                  <td>
+                    {Object.hasOwn(blessing.numbers, k) ? (
+                      <b class="v">{String(blessing.numbers[k])}</b>
+                    ) : (
+                      <i class="u">待补充</i>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <p class="note">这个福佑的描述里没有可变数值。</p>
+        )
+      }
+      <p class="note">
+        数值记录在 <code>{OVERRIDES_FILE}</code>，按占位符名填写；不知道的保持空着，页面会显示「待补充」。
+        <a class="link-inline" href={editUrl} target="_blank" rel="noopener"><Icon name="edit" />在 GitHub 上补充</a>
+      </p>
+    </section>
+  </div>
+
+  <section aria-labelledby="heroes-h">
+    <h2 id="heroes-h" class="strap">推荐搭配的英雄</h2>
     {
       recommendedBy.length > 0 ? (
-        <p>{recommendedBy.map((h, i) => <Fragment>{i > 0 && '、'}<a href={url(`/heroes/${h.id}/`)}>{h.name}</a></Fragment>)}</p>
+        <ul class="hero-grid">
+          {recommendedBy.map((h) => (
+            <li>
+              <a class="hero-tile" href={url(`/heroes/${h.id}/`)}>
+                <HeroImage hero={h} />
+                <span class="name-strap">{h.name}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
       ) : (
-        <p class="muted">暂无，欢迎补充</p>
+        <p class="note">
+          还没有英雄搭配推荐这个福佑。
+          <a class="link-inline" href={url('/heroes/')}>去英雄页看看</a>
+        </p>
       )
     }
   </section>
 
-  <section>
-    <h2>改动历史</h2>
+  <section aria-labelledby="history-h">
+    <h2 id="history-h" class="strap">改动历史</h2>
     {
       blessing.history.length > 0 ? (
-        <ol>
+        <ol class="plain-list">
           {blessing.history.map((h) => (
             <li>
-              <a href={url(`/versions/#v-${h.version}`)}>{h.version}</a>：{h.change}
+              <a class="num" href={url(`/versions/#v-${h.version}`)}>{h.version}</a>
+              {h.change}
             </li>
           ))}
         </ol>
       ) : (
-        <p class="muted">{blessing.since_version ? `自 ${blessing.since_version} 起暂无改动记录` : '暂无记录'}</p>
+        <p class="note">{blessing.since_version ? `自 ${blessing.since_version} 起暂无改动记录。` : '暂无改动记录。'}</p>
       )
     }
   </section>
 
   {
     blessing.sources.length > 0 && (
-      <section>
-        <h2>参考来源</h2>
-        <ul>
+      <section aria-labelledby="sources-h">
+        <h2 id="sources-h" class="strap">参考来源</h2>
+        <ul class="plain-list">
           {blessing.sources.map((s) => (
-            <li><a href={s} target="_blank" rel="noopener">{s}</a></li>
+            <li>
+              <a class="link-inline" href={s} target="_blank" rel="noopener">
+                {s}
+                <Icon name="external" />
+              </a>
+            </li>
           ))}
         </ul>
       </section>

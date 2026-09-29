@@ -1,6 +1,7 @@
 import { applyFilters, createSearcher, type Filters } from '../lib/searcher';
 import type { SearchRecord } from '../lib/search-record';
 import { replaceSearch } from './history';
+import { flip } from './motion';
 
 type FilterKey = keyof Filters;
 
@@ -15,34 +16,54 @@ export function initSearchPage(): void {
   const records: SearchRecord[] = JSON.parse(data.textContent ?? '[]');
   const search = createSearcher(records);
   const items = new Map<string, HTMLElement>();
-  list.querySelectorAll<HTMLElement>('li[data-id]').forEach((li) => items.set(li.dataset.id!, li));
+  list.querySelectorAll<HTMLElement>(':scope > li[data-id]').forEach((li) => items.set(li.dataset.id!, li));
+  const total = records.length;
+  const countNum = count.querySelector('b')!;
+  const countLabel = count.querySelector('small')!;
+  const tallies = new Map<string, HTMLElement>();
+  document.querySelectorAll<HTMLElement>('[data-tally]').forEach((el) => tallies.set(el.dataset.tally!, el));
+  const reset = document.getElementById('reset-filters');
 
-  // Each chip row drives one filter; the value lives in data-quality / data-tag.
+  // Team-bars drive quality, the tag strip drives tag. Each is a toggle: pressing the active one clears it.
   const groups: Record<FilterKey, HTMLButtonElement[]> = {
-    quality: [...document.querySelectorAll<HTMLButtonElement>('.chip[data-quality]')],
-    tag: [...document.querySelectorAll<HTMLButtonElement>('.chip[data-tag]')],
+    quality: [...document.querySelectorAll<HTMLButtonElement>('button[data-quality]')],
+    tag: [...document.querySelectorAll<HTMLButtonElement>('button[data-tag]')],
   };
   const filters: Required<Filters> = { quality: '', tag: '' };
-  const chipValue = (key: FilterKey, chip: HTMLButtonElement) => chip.dataset[key] ?? '';
+  const valueOf = (key: FilterKey, b: HTMLButtonElement) => b.dataset[key] ?? '';
 
   const select = (key: FilterKey, value: string) => {
-    const chip = groups[key].find((c) => chipValue(key, c) === value);
-    if (!chip) return; // unknown value from the URL: keep "all"
+    const known = value === '' || groups[key].some((b) => valueOf(key, b) === value);
+    if (!known) return; // unknown value from the URL: keep "all"
     (filters as Record<FilterKey, string>)[key] = value;
-    groups[key].forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+    groups[key].forEach((b) => b.setAttribute('aria-pressed', String(valueOf(key, b) === value)));
   };
 
-  const render = () => {
-    const results = applyFilters(search(input.value), filters);
+  const render = (animate = true) => {
+    const hits = search(input.value);
+    // Tallies count the current query and tag, so each team-bar previews what pressing it would show.
+    const byTag = applyFilters(hits, { tag: filters.tag });
+    const tally: Record<string, number> = { ssr: 0, sr: 0, r: 0, none: 0 };
+    for (const r of byTag) tally[r.quality ?? 'none'] += 1;
+    tallies.forEach((el, q) => (el.textContent = String(tally[q] ?? 0)));
+
+    const results = applyFilters(byTag, { quality: filters.quality });
     const shown = new Set(results.map((r) => r.id));
-    for (const r of results) {
-      const li = items.get(r.id);
-      if (li) list.appendChild(li); // re-order by relevance
-    }
-    items.forEach((li, id) => (li.hidden = !shown.has(id)));
+    const apply = () => {
+      for (const r of results) {
+        const li = items.get(r.id);
+        if (li) list.appendChild(li); // re-order by relevance
+      }
+      items.forEach((li, id) => (li.hidden = !shown.has(id)));
+    };
+    if (animate) flip(list, apply);
+    else apply();
+
     const filtered = input.value.trim() !== '' || filters.quality !== '' || filters.tag !== '';
-    count.textContent = filtered ? `找到 ${results.length} 个` : `共 ${records.length} 个`;
+    countNum.textContent = String(results.length);
+    countLabel.textContent = filtered ? `/ ${total}` : '福佑';
     empty.hidden = results.length > 0;
+    if (reset) reset.hidden = filters.quality === '' && filters.tag === '';
     scheduleUrlUpdate();
   };
 
@@ -66,7 +87,7 @@ export function initSearchPage(): void {
   select('quality', initial.get('quality') ?? '');
   select('tag', initial.get('tag') ?? '');
 
-  input.addEventListener('input', render);
+  input.addEventListener('input', () => render());
   input.addEventListener('keydown', (e) => {
     if (e.isComposing || e.keyCode === 229) return; // IME candidate confirmation, not a submit
     if (e.key === 'Enter') {
@@ -76,13 +97,31 @@ export function initSearchPage(): void {
       render();
     }
   });
+  document.querySelector('.field-clear')?.addEventListener('click', () => {
+    input.value = '';
+    render();
+    input.focus();
+  });
   for (const key of Object.keys(groups) as FilterKey[]) {
-    for (const chip of groups[key]) {
-      chip.addEventListener('click', () => {
-        select(key, chipValue(key, chip));
+    for (const b of groups[key]) {
+      b.addEventListener('click', () => {
+        const value = valueOf(key, b);
+        select(key, filters[key] === value ? '' : value);
         render();
       });
     }
   }
-  if (input.value || filters.quality || filters.tag) render();
+  document.querySelectorAll<HTMLButtonElement>('[data-try]').forEach((b) =>
+    b.addEventListener('click', () => {
+      input.value = b.dataset.try ?? '';
+      render();
+      input.focus();
+    }),
+  );
+  reset?.addEventListener('click', () => {
+    select('quality', '');
+    select('tag', '');
+    render();
+  });
+  if (input.value || filters.quality || filters.tag) render(false);
 }

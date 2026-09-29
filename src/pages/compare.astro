@@ -1,41 +1,69 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import BlessingCard from '../components/BlessingCard.astro';
-import { toSearchRecord } from '../lib/search-record';
+import Icon from '../components/Icon.astro';
+import { publicFileExists } from '../lib/assets';
+import { toCardRecord } from '../lib/card-data';
+import { MAX_COMPARE } from '../lib/compare';
 import { safeJson } from '../lib/json';
 
 const blessings = (await getCollection('blessings'))
   .map((e) => e.data)
   .sort((a, b) => a.name.localeCompare(b.name, 'zh-CN'));
-const records = blessings.map(toSearchRecord);
+// Cards are drawn on the client from this data; no hidden pool of 675 server-rendered cards.
+const records = blessings.map((b) => toCardRecord(b, Boolean(b.icon && publicFileExists(`img/blessings/${b.icon}`))));
+const slots = Array.from({ length: MAX_COMPARE }, (_, i) => i);
 ---
 
-<Base title="三选一对比">
-  <h1>三选一对比</h1>
-  <p class="muted">对局里抽到三个福佑？分别搜出来并排看。回车选第一个结果并跳到下一格；链接可以直接分享。</p>
-  <div class="compare-grid">
+<Base title="三选一对比" description="对局里抽到三个福佑？分别搜出来并排比较。">
+  <div class="board-head">
+    <h1>三选一对比</h1>
+    <p class="page-lede">每格输入名称或首字母，回车锁定第一个结果并跳到下一格。锁定后的链接可以直接分享。</p>
+  </div>
+  <div class="board">
     {
-      [0, 1, 2].map((i) => (
-        <section class="compare-slot" data-slot={i}>
-          <input
-            class="search-input"
-            type="search"
-            placeholder={`福佑 ${i + 1}`}
-            aria-label={`第 ${i + 1} 个福佑`}
-            autocomplete="off"
-            enterkeyhint={i === 2 ? 'done' : 'next'}
-          />
-          <ul class="suggestions" hidden />
-          <div class="slot-card" />
+      slots.map((i) => (
+        <section class="pick" data-slot={i} aria-label={`第 ${i + 1} 个福佑`}>
+          <div class="pick-head">
+            <span class="pick-lock" aria-hidden="true" />
+            <span class="pick-no num" aria-hidden="true">{i + 1}</span>
+            <span class="pick-state">
+              <span class="pick-idle">待选</span>
+              <span class="pick-stamp" hidden>
+                <Icon name="lock" size={16} />
+                已锁定
+              </span>
+            </span>
+            <button class="icon-btn pick-clear" type="button" aria-label={`清空第 ${i + 1} 格`} hidden>
+              <Icon name="close" />
+            </button>
+          </div>
+          <div class="pick-field">
+            <div class="field field-sm">
+              <label class="field-cap" for={`pick-${i}`}>
+                <Icon name="search" />
+                <span class="sr-only">搜索第 {i + 1} 个福佑</span>
+              </label>
+              <input
+                id={`pick-${i}`}
+                type="search"
+                placeholder={`福佑 ${i + 1}：名称 / 首字母`}
+                autocomplete="off"
+                autocapitalize="off"
+                spellcheck="false"
+                enterkeyhint={i === MAX_COMPARE - 1 ? 'done' : 'next'}
+                aria-controls={`suggest-${i}`}
+              />
+            </div>
+            <ul id={`suggest-${i}`} class="suggest" aria-label="候选福佑" hidden />
+          </div>
+          <div class="pick-card" data-empty="空位：搜索并锁定一个福佑" aria-live="polite" />
         </section>
       ))
     }
   </div>
-  <div id="card-pool" hidden>
-    {blessings.map((b) => <div data-id={b.id}><BlessingCard blessing={b} /></div>)}
-  </div>
-  <script type="application/json" id="search-data" set:html={safeJson(records)} />
+  <noscript><p class="page-lede">对比需要启用 JavaScript；也可以在图鉴里逐个查看。</p></noscript>
+  <script type="application/json" id="card-data" set:html={safeJson(records)} />
   <script>
     import { initComparePage } from '../scripts/compare-page';
     initComparePage();

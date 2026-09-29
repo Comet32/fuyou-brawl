@@ -2,8 +2,9 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import BlessingCard from '../components/BlessingCard.astro';
+import Icon from '../components/Icon.astro';
 import { QUALITIES } from '../lib/quality';
-import { TAGS, TAG_COLORS } from '../lib/tags';
+import { TAGS } from '../lib/tags';
 import { toSearchRecord } from '../lib/search-record';
 import { safeJson } from '../lib/json';
 
@@ -12,55 +13,75 @@ const blessings = (await getCollection('blessings'))
   .sort((a, b) => a.name.localeCompare(b.name, 'zh-CN'));
 const records = blessings.map(toSearchRecord);
 const tags = TAGS.filter((t) => blessings.some((b) => b.tags.includes(t)));
+const tally = (q: string | null) => blessings.filter((b) => b.quality === q).length;
 ---
 
 <Base>
+  <p id="count" slot="score" class="score bar" aria-live="polite">
+    <b>{blessings.length}</b><small>福佑</small>
+  </p>
   <h1 class="sr-only">福佑图鉴</h1>
-  <div class="search-box">
-    <input
-      id="q"
-      class="search-input"
-      type="search"
-      placeholder="搜福佑：名称 / 拼音首字母 / 效果关键词"
-      autocomplete="off"
-      aria-label="搜索福佑"
-      enterkeyhint="search"
-      autofocus
-    />
-    <div class="filter-row">
-      <div class="chips" role="group" aria-label="按品质筛选">
-        <button class="chip" type="button" data-quality="" aria-pressed="true">全部</button>
-        {
-          QUALITIES.map((q) => (
-            <button class="chip" type="button" data-quality={q.id} aria-pressed="false">
-              <span class="dot" style={`--c:${q.color}`} aria-hidden="true" />{q.label}
-            </button>
-          ))
-        }
-        <button class="chip" type="button" data-quality="none" aria-pressed="false">未标注</button>
-      </div>
-      <p id="count" class="count muted" aria-live="polite">共 {blessings.length} 个</p>
+  <div class="lookup">
+    <div class="field">
+      <label class="field-cap" for="q"><Icon name="search" size={22} /><span class="sr-only">搜索福佑</span></label>
+      <input
+        id="q"
+        type="search"
+        placeholder="名称 · 首字母 · 效果"
+        autocomplete="off"
+        autocapitalize="off"
+        spellcheck="false"
+        enterkeyhint="search"
+        autofocus
+      />
+      <button class="icon-btn field-clear" type="button" aria-label="清空搜索"><Icon name="close" /></button>
     </div>
-    {
-      tags.length > 0 && (
-        <div class="filter-row">
-          <div class="chips" role="group" aria-label="按标签筛选">
-            <button class="chip" type="button" data-tag="" aria-pressed="true">全部</button>
-            {tags.map((t) => (
-              <button class="chip" type="button" data-tag={t} aria-pressed="false">
-                <span class="dot" style={`--c:${TAG_COLORS[t]}`} aria-hidden="true" />{t}
-              </button>
-            ))}
-          </div>
-        </div>
-      )
-    }
   </div>
-  {blessings.length === 0 && <p class="empty">还没有收录福佑。</p>}
-  <ul id="results" class="card-list">
+  <div class="teams" role="group" aria-label="按品质筛选（再点一次取消）">
+    {
+      QUALITIES.map((q) => (
+        <button class="team bar" type="button" data-q={q.id} data-quality={q.id} aria-pressed="false">
+          {q.label}
+          <b data-tally={q.id}>{tally(q.id)}</b>
+        </button>
+      ))
+    }
+    <button class="team bar team-none" type="button" data-quality="none" aria-pressed="false">
+      <span class="strip hatched" aria-hidden="true"></span>未标注<b data-tally="none">{tally(null)}</b>
+    </button>
+  </div>
+  {
+    tags.length > 0 && (
+      <div class="tagstrip" role="group" aria-label="按标签筛选（再点一次取消）">
+        {tags.map((t) => (
+          <button class="chip bar" type="button" data-tag={t} aria-pressed="false">
+            {t}
+          </button>
+        ))}
+      </div>
+    )
+  }
+  {
+    blessings.length === 0 && (
+      <div class="empty-state">
+        <h2>还没有收录福佑</h2>
+        <p>运行 npm run import 从游戏文件导入。</p>
+      </div>
+    )
+  }
+  <ul id="results" class="slots">
     {blessings.map((b) => <li data-id={b.id}><BlessingCard blessing={b} /></li>)}
   </ul>
-  <p id="no-result" class="empty" hidden>没找到，换个关键词试试（支持拼音首字母，比如 dcsw）</p>
+  <div id="no-result" class="empty-state" hidden>
+    <h2>没有匹配的福佑</h2>
+    <p>支持中文名、全拼、拼音首字母、英文名和效果关键词。试试：</p>
+    <div class="try-list">
+      <button class="try bar" type="button" data-try="dcsw"><code>dcsw</code>电锤思维（首字母）</button>
+      <button class="try bar" type="button" data-try="复活"><code>复活</code>效果关键词</button>
+      <button class="try bar" type="button" data-try="maelstrom"><code>maelstrom</code>英文名</button>
+    </div>
+    <button id="reset-filters" class="btn bar" type="button" hidden>清除品质和标签筛选</button>
+  </div>
   <script type="application/json" id="search-data" set:html={safeJson(records)} />
   <script>
     import { initSearchPage } from '../scripts/search-page';

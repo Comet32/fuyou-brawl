@@ -1,23 +1,22 @@
 ---
 import type { Blessing } from '../lib/schema';
 import { publicFileExists } from '../lib/assets';
-import { qualityOf } from '../lib/quality';
 import { url } from '../lib/url';
 
 interface Props {
   blessing: Blessing;
+  /** Rendered size in CSS pixels (the source images are 128×128). */
+  size?: number;
+  eager?: boolean;
 }
-const { blessing } = Astro.props;
-const quality = qualityOf(blessing.quality);
+const { blessing, size = 56, eager = false } = Astro.props;
 const rel = blessing.icon ? `img/blessings/${blessing.icon}` : undefined;
 ---
 
-<div class:list={['blessing-icon', { unlabeled: !quality }]} style={`--q:${quality?.color ?? 'var(--surface-2)'}`}>
-  {
-    rel && publicFileExists(rel) ? (
-      <img src={url(rel)} alt="" width="48" height="48" loading="lazy" />
-    ) : (
-      <span aria-hidden="true">{blessing.name.slice(0, 1)}</span>
-    )
-  }
-</div>
+<span class="ic">{
+  rel && publicFileExists(rel) ? (
+    <img src={url(rel)} alt="" width={size} height={size} loading={eager ? undefined : 'lazy'} decoding="async" />
+  ) : (
+    <span class="fb" aria-hidden="true">{blessing.name.slice(0, 1)}</span>
+  )
+}</span>

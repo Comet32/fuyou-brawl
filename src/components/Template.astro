@@ -1,7 +1,9 @@
 ---
 // Renders a game description template. Every piece of text goes through an Astro
 // expression, so it is escaped; no raw HTML from the data ever reaches the page.
-import { parseTemplate } from '../lib/template';
+// Markup is kept minimal (plain text for the normal tone) because the catalog renders 675 of these.
+// scripts/segments.ts renders the same classes on the client.
+import { parseTemplate, type Tone } from '../lib/template';
 
 interface Props {
   tpl: string;
@@ -9,6 +11,7 @@ interface Props {
 }
 const { tpl, numbers } = Astro.props;
 const segments = parseTemplate(tpl, numbers);
+const TONE_CLASS: Record<Tone, string | undefined> = { normal: undefined, highlight: 'h', muted: 'm', accent: 'a' };
 ---
 
 {
@@ -16,11 +19,15 @@ const segments = parseTemplate(tpl, numbers);
     seg.type === 'break' ? (
       <br />
     ) : seg.type === 'text' ? (
-      <span class={seg.tone}>{seg.text}</span>
+      TONE_CLASS[seg.tone] ? (
+        <span class={TONE_CLASS[seg.tone]}>{seg.text}</span>
+      ) : (
+        seg.text
+      )
     ) : seg.value !== undefined ? (
-      <span class="v">{seg.value}</span>
+      <b class="v">{seg.value}</b>
     ) : (
-      <span class="v v-unknown" title={seg.key}>?</span>
+      <i class="u" title={`${seg.key}：数值待补充`}>?</i>
     ),
   )
 }
