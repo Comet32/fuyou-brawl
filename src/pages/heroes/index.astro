@@ -13,7 +13,7 @@ const withBuild = new Set((await getCollection('builds')).map((e) => e.data.hero
 
 <Base title="英雄">
   <h1>英雄搭配</h1>
-  <p class="muted">共 {heroes.length} 个英雄，其中 {withBuild.size} 个已有搭配攻略（半透明的待补充）。</p>
+  <p class="muted">共 {heroes.length} 个英雄，其中 {withBuild.size} 个已有搭配攻略（灰色的待补充）。</p>
   {
     ATTRS.map((attr) => {
       const group = heroes.filter((h) => h.attr === attr);

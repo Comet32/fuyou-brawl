@@ -7,14 +7,16 @@ import BlessingIcon from './BlessingIcon.astro';
 interface Props {
   blessing: Blessing;
   note?: string;
+  headingLevel?: 'h1' | 'h2' | 'h3';
 }
-const { blessing, note } = Astro.props;
+const { blessing, note, headingLevel = 'h3' } = Astro.props;
+const Tag = headingLevel;
 ---
 
 <article class="blessing-card" style={`--cat:${CATEGORY_COLORS[blessing.category]}`}>
   <BlessingIcon blessing={blessing} />
   <div>
-    <h3><a href={url(`/blessings/${blessing.id}/`)}>{blessing.name}</a></h3>
+    <Tag><a href={url(`/blessings/${blessing.id}/`)}>{blessing.name}</a></Tag>
     <p class="blessing-meta">
       <span class="cat">{blessing.category}</span>
       {blessing.tags.map((t) => <span class="tag">{t}</span>)}

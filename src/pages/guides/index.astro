@@ -8,6 +8,7 @@ const guides = (await getCollection('guides')).sort((a, b) => a.data.order - b.d
 
 <Base title="攻略">
   <h1>攻略文章</h1>
+  {guides.length === 0 && <p class="empty">还没有攻略文章。</p>}
   <ul class="card-list">
     {
       guides.map((g) => (

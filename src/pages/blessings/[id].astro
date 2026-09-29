@@ -22,7 +22,7 @@ const numbers = Object.entries(blessing.numbers);
 
 <Base title={blessing.name} description={blessing.effect}>
   <p><a href={url('/')}>← 返回图鉴</a></p>
-  <BlessingCard blessing={blessing} />
+  <BlessingCard blessing={blessing} headingLevel="h1" />
 
   {exclusive && <p>专属英雄：<a href={url(`/heroes/${exclusive.id}/`)}>{exclusive.name}</a></p>}
 

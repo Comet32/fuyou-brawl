@@ -29,8 +29,8 @@ export const blessingSchema = z.object({
   // Keys are human-readable Chinese labels, e.g. { 金币: 3500 }
   numbers: z.record(z.string(), z.union([z.number(), z.string()])).default({}),
   tags: z.array(z.string()).default([]),
-  // File name under public/img/blessings/
-  icon: z.string().optional(),
+  // Plain file name (no path segments) under public/img/blessings/
+  icon: z.string().regex(/^[\w.-]+\.(webp|png)$/, 'icon 必须是 .webp/.png 文件名，不含路径').optional(),
   since_version: isoDate.optional(),
   sources: z.array(httpUrl).default([]),
   history: z.array(z.object({ version: isoDate, change: z.string().min(1) })).default([]),

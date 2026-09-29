@@ -18,7 +18,14 @@ const records = blessings.map(toSearchRecord);
     {
       [0, 1, 2].map((i) => (
         <section class="compare-slot" data-slot={i}>
-          <input class="search-input" type="search" placeholder={`福佑 ${i + 1}`} autocomplete="off" enterkeyhint="next" />
+          <input
+            class="search-input"
+            type="search"
+            placeholder={`福佑 ${i + 1}`}
+            aria-label={`第 ${i + 1} 个福佑`}
+            autocomplete="off"
+            enterkeyhint={i === 2 ? 'done' : 'next'}
+          />
           <ul class="suggestions" hidden />
           <div class="slot-card" />
         </section>

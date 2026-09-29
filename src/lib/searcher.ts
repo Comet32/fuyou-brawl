@@ -27,12 +27,15 @@ export function createSearcher(records: SearchRecord[]) {
     ignoreLocation: true,
   });
 
+  // Normalize each name once instead of on every keystroke.
+  const names = records.map((r) => normalize(r.name));
+
   return function search(query: string): SearchRecord[] {
     const q = normalize(query);
     if (!q) return [...records];
     // Exact name / pinyin prefix hits always rank above fuzzy hits, ordered by match quality (stable).
     const exact = records
-      .map((r) => ({ r, rank: exactRank(r, normalize(r.name), q) }))
+      .map((r, i) => ({ r, rank: exactRank(r, names[i], q) }))
       .filter((x): x is { r: SearchRecord; rank: number } => x.rank !== undefined)
       .sort((a, b) => a.rank - b.rank)
       .map((x) => x.r);

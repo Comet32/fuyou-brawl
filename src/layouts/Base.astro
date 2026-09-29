@@ -18,7 +18,10 @@ const nav = [
   { href: url('/guides/'), label: '攻略' },
 ];
 const path = Astro.url.pathname;
-const isCurrent = (href: string) => (href === home ? path === home : path.startsWith(href));
+const blessingsPrefix = url('/blessings/');
+// Blessing detail pages belong to the 图鉴 nav item.
+const isCurrent = (href: string) =>
+  href === home ? path === home || path.startsWith(blessingsPrefix) : path.startsWith(href);
 ---
 
 <!doctype html>

@@ -14,6 +14,7 @@ const categories = CATEGORIES.filter((c) => blessings.some((b) => b.category ===
 ---
 
 <Base>
+  <h1 class="sr-only">福佑图鉴</h1>
   <div class="search-box">
     <input
       id="q"
@@ -21,15 +22,19 @@ const categories = CATEGORIES.filter((c) => blessings.some((b) => b.category ===
       type="search"
       placeholder="搜福佑：名称 / 拼音首字母 / 效果关键词"
       autocomplete="off"
+      aria-label="搜索福佑"
       enterkeyhint="search"
       autofocus
     />
-    <div class="chips" role="group" aria-label="按分类筛选">
-      <button class="chip" type="button" data-cat="" aria-pressed="true">全部</button>
-      {categories.map((c) => <button class="chip" type="button" data-cat={c} aria-pressed="false">{c}</button>)}
+    <div class="filter-row">
+      <div class="chips" role="group" aria-label="按分类筛选">
+        <button class="chip" type="button" data-cat="" aria-pressed="true">全部</button>
+        {categories.map((c) => <button class="chip" type="button" data-cat={c} aria-pressed="false">{c}</button>)}
+      </div>
+      <p id="count" class="count muted" aria-live="polite">共 {blessings.length} 个</p>
     </div>
-    <p id="count" class="muted" aria-live="polite">共 {blessings.length} 个福佑</p>
   </div>
+  {blessings.length === 0 && <p class="empty">还没有收录福佑。</p>}
   <ul id="results" class="card-list">
     {blessings.map((b) => <li data-id={b.id}><BlessingCard blessing={b} /></li>)}
   </ul>

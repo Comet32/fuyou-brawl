@@ -1,5 +1,6 @@
 import { applyCategory, createSearcher } from '../lib/searcher';
 import type { SearchRecord } from '../lib/search-record';
+import { replaceSearch } from './history';
 
 export function initSearchPage(): void {
   const data = document.getElementById('search-data');
@@ -25,20 +26,31 @@ export function initSearchPage(): void {
     }
     items.forEach((li, id) => (li.hidden = !shown.has(id)));
     const filtered = input.value.trim() !== '' || category !== '';
-    count.textContent = filtered ? `找到 ${results.length} 个` : `共 ${records.length} 个福佑`;
+    count.textContent = filtered ? `找到 ${results.length} 个` : `共 ${records.length} 个`;
     empty.hidden = results.length > 0;
+    scheduleUrlUpdate();
+  };
 
-    const params = new URLSearchParams(location.search);
-    if (input.value.trim()) params.set('q', input.value.trim());
-    else params.delete('q');
-    const qs = params.toString();
-    history.replaceState(null, '', qs ? `${location.pathname}?${qs}` : location.pathname);
+  // Results render immediately; the URL is updated after typing pauses.
+  let urlTimer: ReturnType<typeof setTimeout> | undefined;
+  const scheduleUrlUpdate = () => {
+    clearTimeout(urlTimer);
+    urlTimer = setTimeout(() => {
+      const params = new URLSearchParams(location.search);
+      if (input.value.trim()) params.set('q', input.value.trim());
+      else params.delete('q');
+      const qs = params.toString();
+      replaceSearch(qs ? `?${qs}` : '');
+    }, 250);
   };
 
   input.value = new URLSearchParams(location.search).get('q') ?? '';
   input.addEventListener('input', render);
   input.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
+    if (e.isComposing || e.keyCode === 229) return; // IME candidate confirmation, not a submit
+    if (e.key === 'Enter') {
+      input.blur(); // dismiss the phone keyboard
+    } else if (e.key === 'Escape') {
       input.value = '';
       render();
     }

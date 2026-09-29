@@ -20,7 +20,7 @@ const changelog = `https://steamcommunity.com/sharedfiles/filedetails/changelog/
         <ul>
           {v.changes.map((c) => (
             <li>
-              {c.blessing && <Fragment><a href={url(`/blessings/${c.blessing}/`)}>{names.get(c.blessing)}</a>：</Fragment>}
+              {c.blessing && <Fragment><a href={url(`/blessings/${c.blessing}/`)}>{names.get(c.blessing) ?? c.blessing}</a>：</Fragment>}
               {c.text}
             </li>
           ))}

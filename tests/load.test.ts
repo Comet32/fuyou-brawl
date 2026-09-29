@@ -1,11 +1,17 @@
-import { mkdirSync, mkdtempSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { describe, expect, it } from 'vitest';
+import { afterAll, describe, expect, it } from 'vitest';
 import { loadDataSet, readFrontmatter } from '../src/lib/load';
+
+const tempDirs: string[] = [];
+afterAll(() => {
+  for (const dir of tempDirs) rmSync(dir, { recursive: true, force: true });
+});
 
 function makeRepo(blessingsYaml: string): string {
   const root = mkdtempSync(join(tmpdir(), 'fuyou-'));
+  tempDirs.push(root);
   mkdirSync(join(root, 'src/data'), { recursive: true });
   mkdirSync(join(root, 'src/content/builds'), { recursive: true });
   writeFileSync(join(root, 'src/data/blessings.yaml'), blessingsYaml);

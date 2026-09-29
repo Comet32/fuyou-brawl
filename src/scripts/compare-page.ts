@@ -1,6 +1,7 @@
 import { parseCompareIds, serializeCompareIds } from '../lib/compare';
 import { createSearcher } from '../lib/searcher';
 import type { SearchRecord } from '../lib/search-record';
+import { replaceSearch } from './history';
 
 export function initComparePage(): void {
   const data = document.getElementById('search-data');
@@ -25,7 +26,7 @@ export function initComparePage(): void {
       input.value = byId.get(id)?.name ?? '';
     }
     slot.querySelector<HTMLElement>('.suggestions')!.hidden = true;
-    history.replaceState(null, '', location.pathname + serializeCompareIds(selected));
+    replaceSearch(serializeCompareIds(selected));
   };
 
   slots.forEach((slot, i) => {
@@ -51,11 +52,23 @@ export function initComparePage(): void {
       box.hidden = hits.length === 0;
     });
     input.addEventListener('keydown', (e) => {
+      if (e.isComposing || e.keyCode === 229) return; // IME candidate confirmation, not a submit
+      if (e.key === 'Escape') {
+        box.hidden = true;
+        return;
+      }
       if (e.key !== 'Enter' || !input.value.trim()) return;
       const first = search(input.value)[0];
       if (!first) return;
       choose(i, first.id);
-      slots[i + 1]?.querySelector('input')?.focus();
+      const next = slots[i + 1]?.querySelector('input');
+      if (next) next.focus();
+      else input.blur(); // last slot: dismiss the phone keyboard
+    });
+    // Keep the pointer press from blurring the input, so the suggestion click still lands.
+    box.addEventListener('mousedown', (e) => e.preventDefault());
+    slot.addEventListener('focusout', (e) => {
+      if (!slot.contains(e.relatedTarget as Node | null)) box.hidden = true;
     });
   });
 
