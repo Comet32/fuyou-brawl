@@ -1,7 +1,8 @@
 /*
- * Draft-desk world: stage black-blue ground, slate panel bars cut on a 12° slant at their
- * leading end, quality colors as solid team bars, one broadcast gold for focus / selection / locked.
- * Flat color only: no gradients, glass or glow. Depth comes from overlapping bars and offset shadows.
+ * Draft-desk world: stage black-blue ground, rounded slate cards (14px) and controls (10px),
+ * quality colors as solid team masses, one broadcast gold for focus / selection / locked.
+ * The 12° slant survives only as the leading cap of the lookup bar and team-bar tallies.
+ * Flat color only: no gradients, glass or glow. Depth comes from overlap; soft shadows only on floating layers.
  */
 
 /* Barlow Condensed, latin subset only (numerals and Latin). CJK stays on the system heavy sans. */
@@ -40,6 +41,7 @@
 
 /* ---------- Tokens ---------- */
 :root {
+  --press-shade: rgb(0 0 0 / 0.14);
   color-scheme: dark;
   /* Stage and panel bars */
   --stage: #0a0d14;
@@ -358,7 +360,7 @@ main {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 0 18px 0 20px;
+  padding: 0 19px;
   color: var(--ink-2);
   text-decoration: none;
   font-weight: 700;
@@ -382,7 +384,7 @@ main {
   right: 14px;
   bottom: 0;
   height: 3px;
-  border-radius: 3px 3px 0 0;
+  border-radius: 4px 4px 0 0;
   background: var(--gold);
 }
 .topbar-end {
@@ -535,7 +537,7 @@ body {
   justify-content: center;
   gap: 8px;
   min-height: 44px;
-  padding: 0 18px 0 22px;
+  padding: 0 20px;
   color: var(--ink);
   font-weight: 700;
   font-size: 15px;
@@ -1068,7 +1070,7 @@ body {
   right: 4px;
   top: calc(100% + 2px);
   height: 6px;
-  border-radius: 3px;
+  border-radius: 4px;
   background: var(--hatch);
   -webkit-mask: var(--hatch-mask) repeat;
   mask: var(--hatch-mask) repeat;
@@ -1333,7 +1335,7 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  border-radius: 11px;
+  border-radius: 12px;
   background: var(--hatch);
   opacity: 0.7;
   -webkit-mask: var(--hatch-mask) repeat;
@@ -1420,7 +1422,7 @@ body {
   color: inherit;
 }
 .pick-clear:hover {
-  background: rgb(0 0 0 / 0.14);
+  background: var(--press-shade);
   color: inherit;
 }
 .pick-card {
@@ -2297,6 +2299,7 @@ a.tag:hover {
   font: 0.9em var(--font-code);
   background: var(--panel-2);
   padding: 1px 5px;
+  border-radius: 4px;
 }
 .prose strong {
   font-weight: 800;
@@ -2328,7 +2331,7 @@ a.tag:hover {
   grid-template-columns: auto minmax(0, 1fr) auto;
   gap: 4px 16px;
   align-items: center;
-  padding: 16px 18px 16px 22px;
+  padding: 16px 20px;
   color: var(--ink);
   text-decoration: none;
 }
@@ -2428,7 +2431,7 @@ a.tag:hover {
   width: 40px;
   height: 4px;
   margin: 0 auto 14px;
-  border-radius: 2px;
+  border-radius: 4px;
   background: var(--gold);
 }
 .more-sheet::backdrop {
@@ -2502,7 +2505,7 @@ a.tag:hover {
 .tallies i {
   width: 12px;
   height: 12px;
-  border-radius: 3px;
+  border-radius: 4px;
   background: var(--q, transparent);
 }
 .tallies b {
@@ -2645,6 +2648,7 @@ a.tag:hover {
 .kbd-hint kbd {
   font: 700 13px var(--font-num);
   padding: 0 6px;
+  border-radius: 4px;
   border: 1px solid var(--line);
   background: var(--panel);
   color: var(--ink-2);
@@ -2671,3 +2675,9 @@ a.tag:hover {
     transition-duration: 1ms !important;
   }
 }
+
+/* Rounded leftovers: every drawn surface follows the rounded grammar. */
+.icon-btn { border-radius: 10px; }
+.prose blockquote { border-radius: 10px; }
+.page-lede code { border-radius: 4px; }
+::-webkit-scrollbar-thumb { border-radius: 999px; }

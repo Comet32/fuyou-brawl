@@ -103,7 +103,7 @@ const groups = [
             <span class="group-empty" hidden={g.items.length > 0}>
               {g.q ? (
                 <Fragment>
-                  还没有 · <a href={url('/label/')}>去标注 →</a>
+                  还没有 · <a href={url('/label/')}>去标注 <Icon name="next" /></a>
                 </Fragment>
               ) : (
                 '全部已标注'

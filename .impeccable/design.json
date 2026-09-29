@@ -1,0 +1,779 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-29T11:26:33.711Z",
+  "title": "Design System: 福佑大乱斗 · 图鉴与攻略",
+  "sourceCommit": "0a6494a5b1f966a781b2195d55cf1345efba8476",
+  "extensions": {
+    "colorMeta": {
+      "stage": {
+        "role": "neutral",
+        "displayName": "Stage Black-Blue",
+        "canonical": "#0a0d14",
+        "cssVar": "--stage",
+        "tonalRamp": [
+          "oklch(15% 0.016 266.6)",
+          "oklch(26% 0.016 266.6)",
+          "oklch(37% 0.016 266.6)",
+          "oklch(48% 0.016 266.6)",
+          "oklch(60% 0.016 266.6)",
+          "oklch(71% 0.016 266.6)",
+          "oklch(83% 0.016 266.6)",
+          "oklch(95% 0.016 266.6)"
+        ],
+        "light": "#e8ecf2"
+      },
+      "hollow": {
+        "role": "neutral",
+        "displayName": "Sunken Hollow",
+        "canonical": "#05070b",
+        "cssVar": "--hollow",
+        "tonalRamp": [
+          "oklch(15% 0.011 259.6)",
+          "oklch(26% 0.011 259.6)",
+          "oklch(37% 0.011 259.6)",
+          "oklch(48% 0.011 259.6)",
+          "oklch(60% 0.011 259.6)",
+          "oklch(71% 0.011 259.6)",
+          "oklch(83% 0.011 259.6)",
+          "oklch(95% 0.011 259.6)"
+        ],
+        "light": "#dbe1ea"
+      },
+      "panel": {
+        "role": "neutral",
+        "displayName": "Slate Panel",
+        "canonical": "#121826",
+        "cssVar": "--panel",
+        "tonalRamp": [
+          "oklch(15% 0.029 266.1)",
+          "oklch(26% 0.029 266.1)",
+          "oklch(37% 0.029 266.1)",
+          "oklch(48% 0.029 266.1)",
+          "oklch(60% 0.029 266.1)",
+          "oklch(71% 0.029 266.1)",
+          "oklch(83% 0.029 266.1)",
+          "oklch(95% 0.029 266.1)"
+        ],
+        "light": "#ffffff"
+      },
+      "panel-2": {
+        "role": "neutral",
+        "displayName": "Slate Panel Hover",
+        "canonical": "#1a2233",
+        "cssVar": "--panel-2",
+        "tonalRamp": [
+          "oklch(15% 0.034 264.7)",
+          "oklch(26% 0.034 264.7)",
+          "oklch(37% 0.034 264.7)",
+          "oklch(48% 0.034 264.7)",
+          "oklch(60% 0.034 264.7)",
+          "oklch(71% 0.034 264.7)",
+          "oklch(83% 0.034 264.7)",
+          "oklch(95% 0.034 264.7)"
+        ],
+        "light": "#f1f4f8"
+      },
+      "panel-3": {
+        "role": "neutral",
+        "displayName": "Slate Panel Current",
+        "canonical": "#243049",
+        "cssVar": "--panel-3",
+        "tonalRamp": [
+          "oklch(15% 0.048 264.2)",
+          "oklch(26% 0.048 264.2)",
+          "oklch(37% 0.048 264.2)",
+          "oklch(48% 0.048 264.2)",
+          "oklch(60% 0.048 264.2)",
+          "oklch(71% 0.048 264.2)",
+          "oklch(83% 0.048 264.2)",
+          "oklch(95% 0.048 264.2)"
+        ],
+        "light": "#e1e7f0"
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Hairline Slate",
+        "canonical": "#2b3650",
+        "cssVar": "--line",
+        "tonalRamp": [
+          "oklch(15% 0.049 266.3)",
+          "oklch(26% 0.049 266.3)",
+          "oklch(37% 0.049 266.3)",
+          "oklch(48% 0.049 266.3)",
+          "oklch(60% 0.049 266.3)",
+          "oklch(71% 0.049 266.3)",
+          "oklch(83% 0.049 266.3)",
+          "oklch(95% 0.049 266.3)"
+        ],
+        "light": "#c3ccda"
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Booth White",
+        "canonical": "#e9edf5",
+        "cssVar": "--ink",
+        "tonalRamp": [
+          "oklch(15% 0.012 264.5)",
+          "oklch(26% 0.012 264.5)",
+          "oklch(37% 0.012 264.5)",
+          "oklch(48% 0.012 264.5)",
+          "oklch(60% 0.012 264.5)",
+          "oklch(71% 0.012 264.5)",
+          "oklch(83% 0.012 264.5)",
+          "oklch(95% 0.012 264.5)"
+        ],
+        "light": "#0d1320"
+      },
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "Secondary Ink",
+        "canonical": "#b4bdd0",
+        "cssVar": "--ink-2",
+        "tonalRamp": [
+          "oklch(15% 0.029 265.4)",
+          "oklch(26% 0.029 265.4)",
+          "oklch(37% 0.029 265.4)",
+          "oklch(48% 0.029 265.4)",
+          "oklch(60% 0.029 265.4)",
+          "oklch(71% 0.029 265.4)",
+          "oklch(83% 0.029 265.4)",
+          "oklch(95% 0.029 265.4)"
+        ],
+        "light": "#333e52"
+      },
+      "ink-3": {
+        "role": "neutral",
+        "displayName": "Tertiary Ink",
+        "canonical": "#919eb5",
+        "cssVar": "--ink-3",
+        "tonalRamp": [
+          "oklch(15% 0.037 261.9)",
+          "oklch(26% 0.037 261.9)",
+          "oklch(37% 0.037 261.9)",
+          "oklch(48% 0.037 261.9)",
+          "oklch(60% 0.037 261.9)",
+          "oklch(71% 0.037 261.9)",
+          "oklch(83% 0.037 261.9)",
+          "oklch(95% 0.037 261.9)"
+        ],
+        "light": "#505c73"
+      },
+      "gold": {
+        "role": "primary",
+        "displayName": "Broadcast Gold",
+        "canonical": "#ffc933",
+        "cssVar": "--gold",
+        "tonalRamp": [
+          "oklch(15% 0.163 87.1)",
+          "oklch(26% 0.163 87.1)",
+          "oklch(37% 0.163 87.1)",
+          "oklch(48% 0.163 87.1)",
+          "oklch(60% 0.163 87.1)",
+          "oklch(71% 0.163 87.1)",
+          "oklch(83% 0.163 87.1)",
+          "oklch(95% 0.163 87.1)"
+        ],
+        "light": "#f5b800"
+      },
+      "gold-ink": {
+        "role": "primary",
+        "displayName": "Gold Ink",
+        "canonical": "#ffc933",
+        "cssVar": "--gold-ink",
+        "tonalRamp": [
+          "oklch(15% 0.163 87.1)",
+          "oklch(26% 0.163 87.1)",
+          "oklch(37% 0.163 87.1)",
+          "oklch(48% 0.163 87.1)",
+          "oklch(60% 0.163 87.1)",
+          "oklch(71% 0.163 87.1)",
+          "oklch(83% 0.163 87.1)",
+          "oklch(95% 0.163 87.1)"
+        ],
+        "light": "#7a5a00"
+      },
+      "on-gold": {
+        "role": "primary",
+        "displayName": "On Gold",
+        "canonical": "#0a0d14",
+        "cssVar": "--on-gold",
+        "tonalRamp": [
+          "oklch(15% 0.016 266.6)",
+          "oklch(26% 0.016 266.6)",
+          "oklch(37% 0.016 266.6)",
+          "oklch(48% 0.016 266.6)",
+          "oklch(60% 0.016 266.6)",
+          "oklch(71% 0.016 266.6)",
+          "oklch(83% 0.016 266.6)",
+          "oklch(95% 0.016 266.6)"
+        ],
+        "light": "#0d1320"
+      },
+      "q-ssr": {
+        "role": "secondary",
+        "displayName": "Legend Orange",
+        "canonical": "#ff910a",
+        "cssVar": "--q-ssr",
+        "tonalRamp": [
+          "oklch(15% 0.176 60.2)",
+          "oklch(26% 0.176 60.2)",
+          "oklch(37% 0.176 60.2)",
+          "oklch(48% 0.176 60.2)",
+          "oklch(60% 0.176 60.2)",
+          "oklch(71% 0.176 60.2)",
+          "oklch(83% 0.176 60.2)",
+          "oklch(95% 0.176 60.2)"
+        ]
+      },
+      "q-sr": {
+        "role": "secondary",
+        "displayName": "Epic Purple",
+        "canonical": "#b518ff",
+        "cssVar": "--q-sr",
+        "tonalRamp": [
+          "oklch(15% 0.295 309.8)",
+          "oklch(26% 0.295 309.8)",
+          "oklch(37% 0.295 309.8)",
+          "oklch(48% 0.295 309.8)",
+          "oklch(60% 0.295 309.8)",
+          "oklch(71% 0.295 309.8)",
+          "oklch(83% 0.295 309.8)",
+          "oklch(95% 0.295 309.8)"
+        ]
+      },
+      "q-r": {
+        "role": "secondary",
+        "displayName": "Rare Blue",
+        "canonical": "#3d8bff",
+        "cssVar": "--q-r",
+        "tonalRamp": [
+          "oklch(15% 0.189 258.5)",
+          "oklch(26% 0.189 258.5)",
+          "oklch(37% 0.189 258.5)",
+          "oklch(48% 0.189 258.5)",
+          "oklch(60% 0.189 258.5)",
+          "oklch(71% 0.189 258.5)",
+          "oklch(83% 0.189 258.5)",
+          "oklch(95% 0.189 258.5)"
+        ]
+      },
+      "q-ssr-ink": {
+        "role": "secondary",
+        "displayName": "Legend Orange Ink",
+        "canonical": "#ff9f2e",
+        "cssVar": "--q-ssr-ink",
+        "tonalRamp": [
+          "oklch(15% 0.163 64.3)",
+          "oklch(26% 0.163 64.3)",
+          "oklch(37% 0.163 64.3)",
+          "oklch(48% 0.163 64.3)",
+          "oklch(60% 0.163 64.3)",
+          "oklch(71% 0.163 64.3)",
+          "oklch(83% 0.163 64.3)",
+          "oklch(95% 0.163 64.3)"
+        ],
+        "light": "#9a5100"
+      },
+      "q-sr-ink": {
+        "role": "secondary",
+        "displayName": "Epic Purple Ink",
+        "canonical": "#c875ff",
+        "cssVar": "--q-sr-ink",
+        "tonalRamp": [
+          "oklch(15% 0.205 309.9)",
+          "oklch(26% 0.205 309.9)",
+          "oklch(37% 0.205 309.9)",
+          "oklch(48% 0.205 309.9)",
+          "oklch(60% 0.205 309.9)",
+          "oklch(71% 0.205 309.9)",
+          "oklch(83% 0.205 309.9)",
+          "oklch(95% 0.205 309.9)"
+        ],
+        "light": "#8a00d4"
+      },
+      "q-r-ink": {
+        "role": "secondary",
+        "displayName": "Rare Blue Ink",
+        "canonical": "#6aa5ff",
+        "cssVar": "--q-r-ink",
+        "tonalRamp": [
+          "oklch(15% 0.146 258.6)",
+          "oklch(26% 0.146 258.6)",
+          "oklch(37% 0.146 258.6)",
+          "oklch(48% 0.146 258.6)",
+          "oklch(60% 0.146 258.6)",
+          "oklch(71% 0.146 258.6)",
+          "oklch(83% 0.146 258.6)",
+          "oklch(95% 0.146 258.6)"
+        ],
+        "light": "#1d5ac4"
+      },
+      "on-sr": {
+        "role": "secondary",
+        "displayName": "On Purple",
+        "canonical": "#ffffff",
+        "cssVar": "--on-sr",
+        "tonalRamp": [
+          "oklch(15% 0.000 89.9)",
+          "oklch(26% 0.000 89.9)",
+          "oklch(37% 0.000 89.9)",
+          "oklch(48% 0.000 89.9)",
+          "oklch(60% 0.000 89.9)",
+          "oklch(71% 0.000 89.9)",
+          "oklch(83% 0.000 89.9)",
+          "oklch(95% 0.000 89.9)"
+        ]
+      },
+      "hl": {
+        "role": "tertiary",
+        "displayName": "Value Green",
+        "canonical": "#83d18a",
+        "cssVar": "--hl",
+        "tonalRamp": [
+          "oklch(15% 0.126 146.4)",
+          "oklch(26% 0.126 146.4)",
+          "oklch(37% 0.126 146.4)",
+          "oklch(48% 0.126 146.4)",
+          "oklch(60% 0.126 146.4)",
+          "oklch(71% 0.126 146.4)",
+          "oklch(83% 0.126 146.4)",
+          "oklch(95% 0.126 146.4)"
+        ],
+        "light": "#1a7030"
+      },
+      "accent-ink": {
+        "role": "tertiary",
+        "displayName": "Callout Yellow",
+        "canonical": "#ffe45c",
+        "cssVar": "--accent-ink",
+        "tonalRamp": [
+          "oklch(15% 0.155 98.0)",
+          "oklch(26% 0.155 98.0)",
+          "oklch(37% 0.155 98.0)",
+          "oklch(48% 0.155 98.0)",
+          "oklch(60% 0.155 98.0)",
+          "oklch(71% 0.155 98.0)",
+          "oklch(83% 0.155 98.0)",
+          "oklch(95% 0.155 98.0)"
+        ],
+        "light": "#735800"
+      },
+      "warn-ink": {
+        "role": "tertiary",
+        "displayName": "Warn Red",
+        "canonical": "#ff8a8a",
+        "cssVar": "--warn-ink",
+        "tonalRamp": [
+          "oklch(15% 0.142 20.9)",
+          "oklch(26% 0.142 20.9)",
+          "oklch(37% 0.142 20.9)",
+          "oklch(48% 0.142 20.9)",
+          "oklch(60% 0.142 20.9)",
+          "oklch(71% 0.142 20.9)",
+          "oklch(83% 0.142 20.9)",
+          "oklch(95% 0.142 20.9)"
+        ],
+        "light": "#b3261e"
+      },
+      "hatch": {
+        "role": "neutral",
+        "displayName": "Hatch Slate",
+        "canonical": "#5a6a8e",
+        "cssVar": "--hatch",
+        "tonalRamp": [
+          "oklch(15% 0.060 265.8)",
+          "oklch(26% 0.060 265.8)",
+          "oklch(37% 0.060 265.8)",
+          "oklch(48% 0.060 265.8)",
+          "oklch(60% 0.060 265.8)",
+          "oklch(71% 0.060 265.8)",
+          "oklch(83% 0.060 265.8)",
+          "oklch(95% 0.060 265.8)"
+        ],
+        "light": "#8793a8"
+      },
+      "attr-str": {
+        "role": "tertiary",
+        "displayName": "Strength Ground",
+        "canonical": "#3a2026",
+        "cssVar": "--attr-ground ([data-attr=str])",
+        "tonalRamp": [
+          "oklch(15% 0.041 5.1)",
+          "oklch(26% 0.041 5.1)",
+          "oklch(37% 0.041 5.1)",
+          "oklch(48% 0.041 5.1)",
+          "oklch(60% 0.041 5.1)",
+          "oklch(71% 0.041 5.1)",
+          "oklch(83% 0.041 5.1)",
+          "oklch(95% 0.041 5.1)"
+        ],
+        "light": "#efd6d8"
+      },
+      "attr-agi": {
+        "role": "tertiary",
+        "displayName": "Agility Ground",
+        "canonical": "#1b3326",
+        "cssVar": "--attr-ground ([data-attr=agi])",
+        "tonalRamp": [
+          "oklch(15% 0.039 159.2)",
+          "oklch(26% 0.039 159.2)",
+          "oklch(37% 0.039 159.2)",
+          "oklch(48% 0.039 159.2)",
+          "oklch(60% 0.039 159.2)",
+          "oklch(71% 0.039 159.2)",
+          "oklch(83% 0.039 159.2)",
+          "oklch(95% 0.039 159.2)"
+        ],
+        "light": "#d3eadb"
+      },
+      "attr-int": {
+        "role": "tertiary",
+        "displayName": "Intelligence Ground",
+        "canonical": "#1b2b45",
+        "cssVar": "--attr-ground ([data-attr=int])",
+        "tonalRamp": [
+          "oklch(15% 0.053 259.7)",
+          "oklch(26% 0.053 259.7)",
+          "oklch(37% 0.053 259.7)",
+          "oklch(48% 0.053 259.7)",
+          "oklch(60% 0.053 259.7)",
+          "oklch(71% 0.053 259.7)",
+          "oklch(83% 0.053 259.7)",
+          "oklch(95% 0.053 259.7)"
+        ],
+        "light": "#d6e2f4"
+      },
+      "attr-all": {
+        "role": "tertiary",
+        "displayName": "Universal Ground",
+        "canonical": "#30264a",
+        "cssVar": "--attr-ground ([data-attr=all])",
+        "tonalRamp": [
+          "oklch(15% 0.064 295.0)",
+          "oklch(26% 0.064 295.0)",
+          "oklch(37% 0.064 295.0)",
+          "oklch(48% 0.064 295.0)",
+          "oklch(60% 0.064 295.0)",
+          "oklch(71% 0.064 295.0)",
+          "oklch(83% 0.064 295.0)",
+          "oklch(95% 0.064 295.0)"
+        ],
+        "light": "#e4dcf3"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Page titles in the display stack (Barlow Condensed + Fuyou Display 900 subset)."
+      },
+      "nameplate": {
+        "displayName": "Nameplate",
+        "purpose": "Lower-third blessing/hero name; 44px from 721px."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Quality group heads."
+      },
+      "strap": {
+        "displayName": "Strap",
+        "purpose": "Section straps on detail and hero pages."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Card names in result slots."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Base text; tabular-nums globally."
+      },
+      "body-card": {
+        "displayName": "Card Summary",
+        "purpose": "Summary line inside result slots."
+      },
+      "prose": {
+        "displayName": "Prose",
+        "purpose": "Full effect, guides and versions; 70ch measure."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Chips, tabs, team bars, dock (12–15px)."
+      },
+      "meta": {
+        "displayName": "Meta",
+        "purpose": "Card meta line, tip meta, captions."
+      },
+      "numeral-score": {
+        "displayName": "Score Numeral",
+        "purpose": "Top-bar live count and pick numbers."
+      },
+      "numeral-tally": {
+        "displayName": "Tally Numeral",
+        "purpose": "Team-bar tallies."
+      },
+      "code": {
+        "displayName": "Code",
+        "purpose": "Placeholder keys, inline code, label-desk textarea."
+      }
+    },
+    "shadows": [
+      {
+        "name": "shadow",
+        "value": "0 12px 28px -10px rgb(0 0 0 / 0.7)",
+        "light": "0 12px 28px -12px rgb(20 32 56 / 0.35)",
+        "purpose": "Lift: locked compare card (with translate 0 -4px) and suggestion popover."
+      },
+      {
+        "name": "shadow-sm",
+        "value": "0 4px 12px -4px rgb(0 0 0 / 0.6)",
+        "light": "0 4px 12px -6px rgb(20 32 56 / 0.3)",
+        "purpose": "Lower-third quality band under the nameplate."
+      },
+      {
+        "name": "dock-edge",
+        "value": "0 -6px 18px -8px rgb(0 0 0 / 0.5)",
+        "purpose": "Fixed bottom dock."
+      },
+      {
+        "name": "sheet",
+        "value": "0 -16px 40px -12px rgb(0 0 0 / 0.7)",
+        "purpose": "更多 bottom sheet, over rgb(5 7 11 / 0.6) backdrop."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-expo",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "The only easing."
+      },
+      {
+        "name": "flip-reorder",
+        "value": "160ms",
+        "purpose": "Result reorder while typing; new slots rise from 14px at 0.35 opacity."
+      },
+      {
+        "name": "lock-wipe",
+        "value": "220ms",
+        "purpose": "Quality-color clip-path wipe across the pick head on lock."
+      },
+      {
+        "name": "lock-stamp",
+        "value": "260ms",
+        "purpose": "已锁定 stamp, scale 1.35 → 1 with fade."
+      },
+      {
+        "name": "sheet-in",
+        "value": "200ms",
+        "purpose": "更多 sheet rises 24px."
+      },
+      {
+        "name": "switch-knob",
+        "value": "160ms",
+        "purpose": "Switch thumb slide."
+      },
+      {
+        "name": "timeline-fill",
+        "value": "200ms",
+        "purpose": "Label-desk progress fill."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "1ms",
+        "purpose": "All animations/transitions collapse under prefers-reduced-motion; FLIP skipped."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "team-wide",
+        "value": "480px"
+      },
+      {
+        "name": "hero-grid",
+        "value": "560px"
+      },
+      {
+        "name": "desktop",
+        "value": "721px"
+      },
+      {
+        "name": "board-3col",
+        "value": "900px"
+      },
+      {
+        "name": "detail-2col",
+        "value": "1000px"
+      },
+      {
+        "name": "results-3col",
+        "value": "1080px"
+      }
+    ],
+    "materials": [
+      {
+        "name": "hatch-mask",
+        "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6' height='6'%3E%3Cpath d='M-1 1l2-2M0 6l6-6M5 7l2-2' stroke='%23000' stroke-width='1.4'/%3E%3C/svg%3E\")",
+        "purpose": "Hatched hollow: mask over a hatch-colored fill, with a 1px hatch border, for unknown quality/values."
+      },
+      {
+        "name": "slant",
+        "value": "offset = height × 0.2126 (12°)",
+        "purpose": "Only on the lookup cap trailing edge and tally-block leading edges."
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Button",
+      "kind": "button",
+      "refersTo": "button",
+      "description": "Default action on a panel-2 control; steps to panel-3 on hover.",
+      "html": "<button class=\"ds-btn\" type=\"button\">清除品质和标签筛选</button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px 0 22px;border:0;border-radius:10px;background:var(--panel-2, #1a2233);color:var(--ink, #e9edf5);font:700 15px 'PingFang SC', 'Microsoft YaHei', 'Noto Sans CJK SC', system-ui, sans-serif;cursor:pointer}.ds-btn:hover{background:var(--panel-3, #243049)}.ds-btn:active{translate:0 1px}.ds-btn:focus-visible{outline:2px solid var(--gold-ink, #ffc933);outline-offset:2px}"
+    },
+    {
+      "name": "Gold Button",
+      "kind": "button",
+      "refersTo": "button-gold",
+      "description": "The single primary action; gold fill, stage ink.",
+      "html": "<button class=\"ds-btn-gold\" type=\"button\">锁定</button>",
+      "css": ".ds-btn-gold{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 18px 0 22px;border:0;border-radius:10px;background:var(--gold, #ffc933);color:var(--on-gold, #0a0d14);font:700 15px 'PingFang SC', 'Microsoft YaHei', 'Noto Sans CJK SC', system-ui, sans-serif;cursor:pointer}.ds-btn-gold:hover{filter:brightness(1.08)}.ds-btn-gold:active{translate:0 1px}.ds-btn-gold:focus-visible{outline:2px solid var(--gold-ink, #ffc933);outline-offset:2px}"
+    },
+    {
+      "name": "Lookup Field",
+      "kind": "input",
+      "refersTo": "lookup-field",
+      "description": "56px search bar with the slanted search cap; cap and underline turn gold on focus.",
+      "html": "<div class=\"ds-field\"><label class=\"ds-field-cap\" for=\"ds-q\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"square\" stroke-linejoin=\"miter\" aria-hidden=\"true\"><path d=\"M10.5 4a6.5 6.5 0 1 0 0 13a6.5 6.5 0 0 0 0-13zM15.5 15.5L20 20\"/></svg></label><input id=\"ds-q\" type=\"search\" placeholder=\"名称 · 首字母 · 效果\"></div>",
+      "css": ".ds-field{position:relative;display:flex;align-items:stretch;height:56px;border-radius:10px;overflow:hidden;background:var(--panel, #121826)}.ds-field::after{content:'';position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--line, #2b3650)}.ds-field:focus-within::after{background:var(--gold, #ffc933)}.ds-field-cap{flex:none;display:grid;place-items:center;width:58px;background:var(--panel-3, #243049);color:var(--ink-2, #b4bdd0);clip-path:polygon(0 0,100% 0,calc(100% - 12px) 100%,0 100%)}.ds-field:focus-within .ds-field-cap{background:var(--gold, #ffc933);color:var(--on-gold, #0a0d14)}.ds-field input{flex:1;min-width:0;padding:0 8px 0 10px;border:0;background:none;color:var(--ink, #e9edf5);font:600 18px 'PingFang SC', 'Microsoft YaHei', 'Noto Sans CJK SC', system-ui, sans-serif;caret-color:var(--gold-ink, #ffc933);outline:none}.ds-field input::placeholder{color:var(--ink-3, #919eb5);font-weight:400}"
+    },
+    {
+      "name": "Quality Team Bar",
+      "kind": "custom",
+      "refersTo": "team-bar",
+      "description": "Quality filter with a slant-capped solid tally; pressed fills with the team color. The unlabeled bar uses a hatched tally.",
+      "html": "<div class=\"ds-teams\"><button class=\"ds-team\" data-q=\"ssr\" aria-pressed=\"false\"><span>橙色</span><b>96</b></button><button class=\"ds-team\" data-q=\"sr\" aria-pressed=\"true\"><span>紫色</span><b>212</b></button><button class=\"ds-team\" data-q=\"r\" aria-pressed=\"false\"><span>蓝色</span><b>260</b></button><button class=\"ds-team ds-team-none\" aria-pressed=\"false\"><span>未标注</span><b>84</b></button></div>",
+      "css": ".ds-teams{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) minmax(0,1.35fr);gap:5px}.ds-team[data-q=ssr]{--q:var(--q-ssr, #ff910a);--on-q:#0a0d14}.ds-team[data-q=sr]{--q:var(--q-sr, #b518ff);--on-q:#fff}.ds-team[data-q=r]{--q:var(--q-r, #3d8bff);--on-q:#0a0d14}.ds-team{display:flex;align-items:center;justify-content:space-between;gap:6px;height:40px;padding:0 0 0 12px;border:0;border-radius:10px;overflow:hidden;background:var(--panel, #121826);color:var(--ink, #e9edf5);font:900 14px 'Barlow Condensed', 'Fuyou Display', 'PingFang SC', 'Microsoft YaHei', sans-serif;white-space:nowrap;cursor:pointer}.ds-team:hover{background:var(--panel-2, #1a2233)}.ds-team:focus-visible{outline:2px solid var(--gold-ink, #ffc933);outline-offset:2px}.ds-team b{position:relative;isolation:isolate;align-self:stretch;display:flex;align-items:center;padding:0 7px 0 14px;background:var(--q);color:var(--on-q);clip-path:polygon(8.5px 0,100% 0,100% 100%,0 100%);font:700 19px/1 'Barlow Condensed', 'PingFang SC', sans-serif;font-variant-numeric:tabular-nums}.ds-team[aria-pressed=true]{background:var(--q);color:var(--on-q)}.ds-team[aria-pressed=true] span{text-decoration:underline;text-decoration-color:var(--gold, #ffc933);text-decoration-thickness:3px;text-underline-offset:6px}.ds-team-none{color:var(--ink-2, #b4bdd0)}.ds-team-none b{background:transparent;color:var(--ink, #e9edf5)}.ds-team-none b::before{content:'';position:absolute;inset:0;z-index:-1;background:var(--hatch, #5a6a8e);-webkit-mask:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6' height='6'%3E%3Cpath d='M-1 1l2-2M0 6l6-6M5 7l2-2' stroke='%23000' stroke-width='1.4'/%3E%3C/svg%3E\") repeat;mask:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6' height='6'%3E%3Cpath d='M-1 1l2-2M0 6l6-6M5 7l2-2' stroke='%23000' stroke-width='1.4'/%3E%3C/svg%3E\") repeat}"
+    },
+    {
+      "name": "Filter Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Pill tag filter; pressed is solid gold.",
+      "html": "<div class=\"ds-chips\"><button class=\"ds-chip\" aria-pressed=\"false\">攻击</button><button class=\"ds-chip\" aria-pressed=\"true\">生存</button><button class=\"ds-chip\" aria-pressed=\"false\">技能</button></div>",
+      "css": ".ds-chips{display:flex;gap:6px;flex-wrap:wrap}.ds-chip{height:34px;padding:0 16px;border:0;border-radius:999px;background:var(--panel, #121826);color:var(--ink-2, #b4bdd0);font:600 14px 'Barlow Condensed', 'Fuyou Display', 'PingFang SC', 'Microsoft YaHei', sans-serif;cursor:pointer}.ds-chip:hover{background:var(--panel-2, #1a2233);color:var(--ink, #e9edf5)}.ds-chip[aria-pressed=true]{background:var(--gold, #ffc933);color:var(--on-gold, #0a0d14);font-weight:800}.ds-chip:focus-visible{outline:2px solid var(--gold-ink, #ffc933);outline-offset:2px}"
+    },
+    {
+      "name": "Result Slot",
+      "kind": "card",
+      "refersTo": "slot-card",
+      "description": "Catalog card: icon on a solid quality plinth, name, quality-ink meta, summary with a known value and a hatched unknown.",
+      "html": "<article class=\"ds-slot\" data-q=\"ssr\"><span class=\"ds-ic\"><span class=\"ds-fb\">电</span></span><h3><a href=\"#\">电锤思维</a></h3><p class=\"ds-mt\"><b>橙色</b>攻击 · 技能</p><p class=\"ds-sm\">攻击有 <span class=\"ds-v\">25%</span> 几率释放连环闪电，造成 <span class=\"ds-u\">?</span> 点伤害。</p></article>",
+      "css": ".ds-slot{--q:var(--q-ssr, #ff910a);--qt:var(--q-ssr-ink, #ff9f2e);position:relative;display:grid;grid-template-columns:64px minmax(0,1fr);grid-template-rows:auto auto 1fr;column-gap:10px;max-width:380px;min-height:92px;padding:10px 14px 12px 10px;border-radius:14px;background:var(--panel, #121826);color:var(--ink, #e9edf5);font:16px/1.6 'PingFang SC', 'Microsoft YaHei', 'Noto Sans CJK SC', system-ui, sans-serif}.ds-slot:hover{background:var(--panel-2, #1a2233)}.ds-slot:focus-within{outline:2px solid var(--gold-ink, #ffc933);outline-offset:-2px}.ds-ic{grid-row:1/span 3;width:56px;height:56px;padding:4px 4px 16px;margin-bottom:4px;border-radius:12px;background:var(--q)}.ds-fb{display:grid;place-items:center;width:100%;height:100%;border-radius:8px;background:var(--panel-3, #243049);color:var(--ink-3, #919eb5);font-size:22px;font-weight:800}.ds-slot h3{margin:0;font-size:17px;font-weight:800;line-height:1.3}.ds-slot h3 a{color:inherit;text-decoration:none}.ds-slot h3 a:focus-visible{outline:none}.ds-slot:hover h3 a{color:var(--gold-ink, #ffc933)}.ds-mt{margin:2px 0 6px;font-size:13px;line-height:1.4;color:var(--ink-3, #919eb5)}.ds-mt b{color:var(--qt);font-weight:800;margin-right:6px}.ds-sm{margin:0;font-size:14.5px;color:var(--ink-2, #b4bdd0)}.ds-v{color:var(--hl, #83d18a);font:700 1.08em/1 'Barlow Condensed', 'PingFang SC', sans-serif;font-variant-numeric:tabular-nums}.ds-u{position:relative;isolation:isolate;display:inline-block;min-width:1.9em;padding:0 .3em;border:1px solid var(--hatch, #5a6a8e);border-radius:4px;color:var(--ink-3, #919eb5);font:700 .9em/1.3 'Barlow Condensed', 'PingFang SC', sans-serif;text-align:center}.ds-u::before{content:'';position:absolute;inset:0;z-index:-1;background:var(--hatch, #5a6a8e);opacity:.55;-webkit-mask:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6' height='6'%3E%3Cpath d='M-1 1l2-2M0 6l6-6M5 7l2-2' stroke='%23000' stroke-width='1.4'/%3E%3C/svg%3E\") repeat;mask:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6' height='6'%3E%3Cpath d='M-1 1l2-2M0 6l6-6M5 7l2-2' stroke='%23000' stroke-width='1.4'/%3E%3C/svg%3E\") repeat}"
+    },
+    {
+      "name": "Group Head",
+      "kind": "custom",
+      "refersTo": "group-head",
+      "description": "Quality family header: solid team-color bar with an inverse stage tally cut by the slant cap.",
+      "html": "<h2 class=\"ds-group\" data-q=\"sr\"><span>紫色</span><b>212</b></h2>",
+      "css": ".ds-group{--q:var(--q-sr, #b518ff);--on-q:var(--on-sr, #ffffff);display:flex;align-items:stretch;justify-content:space-between;height:48px;margin:0;padding-left:18px;border-radius:12px;overflow:hidden;background:var(--q);color:var(--on-q);font:900 19px 'Barlow Condensed', 'Fuyou Display', 'PingFang SC', 'Microsoft YaHei', sans-serif}.ds-group span{align-self:center}.ds-group b{display:flex;align-items:center;justify-content:flex-end;min-width:4.2em;padding:0 18px 0 26px;background:var(--stage, #0a0d14);color:var(--ink, #e9edf5);clip-path:polygon(10.2px 0,100% 0,100% 100%,0 100%);font:800 26px/1 'Barlow Condensed', 'PingFang SC', sans-serif;font-variant-numeric:tabular-nums}"
+    },
+    {
+      "name": "Lower-Third",
+      "kind": "card",
+      "refersTo": "lower-third",
+      "description": "Detail nameplate overlapping a full-width band of solid quality color.",
+      "html": "<div class=\"ds-lt3\" data-q=\"r\"><div class=\"ds-lt\"><span class=\"ds-lt-ic\"></span><div><h1>冰霜护甲</h1><p class=\"ds-en\">FROST ARMOR</p></div></div><div class=\"ds-band\"><span>蓝色品质</span></div></div>",
+      "css": ".ds-lt3{--q:var(--q-r, #3d8bff);--on-q:#0a0d14;position:relative;isolation:isolate;max-width:560px}.ds-lt{position:relative;z-index:1;display:grid;grid-template-columns:96px minmax(0,1fr);gap:4px 16px;padding:20px 20px 22px;border-radius:14px;background:var(--panel, #121826);color:var(--ink, #e9edf5)}.ds-lt-ic{width:88px;height:88px;border-radius:12px;background:var(--q)}.ds-lt h1{margin:0;font:800 30px/1.15 'PingFang SC', 'Microsoft YaHei', 'Noto Sans CJK SC', system-ui, sans-serif}.ds-en{margin:4px 0 0;font:600 18px/1.2 'Barlow Condensed', 'PingFang SC', sans-serif;letter-spacing:.03em;color:var(--ink-3, #919eb5);text-transform:uppercase}.ds-band{display:flex;align-items:flex-end;justify-content:flex-end;height:60px;margin:-24px 0 0 20px;padding:0 20px 8px;border-radius:0 0 14px 14px;background:var(--q);color:var(--on-q);font:900 17px 'Barlow Condensed', 'Fuyou Display', 'PingFang SC', 'Microsoft YaHei', sans-serif;letter-spacing:.04em;box-shadow:var(--shadow-sm, 0 4px 12px -4px rgb(0 0 0 / 0.6))}"
+    },
+    {
+      "name": "Bottom Dock",
+      "kind": "nav",
+      "refersTo": "dock",
+      "description": "Phone navigation: four icon-over-label items; current gets ink text and a gold notch.",
+      "html": "<nav class=\"ds-dock\"><a href=\"#\" aria-current=\"page\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"square\" stroke-linejoin=\"miter\" aria-hidden=\"true\"><path d=\"M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z\"/></svg>图鉴</a><a href=\"#\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"square\" stroke-linejoin=\"miter\" aria-hidden=\"true\"><path d=\"M3 5h5v14H3zM9.5 5h5v14h-5zM16 5h5v14h-5z\"/></svg>对比</a><a href=\"#\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"square\" stroke-linejoin=\"miter\" aria-hidden=\"true\"><path d=\"M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z\"/></svg>英雄</a><a href=\"#\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"square\" stroke-linejoin=\"miter\" aria-hidden=\"true\"><path d=\"M4 7h16M4 12h16M4 17h10\"/></svg>更多</a></nav>",
+      "css": ".ds-dock{display:grid;grid-template-columns:repeat(4,1fr);max-width:400px;padding:0 8px;background:var(--panel, #121826);border-top:1px solid var(--line, #2b3650);border-radius:16px 16px 0 0;box-shadow:0 -6px 18px -8px rgb(0 0 0 / .5)}.ds-dock a{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;height:60px;color:var(--ink-3, #919eb5);text-decoration:none;font:700 12px 'Barlow Condensed', 'Fuyou Display', 'PingFang SC', 'Microsoft YaHei', sans-serif}.ds-dock a:hover{color:var(--ink, #e9edf5)}.ds-dock a:active{background:var(--panel-2, #1a2233)}.ds-dock a:focus-visible{outline:2px solid var(--gold-ink, #ffc933);outline-offset:2px}.ds-dock a[aria-current=page]{color:var(--ink, #e9edf5)}.ds-dock a[aria-current=page]::before{content:'';position:absolute;top:0;left:50%;width:34px;height:4px;translate:-50% 0;background:var(--gold, #ffc933);border-radius:0 0 4px 4px}"
+    },
+    {
+      "name": "Section Strap",
+      "kind": "custom",
+      "refersTo": "section-strap",
+      "description": "Detail-page section heading on a panel-3 strap with an optional tabular count.",
+      "html": "<h2 class=\"ds-strap\">数值表<span>3/4</span></h2>",
+      "css": ".ds-strap{display:inline-block;margin:0;padding:3px 18px 3px 16px;border-radius:8px;background:var(--panel-3, #243049);color:var(--ink, #e9edf5);font:800 17px/1.25 'Barlow Condensed', 'Fuyou Display', 'PingFang SC', 'Microsoft YaHei', sans-serif}.ds-strap span{margin-left:8px;color:var(--ink-3, #919eb5);font:700 17px 'Barlow Condensed', 'PingFang SC', sans-serif;font-variant-numeric:tabular-nums}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Draft Desk",
+    "overview": "The site is the broadcast booth during a Captain's-Mode draft: a stage black-blue ground, slate panel bars laid on it, the game's three quality colors painted as solid team bars, and one broadcast gold that means \"this one\" (focus, selection, current, locked). Every blessing is a pick slot; the catalog is the draft pool, the compare page is the draft board, and the detail page is a lower-third nameplate. The system is dark by default, with a light \"daytime booth\" translation of the same tokens that the visitor opts into.\n\nDensity is operator-grade and phone-first. The first viewport on a 375px screen stacks a 48px scoreboard top bar, a 56px auto-focused lookup bar, one row of four team bars with tallies, and a scrolling chip strip, and results begin right after. Cards are compact (92px minimum), numerals are condensed and tabular, and nothing moves unless it tells you something: a result reorders, a pick locks, a sheet rises.\n\nColor is flat and fully committed. There are no gradients, no glass and no glow anywhere in the build. Depth comes from bars overlapping bars (the nameplate over its quality band, the tally block cut into its team bar), with a soft ambient shadow reserved for things that float over the desk. Unknown data has its own material, a hatched hollow, and it is never faked with a gray that could be read as a fourth quality.",
+    "keyCharacteristics": [
+      "Stage black-blue ground, three steps of slate panel, one hairline line color.",
+      "Quality colors (orange / purple / blue) are information, painted as solid fills; each has a text-safe ink variant.",
+      "One broadcast gold for focus, selection, the current page, and the locked state.",
+      "Rounded desk: 14px cards, 12px tiles, 10px controls, pill chips; a 12° slant survives only as a small leading cap.",
+      "Condensed tabular numerals (Barlow Condensed) on every count, tally and value.",
+      "Hatched hollow for anything unknown or unlabeled.",
+      "Motion is expo-out and short (160–260ms), and all of it collapses under reduced motion."
+    ],
+    "rules": [
+      {
+        "name": "The Team Color Is Information Rule",
+        "body": "Orange, purple and blue mean ssr, sr and r, and nothing else. They are applied through `data-q` (which sets `--q`, `--qt`, `--on-q`), always as solid fills or their ink variants, and never as decoration, borders on unrelated UI, or hover tints.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Gold Rule",
+        "body": "Gold marks the one thing currently chosen or focused. If two unrelated golds are visible in the same region, one of them is wrong.",
+        "section": "colors"
+      },
+      {
+        "name": "The Hatched Hollow Rule",
+        "body": "Unknown quality or an unknown value is shown as a transparent body with a 1px `hatch` border and a masked diagonal hatch (6px tile, 1.4px stroke). It is never a gray fill, never a fourth color, and never a guessed number.",
+        "section": "colors"
+      },
+      {
+        "name": "The Scoreboard Numeral Rule",
+        "body": "Every count, tally, value and index is set in Barlow Condensed with `tabular-nums` (`.num` or `--font-num`), so the numbers align on one baseline grid. The body also sets `tabular-nums` globally.",
+        "section": "typography"
+      },
+      {
+        "name": "The Closed Glyph Set Rule",
+        "body": "Fuyou Display renders only the fixed chrome strings listed in `src/lib/display-glyphs.ts`. A new chrome string goes into that list and then `npm run fonts` is run. Blessing names, hero names and descriptions never use the display face.",
+        "section": "typography"
+      },
+      {
+        "name": "The Filled Slot Lifts Rule",
+        "body": "An empty slot is a dark hollow sunk below the stage. A filled, locked slot rises 4px and casts the Lift shadow. Elevation expresses state, not decoration.",
+        "section": "elevation"
+      },
+      {
+        "name": "The No Glow Rule",
+        "body": "No gradients, no `backdrop-filter`, no `text-shadow`, and no colored shadows. Emphasis comes from a solid fill or gold, never from light.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Last Slant Rule",
+        "body": "The 12° slant (offset = height × 0.2126) survives in exactly two places: the trailing edge of the lookup field's search cap (12px on the 56px field, 10px on the 48px compare field), and the leading edge of tally blocks (8.5px in team bars, 10.2px in group heads). It never appears on a card, tile, button or chip silhouette.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "Do apply quality through `data-q` so `--q`, `--qt` and `--on-q` resolve together. Use `--q` for fills, `--qt` for text on panels, and `--on-q` for text on fills.",
+      "Do keep the radius ladder: card 14px, tile 12px, control 10px, strap 8px, pill for chips and tags.",
+      "Do paint bar fills on `::before` with `--bar-bg` / `--r`, so the element's own gold focus outline stays visible.",
+      "Do set every number in Barlow Condensed with tabular figures.",
+      "Do render unknown quality and unknown values as the hatched hollow (a `hatch` border plus the masked 6px diagonal).",
+      "Do use `gold-ink`, not `gold`, for gold text and outlines, so the light theme stays AA.",
+      "Do keep touch targets at 44px or more, and give small text links an expanded hit area (source marks use 24px).",
+      "Do use `hollow` with a 1px `line` border for empty slots and empty states."
+    ],
+    "donts": [
+      "Don't use gradients, glass (`backdrop-filter`), glow, `text-shadow` or colored shadows.",
+      "Don't put the 12° slant on card, tile, button or chip silhouettes. It belongs only to the lookup cap and tally blocks.",
+      "Don't use orange, purple or blue for anything but ssr / sr / r quality, and don't recolor them.",
+      "Don't use gold for anything other than focus, selection, current or locked.",
+      "Don't show unknown quality as gray or as a fourth color, and don't show a guessed number in place of an unknown value.",
+      "Don't set blessing or hero names in the display face; it is a closed glyph subset for fixed chrome.",
+      "Don't add motion that survives `prefers-reduced-motion`, or motion outside the expo-out 160–260ms grammar."
+    ]
+  }
+}
