@@ -55,3 +55,6 @@ for (const { probe, result } of results) {
 }
 console.log(`${ok}/${results.length} succeeded`);
 if (ok === 0) process.exit(1);
+
+// Top-level await needs module scope for the type checker.
+export {};
