@@ -1,0 +1,25 @@
+---
+import type { Blessing } from '../lib/schema';
+import { CATEGORY_COLORS } from '../lib/categories';
+import { url } from '../lib/url';
+import BlessingIcon from './BlessingIcon.astro';
+
+interface Props {
+  blessing: Blessing;
+  note?: string;
+}
+const { blessing, note } = Astro.props;
+---
+
+<article class="blessing-card" style={`--cat:${CATEGORY_COLORS[blessing.category]}`}>
+  <BlessingIcon blessing={blessing} />
+  <div>
+    <h3><a href={url(`/blessings/${blessing.id}/`)}>{blessing.name}</a></h3>
+    <p class="blessing-meta">
+      <span class="cat">{blessing.category}</span>
+      {blessing.tags.map((t) => <span class="tag">{t}</span>)}
+    </p>
+    <p class="blessing-effect">{blessing.effect}</p>
+    {note && <p class="blessing-note">💡 {note}</p>}
+  </div>
+</article>

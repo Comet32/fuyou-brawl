@@ -1,0 +1,11 @@
+---
+import { publicFileExists } from '../lib/assets';
+import { url } from '../lib/url';
+
+interface Props {
+  id: string;
+}
+const rel = `img/items/${Astro.props.id}.webp`;
+---
+
+{publicFileExists(rel) && <img class="item-img" src={url(rel)} alt="" width="88" height="64" loading="lazy" />}

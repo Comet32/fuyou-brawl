@@ -1,0 +1,20 @@
+---
+import type { Blessing } from '../lib/schema';
+import { CATEGORY_COLORS } from '../lib/categories';
+import { url } from '../lib/url';
+
+interface Props {
+  blessing: Blessing;
+}
+const { blessing } = Astro.props;
+---
+
+<div class="blessing-icon" style={`--cat:${CATEGORY_COLORS[blessing.category]}`}>
+  {
+    blessing.icon ? (
+      <img src={url(`/img/blessings/${blessing.icon}`)} alt="" width="48" height="48" loading="lazy" />
+    ) : (
+      <span aria-hidden="true">{blessing.name.slice(0, 1)}</span>
+    )
+  }
+</div>
