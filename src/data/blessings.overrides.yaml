@@ -32,3 +32,50 @@
   heroes: [shredder] # 伐木机摧毁树木
 '100277':
   heroes: [skeleton_king] # 冥火爆击
+# Quality from follow-up research (tmp/research/unlabeled-notes.json); each cites its source.
+'10043':
+  quality: r # 技能增强
+  sources: [http://122.51.0.76:8081/api/universal, http://122.51.0.76:8081/icons/guides/1780614669802.png]
+  tips:
+    - { text: '图鉴蓝色条目「英雄技能强化」与本 id 同图标，据此对应为蓝色', source: 'http://122.51.0.76:8081/api/universal', date: '2026-09-29' }
+'10047':
+  quality: sr # 技能增强
+  sources: [http://122.51.0.76:8081/api/universal, http://122.51.0.76:8081/icons/guides/1780614669802.png]
+  tips:
+    - { text: '图鉴紫色条目「技能增强」与本 id 同图标，据此对应为紫色', source: 'http://122.51.0.76:8081/api/universal', date: '2026-09-29' }
+'10048':
+  quality: sr # 攻击增幅
+  sources: [http://122.51.0.76:8081/api/universal, http://122.51.0.76:8081/icons/guides/1776403380549.png]
+  tips:
+    - { text: '图鉴标紫色；一图流蓝色分区的「攻击增幅」实为攻击力提升，属标注笔误', source: 'http://122.51.0.76:8081/api/universal', date: '2026-09-29' }
+'10056':
+  quality: sr # 生命之泉的祝福
+  sources: [https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese, http://122.51.0.76:8081/icons/guides/1775888401870.png]
+  tips:
+    - { text: '官方 2026-04-03 品质上调一档，一图流写明紫色；图鉴的蓝色应为旧数据', source: 'https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese', date: '2026-04-03' }
+'10112':
+  quality: sr # 会心攻击
+  sources: [http://122.51.0.76:8081/api/universal, http://122.51.0.76:8081/icons/guides/1776403380549.png]
+  tips:
+    - { text: '图鉴两条「会心攻击」都标紫色，图标与本 id 一致', source: 'http://122.51.0.76:8081/api/universal', date: '2026-09-29' }
+'10159':
+  quality: r # 会心攻击
+  sources: [http://122.51.0.76:8081/icons/guides/1776403380549.png, http://122.51.0.76:8081/icons/guides/1776583999601.png, http://122.51.0.76:8081/icons/guides/1778030133350.png]
+  tips:
+    - { text: 'PA、火猫、莱恩一图流的蓝色分区用的是本 id 的图标', source: 'http://122.51.0.76:8081/icons/guides/1776403380549.png', date: '2026-04-17' }
+'21005':
+  quality: r # 寻血猎犬
+  sources: [https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese]
+  tips:
+    - { text: '官方 2026-05-25 改动说明写明下调为蓝色', source: 'https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese', date: '2026-05-25' }
+# Corrections: the community wiki predates these official quality changes.
+'10136':
+  quality: sr # 不狂不如卖红薯
+  sources: [https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese]
+  tips:
+    - { text: '官方 2026-08-07 从橙色下调为紫色，图鉴仍标橙色', source: 'https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese', date: '2026-08-07' }
+'10022':
+  quality: sr # 护盾电池（大）
+  sources: [https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese]
+  tips:
+    - { text: '官方 2026-04-03 品质下调一档（橙→紫），图鉴仍标橙色', source: 'https://steamcommunity.com/sharedfiles/filedetails/changelog/2841152696?l=schinese', date: '2026-04-03' }
