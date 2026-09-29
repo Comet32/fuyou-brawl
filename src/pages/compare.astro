@@ -1,0 +1,36 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import BlessingCard from '../components/BlessingCard.astro';
+import { toSearchRecord } from '../lib/search-record';
+import { safeJson } from '../lib/json';
+
+const blessings = (await getCollection('blessings'))
+  .map((e) => e.data)
+  .sort((a, b) => a.name.localeCompare(b.name, 'zh-CN'));
+const records = blessings.map(toSearchRecord);
+---
+
+<Base title="三选一对比">
+  <h1>三选一对比</h1>
+  <p class="muted">对局里抽到三个福佑？分别搜出来并排看。回车选第一个结果并跳到下一格；链接可以直接分享。</p>
+  <div class="compare-grid">
+    {
+      [0, 1, 2].map((i) => (
+        <section class="compare-slot" data-slot={i}>
+          <input class="search-input" type="search" placeholder={`福佑 ${i + 1}`} autocomplete="off" enterkeyhint="next" />
+          <ul class="suggestions" hidden />
+          <div class="slot-card" />
+        </section>
+      ))
+    }
+  </div>
+  <div id="card-pool" hidden>
+    {blessings.map((b) => <div data-id={b.id}><BlessingCard blessing={b} /></div>)}
+  </div>
+  <script type="application/json" id="search-data" set:html={safeJson(records)} />
+  <script>
+    import { initComparePage } from '../scripts/compare-page';
+    initComparePage();
+  </script>
+</Base>

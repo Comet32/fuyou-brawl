@@ -1,0 +1,42 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import BlessingCard from '../components/BlessingCard.astro';
+import { CATEGORIES } from '../lib/schema';
+import { toSearchRecord } from '../lib/search-record';
+import { safeJson } from '../lib/json';
+
+const blessings = (await getCollection('blessings'))
+  .map((e) => e.data)
+  .sort((a, b) => a.name.localeCompare(b.name, 'zh-CN'));
+const records = blessings.map(toSearchRecord);
+const categories = CATEGORIES.filter((c) => blessings.some((b) => b.category === c));
+---
+
+<Base>
+  <div class="search-box">
+    <input
+      id="q"
+      class="search-input"
+      type="search"
+      placeholder="搜福佑：名称 / 拼音首字母 / 效果关键词"
+      autocomplete="off"
+      enterkeyhint="search"
+      autofocus
+    />
+    <div class="chips" role="group" aria-label="按分类筛选">
+      <button class="chip" type="button" data-cat="" aria-pressed="true">全部</button>
+      {categories.map((c) => <button class="chip" type="button" data-cat={c} aria-pressed="false">{c}</button>)}
+    </div>
+    <p id="count" class="muted" aria-live="polite">共 {blessings.length} 个福佑</p>
+  </div>
+  <ul id="results" class="card-list">
+    {blessings.map((b) => <li data-id={b.id}><BlessingCard blessing={b} /></li>)}
+  </ul>
+  <p id="no-result" class="empty" hidden>没找到，换个关键词试试（支持拼音首字母，比如 dcsw）</p>
+  <script type="application/json" id="search-data" set:html={safeJson(records)} />
+  <script>
+    import { initSearchPage } from '../scripts/search-page';
+    initSearchPage();
+  </script>
+</Base>
