@@ -78,13 +78,16 @@ const abilityFeed = {
         ab('ability_capture', '占领'),
         ab('plus_high_five', '击掌'),
         ab('item_blink', '闪烁匕首', 'Blink Dagger'),
+        ab('axe_berserkers_call_ad', '狂战士之吼（OMG）', "Berserker's Call (OMG)"),
+        ab('sandking_burrowstrike', '掘地穿刺', 'Burrowstrike'),
+        ab('sandking_epicenter', '地震', 'Epicenter'),
       ],
     },
   },
 };
 
 describe('mapAbilityFeed', () => {
-  const heroIds = ['nevermore', 'antimage', 'shadow_shaman', 'shadow_demon', 'shadow', 'axe'];
+  const heroIds = ['nevermore', 'antimage', 'shadow_shaman', 'shadow_demon', 'shadow', 'axe', 'sand_king'];
   const out = mapAbilityFeed(abilityFeed, heroIds);
   const of = (hero: string) => out.find((h) => h.hero === hero)?.abilities;
 
@@ -113,8 +116,19 @@ describe('mapAbilityFeed', () => {
   });
 
   it('omits heroes without abilities and sorts heroes by id', () => {
-    expect(of('axe')).toBeUndefined();
-    expect(out.map((h) => h.hero)).toEqual(['antimage', 'nevermore', 'shadow', 'shadow_demon', 'shadow_shaman']);
+    expect(of('axe')).toBeUndefined(); // only had an OMG-mode variant
+    expect(out.map((h) => h.hero)).toEqual([
+      'antimage',
+      'nevermore',
+      'sand_king',
+      'shadow',
+      'shadow_demon',
+      'shadow_shaman',
+    ]);
+  });
+
+  it('maps abilities whose internal prefix differs from the hero id (sandking -> sand_king)', () => {
+    expect(of('sand_king')?.map((a) => a.id)).toEqual(['sandking_burrowstrike', 'sandking_epicenter']);
   });
 
   it('falls back to the localized name when the English name is missing', () => {

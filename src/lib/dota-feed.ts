@@ -45,6 +45,10 @@ export function mapItemFeed(feed: ItemFeed): Item[] {
 
 // Talents, generic/shared abilities and placeholder or hidden slots are not real hero abilities.
 const NON_ABILITY_RE = /^(special_bonus_|generic_)|_empty|hidden/;
+// "Ability Draft OMG" duplicates of the regular abilities, e.g. "急速冷却（OMG）".
+const OMG_VARIANT_RE = /[（(]OMG[）)]/;
+// Heroes whose ability prefix differs from the hero id: ability prefix -> hero id.
+const ABILITY_PREFIX_ALIASES: Record<string, string> = { sandking: 'sand_king' };
 
 /**
  * Group the ability list by hero. An ability belongs to the hero whose id is the longest prefix of its
@@ -53,13 +57,17 @@ const NON_ABILITY_RE = /^(special_bonus_|generic_)|_empty|hidden/;
  * Heroes without abilities are omitted; the result is sorted by hero id.
  */
 export function mapAbilityFeed(feed: ItemFeed, heroIds: string[]): HeroAbilities[] {
-  const byLength = [...heroIds].sort((a, b) => b.length - a.length);
+  const known = new Set(heroIds);
+  const prefixes = [
+    ...heroIds.map((id) => [id, id] as const),
+    ...Object.entries(ABILITY_PREFIX_ALIASES).filter(([, hero]) => known.has(hero)),
+  ].sort((a, b) => b[0].length - a[0].length);
   const groups = new Map<string, { abilities: HeroAbility[]; names: Set<string> }>();
 
   for (const a of feed.result.data.itemabilities) {
     const name = a.name_loc.trim();
-    if (!name || NON_ABILITY_RE.test(a.name)) continue;
-    const hero = byLength.find((id) => a.name.startsWith(`${id}_`));
+    if (!name || NON_ABILITY_RE.test(a.name) || OMG_VARIANT_RE.test(name)) continue;
+    const hero = prefixes.find(([prefix]) => a.name.startsWith(`${prefix}_`))?.[1];
     if (!hero) continue;
     let group = groups.get(hero);
     if (!group) groups.set(hero, (group = { abilities: [], names: new Set() }));
