@@ -1,30 +1,39 @@
 import { blessingSchema, buildSchema, heroSchema, itemSchema, versionSchema } from '../src/lib/schema';
 import type { DataSet } from '../src/lib/integrity';
 
+const hl = (s: string) => `<font color='#83d18a'>${s}</font>`;
+
 export const blessings = [
   blessingSchema.parse({
-    id: 'wolf-core',
-    name: '狼王核心',
-    category: '团队类',
-    effect: '在双方泉水生成 3 个狼王核心，拾取者冷却缩减 8%',
-    numbers: { 冷却缩减: '8%' },
-    tags: ['冷却'],
+    id: '10145',
+    name: '狼王内丹',
+    name_en: 'Arcana Pill',
+    summary: `在双方泉水生成 ${hl('{count}')} 次狼王内丹，拾取后冷却时间减少 ${hl('+{pct}%')}`,
+    effect: `${hl('{cd_min} - {cd_max}')} 秒后，在双方泉水生成 ${hl('{count}')} 次狼王内丹。`,
+    numbers: { count: 3, pct: 8 },
+    tags: ['法术'],
     since_version: '2026-09-01',
   }),
   blessingSchema.parse({
-    id: 'electric-hammer',
+    id: '10010',
     name: '电锤思维',
-    category: '装备类',
-    effect: '获得 3500 金币，携带的第一把深渊之刃升级为雷神之锤（真）',
-    numbers: { 金币: 3500 },
-    tags: ['经济', '前期'],
+    name_en: 'Maelstrom Mind',
+    quality: 'ssr',
+    summary: `获得 ${hl('{gold}')} 金币。首次携带黯灭时，将其升级为 ${hl('雷神之锤(真)')} 。`,
+    effect: `获得 ${hl('{gold}')} 金币。首次携带黯灭时，将其升级为 ${hl('雷神之锤(真)')} ，可以和雷神之锤叠加。`,
+    numbers: { gold: 3500 },
+    tags: ['经济', '装备'],
     history: [{ version: '2026-09-01', change: '金币 3000→3500' }],
   }),
   blessingSchema.parse({
-    id: 'rescue',
-    name: '救援',
-    category: '其他',
-    effect: '死亡后留下墓碑，3 秒后可在队友附近复活，期间可以购物',
+    id: '10091',
+    name: '救救救救救',
+    name_en: 'Help!',
+    quality: 'r',
+    summary: `阵亡后召唤墓碑，${hl('{time}')} 秒后复活，墓碑期间可以使用商店。`,
+    effect: `阵亡后召唤墓碑，若墓碑附近 ${hl('{radius}')} 码内只有友军， ${hl('{time}')} 秒后原地复活。`,
+    numbers: { time: 3 },
+    tags: ['生存', '经济'],
     exclusive_hero: 'axe',
   }),
 ];
@@ -43,7 +52,7 @@ export const versions = [
   versionSchema.parse({
     id: '2026-09-01',
     title: '秋季更新',
-    changes: [{ blessing: 'electric-hammer', text: '金币 3000→3500' }],
+    changes: [{ blessing: '10010', text: '金币 3000→3500' }],
   }),
 ];
 
@@ -53,7 +62,7 @@ export const builds = [
     data: buildSchema.parse({
       hero: 'axe',
       summary: '跳吼开团',
-      blessings: [{ id: 'electric-hammer', note: '前期经济' }, { id: 'wolf-core' }],
+      blessings: [{ id: '10010', note: '前期经济' }, { id: '10145' }],
       items: ['blink'],
       updated: '2026-09-20',
     }),

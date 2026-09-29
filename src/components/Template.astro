@@ -1,0 +1,26 @@
+---
+// Renders a game description template. Every piece of text goes through an Astro
+// expression, so it is escaped; no raw HTML from the data ever reaches the page.
+import { parseTemplate } from '../lib/template';
+
+interface Props {
+  tpl: string;
+  numbers?: Record<string, number | string>;
+}
+const { tpl, numbers } = Astro.props;
+const segments = parseTemplate(tpl, numbers);
+---
+
+{
+  segments.map((seg) =>
+    seg.type === 'break' ? (
+      <br />
+    ) : seg.type === 'text' ? (
+      <span class={seg.tone}>{seg.text}</span>
+    ) : seg.value !== undefined ? (
+      <span class="v">{seg.value}</span>
+    ) : (
+      <span class="v v-unknown" title={seg.key}>?</span>
+    ),
+  )
+}

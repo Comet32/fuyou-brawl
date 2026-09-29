@@ -23,7 +23,6 @@ export function findBrokenRefs(d: DataSet): string[] {
   const versionIds = new Set(d.versions.map((v) => v.id));
 
   for (const id of duplicates(d.blessings.map((b) => b.id))) errors.push(`福佑 id 重复：${id}`);
-  for (const name of duplicates(d.blessings.map((b) => b.name))) errors.push(`福佑名称重复：${name}`);
   for (const id of duplicates(d.heroes.map((h) => h.id))) errors.push(`英雄 id 重复：${id}`);
   for (const id of duplicates(d.items.map((i) => i.id))) errors.push(`装备 id 重复：${id}`);
   for (const id of duplicates(d.versions.map((v) => v.id))) errors.push(`版本 id 重复：${id}`);

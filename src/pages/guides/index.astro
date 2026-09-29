@@ -13,7 +13,7 @@ const guides = (await getCollection('guides')).sort((a, b) => a.data.order - b.d
     {
       guides.map((g) => (
         <li>
-          <article class="blessing-card" style="--cat: var(--accent)">
+          <article class="blessing-card" style="--q: var(--accent)">
             <div>
               <h3><a href={url(`/guides/${g.id}/`)}>{g.data.title}</a></h3>
               <p class="blessing-effect">{g.data.description}</p>

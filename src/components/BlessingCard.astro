@@ -1,8 +1,9 @@
 ---
 import type { Blessing } from '../lib/schema';
-import { CATEGORY_COLORS } from '../lib/categories';
+import { qualityOf } from '../lib/quality';
 import { url } from '../lib/url';
 import BlessingIcon from './BlessingIcon.astro';
+import Template from './Template.astro';
 
 interface Props {
   blessing: Blessing;
@@ -11,17 +12,18 @@ interface Props {
 }
 const { blessing, note, headingLevel = 'h3' } = Astro.props;
 const Tag = headingLevel;
+const quality = qualityOf(blessing.quality);
 ---
 
-<article class="blessing-card" style={`--cat:${CATEGORY_COLORS[blessing.category]}`}>
+<article class="blessing-card" style={`--q:${quality?.color ?? 'var(--border)'}`}>
   <BlessingIcon blessing={blessing} />
   <div>
     <Tag><a href={url(`/blessings/${blessing.id}/`)}>{blessing.name}</a></Tag>
     <p class="blessing-meta">
-      <span class="cat">{blessing.category}</span>
+      {quality && <span class="q">{quality.label}</span>}
       {blessing.tags.map((t) => <span class="tag">{t}</span>)}
     </p>
-    <p class="blessing-effect">{blessing.effect}</p>
+    <p class="blessing-effect"><Template tpl={blessing.summary} numbers={blessing.numbers} /></p>
     {note && <p class="blessing-note">💡 {note}</p>}
   </div>
 </article>

@@ -1,0 +1,11 @@
+# Manual data merged onto blessings.generated.yaml. Keys are blessing ids.
+'10010':
+  quality: ssr
+  numbers: { gold: 3500 }
+  sources: [https://steamcommunity.com/sharedfiles/filedetails/?id=2841152696]
+'10145':
+  numbers: { count: 3, pct: 8, self_pct: 3 }
+  sources: [https://steamcommunity.com/sharedfiles/filedetails/?id=2841152696]
+'10091':
+  numbers: { time: 3 }
+  sources: [https://steamcommunity.com/sharedfiles/filedetails/?id=2841152696]

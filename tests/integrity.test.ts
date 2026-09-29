@@ -11,7 +11,7 @@ describe('isoDate fields', () => {
 });
 
 describe('source URLs', () => {
-  const base = { id: 'x', name: 'X', category: '其他', effect: 'e' };
+  const base = { id: '10010', name: 'X', summary: 's', effect: 'e' };
   it('rejects non-http(s) protocols', () => {
     expect(blessingSchema.safeParse({ ...base, sources: ['javascript:alert(1)'] }).success).toBe(false);
   });
@@ -25,12 +25,16 @@ describe('findBrokenRefs', () => {
     expect(findBrokenRefs(validSet())).toEqual([]);
   });
 
-  it('reports duplicate blessing ids and names', () => {
+  it('reports duplicate blessing ids', () => {
     const d = validSet();
     d.blessings.push({ ...d.blessings[0] });
-    const errors = findBrokenRefs(d);
-    expect(errors).toContain('福佑 id 重复：wolf-core');
-    expect(errors).toContain('福佑名称重复：狼王核心');
+    expect(findBrokenRefs(d)).toEqual(['福佑 id 重复：10145']);
+  });
+
+  it('allows duplicate blessing names (the game has some)', () => {
+    const d = validSet();
+    d.blessings.push({ ...d.blessings[0], id: '10146' });
+    expect(findBrokenRefs(d)).toEqual([]);
   });
 
   it('reports duplicate hero, item and version ids', () => {
@@ -47,7 +51,7 @@ describe('findBrokenRefs', () => {
   it('reports unknown exclusive hero', () => {
     const d = validSet();
     d.blessings[2].exclusive_hero = 'nobody';
-    expect(findBrokenRefs(d)).toContain('福佑 rescue：exclusive_hero "nobody" 不存在');
+    expect(findBrokenRefs(d)).toContain('福佑 10091：exclusive_hero "nobody" 不存在');
   });
 
   it('reports unknown versions in since_version and history', () => {
@@ -55,24 +59,24 @@ describe('findBrokenRefs', () => {
     d.blessings[0].since_version = '2020-01-01';
     d.blessings[1].history[0].version = '2020-01-02';
     const errors = findBrokenRefs(d);
-    expect(errors).toContain('福佑 wolf-core：since_version "2020-01-01" 不在 versions.yaml 中');
-    expect(errors).toContain('福佑 electric-hammer：history 版本 "2020-01-02" 不在 versions.yaml 中');
+    expect(errors).toContain('福佑 10145：since_version "2020-01-01" 不在 versions.yaml 中');
+    expect(errors).toContain('福佑 10010：history 版本 "2020-01-02" 不在 versions.yaml 中');
   });
 
   it('reports unknown blessing in version changes', () => {
     const d = validSet();
-    d.versions[0].changes[0].blessing = 'ghost';
-    expect(findBrokenRefs(d)).toContain('版本 2026-09-01：引用了不存在的福佑 "ghost"');
+    d.versions[0].changes[0].blessing = '99999';
+    expect(findBrokenRefs(d)).toContain('版本 2026-09-01：引用了不存在的福佑 "99999"');
   });
 
   it('reports build file / hero mismatch and bad refs', () => {
     const d = validSet();
     d.builds[0].file = 'antimage.md';
-    d.builds[0].data.blessings.push({ id: 'ghost' });
+    d.builds[0].data.blessings.push({ id: '99999' });
     d.builds[0].data.items.push('nothing');
     const errors = findBrokenRefs(d);
     expect(errors).toContain('搭配 antimage.md：文件名应为 axe.md');
-    expect(errors).toContain('搭配 antimage.md：福佑 "ghost" 不存在');
+    expect(errors).toContain('搭配 antimage.md：福佑 "99999" 不存在');
     expect(errors).toContain('搭配 antimage.md：装备 "nothing" 不存在');
   });
 

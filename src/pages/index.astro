@@ -2,7 +2,8 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import BlessingCard from '../components/BlessingCard.astro';
-import { CATEGORIES } from '../lib/schema';
+import { QUALITIES } from '../lib/quality';
+import { TAGS, TAG_COLORS } from '../lib/tags';
 import { toSearchRecord } from '../lib/search-record';
 import { safeJson } from '../lib/json';
 
@@ -10,7 +11,7 @@ const blessings = (await getCollection('blessings'))
   .map((e) => e.data)
   .sort((a, b) => a.name.localeCompare(b.name, 'zh-CN'));
 const records = blessings.map(toSearchRecord);
-const categories = CATEGORIES.filter((c) => blessings.some((b) => b.category === c));
+const tags = TAGS.filter((t) => blessings.some((b) => b.tags.includes(t)));
 ---
 
 <Base>
@@ -27,12 +28,33 @@ const categories = CATEGORIES.filter((c) => blessings.some((b) => b.category ===
       autofocus
     />
     <div class="filter-row">
-      <div class="chips" role="group" aria-label="按分类筛选">
-        <button class="chip" type="button" data-cat="" aria-pressed="true">全部</button>
-        {categories.map((c) => <button class="chip" type="button" data-cat={c} aria-pressed="false">{c}</button>)}
+      <div class="chips" role="group" aria-label="按品质筛选">
+        <button class="chip" type="button" data-quality="" aria-pressed="true">全部</button>
+        {
+          QUALITIES.map((q) => (
+            <button class="chip" type="button" data-quality={q.id} aria-pressed="false">
+              <span class="dot" style={`--c:${q.color}`} aria-hidden="true" />{q.label}
+            </button>
+          ))
+        }
+        <button class="chip" type="button" data-quality="none" aria-pressed="false">未标注</button>
       </div>
       <p id="count" class="count muted" aria-live="polite">共 {blessings.length} 个</p>
     </div>
+    {
+      tags.length > 0 && (
+        <div class="filter-row">
+          <div class="chips" role="group" aria-label="按标签筛选">
+            <button class="chip" type="button" data-tag="" aria-pressed="true">全部</button>
+            {tags.map((t) => (
+              <button class="chip" type="button" data-tag={t} aria-pressed="false">
+                <span class="dot" style={`--c:${TAG_COLORS[t]}`} aria-hidden="true" />{t}
+              </button>
+            ))}
+          </div>
+        </div>
+      )
+    }
   </div>
   {blessings.length === 0 && <p class="empty">还没有收录福佑。</p>}
   <ul id="results" class="card-list">

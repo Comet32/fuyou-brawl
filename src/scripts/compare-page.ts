@@ -1,4 +1,5 @@
 import { parseCompareIds, serializeCompareIds } from '../lib/compare';
+import { qualityOf } from '../lib/quality';
 import { createSearcher } from '../lib/searcher';
 import type { SearchRecord } from '../lib/search-record';
 import { replaceSearch } from './history';
@@ -43,7 +44,8 @@ export function initComparePage(): void {
           const li = document.createElement('li');
           const btn = document.createElement('button');
           btn.type = 'button';
-          btn.textContent = `${r.name} · ${r.category}`;
+          const quality = qualityOf(r.quality)?.label;
+          btn.textContent = quality ? `${r.name} · ${quality}` : r.name;
           btn.addEventListener('click', () => choose(i, r.id));
           li.appendChild(btn);
           return li;

@@ -9,12 +9,13 @@ afterAll(() => {
   for (const dir of tempDirs) rmSync(dir, { recursive: true, force: true });
 });
 
-function makeRepo(blessingsYaml: string): string {
+function makeRepo(generatedYaml: string, overridesYaml = ''): string {
   const root = mkdtempSync(join(tmpdir(), 'fuyou-'));
   tempDirs.push(root);
   mkdirSync(join(root, 'src/data'), { recursive: true });
   mkdirSync(join(root, 'src/content/builds'), { recursive: true });
-  writeFileSync(join(root, 'src/data/blessings.yaml'), blessingsYaml);
+  writeFileSync(join(root, 'src/data/blessings.generated.yaml'), generatedYaml);
+  writeFileSync(join(root, 'src/data/blessings.overrides.yaml'), overridesYaml);
   writeFileSync(join(root, 'src/data/heroes.yaml'), '- { id: axe, name: 斧王, name_en: Axe, attr: str }\n');
   writeFileSync(join(root, 'src/data/items.yaml'), '[]\n');
   writeFileSync(join(root, 'src/data/versions.yaml'), '[]\n');
@@ -35,15 +36,15 @@ describe('readFrontmatter', () => {
 });
 
 describe('loadDataSet', () => {
-  it('loads and applies schema defaults', () => {
-    const root = makeRepo('- { id: x, name: 甲, category: 其他, effect: 效果 }\n');
+  it('loads merged blessings and applies schema defaults', () => {
+    const root = makeRepo("- { id: '10010', name: 甲, summary: 短, effect: 效果 }\n", "'10010': { quality: sr }\n");
     const d = loadDataSet(root);
-    expect(d.blessings[0].tags).toEqual([]);
+    expect(d.blessings[0]).toMatchObject({ id: '10010', quality: 'sr', tags: [], numbers: {} });
     expect(d.builds).toEqual([expect.objectContaining({ file: 'axe.md' })]);
     expect(d.builds[0].data.blessings).toEqual([]);
   });
   it('names the file when schema validation fails', () => {
-    const root = makeRepo('- { id: x, name: 甲, category: 不存在的分类, effect: 效果 }\n');
-    expect(() => loadDataSet(root)).toThrow(/blessings\.yaml/);
+    const root = makeRepo("- { id: '10010', name: '', summary: 短, effect: 效果 }\n");
+    expect(() => loadDataSet(root)).toThrow(/blessings\.generated\.yaml/);
   });
 });

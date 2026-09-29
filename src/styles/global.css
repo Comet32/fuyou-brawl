@@ -7,6 +7,7 @@
   --muted: #9aa1ad;
   --accent: #d9a441;
   --accent-text: #1a1406;
+  --hl: #83d18a;
   --radius: 10px;
   --gap: 12px;
   --header-h: 48px;
@@ -22,6 +23,7 @@
     --muted: #5f6673;
     --accent: #8a5f12;
     --accent-text: #ffffff;
+    --hl: #2e7d3a;
     color-scheme: light;
   }
 }
@@ -34,6 +36,7 @@
   --muted: #5f6673;
   --accent: #8a5f12;
   --accent-text: #ffffff;
+  --hl: #2e7d3a;
   color-scheme: light;
 }
 
@@ -89,6 +92,7 @@ main { max-width: 960px; margin: 0 auto; padding: 16px; }
 }
 .search-input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
 .filter-row { display: flex; align-items: center; gap: 8px; padding-top: 6px; }
+.filter-row + .filter-row { padding-top: 4px; }
 .chips { display: flex; gap: 6px; flex: 1; min-width: 0; overflow-x: auto; scrollbar-width: none; }
 .chips::-webkit-scrollbar { display: none; }
 .count { flex: none; margin: 0; font-size: 13px; white-space: nowrap; }
@@ -97,6 +101,13 @@ main { max-width: 960px; margin: 0 auto; padding: 16px; }
   border-radius: 999px; padding: 4px 12px; font-size: 14px; min-height: 36px;
 }
 .chip[aria-pressed='true'] { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
+.chip .dot { display: inline-block; width: 8px; height: 8px; margin-right: 5px; border-radius: 50%; background: var(--c); vertical-align: 1px; }
+
+/* Description template segments (see Template.astro) */
+.highlight { color: var(--hl); }
+.accent { color: var(--accent); }
+.v { font-weight: 600; color: var(--hl); }
+.v-unknown { color: var(--muted); text-decoration: underline dashed; text-underline-offset: 3px; cursor: help; }
 
 .card-list {
   list-style: none; padding: 0; margin: 0;
@@ -104,22 +115,23 @@ main { max-width: 960px; margin: 0 auto; padding: 16px; }
 }
 .blessing-card {
   display: flex; gap: 12px; padding: 12px; height: 100%;
-  background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--cat);
+  background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--q);
   border-radius: var(--radius);
 }
 .blessing-card :is(h1, h2, h3) { margin: 0; font-size: 17px; }
 .blessing-card h1 { font-size: 20px; }
 .blessing-card :is(h1, h2, h3) a { color: var(--text); text-decoration: none; }
 .blessing-meta { margin: 2px 0 6px; display: flex; flex-wrap: wrap; gap: 4px; font-size: 12px; }
-.blessing-meta .cat { color: var(--text); font-weight: 600; margin-right: 4px; }
+.blessing-meta .q { color: var(--text); font-weight: 600; margin-right: 4px; }
 .tag { padding: 0 6px; border-radius: 4px; background: var(--surface-2); color: var(--muted); }
 .blessing-effect { margin: 0; font-size: 15px; }
 .blessing-note { margin: 6px 0 0; font-size: 14px; color: var(--muted); }
 .blessing-icon {
   flex: none; width: 48px; height: 48px; border-radius: 8px;
-  background: var(--cat); display: grid; place-items: center;
+  background: var(--q); display: grid; place-items: center;
   font-weight: 700; font-size: 20px; color: #111;
 }
+.blessing-icon.unlabeled { color: var(--muted); }
 .blessing-icon img { width: 100%; height: 100%; border-radius: 8px; object-fit: cover; }
 
 .hero-grid { display: grid; gap: 8px; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); padding: 0; list-style: none; }

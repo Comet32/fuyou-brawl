@@ -1,12 +1,16 @@
 import { pinyin } from 'pinyin-pro';
+import type { QualityId } from './quality';
 import type { Blessing } from './schema';
+import { toPlainText } from './template';
 
 export interface SearchRecord {
   id: string;
   name: string;
-  category: string;
-  effect: string;
+  name_en: string;
+  quality: QualityId | null;
   tags: string[];
+  /** Plain-text summary; unknown values show as "?" (numbers are not needed for search). */
+  text: string;
   py: string;
   pyInitials: string;
 }
@@ -17,9 +21,10 @@ export function toSearchRecord(b: Blessing): SearchRecord {
   return {
     id: b.id,
     name: b.name,
-    category: b.category,
-    effect: b.effect,
+    name_en: b.name_en,
+    quality: b.quality,
     tags: b.tags,
+    text: toPlainText(b.summary),
     py: toKey(pinyin(b.name, { toneType: 'none', type: 'array', v: true })),
     pyInitials: toKey(pinyin(b.name, { pattern: 'first', toneType: 'none', type: 'array', v: true })),
   };

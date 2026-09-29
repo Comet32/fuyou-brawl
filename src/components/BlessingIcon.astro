@@ -1,18 +1,21 @@
 ---
 import type { Blessing } from '../lib/schema';
-import { CATEGORY_COLORS } from '../lib/categories';
+import { publicFileExists } from '../lib/assets';
+import { qualityOf } from '../lib/quality';
 import { url } from '../lib/url';
 
 interface Props {
   blessing: Blessing;
 }
 const { blessing } = Astro.props;
+const quality = qualityOf(blessing.quality);
+const rel = blessing.icon ? `img/blessings/${blessing.icon}` : undefined;
 ---
 
-<div class="blessing-icon" style={`--cat:${CATEGORY_COLORS[blessing.category]}`}>
+<div class:list={['blessing-icon', { unlabeled: !quality }]} style={`--q:${quality?.color ?? 'var(--surface-2)'}`}>
   {
-    blessing.icon ? (
-      <img src={url(`/img/blessings/${blessing.icon}`)} alt="" width="48" height="48" loading="lazy" />
+    rel && publicFileExists(rel) ? (
+      <img src={url(rel)} alt="" width="48" height="48" loading="lazy" />
     ) : (
       <span aria-hidden="true">{blessing.name.slice(0, 1)}</span>
     )
