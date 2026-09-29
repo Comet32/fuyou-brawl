@@ -34,14 +34,21 @@ const linked = (heroLinks().byHero.get(hero.id) ?? [])
   .sort((a, b) => qualityRank(a.quality) - qualityRank(b.quality) || a.name.localeCompare(b.name, 'zh-CN'));
 const heroBlessings = linked.filter((b) => isHeroBlessing(b.id));
 const generalLinked = linked.filter((b) => !isHeroBlessing(b.id));
-// Community picks for this hero (one-image guides, video titles), grouped by quality.
-const recommended = blessingsRecommendedForHero(hero.id, blessings);
-const recGroups = [
+// Quality families (橙 / 紫 / 蓝 / 未标注) for grouped card lists.
+const FAMILIES = [
   ...QUALITIES.map((q) => ({ id: q.id as string, q: q.id as string | undefined, label: q.label })),
   { id: 'none', q: undefined, label: '未标注' },
-]
-  .map((g) => ({ ...g, items: recommended.filter((r) => (r.blessing.quality ?? 'none') === g.id) }))
-  .filter((g) => g.items.length > 0);
+];
+const byFamily = <T,>(list: T[], blessingOf: (x: T) => { quality: string | null }) =>
+  FAMILIES.map((g) => ({ ...g, items: list.filter((x) => (blessingOf(x).quality ?? 'none') === g.id) })).filter(
+    (g) => g.items.length > 0,
+  );
+// The build's picks (tier notes kept), grouped like the catalog.
+const relatedGroups = byFamily(related, (r) => r.blessing);
+// Community picks for this hero (one-image guides, video titles) that the build does not already list.
+const inBuild = new Set(related.map((r) => r.blessing.id));
+const recommended = blessingsRecommendedForHero(hero.id, blessings).filter((r) => !inBuild.has(r.blessing.id));
+const recGroups = byFamily(recommended, (r) => r.blessing);
 const recNote = (sources: string[]) => `推荐来源：${[...new Set(sources.map((s) => sourceLink(s).label))].join('、')}`;
 const items = new Map((await getCollection('items')).map((e) => [e.data.id, e.data]));
 const newBuildUrl = `${REPO_URL}/new/main/src/content/builds?filename=${hero.id}.md`;
@@ -95,13 +102,40 @@ const newBuildUrl = `${REPO_URL}/new/main/src/content/builds?filename=${hero.id}
   }
 
   {
+    related.length > 0 && (
+      <section aria-labelledby="bless-h">
+        <h2 id="bless-h" class="strap">推荐福佑<span class="num">{related.length}</span></h2>
+        {relatedGroups.map((g) => (
+          <div class="group rec-group" data-q={g.q}>
+            <h3 class="group-head">
+              <span class="group-name">{g.label}</span>
+              <b class="num">{g.items.length}</b>
+            </h3>
+            <ul class="slot-list">
+              {g.items.map((r) => (
+                <li>
+                  <BlessingCard
+                    blessing={r.blessing}
+                    headingLevel="h4"
+                    note={r.note ?? (r.reason === 'exclusive' ? '专属福佑' : undefined)}
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </section>
+    )
+  }
+
+  {
     recommended.length > 0 && (
       <section aria-labelledby="rec-h">
         <h2 id="rec-h" class="strap">社区推荐福佑<span class="num">{recommended.length}</span></h2>
         <p class="note">
           整理自
           <a class="link-inline" href={COMMUNITY_WIKI_URL} target="_blank" rel="noopener">社区图鉴站<Icon name="external" /></a>
-          的英雄一图流和 B站实战视频标题，是玩家的经验之谈，不是官方推荐。
+          的英雄一图流和 B站实战视频标题，是玩家的经验之谈，不是官方推荐。{build && '上面搭配里已有的不再重复。'}
         </p>
         {recGroups.map((g) => (
           <div class="group rec-group" data-q={g.q}>
@@ -118,21 +152,6 @@ const newBuildUrl = `${REPO_URL}/new/main/src/content/builds?filename=${hero.id}
             </ul>
           </div>
         ))}
-      </section>
-    )
-  }
-
-  {
-    related.length > 0 && (
-      <section aria-labelledby="bless-h">
-        <h2 id="bless-h" class="strap">推荐福佑<span class="num">{related.length}</span></h2>
-        <ul class="slot-list">
-          {related.map((r) => (
-            <li>
-              <BlessingCard blessing={r.blessing} note={r.note ?? (r.reason === 'exclusive' ? '专属福佑' : undefined)} />
-            </li>
-          ))}
-        </ul>
       </section>
     )
   }
@@ -182,7 +201,7 @@ const newBuildUrl = `${REPO_URL}/new/main/src/content/builds?filename=${hero.id}
           {build.sources.map((s) => (
             <li>
               <a class="link-inline" href={s} target="_blank" rel="noopener">
-                {s}
+                {sourceLink(s).label}
                 <Icon name="external" />
               </a>
             </li>

@@ -64,15 +64,18 @@ const history = historyEntries(blessing.history, blessing.changes);
 const hasHistory = history.length > 0 || blessing.change_summary !== undefined;
 const registry = renderSources();
 const manualSources = blessing.sources.map((s) => describeSource(s, registry));
-// Community picks, separate from the automatic hero links above them.
+// Community picks, separate from the automatic hero links above them. Heroes whose build already lists
+// this blessing appear under 推荐搭配的英雄 instead (most builds come from the same one-image guides).
+const inBuilds = new Set(recommendedBy.map((h) => h.id));
 const communityHeroes = blessing.recommended_heroes
+  .filter((r) => !inBuilds.has(r.hero))
   .map((r) => ({ hero: heroes.get(r.hero), link: sourceLink(r.source) }))
   .filter((x): x is { hero: NonNullable<typeof x.hero>; link: ReturnType<typeof sourceLink> } => x.hero !== undefined);
 const communityHeroLabels = [...new Set(communityHeroes.map((x) => x.link.label))];
 const usesCommunity =
   qualitySource !== undefined ||
   Object.keys(blessing.number_sources).length > 0 ||
-  communityHeroes.length > 0 ||
+  blessing.recommended_heroes.length > 0 ||
   tips.some((t) => t.source) ||
   blessing.wiki_notes.length > 0 ||
   blessing.changes.length > 0 ||
@@ -272,10 +275,10 @@ const usesCommunity =
       <section aria-labelledby="heroes-h">
         <h2 id="heroes-h" class="strap">推荐搭配的英雄</h2>
         <ul class="hero-grid">
-          {recommendedBy.map((h) => (
+          {recommendedBy.map((h, i) => (
             <li>
               <a class="hero-tile" href={url(`/heroes/${h.id}/`)}>
-                <HeroImage hero={h} eager />
+                <HeroImage hero={h} eager={i < 4} />
                 <span class="name-strap">{h.name}</span>
               </a>
             </li>
