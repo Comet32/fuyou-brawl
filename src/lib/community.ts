@@ -1,0 +1,166 @@
+// Community research -> blessings.community.yaml entries, plus small display helpers for tips and sources.
+import { qualityOf, QUALITY_IDS, type QualityId } from './quality';
+import { TIP_MAX_LENGTH, type BlessingCommunity } from './schema';
+
+/** One entry of tmp/research/blessing-notes.json (shape of the research export). */
+export interface ResearchNote {
+  id: string;
+  name: string;
+  numbers?: Record<
+    string,
+    { value?: number; range?: [number, number]; sample?: number; source: string; unit_mismatch?: boolean }
+  >;
+  tips?: { text: string; source: string; date: string | null; possibly_outdated?: boolean }[];
+  quality?: { value: string; source: string; date?: string | null; note?: string } | null;
+  quality_conflicts?: { value: string; source: string; note?: string }[] | null;
+  quality_note?: string | null;
+  heroes?: { hero: string; source: string; note?: string; date?: string | null }[];
+  /** The wiki's own prose: used by the researcher to cross-check, never imported. */
+  wiki_text?: unknown;
+}
+
+export interface ConvertContext {
+  /** Chinese hero name -> hero id (from heroes.yaml). */
+  heroIdByName: Map<string, string>;
+  /** Placeholder keys of the blessing's templates; values for other keys are skipped. */
+  placeholders: Set<string>;
+}
+
+export type SkipReason = 'quality_conflict' | 'unit_mismatch' | 'not_placeholder' | 'tip_too_long' | 'hero_unmapped';
+export interface Skip {
+  id: string;
+  what: string;
+  reason: SkipReason;
+}
+
+/**
+ * Common short names that differ from heroes.yaml. Explicit and reviewed; names are never matched fuzzily.
+ * 先知 is the everyday name of 自然先知 (Nature's Prophet).
+ */
+export const HERO_NAME_ALIASES: Record<string, string> = { 先知: 'furion' };
+
+// "图鉴标注的专属英雄" marks the owner of a hero blessing, which the site already links; not a recommendation.
+const EXCLUSIVE_MARKER = '图鉴标注的专属英雄';
+
+const WIKI_HOST = '122.51.0.76:8081';
+export const WIKI_URL = `http://${WIKI_HOST}/`;
+
+/** Keep YYYY-MM and YYYY-MM-DD (trimming any time part); anything else is dropped. */
+export function normalizeTipDate(date: string | null | undefined): string | undefined {
+  if (!date) return undefined;
+  const m = /^(\d{4}-\d{2})(-\d{2})?(?:$|T)/.exec(date);
+  return m ? m[1] + (m[2] ?? '') : undefined;
+}
+
+const qualityLabel = (id: string) => qualityOf(id)?.label ?? id;
+
+/** Convert one research note into a community entry (undefined when nothing usable is left). */
+export function convertNote(
+  note: ResearchNote,
+  ctx: ConvertContext,
+): { entry: BlessingCommunity | undefined; skipped: Skip[]; unmapped: string[] } {
+  const skipped: Skip[] = [];
+  const unmapped: string[] = [];
+  const skip = (what: string, reason: SkipReason) => skipped.push({ id: note.id, what, reason });
+  const entry: BlessingCommunity = {};
+  const tips: NonNullable<BlessingCommunity['tips']> = [];
+
+  const q = note.quality;
+  if (q && QUALITY_IDS.includes(q.value as QualityId)) {
+    const conflicts = note.quality_conflicts ?? [];
+    if (conflicts.length > 0) {
+      skip('quality', 'quality_conflict');
+      const claims = [q, ...conflicts].map((c) => `${sourceLink(c.source).label}为${qualityLabel(c.value)}`);
+      const date = normalizeTipDate(q.date);
+      tips.push({ text: `品质说法不一：${claims.join('，')}，暂不标注`, source: q.source, ...(date && { date }) });
+    } else {
+      entry.quality = q.value as QualityId;
+      entry.quality_source = q.source;
+    }
+  }
+  if (note.quality_note) entry.notes = note.quality_note;
+
+  const numbers: NonNullable<BlessingCommunity['numbers']> = {};
+  const numberSources: Record<string, string> = {};
+  for (const [key, n] of Object.entries(note.numbers ?? {})) {
+    if (n.unit_mismatch) {
+      skip(`numbers.${key}`, 'unit_mismatch');
+      continue;
+    }
+    if (!ctx.placeholders.has(key)) {
+      skip(`numbers.${key}`, 'not_placeholder');
+      continue;
+    }
+    const value = n.range ? `${n.range[0]}~${n.range[1]}` : n.value;
+    if (value === undefined) continue;
+    numbers[key] = value;
+    numberSources[key] = n.source;
+  }
+  if (Object.keys(numbers).length > 0) {
+    entry.numbers = numbers;
+    entry.number_sources = numberSources;
+  }
+
+  for (const t of note.tips ?? []) {
+    const text = t.text.trim();
+    if (text.length > TIP_MAX_LENGTH) {
+      skip(`tip: ${text.slice(0, 20)}…`, 'tip_too_long');
+      continue;
+    }
+    const date = normalizeTipDate(t.date);
+    tips.push({ text, source: t.source, ...(date && { date }) });
+  }
+  if (tips.length > 0) entry.tips = tips;
+
+  const heroes: NonNullable<BlessingCommunity['recommended_heroes']> = [];
+  for (const h of note.heroes ?? []) {
+    if (h.note === EXCLUSIVE_MARKER) continue;
+    const id = ctx.heroIdByName.get(h.hero) ?? HERO_NAME_ALIASES[h.hero];
+    if (!id) {
+      if (!unmapped.includes(h.hero)) {
+        unmapped.push(h.hero);
+        skip(`hero: ${h.hero}`, 'hero_unmapped');
+      }
+      continue;
+    }
+    if (!heroes.some((r) => r.hero === id)) heroes.push({ hero: id, source: h.source });
+  }
+  if (heroes.length > 0) entry.recommended_heroes = heroes;
+
+  return { entry: Object.keys(entry).length > 0 ? entry : undefined, skipped, unmapped };
+}
+
+/**
+ * Whether a tip dated `date` is more than `months` months older than `reference` (the current game version).
+ * A month-only date counts as the end of that month, so it is only flagged when surely old.
+ */
+export function isPossiblyOutdated(date: string | undefined, reference: string, months = 6): boolean {
+  if (!date) return false;
+  const [y, m, d] = date.split('-').map(Number);
+  // Day 0 of the next month is the last day of this one.
+  const at = d ? Date.UTC(y, m - 1, d) : Date.UTC(y, m, 0);
+  const [ry, rm, rd] = reference.split('-').map(Number);
+  const cutoff = Date.UTC(ry, rm - 1 - months, rd);
+  return at < cutoff;
+}
+
+/** Display link for a source url: a short Chinese label, and the wiki's front page instead of its JSON API. */
+export function sourceLink(source: string): { href: string; label: string } {
+  let u: URL;
+  try {
+    u = new URL(source);
+  } catch {
+    return { href: source, label: source };
+  }
+  if (u.host === WIKI_HOST) {
+    // Hero "一图流" guide images and the API listing them.
+    if (u.pathname.startsWith('/icons/guides/')) return { href: source, label: '社区一图流' };
+    if (u.pathname.startsWith('/api/hero-guides')) return { href: WIKI_URL, label: '社区一图流' };
+    return { href: u.pathname.startsWith('/api/') ? WIKI_URL : source, label: '社区图鉴' };
+  }
+  if (u.hostname === 'steamcommunity.com') {
+    return { href: source, label: u.pathname.includes('/changelog/') ? 'Steam 改动记录' : 'Steam 创意工坊' };
+  }
+  if (u.hostname.endsWith('bilibili.com')) return { href: source, label: 'B站' };
+  return { href: source, label: u.hostname };
+}

@@ -79,11 +79,15 @@ describe('blessingSchema (merged)', () => {
       ...base,
       name_en: '',
       quality: null,
+      quality_source: null,
       tags: [],
       numbers: {},
+      number_sources: {},
       exclusive_hero: null,
       sources: [],
       history: [],
+      tips: [],
+      recommended_heroes: [],
     });
   });
   it('allows free-form tags', () => {

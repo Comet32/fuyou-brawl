@@ -1,3 +1,4 @@
+import { QUALITY_IDS } from './quality';
 import type { Blessing, Build } from './schema';
 
 export interface HeroBlessing {
@@ -27,4 +28,27 @@ export function blessingsForHero(heroId: string, blessings: Blessing[], build: B
 // Exclusive heroes are intentionally not included; the detail page shows exclusive_hero separately.
 export function heroesForBlessing(blessingId: string, builds: Build[]): string[] {
   return builds.filter((b) => b.blessings.some((ref) => ref.id === blessingId)).map((b) => b.hero);
+}
+
+export interface RecommendedBlessing {
+  blessing: Blessing;
+  /** Where the community recommended it for this hero (guide image, video...). */
+  sources: string[];
+}
+
+const qualityRank = (q: Blessing['quality']) => (q ? QUALITY_IDS.indexOf(q) : QUALITY_IDS.length);
+
+/** Blessings whose community `recommended_heroes` include `heroId`, best quality first, then by name. */
+export function blessingsRecommendedForHero(heroId: string, blessings: Blessing[]): RecommendedBlessing[] {
+  return blessings
+    .map((blessing) => ({
+      blessing,
+      sources: [...new Set(blessing.recommended_heroes.filter((r) => r.hero === heroId).map((r) => r.source))],
+    }))
+    .filter((r) => r.sources.length > 0)
+    .sort(
+      (a, b) =>
+        qualityRank(a.blessing.quality) - qualityRank(b.blessing.quality) ||
+        a.blessing.name.localeCompare(b.blessing.name, 'zh-CN'),
+    );
 }

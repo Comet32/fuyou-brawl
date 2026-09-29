@@ -54,6 +54,15 @@ describe('findBrokenRefs', () => {
     expect(findBrokenRefs(d)).toContain('福佑 10091：exclusive_hero "nobody" 不存在');
   });
 
+  it('reports unknown community recommended heroes', () => {
+    const d = validSet();
+    d.blessings[1].recommended_heroes = [
+      { hero: 'axe', source: 'https://www.bilibili.com/video/BV1feAHzJEGH/' },
+      { hero: 'nobody', source: 'https://www.bilibili.com/video/BV1feAHzJEGH/' },
+    ];
+    expect(findBrokenRefs(d)).toEqual(['福佑 10010：社区推荐英雄 "nobody" 不存在']);
+  });
+
   it('reports unknown versions in since_version and history', () => {
     const d = validSet();
     d.blessings[0].since_version = '2020-01-01';

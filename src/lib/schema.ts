@@ -29,6 +29,18 @@ const quality = z.enum(QUALITY_IDS as [QualityId, ...QualityId[]]);
 // Placeholder name in the description template -> value, e.g. { gold: 3500 }
 const numbers = z.record(z.string(), z.union([z.number(), z.string()]));
 const history = z.array(z.object({ version: isoDate, change: z.string().min(1) }));
+// Tip dates may be month-only (2026-05); unquoted YAML dates become Date objects.
+const tipDate = z.preprocess(
+  (v) => (v instanceof Date ? v.toISOString().slice(0, 10) : v),
+  z.string().regex(/^\d{4}-\d{2}(-\d{2})?$/, '日期格式应为 YYYY-MM 或 YYYY-MM-DD'),
+);
+/** Tip text limit: longer text is likely copied from a source rather than paraphrased. */
+export const TIP_MAX_LENGTH = 80;
+const tipText = z.string().min(1).max(TIP_MAX_LENGTH, `心得不超过 ${TIP_MAX_LENGTH} 字，请用自己的话概括`);
+// A player tip. Manual tips may omit the source; community ones always carry it.
+const tip = z.strictObject({ text: tipText, source: httpUrl.optional(), date: tipDate.optional() });
+const communityTip = z.strictObject({ text: tipText, source: httpUrl, date: tipDate.optional() });
+const recommendedHero = z.strictObject({ hero: slug, source: httpUrl });
 
 /** One entry of blessings.generated.yaml (written by scripts/import-vpk.ts). */
 export const generatedBlessingSchema = z.object({
@@ -54,18 +66,44 @@ export const blessingOverrideSchema = z.strictObject({
   exclusive_hero: slug.optional(),
   // Hero ids this blessing belongs to; replaces the automatic ability-name links ([] = none).
   heroes: z.array(slug).optional(),
+  // Player tips, shown before the community ones.
+  tips: z.array(tip).optional(),
 });
 
-/** A blessing after merging generated data with its override. */
+/**
+ * One value of blessings.community.yaml (written by scripts/import-community.ts from community research).
+ * Strict, so fields that must never be published (like the wiki's own prose) are rejected.
+ */
+export const blessingCommunitySchema = z.strictObject({
+  quality: quality.optional(),
+  quality_source: httpUrl.optional(),
+  numbers: numbers.optional(),
+  // Placeholder name -> where its value came from.
+  number_sources: z.record(z.string(), httpUrl).optional(),
+  tips: z.array(communityTip).optional(),
+  recommended_heroes: z.array(recommendedHero).optional(),
+  // Caveat about the quality, e.g. why it is left unknown.
+  notes: z.string().min(1).optional(),
+});
+
+/** A blessing after merging generated data with community data and its override (override wins). */
 export const blessingSchema = z.object({
   id: blessingId,
   name: z.string().min(1),
   name_en: z.string().default(''),
   quality: quality.nullable().default(null),
+  /** Where `quality` came from: blessings.overrides.yaml, blessings.community.yaml, or nowhere. */
+  quality_source: z.enum(['manual', 'community']).nullable().default(null),
+  /** Source link of a community quality. */
+  quality_url: httpUrl.optional(),
+  /** Community caveat about an unknown quality. */
+  quality_note: z.string().optional(),
   summary: z.string(),
   effect: z.string(),
   tags: z.array(z.string()).default([]),
   numbers: numbers.default({}),
+  /** Source links of the values that came from community data (manual values have none). */
+  number_sources: z.record(z.string(), httpUrl).default({}),
   icon: iconFile.optional(),
   exclusive_hero: slug.nullable().default(null),
   /** Manual hero links; undefined = use the automatic ones. */
@@ -73,6 +111,10 @@ export const blessingSchema = z.object({
   since_version: isoDate.optional(),
   sources: z.array(httpUrl).default([]),
   history: history.default([]),
+  /** Manual tips first, then community ones. */
+  tips: z.array(tip).default([]),
+  /** Heroes the community recommends this blessing for (separate from the automatic hero links). */
+  recommended_heroes: z.array(recommendedHero).default([]),
 });
 
 export const heroSchema = z.object({
@@ -124,6 +166,8 @@ export const guideSchema = z.object({
 
 export type GeneratedBlessing = z.infer<typeof generatedBlessingSchema>;
 export type BlessingOverride = z.infer<typeof blessingOverrideSchema>;
+export type BlessingCommunity = z.infer<typeof blessingCommunitySchema>;
+export type Tip = z.infer<typeof tip>;
 export type Blessing = z.infer<typeof blessingSchema>;
 export type Hero = z.infer<typeof heroSchema>;
 export type HeroAbilities = z.infer<typeof heroAbilitiesSchema>;

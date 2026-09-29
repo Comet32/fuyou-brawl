@@ -35,6 +35,9 @@ export function findBrokenRefs(d: DataSet): string[] {
     for (const hero of b.heroes ?? []) {
       if (!heroIds.has(hero)) errors.push(`福佑 ${b.id}：heroes 中的英雄 "${hero}" 不存在`);
     }
+    for (const { hero } of b.recommended_heroes) {
+      if (!heroIds.has(hero)) errors.push(`福佑 ${b.id}：社区推荐英雄 "${hero}" 不存在`);
+    }
     if (b.since_version && !versionIds.has(b.since_version)) {
       errors.push(`福佑 ${b.id}：since_version "${b.since_version}" 不在 versions.yaml 中`);
     }
