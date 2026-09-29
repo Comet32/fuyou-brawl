@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { heroImageUrl, itemImageUrl, mapHeroFeed, mapItemFeed } from '../src/lib/dota-feed';
+import { heroImageUrl, itemImageUrl, mapAbilityFeed, mapHeroFeed, mapItemFeed } from '../src/lib/dota-feed';
 
 const heroFeed = {
   result: {
@@ -52,5 +52,73 @@ describe('image urls', () => {
   it('points at the dota_react CDN paths', () => {
     expect(heroImageUrl('axe')).toBe('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/axe.png');
     expect(itemImageUrl('blink')).toBe('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/blink.png');
+  });
+});
+
+const ab = (name: string, name_loc: string, name_english_loc = name) => ({ id: 1, name, name_loc, name_english_loc });
+
+const abilityFeed = {
+  result: {
+    data: {
+      itemabilities: [
+        ab('nevermore_shadowraze2', '毁灭阴影', 'Shadowraze'),
+        ab('nevermore_shadowraze1', '毁灭阴影', 'Shadowraze'),
+        ab('nevermore_necromastery', '死亡窃取', 'Necromastery'),
+        ab('nevermore_shadowraze3', '毁灭阴影', 'Shadowraze'),
+        ab('antimage_mana_break', '法力损毁', 'Mana Break'),
+        ab('shadow_shaman_ether_shock', '以太震击', 'Ether Shock'),
+        ab('shadow_shaman_shackles', '束缚之术', 'Shackles'),
+        ab('shadow_demon_disruption', '崩裂禁锢', 'Disruption'),
+        ab('shadow_cloak', '不属于英雄', 'Not a hero ability'),
+        ab('antimage_empty1', '空技能位', 'Empty'),
+        ab('antimage_hidden_blink', '隐藏技能', 'Hidden'),
+        ab('antimage_unnamed', '', ''),
+        ab('special_bonus_attack_speed_20', '+20 攻击速度'),
+        ab('generic_hidden', '隐藏'),
+        ab('ability_capture', '占领'),
+        ab('plus_high_five', '击掌'),
+        ab('item_blink', '闪烁匕首', 'Blink Dagger'),
+      ],
+    },
+  },
+};
+
+describe('mapAbilityFeed', () => {
+  const heroIds = ['nevermore', 'antimage', 'shadow_shaman', 'shadow_demon', 'shadow', 'axe'];
+  const out = mapAbilityFeed(abilityFeed, heroIds);
+  const of = (hero: string) => out.find((h) => h.hero === hero)?.abilities;
+
+  it('assigns each ability to the hero with the longest matching id prefix', () => {
+    expect(of('shadow_shaman')).toEqual([
+      { id: 'shadow_shaman_ether_shock', name: '以太震击', name_en: 'Ether Shock' },
+      { id: 'shadow_shaman_shackles', name: '束缚之术', name_en: 'Shackles' },
+    ]);
+    expect(of('shadow_demon')?.map((a) => a.id)).toEqual(['shadow_demon_disruption']);
+    // "shadow_cloak" only matches the bare "shadow" prefix when followed by "_": it does, so it belongs to "shadow".
+    expect(of('shadow')?.map((a) => a.id)).toEqual(['shadow_cloak']);
+  });
+
+  it('dedupes abilities by localized name per hero, keeping the first in feed order', () => {
+    expect(of('nevermore')).toEqual([
+      { id: 'nevermore_shadowraze2', name: '毁灭阴影', name_en: 'Shadowraze' },
+      { id: 'nevermore_necromastery', name: '死亡窃取', name_en: 'Necromastery' },
+    ]);
+  });
+
+  it('drops unnamed, empty, hidden, special_bonus, generic and non-hero abilities', () => {
+    expect(of('antimage')).toEqual([{ id: 'antimage_mana_break', name: '法力损毁', name_en: 'Mana Break' }]);
+    const all = out.flatMap((h) => h.abilities.map((a) => a.id));
+    for (const bad of ['special_bonus_attack_speed_20', 'generic_hidden', 'ability_capture', 'plus_high_five', 'item_blink'])
+      expect(all).not.toContain(bad);
+  });
+
+  it('omits heroes without abilities and sorts heroes by id', () => {
+    expect(of('axe')).toBeUndefined();
+    expect(out.map((h) => h.hero)).toEqual(['antimage', 'nevermore', 'shadow', 'shadow_demon', 'shadow_shaman']);
+  });
+
+  it('falls back to the localized name when the English name is missing', () => {
+    const feed = { result: { data: { itemabilities: [ab('axe_berserkers_call', '狂战士之吼', '')] } } };
+    expect(mapAbilityFeed(feed, ['axe'])[0].abilities[0].name_en).toBe('狂战士之吼');
   });
 });

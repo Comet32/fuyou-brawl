@@ -1,8 +1,9 @@
-import type { Blessing, Build, Hero, Item, Version } from './schema';
+import type { Blessing, Build, Hero, HeroAbilities, Item, Version } from './schema';
 
 export interface DataSet {
   blessings: Blessing[];
   heroes: Hero[];
+  heroAbilities: HeroAbilities[];
   items: Item[];
   versions: Version[];
   builds: { file: string; data: Build }[];
@@ -40,6 +41,11 @@ export function findBrokenRefs(d: DataSet): string[] {
       }
     }
   }
+
+  for (const { hero } of d.heroAbilities) {
+    if (!heroIds.has(hero)) errors.push(`hero-abilities：英雄 "${hero}" 不存在`);
+  }
+  for (const hero of duplicates(d.heroAbilities.map((h) => h.hero))) errors.push(`hero-abilities：英雄 ${hero} 重复`);
 
   for (const v of d.versions) {
     for (const c of v.changes) {

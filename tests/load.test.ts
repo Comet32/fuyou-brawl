@@ -43,6 +43,22 @@ describe('loadDataSet', () => {
     expect(d.builds).toEqual([expect.objectContaining({ file: 'axe.md' })]);
     expect(d.builds[0].data.blessings).toEqual([]);
   });
+  it('treats a missing hero-abilities.yaml as empty and loads it when present', () => {
+    const root = makeRepo("- { id: '10010', name: 甲, summary: 短, effect: 效果 }\n");
+    expect(loadDataSet(root).heroAbilities).toEqual([]);
+    writeFileSync(
+      join(root, 'src/data/hero-abilities.yaml'),
+      '# header\n- hero: axe\n  abilities:\n    - { id: axe_berserkers_call, name: 狂战士之吼, name_en: "Berserker\'s Call" }\n',
+    );
+    expect(loadDataSet(root).heroAbilities).toEqual([
+      { hero: 'axe', abilities: [{ id: 'axe_berserkers_call', name: '狂战士之吼', name_en: "Berserker's Call" }] },
+    ]);
+  });
+  it('rejects a malformed hero-abilities.yaml', () => {
+    const root = makeRepo("- { id: '10010', name: 甲, summary: 短, effect: 效果 }\n");
+    writeFileSync(join(root, 'src/data/hero-abilities.yaml'), '- { hero: axe, abilities: [{ id: x }] }\n');
+    expect(() => loadDataSet(root)).toThrow(/hero-abilities\.yaml/);
+  });
   it('names the file when schema validation fails', () => {
     const root = makeRepo("- { id: '10010', name: '', summary: 短, effect: 效果 }\n");
     expect(() => loadDataSet(root)).toThrow(/blessings\.generated\.yaml/);

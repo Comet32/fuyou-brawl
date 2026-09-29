@@ -70,5 +70,5 @@ export const builds = [
 ];
 
 export function validSet(): DataSet {
-  return structuredClone({ blessings, heroes, items, versions, builds });
+  return structuredClone({ blessings, heroes, items, versions, builds, heroAbilities: [] });
 }

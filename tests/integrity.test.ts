@@ -89,3 +89,21 @@ describe('findBrokenRefs', () => {
     expect(errors).toContain('英雄 axe 有多个搭配文件');
   });
 });
+
+describe('hero abilities', () => {
+  it('accepts abilities of known heroes', () => {
+    const d = validSet();
+    d.heroAbilities = [{ hero: 'axe', abilities: [{ id: 'axe_berserkers_call', name: '狂战士之吼', name_en: "Berserker's Call" }] }];
+    expect(findBrokenRefs(d)).toEqual([]);
+  });
+
+  it('reports unknown and duplicated hero entries', () => {
+    const d = validSet();
+    const entry = { hero: 'axe', abilities: [{ id: 'axe_a', name: '甲', name_en: 'A' }] };
+    d.heroAbilities = [entry, entry, { ...entry, hero: 'nobody' }];
+    const errors = findBrokenRefs(d);
+    expect(errors).toContain('hero-abilities：英雄 "nobody" 不存在');
+    expect(errors).toContain('hero-abilities：英雄 axe 重复');
+  });
+});
+

@@ -78,6 +78,14 @@ export const heroSchema = z.object({
   attr: z.enum(ATTRS),
 });
 
+/** One entry of hero-abilities.yaml (written by scripts/fetch-dota-assets.ts). */
+export const heroAbilitiesSchema = z.object({
+  hero: slug,
+  abilities: z
+    .array(z.object({ id: slug, name: z.string().min(1), name_en: z.string().min(1) }))
+    .min(1),
+});
+
 export const itemSchema = z.object({
   id: slug,
   name: z.string().min(1),
@@ -114,6 +122,7 @@ export type GeneratedBlessing = z.infer<typeof generatedBlessingSchema>;
 export type BlessingOverride = z.infer<typeof blessingOverrideSchema>;
 export type Blessing = z.infer<typeof blessingSchema>;
 export type Hero = z.infer<typeof heroSchema>;
+export type HeroAbilities = z.infer<typeof heroAbilitiesSchema>;
 export type Item = z.infer<typeof itemSchema>;
 export type Version = z.infer<typeof versionSchema>;
 export type Build = z.infer<typeof buildSchema>;
