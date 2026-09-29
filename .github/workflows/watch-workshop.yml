@@ -1,0 +1,34 @@
+name: Watch workshop updates
+
+on:
+  schedule:
+    - cron: '0 1 * * *' # 09:00 Beijing
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx tsx scripts/check-workshop-update.ts
+      - name: Open issue if this version is new
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          KEY="$(cat issue-key.txt)"
+          FOUND="$(gh issue list --state all --search "$KEY in:title" --json number --jq 'length')"
+          if [ "$FOUND" = "0" ]; then
+            gh label create game-update --color D9A441 --description "创意工坊有新版本" --force
+            gh issue create --title "$(cat issue-title.txt)" --body-file issue-body.md --label game-update
+          else
+            echo "Issue for $KEY already exists"
+          fi
