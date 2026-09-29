@@ -5,13 +5,22 @@ on:
     - cron: '0 1 * * *' # 09:00 Beijing
   workflow_dispatch:
 
+# actions: write is only used by the keep-alive step below.
+# GitHub disables scheduled workflows after 60 days without repo activity; if that happens
+# anyway, re-enable manually (documented in the README).
 permissions:
   contents: read
   issues: write
+  actions: write
+
+concurrency:
+  group: watch-workshop
+  cancel-in-progress: false
 
 jobs:
   check:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
@@ -25,10 +34,14 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           KEY="$(cat issue-key.txt)"
-          FOUND="$(gh issue list --state all --search "$KEY in:title" --json number --jq 'length')"
+          gh label create game-update --color D9A441 --description "创意工坊有新版本" --force
+          FOUND="$(gh issue list --state all --label game-update --limit 500 --json title --jq "[.[] | select(.title | endswith(\" $KEY\"))] | length")"
           if [ "$FOUND" = "0" ]; then
-            gh label create game-update --color D9A441 --description "创意工坊有新版本" --force
             gh issue create --title "$(cat issue-title.txt)" --body-file issue-body.md --label game-update
           else
             echo "Issue for $KEY already exists"
           fi
+      - name: Keep scheduled workflow enabled
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X PUT "repos/${{ github.repository }}/actions/workflows/watch-workshop.yml/enable"

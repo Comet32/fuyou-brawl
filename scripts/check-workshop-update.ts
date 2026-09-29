@@ -7,7 +7,7 @@ const CHANGELOG_URL = `https://steamcommunity.com/sharedfiles/filedetails/change
 
 async function fetchTimeUpdated(): Promise<number> {
   const body = new URLSearchParams({ itemcount: '1', 'publishedfileids[0]': WORKSHOP_ID });
-  const res = await fetch(DETAILS_API, { method: 'POST', body });
+  const res = await fetch(DETAILS_API, { method: 'POST', body, signal: AbortSignal.timeout(30_000) });
   if (!res.ok) throw new Error(`GetPublishedFileDetails HTTP ${res.status}`);
   const json = (await res.json()) as { response?: { publishedfiledetails?: { time_updated?: number }[] } };
   const t = json.response?.publishedfiledetails?.[0]?.time_updated;
@@ -17,7 +17,10 @@ async function fetchTimeUpdated(): Promise<number> {
 
 async function fetchChangelogHtml(): Promise<string> {
   try {
-    const res = await fetch(CHANGELOG_URL, { headers: { 'Accept-Language': 'zh-CN' } });
+    const res = await fetch(CHANGELOG_URL, {
+      headers: { 'Accept-Language': 'zh-CN' },
+      signal: AbortSignal.timeout(30_000),
+    });
     return res.ok ? await res.text() : '';
   } catch {
     return '';
