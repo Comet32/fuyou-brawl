@@ -1,6 +1,6 @@
 // Generate hero builds (src/content/builds/<hero>.md) from the community one-image guides (一图流).
 // Usage: npm run builds -- [guides.json] [build-notes.json]
-//   guides.json       transcription of the guides: { base, site, guides: GuideEntry[] } (tmp/research/guides.json)
+//   guides.json       transcription of the guides: { base, site, guides: GuideEntry[] } (docs/research/data/guides.json)
 //   build-notes.json  our own words per hero (CN name): { summary, idea, core?: { printed name: reason },
 //                     aliases?: { printed name: official name } } — aliases only land on research picks
 // Only files with `origin: community-guide` (or missing files) are written; hand-written builds are kept.
@@ -40,7 +40,7 @@ interface HeroNotes {
   aliases?: Record<string, string>;
 }
 
-const [guidesFile = 'tmp/research/guides.json', notesFile = 'tmp/research/build-notes.json'] = process.argv.slice(2);
+const [guidesFile = 'docs/research/data/guides.json', notesFile = 'docs/research/data/build-notes.json'] = process.argv.slice(2);
 const root = process.cwd();
 
 function readJson<T>(file: string): T {
