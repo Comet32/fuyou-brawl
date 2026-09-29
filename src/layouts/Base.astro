@@ -1,72 +1,161 @@
 ---
 import '../styles/global.css';
+import Icon, { type IconName } from '../components/Icon.astro';
 import { url } from '../lib/url';
 import { REPO_URL, SITE_NAME } from '../lib/site';
 
 interface Props {
   title?: string;
   description?: string;
+  /** Keep the page out of search engines (the labeling tool). */
+  noindex?: boolean;
 }
-const { title, description = '《福佑大乱斗》福佑图鉴、英雄搭配、版本变动与攻略' } = Astro.props;
+const { title, description = '《福佑大乱斗》福佑图鉴、英雄搭配、版本变动与攻略', noindex = false } = Astro.props;
 const fullTitle = title ? `${title} · 福佑大乱斗` : SITE_NAME;
 const home = url('/');
-const nav = [
-  { href: home, label: '图鉴' },
-  { href: url('/compare/'), label: '对比' },
-  { href: url('/heroes/'), label: '英雄' },
-  { href: url('/versions/'), label: '版本' },
-  { href: url('/guides/'), label: '攻略' },
-];
 const path = Astro.url.pathname;
-const blessingsPrefix = url('/blessings/');
-// Blessing detail pages belong to the 图鉴 nav item.
-const isCurrent = (href: string) =>
-  href === home ? path === home || path.startsWith(blessingsPrefix) : path.startsWith(href);
+const at = (p: string) => path.startsWith(url(p));
+
+type Section = 'catalog' | 'compare' | 'heroes' | 'versions' | 'guides' | 'label' | 'more';
+const section: Section | undefined =
+  path === home || at('/blessings/')
+    ? 'catalog'
+    : at('/compare/')
+      ? 'compare'
+      : at('/heroes/')
+        ? 'heroes'
+        : at('/versions/')
+          ? 'versions'
+          : at('/guides/')
+            ? 'guides'
+            : at('/label/')
+              ? 'label'
+              : at('/more/')
+                ? 'more'
+                : undefined;
+
+const tabs: { id: Section; href: string; label: string; icon: IconName }[] = [
+  { id: 'catalog', href: home, label: '图鉴', icon: 'catalog' },
+  { id: 'compare', href: url('/compare/'), label: '对比', icon: 'compare' },
+  { id: 'heroes', href: url('/heroes/'), label: '英雄', icon: 'heroes' },
+  { id: 'versions', href: url('/versions/'), label: '版本', icon: 'versions' },
+  { id: 'guides', href: url('/guides/'), label: '攻略', icon: 'guides' },
+];
+// Secondary pages live under 更多 on phones.
+const moreLinks: { id: Section; href: string; label: string; hint: string; icon: IconName }[] = [
+  { id: 'versions', href: url('/versions/'), label: '版本变动', hint: '按时间倒序', icon: 'versions' },
+  { id: 'guides', href: url('/guides/'), label: '攻略文章', hint: '新手与进阶', icon: 'guides' },
+  { id: 'label', href: url('/label/'), label: '品质标注', hint: '站长工具', icon: 'label' },
+];
+const inMore = section === 'versions' || section === 'guides' || section === 'label' || section === 'more';
+const dock: { href: string; label: string; icon: IconName; current: boolean; sheet?: boolean }[] = [
+  { href: home, label: '图鉴', icon: 'catalog', current: section === 'catalog' },
+  { href: url('/compare/'), label: '对比', icon: 'compare', current: section === 'compare' },
+  { href: url('/heroes/'), label: '英雄', icon: 'heroes', current: section === 'heroes' },
+  { href: url('/more/'), label: '更多', icon: 'more', current: inMore, sheet: true },
+];
+const mark = [
+  'M4 3h5L6 17H1z',
+  'M11 3h5l-3 14H8z',
+  'M18 3h4l-3 14h-4z',
+];
 ---
 
 <!doctype html>
 <html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="description" content={description} />
     <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#121826" />
+    {noindex && <meta name="robots" content="noindex" />}
     <title>{fullTitle}</title>
     <link rel="icon" href={url('/favicon.svg')} type="image/svg+xml" />
     <script is:inline>
+      // Dark is the house scene; light is an explicit choice that persists.
       try {
-        const t = localStorage.getItem('theme');
-        if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t;
+        if (localStorage.getItem('theme') === 'light') document.documentElement.dataset.theme = 'light';
       } catch {}
     </script>
   </head>
   <body>
-    <header class="site-header">
-      <a class="brand" href={home}>福佑图鉴</a>
-      <nav>
-        {nav.map((n) => <a href={n.href} aria-current={isCurrent(n.href) ? 'page' : undefined}>{n.label}</a>)}
+    <header class="topbar">
+      <a class="brand" href={home} aria-label="福佑图鉴 首页">
+        <svg width="24" height="20" viewBox="0 0 23 20" aria-hidden="true">
+          <path d={mark[0]} fill="var(--q-ssr)" /><path d={mark[1]} fill="var(--q-sr)" /><path d={mark[2]} fill="var(--q-r)" />
+        </svg>
+        <span>福佑图鉴</span>
+      </a>
+      <nav class="tabs" aria-label="主导航">
+        {
+          tabs.map((t) => (
+            <a class="tab bar" href={t.href} aria-current={section === t.id ? 'page' : undefined}>
+              {t.label}
+            </a>
+          ))
+        }
       </nav>
-      <button id="theme-toggle" type="button" aria-label="切换深浅色">◐</button>
+      <div class="topbar-end">
+        <slot name="score" />
+        <button id="theme-toggle" class="icon-btn" type="button" aria-label="切换深浅色" title="切换深浅色">
+          <Icon name="theme" />
+        </button>
+      </div>
     </header>
     <main><slot /></main>
     <footer class="site-footer">
       <p>
-        非官方玩家攻略站，数据整理自 Steam 创意工坊与社区，可能滞后于游戏版本。
+        非官方玩家攻略站，名称、描述与图标取自游戏文件，品质为人工标注，数值待补充；可能滞后于游戏版本。
         发现错误？<a href={REPO_URL}>在 GitHub 上提交修改</a>
       </p>
     </footer>
+    <nav class="dock" aria-label="底部导航">
+      {
+        dock.map((d) => (
+          <a href={d.href} aria-current={d.current ? 'page' : undefined} data-sheet={d.sheet ? '' : undefined}>
+            <Icon name={d.icon} size={22} />
+            {d.label}
+          </a>
+        ))
+      }
+    </nav>
+    <div id="more-sheet" class="more-sheet" popover>
+      <h2>更多</h2>
+      <ul class="more-list">
+        {
+          moreLinks.map((m) => (
+            <li>
+              <a class="bar" href={m.href} aria-current={section === m.id ? 'page' : undefined}>
+                <Icon name={m.icon} />
+                {m.label}
+                <small>{m.hint}</small>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
     <script>
+      const root = document.documentElement;
       document.getElementById('theme-toggle')?.addEventListener('click', () => {
-        const root = document.documentElement;
-        const isDark = root.dataset.theme
-          ? root.dataset.theme === 'dark'
-          : !matchMedia('(prefers-color-scheme: light)').matches;
-        const next = isDark ? 'light' : 'dark';
-        root.dataset.theme = next;
+        const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+        if (next === 'light') root.dataset.theme = 'light';
+        else delete root.dataset.theme;
         try {
           localStorage.setItem('theme', next);
         } catch {}
       });
+      // 更多 opens a bottom sheet where the popover API exists; otherwise it is a plain link to /more/.
+      const sheet = document.getElementById('more-sheet');
+      const moreLink = document.querySelector<HTMLAnchorElement>('.dock a[data-sheet]');
+      if (sheet && moreLink && 'togglePopover' in sheet) {
+        moreLink.setAttribute('aria-haspopup', 'dialog');
+        moreLink.addEventListener('click', (e) => {
+          e.preventDefault();
+          sheet.togglePopover();
+        });
+      }
     </script>
   </body>
 </html>

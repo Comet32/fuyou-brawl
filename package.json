@@ -16,6 +16,7 @@
     "check:cn": "tsx scripts/check-china.ts"
   },
   "dependencies": {
+    "@fontsource/barlow-condensed": "^5.3.0",
     "astro": "^7.3.5",
     "fuse.js": "^7.5.0",
     "pinyin-pro": "^3.29.4",
