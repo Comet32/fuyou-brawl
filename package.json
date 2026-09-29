@@ -11,7 +11,8 @@
     "preview": "astro preview",
     "check": "astro check",
     "test": "vitest run",
-    "validate": "tsx scripts/validate-data.ts"
+    "validate": "tsx scripts/validate-data.ts",
+    "import": "tsx scripts/import-vpk.ts"
   },
   "dependencies": {
     "astro": "^7.3.5",
