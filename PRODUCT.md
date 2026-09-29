@@ -20,8 +20,12 @@ web
 
 ## Positioning
 
-- 网上目前没有这个游戏的结构化福佑资料，只有零散的视频和帖子（2026-09-29 调研）。
-- 本站的数据直接来自游戏文件：名称、描述模板、图标都是官方原文和原图；品质由人工标注；数值待补充。
+- 网上关于这个游戏的结构化资料只有一个社区图鉴站（B 站 BV1feAHzJEGH 所附腾讯文档的网页版），其余都是零散的视频和帖子（2026-09-29 调研）。
+- 本站把三层数据合在一起：
+  - 游戏文件：名称、描述模板、图标，都是原文和原图；
+  - 社区图鉴：品质、数值区间、推荐英雄，都注明来源；
+  - 站长手动补充：优先级最高。
+- 在此基础上提供图鉴没有的功能：拼音搜索、三选一对比、英雄与福佑的自动关联。
 - 支持中文 / 全拼 / 首字母 / 英文 / 效果关键词搜索，还有「三选一对比」。
 
 ## Operating Context
@@ -34,7 +38,12 @@ web
 
 - Astro 7 纯静态站，没有后端。部署在 GitHub Pages 的子路径 `/fuyou-brawl/` 下，Cloudflare 只作为海外镜像（国内被墙）。
 - 页面：福佑图鉴（首页，搜索加品质和标签筛选）、三选一对比、福佑详情、英雄列表和详情（127 个英雄）、版本变动、攻略文章，另有一个隐藏的品质标注页。
-- 福佑描述是带 `{占位符}` 的模板，**绝大多数数值未知**，页面上用「?」显示。不能编造数值。
+- 福佑描述是带 `{占位符}` 的模板：
+  - 大部分数值取自社区图鉴，通常是区间（重铸会改变数值），并标注来源；
+  - 仍然未知的显示为斜线空心「?」；
+  - 不能编造数值。
+- 数据优先级：`blessings.overrides.yaml`（手动）> `blessings.community.yaml`（社区，由 `scripts/import-community.ts` 生成）> `blessings.generated.yaml`（游戏文件，由 `scripts/import-vpk.ts` 生成）。
+- 品质冲突（来源说法不一）时不标注，并写明冲突的双方。
 - 福佑图标是 128×128 的游戏原图，风格很杂：原画、特效图，还有表情包式的照片，有 34 个没有图标。英雄图 256×144，装备图 88×64。
 - 页面加载完成后搜索必须能离线进行，拼音索引在构建时生成。
 - 用户会通过 GitHub PR 贡献内容，不做评论、登录或投稿后台。
@@ -47,8 +56,12 @@ web
 
 ## Evidence on Hand
 
-- 游戏数据：`src/data/blessings.generated.yaml`（由 `scripts/import-vpk.ts` 从 VPK 生成）和 `blessings.overrides.yaml`（人工补充的数值和品质）。
+- 游戏数据：`src/data/blessings.generated.yaml`，由 `scripts/import-vpk.ts` 从 VPK 生成，共 652 个福佑。
+- 社区数据：`src/data/blessings.community.yaml`，由 `scripts/import-community.ts` 从调研结果生成。其中品质 568 个，数值覆盖 548 个福佑，心得、备注和改动一共 434 条，推荐英雄 675 个。来源清单见 `docs/research/community-sources.md`。
+- 手动数据：`src/data/blessings.overrides.yaml`。
+- 英雄技能：`src/data/hero-abilities.yaml`，来自 Dota 官方 datafeed，用来把福佑关联到英雄。
 - 图片：`public/img/blessings`、`public/img/heroes`、`public/img/items`。
+- 攻略观点只能转述并附来源，不能照搬原文；社区图鉴的描述原文（wiki_text）不发布。
 - 没有用户评价、没有统计数据、没有胜率，也不能编造。
 
 ## Product Principles
