@@ -1,0 +1,116 @@
+---
+// Rapid-fire quality tagging for the site owner. Not linked from the main tabs; noindex.
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { publicFileExists } from '../lib/assets';
+import { safeJson } from '../lib/json';
+import { QUALITIES } from '../lib/quality';
+
+const blessings = (await getCollection('blessings'))
+  .map((e) => e.data)
+  .sort((a, b) => a.id.localeCompare(b.id));
+const queue = blessings
+  .filter((b) => b.quality === null)
+  .map((b) => ({
+    id: b.id,
+    name: b.name,
+    name_en: b.name_en,
+    quality: b.quality,
+    summary: b.summary,
+    ...(Object.keys(b.numbers).length > 0 ? { numbers: b.numbers } : {}),
+    ...(b.icon && publicFileExists(`img/blessings/${b.icon}`) ? { icon: `img/blessings/${b.icon}` } : {}),
+  }));
+const keys: Record<string, string> = { ssr: '1', sr: '2', r: '3' };
+---
+
+<Base title="品质标注" noindex>
+  <div class="label-desk">
+    <h1>品质标注</h1>
+    <p class="page-lede">
+      逐个给还没有品质的福佑标上游戏里的颜色。进度只存在这个浏览器里；标完点「导出」，保存为 labels.json 后运行
+      <code>npm run labels -- labels.json</code> 写入数据。
+    </p>
+
+    <div class="timeline">
+      <div
+        id="label-track"
+        class="timeline-track"
+        role="progressbar"
+        aria-label="标注进度"
+        aria-valuemin="0"
+        aria-valuemax={queue.length}
+        aria-valuenow="0"
+      >
+        <span class="timeline-fill"></span>
+      </div>
+      <p class="timeline-count"><b id="label-done">0</b><small> / {queue.length}</small></p>
+    </div>
+    <ul class="tallies" aria-label="已标注数量">
+      {
+        QUALITIES.map((q) => (
+          <li data-q={q.id}>
+            <i aria-hidden="true" />
+            {q.label}
+            <b data-count={q.id}>0</b>
+          </li>
+        ))
+      }
+      <li><i class="hatched" aria-hidden="true"></i>不确定<b data-count="unsure">0</b></li>
+    </ul>
+
+    <div class="label-card">
+      <article id="label-card" class="lt" hidden>
+        <span class="ic" id="label-icon"></span>
+        <h2 id="label-name"></h2>
+        <p class="en" id="label-pos"></p>
+        <p class="sm" id="label-summary"></p>
+      </article>
+      <div id="label-finished" class="empty-state" hidden>
+        <h2>这一轮标完了</h2>
+        <p>点「导出」拿到 JSON；想改某一个，按「上一个」往回翻。</p>
+      </div>
+      <div id="label-empty" class="empty-state" hidden={queue.length > 0}>
+        <h2>没有待标注的福佑</h2>
+        <p>所有福佑都已经有品质了。</p>
+      </div>
+      <noscript><p class="note">标注页需要启用 JavaScript。</p></noscript>
+    </div>
+
+    <div class="answers" role="group" aria-label="选择品质">
+      {
+        QUALITIES.map((q) => (
+          <button class="answer bar" type="button" data-q={q.id} data-answer={q.id} aria-pressed="false" disabled>
+            {q.label}
+            <kbd>{keys[q.id]}</kbd>
+          </button>
+        ))
+      }
+    </div>
+    <div class="answers-sub">
+      <button class="answer-sub hatched" type="button" data-answer="unsure" aria-pressed="false" disabled>
+        不确定 <kbd>0</kbd>
+      </button>
+      <button id="label-prev" class="answer-sub bar" type="button" disabled>
+        <Icon name="undo" />上一个 <kbd>Backspace</kbd>
+      </button>
+    </div>
+    <p class="kbd-hint">键盘：<kbd>1</kbd> 橙 <kbd>2</kbd> 紫 <kbd>3</kbd> 蓝 <kbd>0</kbd> 不确定 <kbd>Backspace</kbd> 上一个</p>
+
+    <section class="label-tools" aria-labelledby="tools-h">
+      <h2 id="tools-h" class="sr-only">导出与清空</h2>
+      <div class="btn-row">
+        <button id="label-export" class="btn btn-gold bar" type="button"><Icon name="export" />导出</button>
+        <button id="label-copy" class="btn bar" type="button" hidden><Icon name="copy" />复制到剪贴板</button>
+        <button id="label-clear" class="btn bar" type="button"><Icon name="trash" />清空</button>
+      </div>
+      <textarea id="label-json" readonly hidden aria-label="导出的标注 JSON" spellcheck="false"></textarea>
+      <p id="label-status" class="status" role="status"></p>
+    </section>
+  </div>
+  <script type="application/json" id="label-data" set:html={safeJson(queue)} />
+  <script>
+    import { initLabelPage } from '../scripts/label-page';
+    initLabelPage();
+  </script>
+</Base>
