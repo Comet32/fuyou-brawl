@@ -18,10 +18,6 @@ jobs:
           cache: npm
       - run: sudo apt-get update && sudo apt-get install -y webp
       - run: npm ci
-      - name: TEMP probe feed shape
-        run: |
-          curl -s "https://www.dota2.com/datafeed/herolist?language=schinese" | head -c 1500; echo
-          curl -s "https://www.dota2.com/datafeed/itemlist?language=schinese" | head -c 1500; echo
       - run: npx tsx scripts/fetch-dota-assets.ts
       - run: npm run validate
       - name: Commit and redeploy
