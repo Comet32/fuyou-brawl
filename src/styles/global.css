@@ -2109,7 +2109,7 @@ a.tag:hover {
   aspect-ratio: 16 / 9;
   object-fit: cover;
   /* Shown while the portrait loads (1–3 s on mainland networks) or if it fails: attribute-tinted ground. */
-  background: var(--attr-ground, var(--panel-3));
+  background: var(--hero-bg, var(--attr-ground, var(--panel-3)));
   color: var(--ink-3);
   font-weight: 800;
   font-size: 24px;
@@ -2156,6 +2156,32 @@ a.tag:hover {
   overflow: hidden;
   text-overflow: ellipsis;
   border-radius: 0 8px 8px 0;
+}
+.hero-tile .name-strap {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+/* Attribute hint, kept now that the tile ground is the portrait's own color. */
+.hero-tile .name-strap::before {
+  content: '';
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--attr-dot, var(--ink-3));
+}
+.hero-tile:has([data-attr='str']) {
+  --attr-dot: #e0533f;
+}
+.hero-tile:has([data-attr='agi']) {
+  --attr-dot: #4fb286;
+}
+.hero-tile:has([data-attr='int']) {
+  --attr-dot: #4f9fe8;
+}
+.hero-tile:has([data-attr='all']) {
+  --attr-dot: #b58cf0;
 }
 .hero-tile:hover .name-strap {
   background: var(--gold);

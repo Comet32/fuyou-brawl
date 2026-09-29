@@ -15,8 +15,12 @@ for f in public/img/heroes/*.webp; do
   id=$(basename "$f" .webp)
   "$IMP" embed-prompt "$f" --prompt "Sourced asset, not generated. Origin: Valve Dota 2 CDN $CDN/heroes/$id.png, converted to WebP by scripts/fetch-dota-assets.ts. © Valve Corporation." >/dev/null
 done
+for f in public/img/heroes/thumb/*.webp; do
+  id=$(basename "$f" .webp)
+  "$IMP" embed-prompt "$f" --prompt "Sourced asset, not generated. Origin: Valve Dota 2 CDN $CDN/heroes/$id.png, 128px grid thumbnail made by tools/hero-thumbs.ts (from public/img/heroes/$id.webp) or scripts/fetch-dota-assets.ts (from the PNG). © Valve Corporation." >/dev/null
+done
 for f in public/img/items/*.webp; do
   id=$(basename "$f" .webp)
   "$IMP" embed-prompt "$f" --prompt "Sourced asset, not generated. Origin: Valve Dota 2 CDN $CDN/items/$id.png, converted to WebP by scripts/fetch-dota-assets.ts. © Valve Corporation." >/dev/null
 done
-"$IMP" embed-prompt --scan public/img/blessings public/img/heroes public/img/items | tail -1
+"$IMP" embed-prompt --scan public/img/blessings public/img/heroes public/img/heroes/thumb public/img/items | tail -1

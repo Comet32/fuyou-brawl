@@ -52,7 +52,7 @@ const newBuildUrl = `${REPO_URL}/new/main/src/content/builds?filename=${hero.id}
     <a href={url('/heroes/')}><Icon name="back" size={18} />全部英雄</a>
   </nav>
   <header class="lt hero-lt">
-    <HeroImage hero={hero} eager priority />
+    <HeroImage hero={hero} variant="full" eager priority />
     <div>
       <h1>{hero.name}</h1>
       <p class="en">{hero.name_en} · {ATTR_LABELS[hero.attr]}</p>

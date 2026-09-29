@@ -17,9 +17,11 @@ jobs:
         with:
           node-version: 22
           cache: npm
-      - run: sudo apt-get update && sudo apt-get install -y webp
+      - run: sudo apt-get update && sudo apt-get install -y webp imagemagick
       - run: npm ci
       - run: npx tsx scripts/fetch-dota-assets.ts
+      # Thumbnails already written from the PNGs above are kept; this refreshes the placeholder colors.
+      - run: npm run thumbs
       - run: npm run validate
       - name: Commit and redeploy
         env:

@@ -1,7 +1,7 @@
 ---
 // One result slot. Lean markup on purpose: the catalog renders all 652 of these into one page.
 import type { Blessing, Hero } from '../lib/schema';
-import { publicFileExists } from '../lib/assets';
+import { heroPortrait } from '../lib/hero-portraits';
 import { qualityOf } from '../lib/quality';
 import { url } from '../lib/url';
 import BlessingIcon from './BlessingIcon.astro';
@@ -17,7 +17,8 @@ interface Props {
 const { blessing, note, headingLevel = 'h3', hero } = Astro.props;
 const Heading = headingLevel;
 const quality = qualityOf(blessing.quality);
-const heroImg = hero && publicFileExists(`img/heroes/${hero.id}.webp`) ? url(`img/heroes/${hero.id}.webp`) : undefined;
+const heroThumb = hero ? heroPortrait(hero.id).thumb : undefined;
+const heroImg = heroThumb ? url(heroThumb) : undefined;
 ---
 
 <article class="slot" data-q={quality?.id}>

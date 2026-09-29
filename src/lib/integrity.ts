@@ -4,6 +4,8 @@ export interface DataSet {
   blessings: Blessing[];
   heroes: Hero[];
   heroAbilities: HeroAbilities[];
+  /** Placeholder colors of hero portraits (hero id -> #rrggbb). */
+  heroColors?: Record<string, string>;
   items: Item[];
   versions: Version[];
   builds: { file: string; data: Build }[];
@@ -52,6 +54,9 @@ export function findBrokenRefs(d: DataSet): string[] {
     if (!heroIds.has(hero)) errors.push(`hero-abilities：英雄 "${hero}" 不存在`);
   }
   for (const hero of duplicates(d.heroAbilities.map((h) => h.hero))) errors.push(`hero-abilities：英雄 ${hero} 重复`);
+  for (const hero of Object.keys(d.heroColors ?? {})) {
+    if (!heroIds.has(hero)) errors.push(`hero-colors：英雄 "${hero}" 不存在`);
+  }
 
   for (const v of d.versions) {
     for (const c of v.changes) {

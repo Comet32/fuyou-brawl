@@ -6,6 +6,7 @@ import { publicFileExists } from '../lib/assets';
 import { toCardRecord } from '../lib/card-data';
 import { isHeroBlessing } from '../lib/hero-blessing';
 import { heroLinks } from '../lib/hero-links-data';
+import { heroPortrait } from '../lib/hero-portraits';
 import { MAX_COMPARE } from '../lib/compare';
 import { safeJson } from '../lib/json';
 
@@ -19,8 +20,8 @@ const { byBlessing } = heroLinks();
 const heroOf = (id: string) => {
   const h = isHeroBlessing(id) ? heroes.get(byBlessing.get(id)?.[0]?.hero ?? '') : undefined;
   if (!h) return undefined;
-  const img = `img/heroes/${h.id}.webp`;
-  return { id: h.id, name: h.name, ...(publicFileExists(img) ? { img } : {}) };
+  const img = heroPortrait(h.id).thumb;
+  return { id: h.id, name: h.name, ...(img ? { img } : {}) };
 };
 const records = blessings.map((b) =>
   toCardRecord(b, Boolean(b.icon && publicFileExists(`img/blessings/${b.icon}`)), heroOf(b.id)),

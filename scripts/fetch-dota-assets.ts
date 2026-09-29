@@ -16,8 +16,14 @@ let failed = 0;
 
 // Returns true when a new image was written. Output is written to a temp file and renamed
 // so an interrupted run never leaves a truncated .webp that existsSync would later skip.
-async function downloadWebp(src: string, dest: string, width: number): Promise<boolean> {
-  if (existsSync(dest)) return false;
+// `thumb` also writes a smaller copy from the same source PNG (hero grid thumbnails, see tools/hero-thumbs.ts).
+async function downloadWebp(
+  src: string,
+  dest: string,
+  width: number,
+  thumb?: { dest: string; width: number; quality: number },
+): Promise<boolean> {
+  if (existsSync(dest) && (!thumb || existsSync(thumb.dest))) return false;
   const res = await fetch(src, { signal: AbortSignal.timeout(30_000) });
   if (!res.ok) {
     console.log(`::warning::skip ${src}: HTTP ${res.status}`);
@@ -28,8 +34,14 @@ async function downloadWebp(src: string, dest: string, width: number): Promise<b
   const tmp = `${dest}.tmp`;
   try {
     writeFileSync(png, Buffer.from(await res.arrayBuffer()));
-    execFileSync('cwebp', ['-quiet', '-q', '80', '-resize', String(width), '0', png, '-o', tmp]);
-    renameSync(tmp, dest);
+    if (!existsSync(dest)) {
+      execFileSync('cwebp', ['-quiet', '-q', '80', '-resize', String(width), '0', png, '-o', tmp]);
+      renameSync(tmp, dest);
+    }
+    if (thumb && !existsSync(thumb.dest)) {
+      execFileSync('cwebp', ['-quiet', '-q', String(thumb.quality), '-resize', String(thumb.width), '0', png, '-o', tmp]);
+      renameSync(tmp, thumb.dest);
+    }
     return true;
   } finally {
     rmSync(png, { force: true });
@@ -50,10 +62,13 @@ writeFileSync('src/data/heroes.yaml', HEADER + stringify(heroes));
 writeFileSync('src/data/hero-abilities.yaml', HEADER + stringify(heroAbilities));
 writeFileSync('src/data/items.yaml', HEADER + stringify(items));
 
-mkdirSync('public/img/heroes', { recursive: true });
+mkdirSync('public/img/heroes/thumb', { recursive: true });
 mkdirSync('public/img/items', { recursive: true });
 let fetched = 0;
-for (const h of heroes) if (await downloadWebp(heroImageUrl(h.id), `public/img/heroes/${h.id}.webp`, 256)) fetched++;
+for (const h of heroes) {
+  const thumb = { dest: `public/img/heroes/thumb/${h.id}.webp`, width: 128, quality: 70 };
+  if (await downloadWebp(heroImageUrl(h.id), `public/img/heroes/${h.id}.webp`, 256, thumb)) fetched++;
+}
 for (const i of items) if (await downloadWebp(itemImageUrl(i.id), `public/img/items/${i.id}.webp`, 88)) fetched++;
 console.log(`${heroAbilities.length} heroes with abilities (${heroAbilities.reduce((n, h) => n + h.abilities.length, 0)} abilities)`);
 console.log(`${heroes.length} heroes, ${items.length} items, ${fetched} new images, ${failed} failed downloads`);

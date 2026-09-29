@@ -1,26 +1,37 @@
 ---
 import type { Hero } from '../lib/schema';
-import { publicFileExists } from '../lib/assets';
+import { heroColor, heroPortrait } from '../lib/hero-portraits';
 import { url } from '../lib/url';
 
 interface Props {
   hero: Hero;
+  /** 'tile': grid tiles and chips, prefer the 128px thumb; 'full': detail header. */
+  variant?: 'tile' | 'full';
   /** Load immediately (first screen); otherwise lazy. */
   eager?: boolean;
   /** fetchpriority="high" for the very first tiles. */
   priority?: boolean;
 }
-const { hero, eager = false, priority = false } = Astro.props;
-const rel = `img/heroes/${hero.id}.webp`;
-// data-attr tints the 16:9 ground shown while the portrait loads or if it fails.
+const { hero, variant = 'tile', eager = false, priority = false } = Astro.props;
+const { full, thumb } = heroPortrait(hero.id);
+// The portrait's average color fills the 16:9 box until the image arrives (1–3 s on mainland networks).
+const bg = heroColor(hero.id);
+const style = bg ? `--hero-bg:${bg}` : undefined;
+const tile = variant === 'tile' && thumb && full && thumb !== full;
 ---
 
 {
-  publicFileExists(rel) ? (
+  full ? (
     <img
       class="hero-img"
       data-attr={hero.attr}
-      src={url(rel)}
+      style={style}
+      src={url(tile ? thumb! : full)}
+      srcset={tile ? `${url(thumb!)} 128w, ${url(full)} 256w` : undefined}
+      sizes={
+        /* Deliberately small on phones so 2x screens still take the 2.5 KB thumb: bytes beat sharpness mid-match. */
+        tile ? '(min-width: 721px) 128px, 64px' : undefined
+      }
       alt=""
       width="256"
       height="144"
@@ -29,7 +40,7 @@ const rel = `img/heroes/${hero.id}.webp`;
       decoding="async"
     />
   ) : (
-    <span class="hero-img" data-attr={hero.attr} aria-hidden="true">
+    <span class="hero-img" data-attr={hero.attr} style={style} aria-hidden="true">
       {hero.name.slice(0, 1)}
     </span>
   )
